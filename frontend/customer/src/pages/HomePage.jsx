@@ -1,4 +1,4 @@
-import { Sparkles, Gem, Diamond, Leaf, ArrowRight } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 
 // Real zodiac glyphs, ordered from Aries, grouped by classical element —
 // used to color-code both the hero wheel and the sign-picker strip.
@@ -23,13 +23,6 @@ const ZODIAC = [
   { glyph: '♑', name: 'Capricorn', element: 'earth' },
   { glyph: '♒', name: 'Aquarius', element: 'air' },
   { glyph: '♓', name: 'Pisces', element: 'water' },
-];
-
-const shopCategories = [
-  { name: 'Zodiac gems', icon: Sparkles, blurb: 'Matched to your sign' },
-  { name: 'Birthstones', icon: Gem, blurb: 'Chosen by your month' },
-  { name: 'Pendants', icon: Diamond, blurb: 'Worn close, every day' },
-  { name: 'Rudraksha', icon: Leaf, blurb: 'Sacred and grounding' },
 ];
 
 const energyCategories = [
@@ -109,7 +102,7 @@ const HomePage = () => (
         <div className="w-full max-w-2xl lg:w-[58%] lg:pr-10">
           <p className="mb-3 text-[clamp(0.7rem,1vw,0.85rem)] font-bold uppercase tracking-[0.22em] text-[#f3c969]">Personalised gemstone guidance</p>
           <h1 className="max-w-xl font-['Cormorant_Garamond',serif] text-[clamp(2.75rem,5vw,5.5rem)] font-bold leading-[0.9] tracking-[-0.03em] text-white">
-            Stones chosen by your chart, not by chance.
+            Unlock the power of your birth chart.
           </h1>
           <p className="mt-5 max-w-lg text-[clamp(0.9rem,1.2vw,1.05rem)] leading-6 text-white/70">
             Natural gemstones and sacred jewellery matched to your sign, planet and intention. Sourced responsibly and verified before it reaches you.
@@ -124,21 +117,6 @@ const HomePage = () => (
             </a>
           </div>
 
-          <div className="mt-6 grid grid-cols-2 gap-2 sm:max-w-md">
-            {shopCategories.map(({ name, icon: Icon, blurb }) => (
-              <a
-                key={name}
-                href={`/products?category=${name.toLowerCase().replace(/\s+/g, '-')}`}
-                className="group flex items-start gap-2 rounded-lg border border-white/20 bg-white/10 p-2.5 backdrop-blur-md transition hover:border-[#f3c969]/70 hover:bg-white/20"
-              >
-                <Icon className="mt-0.5 h-5 w-5 flex-shrink-0 text-[#f3c969]" aria-hidden="true" />
-                <span>
-                  <span className="block text-sm font-bold text-white">{name}</span>
-                  <span className="block text-xs text-white/60">{blurb}</span>
-                </span>
-              </a>
-            ))}
-          </div>
         </div>
 
       </div>
