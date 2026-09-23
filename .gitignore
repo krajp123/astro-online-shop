@@ -1,0 +1,15 @@
+# Root-level ignore rules for the monorepo
+node_modules/
+.env
+.env.*
+!.env.example
+.vite/
+dist/
+build/
+coverage/
+.DS_Store
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.prisma/
+*.log
