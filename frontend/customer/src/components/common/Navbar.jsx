@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { useAuth } from '../../hooks/useAuth';
 
 const menuSections = [
   {
@@ -38,12 +39,16 @@ const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [activeMenu, setActiveMenu] = useState(null);
   const [mobileMenu, setMobileMenu] = useState(null);
+  const { isAuthenticated } = useAuth();
+
+  const accountLabel = isAuthenticated ? 'Profile' : 'Login';
+  const accountRoute = isAuthenticated ? '/orders' : '/login';
 
   return (
     <header className="sticky top-0 z-40 border-b border-slate-200 bg-white text-slate-900 shadow-[0_4px_20px_rgba(15,23,42,0.06)]">
       <div className="mx-auto flex min-h-[66px] max-w-[1600px] items-center gap-4 px-4 sm:px-8 lg:gap-6">
-        <Link to="/" aria-label="astro home" className="mr-2 shrink-0 text-2xl font-black tracking-[-0.08em] text-slate-900">
-          astro<span className="text-[#d39e25]">.</span>
+        <Link to="/" aria-label="astrovastubazar home" className="mr-2 shrink-0 text-2xl font-black tracking-[-0.08em] text-slate-900">
+          astrovastubazar<span className="text-[#d39e25]">.</span>
         </Link>
 
         <nav className="hidden min-w-0 max-w-[900px] flex-1 items-center justify-between gap-0 pr-4 xl:flex xl:pr-6" onMouseLeave={() => setActiveMenu(null)}>
@@ -62,10 +67,19 @@ const Navbar = () => {
           <input aria-label="Search products" className="min-w-0 flex-1 bg-transparent outline-none placeholder:text-slate-400" placeholder="Search gems, pendants, birthstones..." />
         </div>
 
-        <div className="flex shrink-0 items-center gap-4 sm:gap-5">
-          <Link to="/orders" className="nav-action hidden text-slate-700 sm:flex"><span className="nav-icon">♙</span><span>Profile</span></Link>
-          <button className="nav-action hidden text-slate-700 sm:flex" aria-label="Wishlist"><span className="nav-icon">♡</span><span>Wishlist</span></button>
-          <Link to="/cart" className="nav-action text-slate-700"><span className="relative nav-icon">♧<span className="absolute -right-2 -top-1 flex h-4 min-w-4 items-center justify-center rounded-full bg-[#f3c969] px-1 text-[9px] font-bold text-[#172554]">0</span></span><span className="hidden sm:block">Bag</span></Link>
+        <div className="flex shrink-0 items-center gap-3 sm:gap-4">
+          <Link to={accountRoute} className="group flex items-center gap-2 text-slate-700 transition-colors hover:text-[#a87500]" aria-label={accountLabel}>
+            <span className="flex h-9 w-9 items-center justify-center rounded-full border border-slate-200 bg-white text-lg transition-colors group-hover:border-[#f3c969] group-hover:text-[#a87500]">👤</span>
+            <span className="hidden overflow-hidden max-w-0 text-sm font-medium opacity-0 transition-all duration-200 group-hover:max-w-[90px] group-hover:opacity-100 sm:inline-block">{accountLabel}</span>
+          </Link>
+          <button className="group flex items-center gap-2 text-slate-700 transition-colors hover:text-[#a87500]" aria-label="Wishlist">
+            <span className="flex h-9 w-9 items-center justify-center rounded-full border border-slate-200 bg-white text-lg transition-colors group-hover:border-[#f3c969] group-hover:text-[#a87500]">♡</span>
+            <span className="hidden overflow-hidden max-w-0 text-sm font-medium opacity-0 transition-all duration-200 group-hover:max-w-[80px] group-hover:opacity-100 sm:inline-block">Wishlist</span>
+          </button>
+          <Link to="/cart" className="group flex items-center gap-2 text-slate-700 transition-colors hover:text-[#a87500]">
+            <span className="relative flex h-9 w-9 items-center justify-center rounded-full border border-slate-200 bg-white text-lg text-slate-700 transition-colors group-hover:border-[#f3c969] group-hover:text-[#a87500]">🛒<span className="absolute -right-2 -top-1 flex h-4 min-w-4 items-center justify-center rounded-full bg-[#f3c969] px-1 text-[9px] font-bold text-[#172554]">0</span></span>
+            <span className="hidden overflow-hidden max-w-0 text-sm font-medium opacity-0 transition-all duration-200 group-hover:max-w-[80px] group-hover:opacity-100 sm:inline-block">Cart</span>
+          </Link>
           <button type="button" className="flex h-10 w-10 items-center justify-center rounded-md border border-slate-200 bg-white text-lg text-slate-700 xl:hidden" aria-label="Toggle menu" onClick={() => setMenuOpen((open) => !open)}>{menuOpen ? '×' : '☰'}</button>
         </div>
       </div>

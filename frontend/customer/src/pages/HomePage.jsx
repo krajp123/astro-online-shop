@@ -1,3 +1,5 @@
+import { useEffect, useState } from 'react';
+import { createPortal } from 'react-dom';
 import { ArrowRight } from 'lucide-react';
 
 // Real zodiac glyphs, ordered from Aries, grouped by classical element —
@@ -37,6 +39,73 @@ const products = [
   { name: 'Emerald Zodiac Pendant', category: 'Mercury / Budh', price: '$129', oldPrice: '', tag: 'New arrival', image: 'https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&w=900&q=85' },
   { name: 'Rose Quartz Tumble Set', category: 'Venus / Shukra', price: '$48', oldPrice: '$64', tag: '25% off', image: 'https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?auto=format&fit=crop&w=900&q=85' },
   { name: 'Tiger Eye Protection Mala', category: 'Sun / Surya', price: '$86', oldPrice: '', tag: 'Handcrafted', image: 'https://images.unsplash.com/photo-1611652022419-a9419f74343d?auto=format&fit=crop&w=900&q=85' },
+];
+
+const stoneShowcase = [
+  {
+    name: 'Pyrite',
+    scientificName: 'Iron Pyrite (FeS₂)',
+    image: '/1.png',
+    description: 'A metallic golden stone known for its protective energy and abundance symbolism.',
+    benefits: 'Boosts confidence, strengthens focus, and attracts clarity in business and decision-making.',
+    whoCanWear: 'Ideal for entrepreneurs, professionals, and anyone seeking courage, discipline, and prosperity.',
+  },
+  {
+    name: 'Garnet',
+    scientificName: 'Grossular Garnet',
+    image: '/2.png',
+    description: 'A deep red gemstone associated with vitality, passion, and energetic renewal.',
+    benefits: 'Improves motivation, supports heart health energy, and helps build emotional resilience.',
+    whoCanWear: 'Best for students, professionals, and anyone who needs a fresh start or inner strength.',
+  },
+  {
+    name: 'Citrine',
+    scientificName: 'Silicon Dioxide / Quartz',
+    image: '/3.png',
+    description: 'A bright golden crystal linked with confidence, joy, and manifesting success.',
+    benefits: 'Encourages optimism, helps attract wealth, and supports confident self-expression.',
+    whoCanWear: 'Perfect for anyone working on career growth, abundance, and confidence-building.',
+  },
+  {
+    name: 'Tiger Eye',
+    scientificName: 'Quartz with Iron Inclusions',
+    image: '/4.png',
+    description: 'A grounding stone valued for courage, protection, and steady willpower.',
+    benefits: 'Supports timing decisions, promotes calm focus, and defends against negativity.',
+    whoCanWear: 'Great for leaders, risk-takers, and those who want strength during uncertain times.',
+  },
+  {
+    name: 'Rose Quartz',
+    scientificName: 'Silicon Dioxide / Quartz',
+    image: '/5.png',
+    description: 'A soft pink stone of love, compassion, and emotional balance.',
+    benefits: 'Helps heal emotional wounds, improves self-love, and nurtures relationships.',
+    whoCanWear: 'Recommended for anyone looking for love, harmony, or emotional gentleness in daily life.',
+  },
+  {
+    name: 'Lapis Lazuli',
+    scientificName: 'Lazurite',
+    image: '/6.png',
+    description: 'A royal blue crystal connected to wisdom, truth, and spiritual awareness.',
+    benefits: 'Enhances intuition, improves communication, and deepens inner truth and self-expression.',
+    whoCanWear: 'Ideal for thinkers, creatives, and anyone seeking honest communication and spiritual clarity.',
+  },
+  {
+    name: 'Amethyst',
+    scientificName: 'Quartz (Violet Variety)',
+    image: '/7.png',
+    description: 'A purple stone associated with calm, protection, and spiritual growth.',
+    benefits: 'Eases stress, supports meditation, and helps calm the mind for deeper insight.',
+    whoCanWear: 'Perfect for anyone needing emotional calm, spiritual focus, or better sleep.',
+  },
+  {
+    name: 'Selenite',
+    scientificName: 'Gypsum',
+    image: '/8.png',
+    description: 'A luminous white stone used for cleansing, serenity, and pure energy flow.',
+    benefits: 'Purifies the aura, clears stagnant energy, and creates a peaceful environment.',
+    whoCanWear: 'Best for spiritual practices, meditation, and anyone wanting mental calm and energetic clarity.',
+  },
 ];
 
 /** Hand-built radial chart wheel — ink linework on ivory, glyphs color-coded
@@ -82,7 +151,71 @@ const ChartWheel = () => {
   );
 };
 
-const HomePage = () => (
+const HomePage = () => {
+  const [hoveredStone, setHoveredStone] = useState(null);
+  const [popupPosition, setPopupPosition] = useState({ x: 0, y: 0 });
+
+  useEffect(() => {
+    const handleScroll = () => setHoveredStone(null);
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  const clampPopupPosition = (clientX, clientY) => {
+    const popupWidth = 320;
+    const popupHeight = 420;
+    const margin = 18;
+    const viewportWidth = window.innerWidth;
+    const viewportHeight = window.innerHeight;
+
+    const preferredLeft = clientX + 26 > viewportWidth - popupWidth - margin
+      ? clientX - popupWidth - 26
+      : clientX + 26;
+
+    const preferredTop = clientY + 18 > viewportHeight - popupHeight - margin
+      ? clientY - popupHeight + 18
+      : clientY + 18;
+
+    return {
+      x: Math.min(Math.max(preferredLeft, margin), viewportWidth - popupWidth - margin),
+      y: Math.min(Math.max(preferredTop, margin), viewportHeight - popupHeight - margin),
+    };
+  };
+
+  const popupOverlay = hoveredStone && typeof document !== 'undefined'
+    ? createPortal(
+        <div
+          className="pointer-events-none fixed z-[99999] w-[320px] overflow-hidden rounded-[22px] border border-[#201b3a]/10 bg-[#fdfaf6] shadow-[0_22px_60px_rgba(22,17,47,0.18)]"
+          style={{ left: popupPosition.x, top: popupPosition.y }}
+        >
+          <div className="flex items-start gap-4 border-b border-[#201b3a]/10 bg-[#f7f1e8] p-4">
+            <img src={hoveredStone.image} alt={hoveredStone.name} className="h-20 w-20 rounded-xl object-contain bg-white/40 p-2 shadow-inner" />
+            <div className="min-w-0 text-left">
+              <p className="text-xl font-bold tracking-[-0.03em] text-[#201b3a]">{hoveredStone.name}</p>
+              <p className="mt-1 text-xs font-medium uppercase tracking-[0.18em] text-[#80758a]">{hoveredStone.scientificName}</p>
+            </div>
+          </div>
+
+          <div className="space-y-4 p-4 text-left">
+            <div>
+              <p className="text-[0.7rem] font-bold uppercase tracking-[0.18em] text-[#b8863c]">What is this stone</p>
+              <p className="mt-1 text-sm leading-6 text-[#413b57]">{hoveredStone.description}</p>
+            </div>
+            <div>
+              <p className="text-[0.7rem] font-bold uppercase tracking-[0.18em] text-[#b8863c]">Benefits of wearing this stone</p>
+              <p className="mt-1 text-sm leading-6 text-[#413b57]">{hoveredStone.benefits}</p>
+            </div>
+            <div>
+              <p className="text-[0.7rem] font-bold uppercase tracking-[0.18em] text-[#b8863c]">Who can wear this</p>
+              <p className="mt-1 text-sm leading-6 text-[#413b57]">{hoveredStone.whoCanWear}</p>
+            </div>
+          </div>
+        </div>,
+        document.body
+      )
+    : null;
+
+  return (
   <div className="bg-[#f8f6f1]">
     {/* Hero */}
     <section className="relative overflow-hidden bg-[#15112f]">
@@ -122,35 +255,65 @@ const HomePage = () => (
       </div>
     </section>
 
-    {/* Trust strip */}
-    <section className="mx-auto flex max-w-[1440px] flex-wrap items-center justify-between gap-4 border-t border-[#201b3a]/10 px-4 py-8 sm:px-8">
-      <p className="text-sm text-[#5b5470]">Certified natural stones, chosen with your birth chart in mind.</p>
-      <div className="flex flex-wrap gap-6 text-xs font-semibold text-[#201b3a]/70">
-        <span>Free shipping over $75</span>
-        <span>Certificate of authenticity</span>
-        <span>30-day returns</span>
+    {/* Stone strip */}
+    <section className="relative z-0 w-full overflow-visible bg-[#f5f1eb] px-0 pb-4 pt-2">
+      <div className="mx-auto max-w-[1440px] px-4 pb-2 pt-1 sm:px-8">
+        <p className="text-left text-[0.85rem] font-semibold uppercase tracking-[0.18em] text-[#201b3a]/70">Shop by Stones</p>
       </div>
+      <div className="relative mx-auto flex w-full max-w-[1440px] items-end justify-between gap-3 overflow-x-auto px-4 sm:gap-4 sm:px-8 md:gap-5 lg:gap-6">
+        {stoneShowcase.map((stone, index) => (
+          <div
+            key={stone.name + index}
+            className="group relative flex min-w-[120px] flex-col items-center justify-end text-center transition duration-300 ease-out hover:-translate-y-1 sm:min-w-[140px]"
+            onMouseEnter={(event) => {
+              setHoveredStone(stone);
+              setPopupPosition(clampPopupPosition(event.clientX, event.clientY));
+            }}
+            onMouseMove={(event) => {
+              setPopupPosition(clampPopupPosition(event.clientX, event.clientY));
+            }}
+            onMouseLeave={() => setHoveredStone(null)}
+            onWheel={() => setHoveredStone(null)}
+          >
+            <img
+              src={stone.image}
+              alt={stone.name}
+              className="h-20 w-auto object-contain transition duration-300 ease-out group-hover:scale-[1.04] sm:h-24 md:h-28 lg:h-32"
+              style={{ background: 'transparent' }}
+            />
+            <span className="mt-1 pb-1 text-[0.82rem] font-medium tracking-[-0.02em] text-[#201b3a] transition duration-300 group-hover:text-[#2b2250] sm:text-[0.95rem]">
+              {stone.name}
+            </span>
+          </div>
+        ))}
+      </div>
+
+      {popupOverlay}
     </section>
 
+    <div className="h-[1px] w-full bg-[#201b3a]/10" />
+
     {/* Shop by sign */}
-    <section className="border-y border-[#201b3a]/10 bg-white">
-      <div className="mx-auto max-w-[1440px] px-4 py-6 sm:px-8">
-        <div className="flex items-center gap-4 overflow-x-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
-          <span className="flex-shrink-0 text-xs font-semibold text-[#5b5470]">Shop by sign</span>
+    <section className="bg-[#f5f1eb] py-7">
+      <div className="mx-auto max-w-[1440px] px-4 pb-3 sm:px-8">
+        <p className="text-left text-[0.85rem] font-semibold uppercase tracking-[0.18em] text-[#201b3a]/70">Shop by Sign</p>
+      </div>
+      <div className="mx-auto max-w-[1440px] px-4 sm:px-8">
+        <div className="flex w-full items-end justify-between gap-3 overflow-x-auto pb-1 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden sm:gap-4 md:gap-5 lg:gap-6">
           {ZODIAC.map((sign) => (
             <a
               key={sign.name}
               href={`/products?sign=${sign.name.toLowerCase()}`}
-              className="group flex flex-shrink-0 flex-col items-center gap-1 rounded-lg px-2 py-1 transition hover:bg-[#f6f1e6]"
+              className="group flex flex-shrink-0 flex-col items-center gap-2 px-2 py-1 transition duration-200 ease-out hover:-translate-y-1"
               title={sign.name}
             >
               <span
-                className="flex h-9 w-9 items-center justify-center rounded-full border text-base"
-                style={{ borderColor: `${ELEMENT_COLORS[sign.element]}55`, color: ELEMENT_COLORS[sign.element] }}
+                className="flex h-16 w-16 items-center justify-center rounded-full border text-[2rem] shadow-[0_0_0_1px_rgba(32,27,58,0.04)] transition duration-200 ease-out group-hover:shadow-[0_8px_18px_rgba(32,27,58,0.10)] sm:h-[4.25rem] sm:w-[4.25rem]"
+                style={{ borderColor: `${ELEMENT_COLORS[sign.element]}55`, color: ELEMENT_COLORS[sign.element], backgroundColor: 'rgba(255,255,255,0.05)' }}
               >
                 {sign.glyph}
               </span>
-              <span className="text-[10px] font-medium text-[#5b5470] group-hover:text-[#201b3a]">{sign.name}</span>
+              <span className="text-[0.72rem] font-medium tracking-[-0.02em] text-[#201b3a] transition duration-200 group-hover:text-[#2b2250] sm:text-[0.8rem]">{sign.name}</span>
             </a>
           ))}
         </div>
@@ -220,6 +383,7 @@ const HomePage = () => (
       </div>
     </section>
   </div>
-);
+  );
+};
 
 export default HomePage;

@@ -2,10 +2,10 @@ import { Link } from 'react-router-dom';
 
 const Footer = () => {
   return (
-    <footer className="mt-20 border-t border-slate-200 bg-white text-slate-900">
+    <footer className="mt-20 border-t border-[#201b3a]/10 bg-[#f3efe9] text-slate-900">
       <div className="mx-auto grid max-w-[1440px] gap-10 px-4 py-12 sm:grid-cols-2 sm:px-8 lg:grid-cols-4">
         <div>
-          <p className="text-2xl font-black tracking-[-0.06em]">astro<span className="text-[#f3c969]">.</span></p>
+          <p className="text-2xl font-black tracking-[-0.06em]">astrovastubazar<span className="text-[#f3c969]">.</span></p>
           <p className="mt-3 max-w-xs text-sm leading-6 text-slate-500">Gems chosen with intention for your cosmic journey.</p>
         </div>
         <div>
@@ -27,7 +27,7 @@ const Footer = () => {
         <div>
           <p className="mb-4 text-xs font-bold uppercase tracking-[0.16em] text-[#f3c969]">Cosmic notes</p>
           <p className="mb-3 text-sm text-slate-500">New arrivals, planetary insights and stone stories.</p>
-          <div className="flex rounded-full border border-slate-200 bg-slate-50 p-1">
+          <div className="flex rounded-full border border-[#201b3a]/10 bg-[#f7f3ee] p-1">
             <input aria-label="Email address" className="min-w-0 flex-1 bg-transparent px-3 text-sm text-slate-900 outline-none placeholder:text-slate-400" placeholder="Your email" />
             <button type="button" className="rounded-full bg-[#f3c969] px-4 py-2 text-xs font-bold text-[#172554]">Join</button>
           </div>
