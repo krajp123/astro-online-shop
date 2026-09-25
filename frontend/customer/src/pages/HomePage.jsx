@@ -1,6 +1,6 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
-import { ArrowRight } from 'lucide-react';
+import { ArrowRight, Heart, ShoppingBag } from 'lucide-react';
 
 // Real zodiac glyphs, ordered from Aries, grouped by classical element —
 // used to color-code both the hero wheel and the sign-picker strip.
@@ -25,20 +25,6 @@ const ZODIAC = [
   { glyph: '♑', name: 'Capricorn', element: 'earth' },
   { glyph: '♒', name: 'Aquarius', element: 'air' },
   { glyph: '♓', name: 'Pisces', element: 'water' },
-];
-
-const energyCategories = [
-  { name: 'Love & harmony', stone: 'Rose Quartz', element: 'water', image: 'https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?auto=format&fit=crop&w=700&q=85' },
-  { name: 'Courage & focus', stone: 'Tiger Eye', element: 'fire', image: 'https://images.unsplash.com/photo-1611652022419-a9419f74343d?auto=format&fit=crop&w=700&q=85' },
-  { name: 'Prosperity', stone: 'Emerald', element: 'earth', image: 'https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&w=700&q=85' },
-  { name: 'Protection', stone: 'Blue Sapphire', element: 'air', image: 'https://images.unsplash.com/photo-1617038220319-276d3cfab638?auto=format&fit=crop&w=700&q=85' },
-];
-
-const products = [
-  { name: 'Natural Blue Sapphire', category: 'Saturn / Shani', price: '$249', oldPrice: '$299', tag: 'Bestseller', image: 'https://images.unsplash.com/photo-1617038220319-276d3cfab638?auto=format&fit=crop&w=900&q=85' },
-  { name: 'Emerald Zodiac Pendant', category: 'Mercury / Budh', price: '$129', oldPrice: '', tag: 'New arrival', image: 'https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&w=900&q=85' },
-  { name: 'Rose Quartz Tumble Set', category: 'Venus / Shukra', price: '$48', oldPrice: '$64', tag: '25% off', image: 'https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?auto=format&fit=crop&w=900&q=85' },
-  { name: 'Tiger Eye Protection Mala', category: 'Sun / Surya', price: '$86', oldPrice: '', tag: 'Handcrafted', image: 'https://images.unsplash.com/photo-1611652022419-a9419f74343d?auto=format&fit=crop&w=900&q=85' },
 ];
 
 const stoneShowcase = [
@@ -108,6 +94,15 @@ const stoneShowcase = [
   },
 ];
 
+const topProducts = [
+  { name: 'Lal Kitab Amrit Vashist Jyotish', price: 'Rs. 2,550.00', image: '/top%20products/1.png' },
+  { name: 'Shakti Peeth Yantra', price: 'Rs. 21,000.00', image: '/top%20products/2.jpg' },
+  { name: 'Shukra Amrit Soap', price: 'Rs. 479.00', image: '/top%20products/3.jpg' },
+  { name: 'Shani Amrit Dhoop', price: 'Rs. 409.00', image: '/top%20products/4.jpg' },
+  { name: 'Ashtasiddhi Yantra', price: 'Rs. 41,000.00', image: '/top%20products/5.jpg' },
+  { name: 'Rahu Mantra Upchar Potli', price: 'Rs. 3,100.00', image: '/top%20products/6.png' },
+];
+
 /** Hand-built radial chart wheel — ink linework on ivory, glyphs color-coded
  * by element, so it reads as astrological rather than decorative. */
 const ChartWheel = () => {
@@ -151,6 +146,79 @@ const ChartWheel = () => {
   );
 };
 
+const RotatingLalKitab = () => {
+  const [rotation, setRotation] = useState(0);
+  const isDragging = useRef(false);
+
+  useEffect(() => {
+    let animationFrame;
+    let previousTime = performance.now();
+
+    const animate = (time) => {
+      const elapsed = time - previousTime;
+      previousTime = time;
+
+      if (!isDragging.current) {
+        setRotation((currentRotation) => currentRotation + elapsed * 0.018);
+      }
+
+      animationFrame = requestAnimationFrame(animate);
+    };
+
+    animationFrame = requestAnimationFrame(animate);
+    return () => cancelAnimationFrame(animationFrame);
+  }, []);
+
+  const handlePointerDown = (event) => {
+    if (event.button !== 0) return;
+
+    event.preventDefault();
+    isDragging.current = true;
+    event.currentTarget.setPointerCapture(event.pointerId);
+  };
+
+  const handlePointerMove = (event) => {
+    if (!isDragging.current) return;
+
+    event.preventDefault();
+    setRotation((currentRotation) => currentRotation + event.movementX * 0.8);
+  };
+
+  const stopDragging = (event) => {
+    isDragging.current = false;
+    if (event.currentTarget.hasPointerCapture(event.pointerId)) {
+      event.currentTarget.releasePointerCapture(event.pointerId);
+    }
+  };
+
+  return (
+    <div
+      className="pointer-events-auto absolute right-[4%] top-1/2 w-[42%] max-w-[520px] -translate-y-1/2 cursor-grab touch-none select-none active:cursor-grabbing sm:right-[3%] sm:w-[38%] lg:right-[5%] lg:w-[30%]"
+      onPointerDown={handlePointerDown}
+      onPointerMove={handlePointerMove}
+      onPointerUp={stopDragging}
+      onPointerCancel={stopDragging}
+      onLostPointerCapture={() => {
+        isDragging.current = false;
+      }}
+      role="slider"
+      aria-label="Rotate Lal Kitab"
+      aria-valuenow={Math.round(rotation % 360)}
+      aria-valuemin="-360"
+      aria-valuemax="360"
+      tabIndex="0"
+    >
+      <img
+        src="/lal-kitab%201.1.png"
+        alt="Lal Kitab astrology book"
+        draggable="false"
+        className="pointer-events-none block w-full object-contain"
+        style={{ transform: `rotate(${rotation}deg)` }}
+      />
+    </div>
+  );
+};
+
 const HomePage = () => {
   const [hoveredStone, setHoveredStone] = useState(null);
   const [popupPosition, setPopupPosition] = useState({ x: 0, y: 0 });
@@ -191,7 +259,7 @@ const HomePage = () => {
           <div className="flex items-start gap-4 border-b border-[#201b3a]/10 bg-[#f7f1e8] p-4">
             <img src={hoveredStone.image} alt={hoveredStone.name} className="h-20 w-20 rounded-xl object-contain bg-white/40 p-2 shadow-inner" />
             <div className="min-w-0 text-left">
-              <p className="text-xl font-bold tracking-[-0.03em] text-[#201b3a]">{hoveredStone.name}</p>
+              <p className="text-xl font-bold tracking-normal text-[#201b3a]">{hoveredStone.name}</p>
               <p className="mt-1 text-xs font-medium uppercase tracking-[0.18em] text-[#80758a]">{hoveredStone.scientificName}</p>
             </div>
           </div>
@@ -227,14 +295,14 @@ const HomePage = () => {
         playsInline
         aria-hidden="true"
       >
-        <source src="/astrology-hero.mp4" type="video/mp4" />
+        <source src="/v2.mp4" type="video/mp4" />
       </video>
       <div className="pointer-events-none absolute inset-y-0 left-0 w-full bg-[linear-gradient(90deg,#15112f_0%,#171432_28%,rgba(23,20,50,0.96)_45%,rgba(23,20,50,0.72)_60%,rgba(23,20,50,0)_78%)]" />
 
       <div className="relative z-10 mx-auto flex min-h-[calc(100svh-66px)] max-w-[1440px] items-center px-4 py-6 sm:px-8 lg:py-8">
         <div className="w-full max-w-2xl lg:w-[58%] lg:pr-10">
           <p className="mb-3 text-[clamp(0.7rem,1vw,0.85rem)] font-bold uppercase tracking-[0.22em] text-[#f3c969]">Personalised gemstone guidance</p>
-          <h1 className="max-w-xl font-['Cormorant_Garamond',serif] text-[clamp(2.75rem,5vw,5.5rem)] font-bold leading-[0.9] tracking-[-0.03em] text-white">
+          <h1 className="max-w-xl text-[clamp(2.25rem,5vw,4rem)] font-bold leading-[1.15] tracking-normal text-white">
             Unlock the power of your birth chart.
           </h1>
           <p className="mt-5 max-w-lg text-[clamp(0.9rem,1.2vw,1.05rem)] leading-6 text-white/70">
@@ -281,7 +349,7 @@ const HomePage = () => {
               className="h-20 w-auto object-contain transition duration-300 ease-out group-hover:scale-[1.04] sm:h-24 md:h-28 lg:h-32"
               style={{ background: 'transparent' }}
             />
-            <span className="mt-1 pb-1 text-[0.82rem] font-medium tracking-[-0.02em] text-[#201b3a] transition duration-300 group-hover:text-[#2b2250] sm:text-[0.95rem]">
+            <span className="mt-1 pb-1 text-[0.82rem] font-medium tracking-normal text-[#201b3a] transition duration-300 group-hover:text-[#2b2250] sm:text-[0.95rem]">
               {stone.name}
             </span>
           </div>
@@ -289,6 +357,97 @@ const HomePage = () => {
       </div>
 
       {popupOverlay}
+    </section>
+
+    <div className="h-8 bg-[#f5f1eb]" aria-hidden="true" />
+
+    {/* Lal Kitab promotion */}
+    <section className="relative isolate min-h-[360px] overflow-hidden bg-[#4d001e] sm:min-h-[400px] lg:min-h-[420px]">
+      <img
+        src="/lal-kitab%201.png"
+        alt=""
+        aria-hidden="true"
+        className="absolute inset-0 h-full w-full object-cover"
+      />
+      <div className="absolute inset-0 bg-[#3c0019]/20" aria-hidden="true" />
+
+      <div className="relative z-10 mx-auto flex min-h-[360px] max-w-[1440px] items-center px-6 py-12 sm:min-h-[400px] sm:px-10 lg:min-h-[420px] lg:px-16">
+        <div className="max-w-xl text-white lg:max-w-[55%]">
+          <h2 className="max-w-2xl text-[clamp(2rem,3.5vw,3rem)] font-bold leading-[1.15] tracking-normal">
+            Discover the Blueprint of Your Destiny
+          </h2>
+          <p className="mt-4 text-[clamp(1rem,1.4vw,1.25rem)] font-semibold leading-7 text-white">
+            Now Just One Exclusive Click Away
+          </p>
+          <a
+            href="/products"
+            className="mt-12 inline-flex items-center rounded-md bg-[#ffd400] px-6 py-3 text-xs font-bold text-[#3d0017] transition hover:bg-white"
+          >
+            Get Your Exclusive Lal Kitab Now
+          </a>
+          <p className="mt-8 text-[0.68rem] font-semibold leading-5 text-[#ffd400] sm:text-xs">
+            <span aria-hidden="true">★ </span>
+            Over 1 Lakh Verified Predictions Delivered — A Standard of Trust &amp; Accuracy
+            <span aria-hidden="true"> ★</span>
+          </p>
+        </div>
+
+        <RotatingLalKitab />
+      </div>
+    </section>
+
+    {/* Top products */}
+    <section className="bg-[#f3efe9] px-4 py-6 sm:px-8 lg:py-10">
+      <div className="mx-auto max-w-[1440px]">
+        <div className="flex flex-col items-center justify-between gap-3 pb-2 text-center">
+          <div className="max-w-3xl">
+            <h2 className="text-2xl font-bold leading-tight tracking-normal text-[#201b3a] sm:text-3xl">
+                Trusted essentials, chosen by thousands.
+            </h2>
+            <p className="mx-auto mt-2 max-w-3xl text-sm leading-5 text-[#5b5470]">
+                Explore carefully selected products inspired by the timeless wisdom of Life, bringing traditional knowledge and modern quality together for balance, positivity, prosperity, and spiritual well-being.
+            </p>
+          </div>
+        </div>
+
+        <div className="mt-4 grid grid-cols-2 gap-3 sm:grid-cols-3 sm:gap-4 lg:grid-cols-5 lg:gap-4">
+          {topProducts.map((product) => (
+            <article key={product.name} className="group overflow-hidden rounded-lg bg-white ring-1 ring-[#201b3a]/5 transition-shadow duration-300 hover:shadow-[0_12px_28px_rgba(32,27,58,0.12)]">
+              <a href="/products" className="block">
+                <div className="relative aspect-[1.15] overflow-hidden bg-[#f7f4ee]">
+                  <img
+                    src={product.image}
+                    alt={product.name}
+                    className="h-full w-full object-cover transition duration-500 group-hover:scale-105"
+                  />
+                  <span className="absolute left-2 top-2 bg-[#201b3a] px-2 py-1 text-[9px] font-semibold uppercase tracking-[0.12em] text-white">Featured</span>
+
+                  <button
+                    type="button"
+                    aria-label={`Save ${product.name} to wishlist`}
+                    onClick={(event) => event.preventDefault()}
+                    className="absolute right-2 top-2 flex h-7 w-7 items-center justify-center rounded-full bg-white/90 text-[#201b3a] transition duration-300 hover:bg-white hover:text-[#b23a52]"
+                  >
+                    <Heart className="h-4 w-4" />
+                  </button>
+
+                  <div className="absolute inset-x-2 bottom-2 translate-y-3 opacity-0 transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100">
+                    <span className="flex w-full items-center justify-center gap-2 rounded-md bg-[#201b3a] py-2 text-xs font-semibold text-white shadow-lg">
+                      <ShoppingBag className="h-3.5 w-3.5" />
+                      Quick add
+                    </span>
+                  </div>
+                </div>
+
+                <div className="p-3">
+                  <h3 className="text-sm font-medium leading-5 text-[#201b3a] sm:text-[15px]">{product.name}</h3>
+                  <p className="mt-2 text-sm font-bold text-[#201b3a]">{product.price}</p>
+                </div>
+              </a>
+            </article>
+          ))}
+        </div>
+      </div>
     </section>
 
     <div className="h-[1px] w-full bg-[#201b3a]/10" />
@@ -313,7 +472,7 @@ const HomePage = () => {
               >
                 {sign.glyph}
               </span>
-              <span className="text-[0.72rem] font-medium tracking-[-0.02em] text-[#201b3a] transition duration-200 group-hover:text-[#2b2250] sm:text-[0.8rem]">{sign.name}</span>
+              <span className="text-[0.72rem] font-medium tracking-normal text-[#201b3a] transition duration-200 group-hover:text-[#2b2250] sm:text-[0.8rem]">{sign.name}</span>
             </a>
           ))}
         </div>
@@ -321,67 +480,6 @@ const HomePage = () => {
     </section>
 
     {/* Shop by energy */}
-    <section className="mx-auto max-w-[1440px] px-4 py-16 sm:px-8">
-      <div className="mb-8">
-        <h2 className="font-['Cormorant_Garamond',serif] text-3xl font-bold tracking-[-0.02em] text-[#201b3a] sm:text-4xl">Find the stone for what you need</h2>
-        <p className="mt-2 max-w-md text-sm text-[#5b5470]">Every stone carries a different energy — start with what you're looking for.</p>
-      </div>
-      <div className="grid grid-cols-2 gap-3 md:grid-cols-4">
-        {energyCategories.map((cat) => (
-          <a href="/products" key={cat.name} className="group relative aspect-[0.85] overflow-hidden rounded-xl bg-[#201b3a]">
-            <img src={cat.image} alt={cat.stone} className="h-full w-full object-cover opacity-85 transition duration-500 group-hover:scale-105 group-hover:opacity-100" />
-            <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/75 via-black/40 to-transparent px-4 pb-4 pt-14">
-              <p className="text-lg font-bold text-white">{cat.name}</p>
-              <p className="mt-1 text-xs font-medium" style={{ color: ELEMENT_COLORS[cat.element] === '#3f6488' ? '#8fb3d6' : '#f0d9a8' }}>{cat.stone}</p>
-            </div>
-          </a>
-        ))}
-      </div>
-    </section>
-
-    {/* Most loved stones */}
-    <section className="border-t border-[#201b3a]/10 bg-white">
-      <div className="mx-auto max-w-[1440px] px-4 py-16 sm:px-8">
-        <div className="mb-8 flex items-end justify-between">
-          <h2 className="font-['Cormorant_Garamond',serif] text-3xl font-bold tracking-[-0.02em] text-[#201b3a] sm:text-4xl">Most loved stones</h2>
-          <a href="/products" className="hidden text-sm font-bold text-[#b8863c] sm:block">Shop all</a>
-        </div>
-        <div className="grid grid-cols-2 gap-x-3 gap-y-8 sm:grid-cols-4 sm:gap-x-5">
-          {products.map((product) => (
-            <article key={product.name} className="group">
-              <div className="relative aspect-[0.82] overflow-hidden rounded-xl border border-[#201b3a]/10 bg-[#f6f1e6]">
-                <img src={product.image} alt={product.name} className="h-full w-full object-cover transition duration-500 group-hover:scale-105" />
-                <span className="absolute left-3 top-3 bg-[#2b2250] px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider text-white">{product.tag}</span>
-                <button aria-label={`Add ${product.name} to wishlist`} className="absolute right-3 top-3 flex h-8 w-8 items-center justify-center rounded-full bg-white/90 text-sm text-[#201b3a] shadow-sm transition hover:bg-[#b8863c] hover:text-white">♡</button>
-                <button className="absolute inset-x-3 bottom-3 translate-y-2 rounded-full bg-[#2b2250] py-2.5 text-xs font-bold text-white opacity-0 shadow-sm transition group-hover:translate-y-0 group-hover:opacity-100">Add to bag</button>
-              </div>
-              <p className="mt-4 text-xs font-medium text-[#b8863c]">{product.category}</p>
-              <h3 className="mt-1 text-sm font-bold text-[#201b3a] sm:text-base">{product.name}</h3>
-              <div className="mt-2 flex gap-2 text-sm font-bold text-[#201b3a]">
-                <span>{product.price}</span>
-                {product.oldPrice && <span className="font-normal text-[#5b5470]/60 line-through">{product.oldPrice}</span>}
-              </div>
-            </article>
-          ))}
-        </div>
-      </div>
-    </section>
-
-    {/* Chart quiz CTA */}
-    <section className="w-full py-16">
-      <div className="mx-auto grid max-w-[1440px] overflow-hidden rounded-2xl border border-[#201b3a]/10 bg-[#ece4f2] px-4 sm:px-8 md:grid-cols-2 md:px-0">
-        <div className="flex flex-col justify-center px-3 py-12 sm:px-6 md:px-14">
-          <h2 className="max-w-md font-['Cormorant_Garamond',serif] text-4xl font-bold leading-tight tracking-[-0.02em] text-[#201b3a]">Not sure which stone is yours?</h2>
-          <p className="mt-5 max-w-md leading-7 text-[#5b5470]">
-            Answer a few questions about your sign and what you're looking for — we'll match you with a stone in under two minutes.
-          </p>
-          <a href="/quiz" className="mt-7 inline-flex w-fit items-center gap-2 rounded-full bg-[#2b2250] px-5 py-3 text-sm font-bold text-white transition hover:bg-[#3a2f68]">
-            Start your reading <ArrowRight className="h-4 w-4" />
-          </a>
-        </div>
-        <img className="h-80 w-full object-cover md:h-full" src="https://images.unsplash.com/photo-1511499767150-a48a237f0083?auto=format&fit=crop&w=1200&q=85" alt="Crystal and moonlight inspired astrology scene" />
-      </div>
-    </section>
   </div>
   );
 };

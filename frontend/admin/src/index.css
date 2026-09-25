@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
 /**
  * Global Tailwind base layer for the admin app.
  * This file imports Tailwind and sets shared admin styling.
@@ -7,7 +9,7 @@
 @tailwind utilities;
 
 :root {
-  font-family: Inter, system-ui, sans-serif;
+  font-family: 'Inter', system-ui, sans-serif;
   color: #111827;
   background: #f8fafc;
 }

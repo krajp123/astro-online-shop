@@ -46,15 +46,15 @@ const Navbar = () => {
 
   return (
     <header className="sticky top-0 z-40 border-b border-slate-200 bg-white text-slate-900 shadow-[0_4px_20px_rgba(15,23,42,0.06)]">
-      <div className="mx-auto flex min-h-[66px] max-w-[1600px] items-center gap-4 px-4 sm:px-8 lg:gap-6">
-        <Link to="/" aria-label="astrovastubazar home" className="mr-2 shrink-0 text-2xl font-black tracking-[-0.08em] text-slate-900">
+      <div className="mx-auto flex min-h-[66px] max-w-[1600px] items-center gap-3 px-4 sm:px-8 lg:gap-4">
+        <Link to="/" aria-label="astrovastubazar home" className="mr-2 shrink-0 text-2xl font-bold tracking-normal text-slate-900">
           astrovastubazar<span className="text-[#d39e25]">.</span>
         </Link>
 
-        <nav className="hidden min-w-0 max-w-[900px] flex-1 items-center justify-between gap-0 pr-4 xl:flex xl:pr-6" onMouseLeave={() => setActiveMenu(null)}>
+        <nav className="hidden min-w-0 max-w-[600px] flex-1 items-center justify-between gap-0 pr-2 xl:flex xl:pr-3 2xl:max-w-[800px]" onMouseLeave={() => setActiveMenu(null)}>
           {menuSections.map((section, index) => (
             <div key={section.label} className="relative" onMouseEnter={() => setActiveMenu(index)}>
-              <button type="button" className={`flex items-center gap-1 whitespace-nowrap rounded-md px-2 py-2 text-[12px] font-bold tracking-normal transition-colors xl:px-3 xl:text-[13px] ${activeMenu === index ? 'bg-amber-50 text-[#a87500]' : 'text-slate-700 hover:text-[#a87500]'}`} onClick={() => setActiveMenu(activeMenu === index ? null : index)} aria-expanded={activeMenu === index}>
+              <button type="button" className={`flex items-center gap-1 whitespace-nowrap rounded-md px-1 py-2 text-[11px] font-bold tracking-normal transition-colors 2xl:px-2 2xl:text-[12px] ${activeMenu === index ? 'bg-amber-50 text-[#a87500]' : 'text-slate-700 hover:text-[#a87500]'}`} onClick={() => setActiveMenu(activeMenu === index ? null : index)} aria-expanded={activeMenu === index}>
                 {section.label}<span className="text-[12px]">⌄</span>
               </button>
               {activeMenu === index && <div className="absolute left-0 top-full z-40 w-56 pt-3" onMouseEnter={() => setActiveMenu(index)}><div className="rounded-lg border border-slate-200 bg-white p-2 shadow-xl">{section.items.map((item) => <Link key={item} to={menuLink(item)} className="block whitespace-nowrap rounded-md px-3 py-2 text-sm text-slate-600 transition-colors hover:bg-amber-50 hover:text-[#a87500]">{item}</Link>)}</div></div>}
@@ -62,7 +62,7 @@ const Navbar = () => {
           ))}
         </nav>
 
-        <div className="ml-8 hidden h-10 w-[230px] shrink-0 items-center rounded-md border border-slate-200 border-l-0 bg-slate-50 px-3 pl-6 text-sm text-slate-400 xl:flex xl:ml-10 xl:w-[300px] xl:pl-7">
+        <div className="ml-2 hidden h-10 w-[180px] shrink-0 items-center rounded-md border border-slate-200 border-l-0 bg-slate-50 px-3 pl-4 text-sm text-slate-400 xl:flex 2xl:w-[220px] 2xl:pl-5">
           <span aria-hidden="true" className="mr-3 text-xl leading-none text-slate-500">⌕</span>
           <input aria-label="Search products" className="min-w-0 flex-1 bg-transparent outline-none placeholder:text-slate-400" placeholder="Search gems, pendants, birthstones..." />
         </div>

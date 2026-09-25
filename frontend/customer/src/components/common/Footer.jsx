@@ -1,11 +1,11 @@
 import { Link } from 'react-router-dom';
 
-const Footer = () => {
+const Footer = ({ className = 'mt-20' }) => {
   return (
-    <footer className="mt-20 border-t border-[#201b3a]/10 bg-[#f3efe9] text-slate-900">
+    <footer className={`${className} border-t border-[#201b3a]/10 bg-[#f3efe9] text-slate-900`}>
       <div className="mx-auto grid max-w-[1440px] gap-10 px-4 py-12 sm:grid-cols-2 sm:px-8 lg:grid-cols-4">
         <div>
-          <p className="text-2xl font-black tracking-[-0.06em]">astrovastubazar<span className="text-[#f3c969]">.</span></p>
+          <p className="text-2xl font-bold tracking-normal">astrovastubazar<span className="text-[#f3c969]">.</span></p>
           <p className="mt-3 max-w-xs text-sm leading-6 text-slate-500">Gems chosen with intention for your cosmic journey.</p>
         </div>
         <div>
