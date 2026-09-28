@@ -5,7 +5,7 @@ import { Route, Routes, useLocation } from 'react-router-dom';
 import CartPage from './pages/CartPage';
 import HomePage from './pages/HomePage';
 import OrdersPage from './pages/OrdersPage';
-import ProductsPage from './pages/ProductsPage';
+import Yantra from './components/products/Yantra';
 import Navbar from './components/common/Navbar';
 import Footer from './components/common/Footer';
 import LoginPage from './pages/LoginPage';
@@ -32,7 +32,7 @@ function App() {
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/login" element={<LoginPage />} />
-          <Route path="/products" element={<ProductsPage />} />
+          <Route path="/products" element={<Yantra />} />
           <Route path="/cart" element={<CartPage />} />
           <Route path="/orders" element={<OrdersPage />} />
         </Routes>

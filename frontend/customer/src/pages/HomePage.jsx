@@ -1,6 +1,15 @@
 import { useEffect, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
-import { ArrowRight, Heart, ShoppingBag } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
+import {
+  motion,
+  useAnimationFrame,
+  useMotionTemplate,
+  useMotionValue,
+  useReducedMotion,
+  useSpring,
+  useTransform,
+} from 'framer-motion';
 
 // Real zodiac glyphs, ordered from Aries, grouped by classical element —
 // used to color-code both the hero wheel and the sign-picker strip.
@@ -95,12 +104,13 @@ const stoneShowcase = [
 ];
 
 const topProducts = [
-  { name: 'Lal Kitab Amrit Vashist Jyotish', price: 'Rs. 2,550.00', image: '/top%20products/1.png' },
-  { name: 'Shakti Peeth Yantra', price: 'Rs. 21,000.00', image: '/top%20products/2.jpg' },
-  { name: 'Shukra Amrit Soap', price: 'Rs. 479.00', image: '/top%20products/3.jpg' },
-  { name: 'Shani Amrit Dhoop', price: 'Rs. 409.00', image: '/top%20products/4.jpg' },
-  { name: 'Ashtasiddhi Yantra', price: 'Rs. 41,000.00', image: '/top%20products/5.jpg' },
+  { name: 'Shakti Peeth Yantra', price: 'Rs. 2,550.00', image: '/top%20products/1.png' },
+  { name: 'Ashtasiddhi Yantra ', price: 'Rs. 41,000.00', image: '/top%20products/4.jpg' },
+  { name: 'Lal Kitab Amrit Vashist Jyotish ', price: 'Rs. 2,550.00', image: '/top%20products/3.jpg' },
+  { name: 'Shukra Amrit Soap', price: 'Rs. 479.00', image: '/top%20products/2.jpg' },
   { name: 'Rahu Mantra Upchar Potli', price: 'Rs. 3,100.00', image: '/top%20products/6.png' },
+  { name: 'Shani Amrit Dhoop', price: 'Rs. 409.00', image: '/top%20products/5.jpg' },
+  
 ];
 
 /** Hand-built radial chart wheel — ink linework on ivory, glyphs color-coded
@@ -216,6 +226,227 @@ const RotatingLalKitab = () => {
         style={{ transform: `rotate(${rotation}deg)` }}
       />
     </div>
+  );
+};
+
+/* ---------------------------------------------------------------------------
+ * Product card — "The Doorway"
+ * A deep burgundy card with an arched niche (a temple doorway) holding the
+ * product. Behind the arch a fine-line zodiac wheel turns like a slow sun, and
+ * speeds up when you hover. The card tilts toward the cursor and a soft rose-gold light
+ * follows it. Add to your index.html for the heading font (falls back to Georgia):
+ *   <link href="https://fonts.googleapis.com/css2?family=Marcellus&display=swap" rel="stylesheet" />
+ * ------------------------------------------------------------------------- */
+const CARD_SERIF = "'Marcellus', Georgia, serif";
+const CARD_GOLD = '#e8b4a0'; // rose gold
+const CARD_EASE = [0.22, 1, 0.36, 1];
+const ARCH_RADIUS = '50% 50% 20px 20px / 40% 40% 20px 20px';
+const NICHE_RADIUS = '50% 50% 27px 27px / 39% 39% 27px 27px';
+
+const makeVariants = (reduce) => {
+  if (reduce) {
+    return {
+      card: { hidden: { opacity: 0 }, show: { opacity: 1, transition: { duration: 0.3 } } },
+      halo: {},
+      arch: {},
+      seal: {},
+      text: {},
+    };
+  }
+  return {
+    card: {
+      hidden: { opacity: 0 },
+      show: { opacity: 1, transition: { duration: 0.9, ease: CARD_EASE } },
+    },
+    halo: {
+      hidden: { opacity: 0, scale: 0.6 },
+      show: { opacity: 1, scale: 1, transition: { duration: 1.5, ease: CARD_EASE } },
+    },
+    // The doorway "opens" from the floor up.
+    arch: {
+      hidden: { clipPath: 'inset(100% 0% 0% 0%)' },
+      show: { clipPath: 'inset(0% 0% 0% 0%)', transition: { duration: 1.9, ease: CARD_EASE } },
+    },
+    seal: {
+      hidden: { opacity: 0, scale: 0.4 },
+      show: { opacity: 1, scale: 1, transition: { type: 'spring', stiffness: 220, damping: 20, delay: 0.2 } },
+    },
+    text: {
+      hidden: { opacity: 0, y: 14 },
+      show: { opacity: 1, y: 0, transition: { duration: 0.8, ease: CARD_EASE, delay: 0.15 } },
+    },
+  };
+};
+
+/** Thin rose-gold zodiac wheel; upright glyphs face outward like an astrolabe rim. */
+const HaloWheel = ({ rotation }) => (
+  <motion.div style={{ rotate: rotation }} className="h-full w-full">
+    <svg viewBox="0 0 200 200" className="h-full w-full" aria-hidden="true">
+      <circle cx="100" cy="100" r="98" fill="none" stroke={CARD_GOLD} strokeOpacity="0.32" />
+      <circle cx="100" cy="100" r="70" fill="none" stroke={CARD_GOLD} strokeOpacity="0.2" strokeDasharray="1 4" />
+      {ZODIAC.map((sign, i) => {
+        const tickAngle = (i * 30 * Math.PI) / 180;
+        const glyphDeg = i * 30 + 15;
+        const glyphAngle = (glyphDeg * Math.PI) / 180;
+        const gx = 100 + 84 * Math.sin(glyphAngle);
+        const gy = 100 - 84 * Math.cos(glyphAngle);
+        return (
+          <g key={sign.name}>
+            <line
+              x1={100 + 70 * Math.sin(tickAngle)}
+              y1={100 - 70 * Math.cos(tickAngle)}
+              x2={100 + 98 * Math.sin(tickAngle)}
+              y2={100 - 98 * Math.cos(tickAngle)}
+              stroke={CARD_GOLD}
+              strokeOpacity="0.3"
+            />
+            <text
+              x={gx}
+              y={gy}
+              fontSize="11"
+              textAnchor="middle"
+              dominantBaseline="central"
+              fill={CARD_GOLD}
+              fillOpacity="0.75"
+              transform={`rotate(${glyphDeg} ${gx} ${gy})`}
+            >
+              {`${sign.glyph}\uFE0E`}
+            </text>
+          </g>
+        );
+      })}
+    </svg>
+  </motion.div>
+);
+
+const ProductCard = ({ product, index }) => {
+  const reduce = useReducedMotion();
+  const cardRef = useRef(null);
+  const variants = makeVariants(reduce);
+
+  // Pointer position inside the card, 0..1, smoothed with springs.
+  const px = useMotionValue(0.5);
+  const py = useMotionValue(0.5);
+  const sx = useSpring(px, { stiffness: 140, damping: 18 });
+  const sy = useSpring(py, { stiffness: 140, damping: 18 });
+  const rotateY = useTransform(sx, [0, 1], [5, -5]);
+  const rotateX = useTransform(sy, [0, 1], [-5, 5]);
+  const imgX = useTransform(sx, [0, 1], [8, -8]);
+  const imgY = useTransform(sy, [0, 1], [6, -6]);
+  const glowX = useTransform(sx, (v) => `${v * 100}%`);
+  const glowY = useTransform(sy, (v) => `${v * 100}%`);
+  const spotlight = useMotionTemplate`radial-gradient(240px circle at ${glowX} ${glowY}, rgba(232,180,160,0.22), transparent 70%)`;
+  const zoom = useSpring(1.1, { stiffness: 120, damping: 20 });
+
+  // The halo wheel turns slowly and eases up to a faster spin on hover.
+  const rotation = useMotionValue(index * 40);
+  const speed = useRef(5);
+  const targetSpeed = useRef(5);
+  useAnimationFrame((_, delta) => {
+    if (reduce) return;
+    speed.current += (targetSpeed.current - speed.current) * 0.05;
+    rotation.set(rotation.get() + (speed.current * delta) / 1000);
+  });
+
+  const handlePointerEnter = (event) => {
+    if (reduce || event.pointerType !== 'mouse') return;
+    targetSpeed.current = 30;
+    zoom.set(1.18);
+  };
+  const handlePointerMove = (event) => {
+    if (reduce || event.pointerType !== 'mouse' || !cardRef.current) return;
+    const rect = cardRef.current.getBoundingClientRect();
+    px.set((event.clientX - rect.left) / rect.width);
+    py.set((event.clientY - rect.top) / rect.height);
+  };
+  const handlePointerLeave = () => {
+    px.set(0.5);
+    py.set(0.5);
+    targetSpeed.current = 5;
+    zoom.set(1.1);
+  };
+
+  const rawPrice = product.price.replace(/^Rs\.?\s*/i, '');
+  const [whole, decimals] = rawPrice.split('.');
+
+  return (
+    <motion.article
+      ref={cardRef}
+      variants={variants.card}
+      initial="hidden"
+      whileInView="show"
+      viewport={{ once: true, amount: 0.2 }}
+      whileHover={reduce ? undefined : { y: -6 }}
+      onPointerEnter={handlePointerEnter}
+      onPointerMove={handlePointerMove}
+      onPointerLeave={handlePointerLeave}
+      style={{ rotateX, rotateY, transformPerspective: 900 }}
+      className="group relative isolate overflow-hidden rounded-[28px] bg-[linear-gradient(180deg,#4a0217_0%,#430015_100%)] shadow-[0_26px_50px_-20px_rgba(77,0,30,0.55)] ring-1 ring-[#e8b4a0]/15"
+    >
+      {/* Cursor-following light */}
+      <motion.div
+        aria-hidden="true"
+        style={{ background: spotlight }}
+        className="pointer-events-none absolute inset-0 z-0 opacity-0 transition-opacity duration-500 group-hover:opacity-100"
+      />
+
+      {/* Zodiac halo behind the doorway */}
+      <div aria-hidden="true" className="pointer-events-none absolute -left-[14%] top-[-8%] z-0 aspect-square w-[128%]">
+        <motion.div variants={variants.halo} className="h-full w-full">
+          <div className="h-full w-full transition-transform duration-700 ease-out group-hover:scale-[1.07]">
+            <HaloWheel rotation={rotation} />
+          </div>
+        </motion.div>
+      </div>
+
+      <a
+        href="/products"
+        className="relative z-10 block rounded-[30px] outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[#e8b4a0]"
+      >
+        {/* The doorway */}
+        <div className="px-[11%] pt-6">
+          <div className="relative">
+            <span
+              aria-hidden="true"
+              style={{ borderRadius: NICHE_RADIUS }}
+              className="absolute -inset-[7px] border border-[#e8b4a0]/35 transition-colors duration-500 group-hover:border-[#e8b4a0]/70"
+            />
+            <motion.div
+              variants={variants.arch}
+              style={{ borderRadius: ARCH_RADIUS }}
+              className="relative aspect-[6/7] overflow-hidden bg-[radial-gradient(circle_at_50%_30%,#fff4ee_0%,#f4d5c8_70%,#dfae9b_100%)]"
+            >
+              <motion.img
+                src={product.image}
+                alt={product.name}
+                style={{ x: imgX, y: imgY, scale: zoom }}
+                className="h-full w-full object-cover"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#3a0017]/45 via-transparent to-transparent" />
+            </motion.div>
+
+          </div>
+        </div>
+
+        {/* Name + price */}
+        <motion.div variants={variants.text} className="relative px-4 pb-4 pt-4 sm:px-5">
+          {/* Masks the zodiac halo behind the text so the name stays readable */}
+          <div aria-hidden="true" className="pointer-events-none absolute inset-0 -z-10 bg-[linear-gradient(180deg,rgba(67,0,21,0)_0%,#430015_20%)]" />
+          <h3
+            style={{ fontFamily: CARD_SERIF }}
+            className="line-clamp-2 min-h-[2.3rem] text-[1rem] leading-[1.3] text-[#fbf3ee]"
+          >
+            {product.name}
+          </h3>
+
+          <p style={{ fontFamily: CARD_SERIF }} className="mt-0.5 tabular-nums leading-none text-[#f7d3c4] text-[1.05rem] sm:text-[1.3rem]">
+            <span className="mr-1 text-[0.65em] text-[#f7d3c4]/60">Rs.</span>
+            {whole}
+            {decimals && <span className="text-[0.65em] opacity-60">.{decimals}</span>}
+          </p>
+        </motion.div>
+      </a>
+    </motion.article>
   );
 };
 
@@ -410,41 +641,11 @@ const HomePage = () => {
           </div>
         </div>
 
-        <div className="mt-4 grid grid-cols-2 gap-3 sm:grid-cols-3 sm:gap-4 lg:grid-cols-5 lg:gap-4">
-          {topProducts.map((product) => (
-            <article key={product.name} className="group overflow-hidden rounded-lg bg-white ring-1 ring-[#201b3a]/5 transition-shadow duration-300 hover:shadow-[0_12px_28px_rgba(32,27,58,0.12)]">
-              <a href="/products" className="block">
-                <div className="relative aspect-[1.15] overflow-hidden bg-[#f7f4ee]">
-                  <img
-                    src={product.image}
-                    alt={product.name}
-                    className="h-full w-full object-cover transition duration-500 group-hover:scale-105"
-                  />
-                  <span className="absolute left-2 top-2 bg-[#201b3a] px-2 py-1 text-[9px] font-semibold uppercase tracking-[0.12em] text-white">Featured</span>
-
-                  <button
-                    type="button"
-                    aria-label={`Save ${product.name} to wishlist`}
-                    onClick={(event) => event.preventDefault()}
-                    className="absolute right-2 top-2 flex h-7 w-7 items-center justify-center rounded-full bg-white/90 text-[#201b3a] transition duration-300 hover:bg-white hover:text-[#b23a52]"
-                  >
-                    <Heart className="h-4 w-4" />
-                  </button>
-
-                  <div className="absolute inset-x-2 bottom-2 translate-y-3 opacity-0 transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100">
-                    <span className="flex w-full items-center justify-center gap-2 rounded-md bg-[#201b3a] py-2 text-xs font-semibold text-white shadow-lg">
-                      <ShoppingBag className="h-3.5 w-3.5" />
-                      Quick add
-                    </span>
-                  </div>
-                </div>
-
-                <div className="p-3">
-                  <h3 className="text-sm font-medium leading-5 text-[#201b3a] sm:text-[15px]">{product.name}</h3>
-                  <p className="mt-2 text-sm font-bold text-[#201b3a]">{product.price}</p>
-                </div>
-              </a>
-            </article>
+        <div className="mt-5 flex gap-4 overflow-x-auto pb-2 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+          {topProducts.map((product, index) => (
+            <div key={product.name} className="min-w-[220px] flex-1 lg:min-w-0">
+              <ProductCard product={product} index={index} />
+            </div>
           ))}
         </div>
       </div>
