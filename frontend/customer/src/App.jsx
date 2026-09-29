@@ -5,6 +5,7 @@ import { Route, Routes, useLocation } from 'react-router-dom';
 import CartPage from './pages/CartPage';
 import HomePage from './pages/HomePage';
 import OrdersPage from './pages/OrdersPage';
+import Rudraksha from './components/products/Rudraksha';
 import Yantra from './components/products/Yantra';
 import Navbar from './components/common/Navbar';
 import Footer from './components/common/Footer';
@@ -33,6 +34,7 @@ function App() {
           <Route path="/" element={<HomePage />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/products" element={<Yantra />} />
+          <Route path="/rudraksha" element={<Rudraksha />} />
           <Route path="/cart" element={<CartPage />} />
           <Route path="/orders" element={<OrdersPage />} />
         </Routes>

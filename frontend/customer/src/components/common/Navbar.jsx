@@ -10,7 +10,14 @@ const menuSections = [
       'Mantra Upchar',
       { label: 'Yantra', children: ['Execlusive Yantra', 'Rashi Yantra', 'Nakshatra Yantra'] },
       { label: 'Gemstones', children: ['Standard Gemstones', 'Premium Gemstones'] },
-      { label: 'Rudraksha', children: ['1 Mukhi', '2 Mukhi ', '3 Mukhi', '4 Mukhi', '5 Mukhi', '6 Mukhi', '7 Mukhi', '8 Mukhi', '9 Mukhi'] },
+      {
+        label: 'Rudraksha',
+        children: [
+          { label: 'Rudraksha Beads', children: Array.from({ length: 14 }, (_, mukhi) => `${mukhi} Mukhi`) },
+          'Rudraksha Bracelet',
+          'Rudraksha Pendant',
+        ],
+      },
       'Bracelets & Malas',
       'Karungali Malas',
       'Vastu',
@@ -46,7 +53,42 @@ const menuSections = [
   },
 ];
 
-const menuLink = (item) => `/products?category=${encodeURIComponent(item)}`;
+const menuLink = (item) => {
+  if (item === 'Rudraksha') return '/rudraksha';
+  const mukhiMatch = item.match(/^(\d+)\s+Mukhi$/);
+  if (mukhiMatch) return `/rudraksha?category=beads&mukhi=${mukhiMatch[1]}`;
+  if (item === 'Rudraksha Beads') return '/rudraksha?category=beads';
+  if (item === 'Rudraksha Bracelet') return '/rudraksha?category=bracelet';
+  if (item === 'Rudraksha Pendant') return '/rudraksha?category=pendant';
+  return `/products?category=${encodeURIComponent(item)}`;
+};
+
+const menuGroupClasses = ['group/menu-level-0', 'group/menu-level-1', 'group/menu-level-2'];
+const submenuVisibilityClasses = [
+  'group-hover/menu-level-0:block group-focus-within/menu-level-0:block',
+  'group-hover/menu-level-1:block group-focus-within/menu-level-1:block',
+  'group-hover/menu-level-2:block group-focus-within/menu-level-2:block',
+];
+
+const renderMenuItem = (item, depth = 0) => typeof item === 'string' ? (
+  <Link key={item} to={menuLink(item)} className={dropdownItem}>{item}</Link>
+) : (
+  <div key={item.label} className={`${menuGroupClasses[depth]} relative`}>
+    <Link to={menuLink(item.label)} className={`${dropdownItem} flex items-center justify-between gap-2 group-hover:bg-amber-50/70 group-hover:text-[#a87500]`}>
+      {item.label}
+      <Chevron className="-rotate-90 opacity-60" />
+    </Link>
+    <div className={`absolute left-full top-0 hidden w-56 pl-2 ${submenuVisibilityClasses[depth]}`}>
+      <div className={`${dropdownPanel} ${item.label === 'Rudraksha Beads' ? 'grid grid-cols-2 gap-x-1' : ''}`}>
+        {item.children.map((child) => renderMenuItem(child, depth + 1))}
+      </div>
+    </div>
+  </div>
+);
+
+const flattenMenuItems = (items) => items.flatMap((item) => (
+  typeof item === 'string' ? [item] : [item.label, ...flattenMenuItems(item.children || [])]
+));
 
 const iconProps = {
   viewBox: '0 0 24 24',
@@ -101,32 +143,18 @@ const Navbar = () => {
           astrovastubazar<span className="text-[#d39e25]">.</span>
         </Link>
 
-        <nav className="hidden min-w-0 max-w-[600px] flex-1 items-center justify-between gap-0 pr-2 xl:flex xl:pr-3 2xl:max-w-[800px]" onMouseLeave={() => setActiveMenu(null)}>
+        <nav className="hidden min-w-0 flex-1 items-center justify-between gap-0 pr-2 xl:flex xl:pr-3" onMouseLeave={() => setActiveMenu(null)}>
           {menuSections.map((section, index) => (
             <div key={section.label} className="relative" onMouseEnter={() => setActiveMenu(index)}>
-              <button type="button" className={`relative flex items-center gap-1 whitespace-nowrap px-1.5 py-2.5 text-[11px] font-semibold tracking-[0.01em] transition-colors 2xl:px-2.5 2xl:text-[12.5px] ${activeMenu === index ? 'text-[#a87500]' : 'text-slate-700 hover:text-[#a87500]'}`} onClick={() => setActiveMenu(activeMenu === index ? null : index)} aria-expanded={activeMenu === index}>
+              <button type="button" className={`relative flex items-center gap-1 whitespace-nowrap px-1.5 py-2.5 text-[11px] font-semibold tracking-[0.01em] transition-colors 2xl:px-2 2xl:text-[12.5px] ${activeMenu === index ? 'text-[#a87500]' : 'text-slate-700 hover:text-[#a87500]'}`} onClick={() => setActiveMenu(activeMenu === index ? null : index)} aria-expanded={activeMenu === index}>
                 {section.label}
                 <Chevron className={`transition-transform duration-200 ${activeMenu === index ? 'rotate-180' : ''}`} />
-                <span aria-hidden="true" className={`absolute inset-x-1.5 bottom-0 h-0.5 origin-left rounded-full bg-[#d39e25] transition-transform duration-200 2xl:inset-x-2.5 ${activeMenu === index ? 'scale-x-100' : 'scale-x-0'}`} />
+                <span aria-hidden="true" className={`absolute inset-x-1.5 bottom-0 h-0.5 origin-left rounded-full bg-[#d39e25] transition-transform duration-200 2xl:inset-x-2 ${activeMenu === index ? 'scale-x-100' : 'scale-x-0'}`} />
               </button>
               {activeMenu === index && (
                 <div className="absolute left-0 top-full z-40 w-60 pt-2" onMouseEnter={() => setActiveMenu(index)}>
                   <div className={dropdownPanel}>
-                    {section.items.map((item) => typeof item === 'string' ? (
-                      <Link key={item} to={menuLink(item)} className={dropdownItem}>{item}</Link>
-                    ) : (
-                      <div key={item.label} className="group relative">
-                        <Link to={menuLink(item.label)} className={`${dropdownItem} flex items-center justify-between gap-2 group-hover:bg-amber-50/70 group-hover:text-[#a87500]`}>
-                          {item.label}
-                          <Chevron className="-rotate-90 opacity-60" />
-                        </Link>
-                        <div className="absolute left-full top-0 hidden w-56 pl-2 group-hover:block">
-                          <div className={dropdownPanel}>
-                            {item.children.map((child) => <Link key={child} to={menuLink(child)} className={dropdownItem}>{child}</Link>)}
-                          </div>
-                        </div>
-                      </div>
-                    ))}
+                    {section.items.map((item) => renderMenuItem(item))}
                   </div>
                 </div>
               )}
@@ -134,7 +162,7 @@ const Navbar = () => {
           ))}
         </nav>
 
-        <div className="ml-2 hidden h-10 w-[180px] shrink-0 items-center rounded-full border border-slate-200 bg-slate-50 px-4 text-sm text-slate-400 transition-all duration-200 focus-within:border-[#d39e25] focus-within:bg-white focus-within:shadow-[0_0_0_3px_rgba(211,158,37,0.15)] xl:flex 2xl:w-[240px]">
+        <div className="ml-2 hidden h-10 w-[180px] shrink-0 items-center rounded-full border border-slate-200 bg-slate-50 px-4 text-sm text-slate-400 transition-all duration-200 focus-within:border-[#d39e25] focus-within:bg-white focus-within:shadow-[0_0_0_3px_rgba(211,158,37,0.15)] xl:flex 2xl:w-[200px]">
           <SearchIcon className="mr-2.5 h-[17px] w-[17px] shrink-0 text-slate-400" />
           <input aria-label="Search products" className="min-w-0 flex-1 bg-transparent text-[13px] text-slate-700 outline-none placeholder:text-slate-400" placeholder="Search gems, pendants, birthstones..." />
         </div>
@@ -166,7 +194,7 @@ const Navbar = () => {
       {mobileMenu !== null && (
         <div className="border-t border-slate-200 bg-white px-4 py-4 xl:hidden">
           <div className="grid grid-cols-2 gap-2 sm:grid-cols-3">
-            {menuSections[mobileMenu].items.flatMap((item) => (typeof item === 'string' ? [item] : [item.label, ...item.children])).map((item) => <Link key={item} to={menuLink(item)} className="rounded-lg border border-slate-200 px-3 py-3 text-xs font-semibold text-slate-600 transition-colors hover:border-[#f3c969] hover:bg-amber-50/60 hover:text-[#a87500]">{item}</Link>)}
+            {flattenMenuItems(menuSections[mobileMenu].items).map((item) => <Link key={item} to={menuLink(item)} className="rounded-lg border border-slate-200 px-3 py-3 text-xs font-semibold text-slate-600 transition-colors hover:border-[#f3c969] hover:bg-amber-50/60 hover:text-[#a87500]">{item}</Link>)}
           </div>
         </div>
       )}

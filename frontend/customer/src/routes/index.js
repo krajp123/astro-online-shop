@@ -3,6 +3,7 @@
 export const customerRoutes = [
   { path: '/', name: 'Home' },
   { path: '/products', name: 'Products' },
+  { path: '/rudraksha', name: 'Rudraksha' },
   { path: '/cart', name: 'Cart' },
   { path: '/orders', name: 'Orders' }
 ];

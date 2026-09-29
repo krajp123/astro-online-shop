@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
-import { createPortal } from 'react-dom';
-import { ArrowRight } from 'lucide-react';
+import { ArrowRight, Heart, Plus, ShoppingCart } from 'lucide-react';
+import { useCustomerStore } from '../store/useCustomerStore';
+import RudrakshaBanner from '../components/products/RudrakshaBanner';
 import {
   motion,
   useAnimationFrame,
@@ -106,12 +107,19 @@ const stoneShowcase = [
 const topProducts = [
   { name: 'Shakti Peeth Yantra', price: 'Rs. 2,550.00', image: '/top%20products/1.png' },
   { name: 'Ashtasiddhi Yantra ', price: 'Rs. 41,000.00', image: '/top%20products/4.jpg' },
-  { name: 'Lal Kitab Amrit Vashist Jyotish ', price: 'Rs. 2,550.00', image: '/top%20products/3.jpg' },
+  { name: 'Lal Kitab Amrit ', price: 'Rs. 2,550.00', image: '/top%20products/3.jpg' },
   { name: 'Shukra Amrit Soap', price: 'Rs. 479.00', image: '/top%20products/2.jpg' },
   { name: 'Rahu Mantra Upchar Potli', price: 'Rs. 3,100.00', image: '/top%20products/6.png' },
   { name: 'Shani Amrit Dhoop', price: 'Rs. 409.00', image: '/top%20products/5.jpg' },
   
 ];
+
+const ShoppingCartPlus = () => (
+  <span className="relative inline-flex h-4 w-4 shrink-0" aria-hidden="true">
+    <ShoppingCart className="h-4 w-4" />
+    <Plus className="absolute -right-1 -top-1 h-2.5 w-2.5 rounded-full bg-[#4a0217]" strokeWidth={3} />
+  </span>
+);
 
 /** Hand-built radial chart wheel — ink linework on ivory, glyphs color-coded
  * by element, so it reads as astrological rather than decorative. */
@@ -320,6 +328,10 @@ const HaloWheel = ({ rotation }) => (
 );
 
 const ProductCard = ({ product, index }) => {
+  const cart = useCustomerStore((state) => state.cart);
+  const wishlist = useCustomerStore((state) => state.wishlist);
+  const setCart = useCustomerStore((state) => state.setCart);
+  const setWishlist = useCustomerStore((state) => state.setWishlist);
   const reduce = useReducedMotion();
   const cardRef = useRef(null);
   const variants = makeVariants(reduce);
@@ -368,6 +380,21 @@ const ProductCard = ({ product, index }) => {
 
   const rawPrice = product.price.replace(/^Rs\.?\s*/i, '');
   const [whole, decimals] = rawPrice.split('.');
+  const isInCart = cart.some((item) => item.name === product.name);
+  const isWishlisted = wishlist.some((item) => item.name === product.name);
+
+  const handleAddToCart = () => {
+    const existingItem = cart.find((item) => item.name === product.name);
+    setCart(existingItem
+      ? cart.map((item) => item.name === product.name ? { ...item, quantity: (item.quantity || 1) + 1 } : item)
+      : [...cart, { ...product, quantity: 1 }]);
+  };
+
+  const handleToggleWishlist = () => {
+    setWishlist(isWishlisted
+      ? wishlist.filter((item) => item.name !== product.name)
+      : [...wishlist, product]);
+  };
 
   return (
     <motion.article
@@ -381,13 +408,13 @@ const ProductCard = ({ product, index }) => {
       onPointerMove={handlePointerMove}
       onPointerLeave={handlePointerLeave}
       style={{ rotateX, rotateY, transformPerspective: 900 }}
-      className="group relative isolate overflow-hidden rounded-[28px] bg-[linear-gradient(180deg,#4a0217_0%,#430015_100%)] shadow-[0_26px_50px_-20px_rgba(77,0,30,0.55)] ring-1 ring-[#e8b4a0]/15"
+      className="group relative isolate overflow-hidden rounded-[28px] bg-[linear-gradient(180deg,#4a0217_0%,#430015_100%)] ring-1 ring-[#e8b4a0]/15"
     >
       {/* Cursor-following light */}
       <motion.div
         aria-hidden="true"
         style={{ background: spotlight }}
-        className="pointer-events-none absolute inset-0 z-0 opacity-0 transition-opacity duration-500 group-hover:opacity-100"
+        className="pointer-events-none absolute inset-x-0 top-0 bottom-14 z-0 opacity-0 transition-opacity duration-500 group-hover:opacity-100"
       />
 
       {/* Zodiac halo behind the doorway */}
@@ -429,7 +456,7 @@ const ProductCard = ({ product, index }) => {
         </div>
 
         {/* Name + price */}
-        <motion.div variants={variants.text} className="relative px-4 pb-4 pt-4 sm:px-5">
+        <motion.div variants={variants.text} className="relative px-4 pb-2 pt-4 sm:px-5">
           {/* Masks the zodiac halo behind the text so the name stays readable */}
           <div aria-hidden="true" className="pointer-events-none absolute inset-0 -z-10 bg-[linear-gradient(180deg,rgba(67,0,21,0)_0%,#430015_20%)]" />
           <h3
@@ -439,81 +466,40 @@ const ProductCard = ({ product, index }) => {
             {product.name}
           </h3>
 
-          <p style={{ fontFamily: CARD_SERIF }} className="mt-0.5 tabular-nums leading-none text-[#f7d3c4] text-[1.05rem] sm:text-[1.3rem]">
-            <span className="mr-1 text-[0.65em] text-[#f7d3c4]/60">Rs.</span>
-            {whole}
-            {decimals && <span className="text-[0.65em] opacity-60">.{decimals}</span>}
-          </p>
         </motion.div>
       </a>
+
+      <div className="relative z-10 flex items-center justify-between gap-2 px-4 pb-4 sm:px-5">
+        <p style={{ fontFamily: CARD_SERIF }} className="min-w-0 flex-1 tabular-nums leading-none text-[#f7d3c4] text-[1.05rem] sm:text-[1.3rem]">
+          <span className="mr-1 text-[0.65em] text-[#f7d3c4]/60">Rs.</span>
+          {whole}
+          {decimals && <span className="text-[0.65em] opacity-60">.{decimals}</span>}
+        </p>
+        <button
+          type="button"
+          onClick={handleAddToCart}
+          aria-label={isInCart ? `Add another ${product.name} to cart` : `Add ${product.name} to cart`}
+          title={isInCart ? 'Add another to cart' : 'Add to cart'}
+          className="inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-md border border-[#e8b4a0]/45 text-[#fbf3ee] transition hover:bg-[#e8b4a0]/15 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#e8b4a0]"
+        >
+          <ShoppingCartPlus className="h-4 w-4" aria-hidden="true" />
+        </button>
+        <button
+          type="button"
+          onClick={handleToggleWishlist}
+          aria-pressed={isWishlisted}
+          aria-label={isWishlisted ? `Remove ${product.name} from wishlist` : `Add ${product.name} to wishlist`}
+          title={isWishlisted ? 'Remove from wishlist' : 'Add to wishlist'}
+          className="inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-md border border-[#e8b4a0]/45 text-[#fbf3ee] transition hover:bg-[#e8b4a0]/15 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#e8b4a0]"
+        >
+          <Heart className="h-4 w-4" fill={isWishlisted ? 'currentColor' : 'none'} aria-hidden="true" />
+        </button>
+      </div>
     </motion.article>
   );
 };
 
 const HomePage = () => {
-  const [hoveredStone, setHoveredStone] = useState(null);
-  const [popupPosition, setPopupPosition] = useState({ x: 0, y: 0 });
-
-  useEffect(() => {
-    const handleScroll = () => setHoveredStone(null);
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-
-  const clampPopupPosition = (clientX, clientY) => {
-    const popupWidth = 320;
-    const popupHeight = 420;
-    const margin = 18;
-    const viewportWidth = window.innerWidth;
-    const viewportHeight = window.innerHeight;
-
-    const preferredLeft = clientX + 26 > viewportWidth - popupWidth - margin
-      ? clientX - popupWidth - 26
-      : clientX + 26;
-
-    const preferredTop = clientY + 18 > viewportHeight - popupHeight - margin
-      ? clientY - popupHeight + 18
-      : clientY + 18;
-
-    return {
-      x: Math.min(Math.max(preferredLeft, margin), viewportWidth - popupWidth - margin),
-      y: Math.min(Math.max(preferredTop, margin), viewportHeight - popupHeight - margin),
-    };
-  };
-
-  const popupOverlay = hoveredStone && typeof document !== 'undefined'
-    ? createPortal(
-        <div
-          className="pointer-events-none fixed z-[99999] w-[320px] overflow-hidden rounded-[22px] border border-[#201b3a]/10 bg-[#fdfaf6] shadow-[0_22px_60px_rgba(22,17,47,0.18)]"
-          style={{ left: popupPosition.x, top: popupPosition.y }}
-        >
-          <div className="flex items-start gap-4 border-b border-[#201b3a]/10 bg-[#f7f1e8] p-4">
-            <img src={hoveredStone.image} alt={hoveredStone.name} className="h-20 w-20 rounded-xl object-contain bg-white/40 p-2 shadow-inner" />
-            <div className="min-w-0 text-left">
-              <p className="text-xl font-bold tracking-normal text-[#201b3a]">{hoveredStone.name}</p>
-              <p className="mt-1 text-xs font-medium uppercase tracking-[0.18em] text-[#80758a]">{hoveredStone.scientificName}</p>
-            </div>
-          </div>
-
-          <div className="space-y-4 p-4 text-left">
-            <div>
-              <p className="text-[0.7rem] font-bold uppercase tracking-[0.18em] text-[#b8863c]">What is this stone</p>
-              <p className="mt-1 text-sm leading-6 text-[#413b57]">{hoveredStone.description}</p>
-            </div>
-            <div>
-              <p className="text-[0.7rem] font-bold uppercase tracking-[0.18em] text-[#b8863c]">Benefits of wearing this stone</p>
-              <p className="mt-1 text-sm leading-6 text-[#413b57]">{hoveredStone.benefits}</p>
-            </div>
-            <div>
-              <p className="text-[0.7rem] font-bold uppercase tracking-[0.18em] text-[#b8863c]">Who can wear this</p>
-              <p className="mt-1 text-sm leading-6 text-[#413b57]">{hoveredStone.whoCanWear}</p>
-            </div>
-          </div>
-        </div>,
-        document.body
-      )
-    : null;
-
   return (
   <div className="bg-[#f8f6f1]">
     {/* Hero */}
@@ -564,15 +550,6 @@ const HomePage = () => {
           <div
             key={stone.name + index}
             className="group relative flex min-w-[120px] flex-col items-center justify-end text-center transition duration-300 ease-out hover:-translate-y-1 sm:min-w-[140px]"
-            onMouseEnter={(event) => {
-              setHoveredStone(stone);
-              setPopupPosition(clampPopupPosition(event.clientX, event.clientY));
-            }}
-            onMouseMove={(event) => {
-              setPopupPosition(clampPopupPosition(event.clientX, event.clientY));
-            }}
-            onMouseLeave={() => setHoveredStone(null)}
-            onWheel={() => setHoveredStone(null)}
           >
             <img
               src={stone.image}
@@ -587,7 +564,6 @@ const HomePage = () => {
         ))}
       </div>
 
-      {popupOverlay}
     </section>
 
     <div className="h-8 bg-[#f5f1eb]" aria-hidden="true" />
@@ -650,6 +626,8 @@ const HomePage = () => {
         </div>
       </div>
     </section>
+
+    <RudrakshaBanner />
 
     <div className="h-[1px] w-full bg-[#201b3a]/10" />
 

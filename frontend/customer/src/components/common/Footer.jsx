@@ -13,7 +13,7 @@ const Footer = ({ className = 'mt-20' }) => {
           <div className="space-y-2 text-sm text-slate-600">
             <Link className="block hover:text-[#a87500]" to="/products?category=Birthstones">Birthstones</Link>
             <Link className="block hover:text-[#a87500]" to="/products?category=Planetary%20gems">Planetary gems</Link>
-            <Link className="block hover:text-[#a87500]" to="/products?category=Rudraksha">Rudraksha</Link>
+            <Link className="block hover:text-[#a87500]" to="/rudraksha">Rudraksha</Link>
           </div>
         </div>
         <div>
