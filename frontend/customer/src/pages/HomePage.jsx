@@ -1,7 +1,8 @@
 import { useEffect, useRef, useState } from 'react';
 import { ArrowRight, Heart, Plus, ShoppingCart } from 'lucide-react';
 import { useCustomerStore } from '../store/useCustomerStore';
-import RudrakshaBanner from '../components/products/RudrakshaBanner';
+import { getProductImage, yantraProducts } from '../components/products/Yantra';
+import { Link } from 'react-router-dom';
 import {
   motion,
   useAnimationFrame,
@@ -499,7 +500,244 @@ const ProductCard = ({ product, index }) => {
   );
 };
 
+const YantraCard = ({ product, isDuplicate = false }) => {
+  return (
+    <article className="group h-full w-full overflow-hidden rounded-lg border border-[#201b3a]/10 bg-white transition duration-200 hover:border-[#201b3a]/20 hover:shadow-md">
+      <a
+        href="/products"
+        aria-label={`View ${product.name}`}
+        tabIndex={isDuplicate ? -1 : undefined}
+        draggable="false"
+        className="block outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[#201b3a]/40"
+      >
+        <div className="aspect-square w-full overflow-hidden bg-[#f7f5f0] p-6">
+          <img
+            src={getProductImage(product)}
+            alt={product.name}
+            draggable="false"
+            loading="lazy"
+            onError={(event) => {
+              event.currentTarget.onerror = null;
+              event.currentTarget.src = '/Yantra/yantra1.jpg';
+            }}
+            className="h-full w-full object-contain transition duration-300 ease-out group-hover:scale-105"
+          />
+        </div>
+        <div className="border-t border-[#201b3a]/10 px-4 py-4">
+          <h3 className="line-clamp-2 min-h-[2.25rem] text-center text-[0.95rem] font-medium leading-[1.2] text-[#8a6a1f]">
+            {product.name}
+          </h3>
+          <p className="text-center text-[0.95rem] font-semibold text-[#201b3a]">{product.price}</p>
+        </div>
+      </a>
+    </article>
+  );
+};
+// --------------------Rudraksha Mandal Component--------------------
+
+const rudrakshaMukhi = Array.from({ length: 13 }, (_, index) => {
+  const mukhi = index + 1;
+  return {
+    mukhi,
+    image: `/Rudraksha/${mukhi}%20${mukhi === 12 ? 'mukhi' : 'Mukhi'}.png`,
+  };
+});
+
+const RudrakshaMandal = () => {
+  const reduceMotion = useReducedMotion();
+  const [hoveredMukhi, setHoveredMukhi] = useState(null);
+  const [tooltipPosition, setTooltipPosition] = useState({ x: 0, y: 0 });
+  const pointerPosition = useRef(null);
+  const lastPointerCheck = useRef(0);
+
+  const trackPointer = (event) => {
+    pointerPosition.current = { x: event.clientX, y: event.clientY };
+    setTooltipPosition({
+      x: Math.max(8, Math.min(event.clientX + 12, window.innerWidth - 150)),
+      y: Math.max(8, Math.min(event.clientY + 12, window.innerHeight - 42)),
+    });
+  };
+
+  useAnimationFrame((time) => {
+    const pointer = pointerPosition.current;
+    if (!pointer || time - lastPointerCheck.current < 50) return;
+
+    lastPointerCheck.current = time;
+    const hoveredElement = document.elementFromPoint(pointer.x, pointer.y);
+    const mukhiValue = hoveredElement?.closest('[data-mukhi]')?.getAttribute('data-mukhi');
+    const nextMukhi = mukhiValue === null || mukhiValue === undefined ? null : Number(mukhiValue);
+
+    setHoveredMukhi((currentMukhi) => currentMukhi === nextMukhi ? currentMukhi : nextMukhi);
+  });
+
+  return (
+    <div
+      className="relative mx-auto aspect-square w-[min(80vw,360px)] shrink-0 md:ml-auto md:mr-0 md:w-[min(42vw,360px)]"
+      onPointerMove={trackPointer}
+      onPointerLeave={() => {
+        pointerPosition.current = null;
+        setHoveredMukhi(null);
+      }}
+    >
+      <motion.div
+        className="absolute inset-0"
+        animate={reduceMotion ? undefined : { rotate: 360 }}
+        transition={{ duration: 30, repeat: Infinity, ease: 'linear' }}
+      >
+        {rudrakshaMukhi.map(({ mukhi, image }, index) => {
+          const angle = (index / rudrakshaMukhi.length) * Math.PI * 2 - Math.PI / 2;
+          const left = `${50 + Math.cos(angle) * 44}%`;
+          const top = `${50 + Math.sin(angle) * 44}%`;
+
+          return (
+            <div
+              key={mukhi}
+              data-mukhi={mukhi}
+              className={`absolute h-[21%] w-[21%] -translate-x-1/2 -translate-y-1/2 transition-transform duration-200 ${hoveredMukhi === mukhi ? 'z-30 scale-125' : 'z-10'}`}
+              style={{ left, top }}
+            >
+              <img
+                src={image}
+                alt={`${mukhi} Mukhi Rudraksha`}
+                loading="lazy"
+                className="h-full w-full rounded-full object-cover drop-shadow-[0_1px_5px_rgba(179,113,48,0.45)]"
+              />
+            </div>
+          );
+        })}
+      </motion.div>
+      <div
+        data-mukhi="0"
+        className={`absolute left-1/2 top-1/2 h-[40%] w-[40%] -translate-x-1/2 -translate-y-1/2 transition-transform duration-200 ${hoveredMukhi === 0 ? 'z-30 scale-110' : 'z-20'}`}
+      >
+        <motion.img
+          src="/Rudraksha/0%20Mukhi.png"
+          alt="0 Mukhi Rudraksha"
+          loading="lazy"
+          className="h-full w-full rounded-full object-cover drop-shadow-[0_1px_5px_rgba(179,113,48,0.45)]"
+          animate={reduceMotion ? undefined : { rotate: 360 }}
+          whileHover={reduceMotion ? undefined : { scale: 1.12 }}
+          transition={{ duration: 30, repeat: Infinity, ease: 'linear' }}
+        />
+      </div>
+      {hoveredMukhi !== null && (
+        <div
+          role="tooltip"
+          className="pointer-events-none fixed z-[100] rounded border border-[#f3c48c]/60 bg-[#1b0802]/95 px-2.5 py-1.5 text-xs font-semibold text-[#fff6e9] shadow-lg"
+          style={{ left: tooltipPosition.x, top: tooltipPosition.y }}
+        >
+          {hoveredMukhi} Mukhi Rudraksha
+        </div>
+      )}
+    </div>
+  );
+};
+
+const RudrakshaBanner = () => (
+  <section className="relative isolate min-h-[360px] overflow-hidden bg-[#1b0802] sm:min-h-[400px] lg:min-h-[420px]">
+    <img
+      src="/Rudra.jpg"
+      alt=""
+      aria-hidden="true"
+      className="absolute inset-0 h-full w-full scale-[1.06] object-cover object-[72%_center] origin-[72%_center]"
+    />
+    <div className="absolute inset-0 bg-gradient-to-r from-[#1b0802]/90 via-[#1b0802]/65 to-[#1b0802]/10" aria-hidden="true" />
+    <div className="relative z-10 mx-auto flex w-full max-w-[1440px] flex-col gap-8 px-6 py-12 sm:px-10 md:flex-row md:items-center md:gap-10 lg:min-h-[420px] lg:px-16 lg:py-7">
+      <div className="w-full text-white md:flex-1 lg:-translate-y-3">
+        <h2 className="max-w-2xl text-[clamp(2rem,3.5vw,3rem)] font-bold leading-[1.15] tracking-normal">
+          Discover the Divine Power of Authentic Rudraksha.
+        </h2>
+        <p className="mt-4 text-left text-sm font-normal leading-6 text-white sm:text-base sm:leading-7">
+          Sourced directly from the pristine foothills of the Himalayas, our lab-certified, 100% genuine beads are meticulously selected and sacredly energized to bring peace, protection, and prosperity to your life. Whether you are seeking spiritual alignment, stress relief, or a powerful shield against negative energies, explore our premium collection to find the perfect Mukhi destined for your journey.
+        </p>
+        <Link
+          to="/rudraksha"
+          className="group mt-6 inline-flex min-h-11 items-center gap-3 rounded-full bg-[#f3c48c] px-6 py-3 text-sm font-semibold text-[#1b0802] transition-colors hover:bg-[#ffdbac] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-[#1b0802]"
+        >
+          Shop now
+          <ArrowRight className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-1" aria-hidden="true" />
+        </Link>
+      </div>
+      <RudrakshaMandal />
+    </div>
+  </section>
+);
+
 const HomePage = () => {
+  const marqueeRef = useRef(null);
+  const marqueeDrag = useRef(null);
+  const suppressMarqueeClick = useRef(false);
+  const marqueeOffset = useRef(0);
+
+  useEffect(() => {
+    const marquee = marqueeRef.current;
+    if (!marquee || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return undefined;
+
+    let frameId;
+    let previousTime;
+    const advance = (time) => {
+      if (previousTime !== undefined && !marqueeDrag.current) {
+        const track = marquee.querySelector('.yantra-marquee__track');
+        const loopWidth = marquee.querySelector('.yantra-marquee__group')?.getBoundingClientRect().width;
+        const elapsed = Math.min(time - previousTime, 32);
+        if (track && loopWidth > 0) {
+          marqueeOffset.current = (marqueeOffset.current + elapsed * 0.035) % loopWidth;
+          track.style.transform = `translate3d(${-marqueeOffset.current}px, 0, 0)`;
+        }
+      }
+      previousTime = time;
+      frameId = requestAnimationFrame(advance);
+    };
+
+    frameId = requestAnimationFrame(advance);
+    return () => cancelAnimationFrame(frameId);
+  }, []);
+
+  const handleMarqueePointerDown = (event) => {
+    if (!event.isPrimary || event.button !== 0) return;
+    marqueeDrag.current = {
+      isDragging: false,
+      startOffset: marqueeOffset.current,
+      startX: event.clientX,
+    };
+    event.currentTarget.setPointerCapture(event.pointerId);
+  };
+
+  const handleMarqueePointerMove = (event) => {
+    const drag = marqueeDrag.current;
+    if (!drag) return;
+
+    const deltaX = event.clientX - drag.startX;
+    if (Math.abs(deltaX) > 4) drag.isDragging = true;
+    if (!drag.isDragging) return;
+    event.preventDefault();
+    const track = marqueeRef.current.querySelector('.yantra-marquee__track');
+    const loopWidth = marqueeRef.current.querySelector('.yantra-marquee__group')?.getBoundingClientRect().width;
+    const nextOffset = drag.startOffset - deltaX;
+    marqueeOffset.current = loopWidth > 0
+      ? ((nextOffset % loopWidth) + loopWidth) % loopWidth
+      : Math.max(0, nextOffset);
+    if (track) track.style.transform = `translate3d(${-marqueeOffset.current}px, 0, 0)`;
+  };
+
+  const handleMarqueePointerUp = (event) => {
+    const drag = marqueeDrag.current;
+    if (!drag) return;
+
+    suppressMarqueeClick.current = drag.isDragging;
+    if (event.currentTarget.hasPointerCapture(event.pointerId)) {
+      event.currentTarget.releasePointerCapture(event.pointerId);
+    }
+    marqueeDrag.current = null;
+  };
+
+  const handleMarqueeClick = (event) => {
+    if (!suppressMarqueeClick.current) return;
+    suppressMarqueeClick.current = false;
+    event.preventDefault();
+    event.stopPropagation();
+  };
+
   return (
   <div className="bg-[#f8f6f1]">
     {/* Hero */}
@@ -630,6 +868,51 @@ const HomePage = () => {
     <RudrakshaBanner />
 
     <div className="h-[1px] w-full bg-[#201b3a]/10" />
+
+    {/* Yantra collection */}
+    <section className="bg-[#f3efe9] px-4 py-7 sm:px-8 lg:py-10">
+      <div className="mx-auto max-w-[1440px]">
+        <div className="text-center">
+          <h2 className="text-2xl font-bold leading-tight text-[#201b3a] sm:text-3xl">Buy Siddh Yantra</h2>
+          <p className="mx-auto mt-3 max-w-5xl text-sm leading-6 text-[#5b5470] sm:text-base">
+            Explore our collection of Siddh Yantras, prepared with authentic methods and guided by the wisdom of G.D. Vashist. Each Yantra is designed to help attract positive energy, overcome challenges, and support your journey toward success and harmony.
+          </p>
+          <div className="mt-2 flex justify-end">
+            <a href="/products" className="inline-flex items-center gap-1 text-xs font-semibold text-[#201b3a] transition hover:text-[#cf092c]">
+              View all products <ArrowRight className="h-3 w-3" />
+            </a>
+          </div>
+        </div>
+
+        <div
+          ref={marqueeRef}
+          className="yantra-marquee mt-4"
+          role="region"
+          aria-label="Yantra products"
+          onPointerDown={handleMarqueePointerDown}
+          onPointerMove={handleMarqueePointerMove}
+          onPointerUp={handleMarqueePointerUp}
+          onPointerCancel={handleMarqueePointerUp}
+          onClickCapture={handleMarqueeClick}
+        >
+          <div className="yantra-marquee__track">
+            {[false, true].map((isDuplicate) => (
+              <div
+                key={isDuplicate ? 'duplicate' : 'products'}
+                className="yantra-marquee__group"
+                aria-hidden={isDuplicate ? 'true' : undefined}
+              >
+                {yantraProducts.filter((product) => product.exclusive).map((product) => (
+                  <div className="yantra-marquee__item" key={`${isDuplicate ? 'duplicate-' : ''}${product.name}`}>
+                    <YantraCard product={product} isDuplicate={isDuplicate} />
+                  </div>
+                ))}
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
 
     {/* Shop by sign */}
     <section className="bg-[#f5f1eb] py-7">

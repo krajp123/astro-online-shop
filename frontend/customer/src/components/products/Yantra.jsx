@@ -1,7 +1,7 @@
 import { useMemo, useState } from 'react';
 import { ArrowRight } from 'lucide-react';
 
-const yantraProducts = [
+export const yantraProducts = [
   { name: 'Sarva Shakti Peeth Yantra', category: 'Exclusive Yantra', price: '₹2,450', tag: 'Best Seller', exclusive: true },
   { name: 'Madhya Shakti Peeth Yantra', category: 'Exclusive Yantra', price: '₹2,350', tag: 'Popular', exclusive: true },
   { name: 'Bal Gopal Yantra', category: 'Exclusive Yantra', price: '₹1,980', tag: 'New', exclusive: true },
@@ -109,7 +109,7 @@ const productImageMap = {
   'Kark Rashi Yantra': ['/Yantra/kark-rashi-2.jpg', '/Yantra/kark-locket.jpg', '/Yantra/yantra1.jpg'],
 };
 
-const getProductImage = (product) => {
+export const getProductImage = (product) => {
   const candidates = productImageMap[product.name] || ['/Yantra/yantra1.jpg'];
   return candidates[0];
 };

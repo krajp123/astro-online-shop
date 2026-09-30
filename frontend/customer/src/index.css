@@ -55,3 +55,60 @@ button {
 #root {
   min-height: 100vh;
 }
+
+.yantra-marquee {
+  container-type: inline-size;
+  cursor: grab;
+  overflow: hidden;
+  touch-action: pan-y;
+  user-select: none;
+}
+
+.yantra-marquee:active {
+  cursor: grabbing;
+}
+
+.yantra-marquee__track {
+  display: flex;
+  width: max-content;
+  will-change: transform;
+}
+
+.yantra-marquee__group {
+  display: flex;
+  flex: 0 0 auto;
+  gap: 0.75rem;
+  padding-right: 0.75rem;
+}
+
+.yantra-marquee__item {
+  flex: 0 0 calc((100cqi - 1.5rem) / 2);
+}
+
+@media (min-width: 640px) {
+  .yantra-marquee__group {
+    gap: 1rem;
+    padding-right: 1rem;
+  }
+
+  .yantra-marquee__item {
+    flex-basis: calc((100cqi - 3rem) / 3);
+  }
+}
+
+@media (min-width: 1024px) {
+  .yantra-marquee__item {
+    flex-basis: calc((100cqi - 4rem) / 4);
+  }
+}
+
+@media (min-width: 1280px) {
+  .yantra-marquee__group {
+    gap: 1.25rem;
+    padding-right: 1.25rem;
+  }
+
+  .yantra-marquee__item {
+    flex-basis: calc((100cqi - 6.25rem) / 5);
+  }
+}
