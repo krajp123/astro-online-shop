@@ -105,6 +105,25 @@ const stoneShowcase = [
   },
 ];
 
+const gemstoneProducts = [
+  { name: 'Neelam (Blue Sapphire)', category: 'Gemstone - Standard', price: 'Rs. 31,100.00', image: '/Gemstone/Standard/neelam-standard.webp', hoverImage: '/Gemstone/Standard/neelam-standard1.webp' },
+  { name: 'Pukhraj (Yellow Sapphire)', category: 'Gemstone - Standard', price: 'Rs. 31,100.00', image: '/Gemstone/Standard/pukhraj-standard.webp', hoverImage: '/Gemstone/Standard/pukhraj-standard-3.webp' },
+  { name: 'Panna (Emerald)', category: 'Gemstone - Standard', price: 'Rs. 31,100.00', image: '/Gemstone/Standard/panna-standard-1.webp', hoverImage: '/Gemstone/Standard/panna-standard-2.webp' },
+  { name: "Lahsuniya (Cat's Eye)", category: 'Gemstone - Standard', price: 'Rs. 8,900.00', image: '/Gemstone/Standard/cats-eye-standard-1.webp', hoverImage: '/Gemstone/Standard/cats-eye-standard-2.webp' },
+  { name: 'Gomed (Hessonite Garnet)', category: 'Gemstone - Standard', price: 'Rs. 8,900.00', image: '/Gemstone/Standard/gomed-standard-1.webp', hoverImage: '/Gemstone/Standard/gomed-standard-2.webp' },
+  { name: 'Moonga (Red Coral)', category: 'Gemstone - Standard', price: 'Rs. 11,000.00', image: '/Gemstone/Standard/moonga-standard-1.webp', hoverImage: '/Gemstone/Standard/moonga-standard-2.webp' },
+  { name: 'Moti (Pearl)', category: 'Gemstone - Standard', price: 'Rs. 6,400.00', image: '/Gemstone/Standard/moti-standard-1.webp', hoverImage: '/Gemstone/Standard/moti-standard-2.webp' },
+  { name: 'Manikya (Ruby)', category: 'Gemstone - Standard', price: 'Rs. 24,600.00', image: '/Gemstone/Standard/manikya-standard-1.webp' },
+  { name: 'Emerald (Panna)', category: 'Gemstone - Premium', price: 'Rs. 66,800.00', image: '/Gemstone/Premium/panna-premium-1.webp', hoverImage: '/Gemstone/Premium/panna-premium-2.webp' },
+  { name: "Cat's Eye (Lahsuniya)", category: 'Gemstone - Premium', price: 'Rs. 14,700.00', image: '/Gemstone/Premium/cats-eye-premium-1.webp', hoverImage: '/Gemstone/Premium/cats-eye-premium-2.webp' },
+  { name: 'Ruby (Manikya)', category: 'Gemstone - Premium', price: 'Rs. 33,900.00', image: '/Gemstone/Premium/manikya-premium-1.webp', hoverImage: '/Gemstone/Premium/manikya-premium-2.webp' },
+  { name: 'Pearl (Moti)', category: 'Gemstone - Premium', price: 'Rs. 8,900.00', image: '/Gemstone/Premium/moti-premium-1.webp' },
+  { name: 'Hessonite Garnet (Gomed)', category: 'Gemstone - Premium', price: 'Rs. 11,400.00', image: '/Gemstone/Premium/gomed-premium-2.webp' },
+  { name: 'Yellow Sapphire (Pukhraj)', category: 'Gemstone - Premium', price: 'Rs. 66,800.00', image: '/Gemstone/Premium/pukhraj-premium-1.webp', hoverImage: '/Gemstone/Premium/pukhraj-premium-2.webp' },
+  { name: 'Red Coral (Moonga)', category: 'Gemstone - Premium', price: 'Rs. 17,400.00', image: '/Gemstone/Premium/moonga-premium-1.webp', hoverImage: '/Gemstone/Premium/moonga-premium-2.webp' },
+  { name: 'Blue Sapphire (Neelam)', category: 'Gemstone - Premium', price: 'Rs. 66,800.00', image: '/Gemstone/Premium/neelam-premium-2.webp' },
+];
+
 const topProducts = [
   { name: 'Shakti Peeth Yantra', price: 'Rs. 2,550.00', image: '/top%20products/1.png' },
   { name: 'Ashtasiddhi Yantra ', price: 'Rs. 41,000.00', image: '/top%20products/4.jpg' },
@@ -500,37 +519,162 @@ const ProductCard = ({ product, index }) => {
   );
 };
 
-const YantraCard = ({ product, isDuplicate = false }) => {
+const CatalogCard = ({ product, isDuplicate = false }) => {
+  const gemstoneCategory = product.category?.startsWith('Gemstone -') ? product.category : null;
+  const displayName = gemstoneCategory ? `${product.name} ${gemstoneCategory}` : product.name;
+  const displayPrice = product.price?.startsWith('₹') && !product.price.includes('.')
+    ? `${product.price}.00`
+    : product.price;
+
   return (
     <article className="group h-full w-full overflow-hidden rounded-lg border border-[#201b3a]/10 bg-white transition duration-200 hover:border-[#201b3a]/20 hover:shadow-md">
       <a
         href="/products"
-        aria-label={`View ${product.name}`}
+        aria-label={`View ${displayName}`}
         tabIndex={isDuplicate ? -1 : undefined}
         draggable="false"
         className="block outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[#201b3a]/40"
       >
         <div className="aspect-square w-full overflow-hidden bg-[#f7f5f0] p-6">
-          <img
-            src={getProductImage(product)}
-            alt={product.name}
-            draggable="false"
-            loading="lazy"
-            onError={(event) => {
-              event.currentTarget.onerror = null;
-              event.currentTarget.src = '/Yantra/yantra1.jpg';
-            }}
-            className="h-full w-full object-contain transition duration-300 ease-out group-hover:scale-105"
-          />
+          <div className="relative h-full w-full">
+            <img
+              src={product.image || getProductImage(product)}
+              alt={displayName}
+              draggable="false"
+              loading="lazy"
+              onError={(event) => {
+                event.currentTarget.onerror = null;
+                event.currentTarget.src = '/Yantra/yantra1.jpg';
+              }}
+              className={`h-full w-full object-contain transition ease-out group-hover:scale-105 ${product.hoverImage ? 'duration-700 group-hover:opacity-0' : 'duration-300'}`}
+            />
+            {product.hoverImage && (
+              <img
+                src={product.hoverImage}
+                alt=""
+                aria-hidden="true"
+                draggable="false"
+                loading="lazy"
+                className="absolute inset-0 h-full w-full object-contain opacity-0 transition duration-700 ease-out group-hover:scale-105 group-hover:opacity-100"
+              />
+            )}
+          </div>
         </div>
         <div className="border-t border-[#201b3a]/10 px-4 py-4">
-          <h3 className="line-clamp-2 min-h-[2.25rem] text-center text-[0.95rem] font-medium leading-[1.2] text-[#8a6a1f]">
-            {product.name}
+          <h3 className={`text-center text-[0.95rem] font-medium leading-[1.2] text-[#8a6a1f] ${gemstoneCategory ? 'line-clamp-3 min-h-[2.75rem]' : 'line-clamp-2 min-h-[2.25rem]'}`}>
+            {gemstoneCategory ? (
+              <>
+                <span className="block">{product.name}</span>
+                <span className="block">{gemstoneCategory}</span>
+              </>
+            ) : displayName}
           </h3>
-          <p className="text-center text-[0.95rem] font-semibold text-[#201b3a]">{product.price}</p>
+          <p className="text-center text-[0.95rem] font-semibold text-[#201b3a]">
+            {displayPrice || 'View details'}
+          </p>
         </div>
       </a>
     </article>
+  );
+};
+
+const ProductMarquee = ({ products, ariaLabel }) => {
+  const marqueeRef = useRef(null);
+  const dragState = useRef(null);
+  const suppressClick = useRef(false);
+  const offset = useRef(0);
+
+  useEffect(() => {
+    const marquee = marqueeRef.current;
+    if (!marquee || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return undefined;
+
+    let frameId;
+    let previousTime;
+    const advance = (time) => {
+      if (previousTime !== undefined && !dragState.current) {
+        const track = marquee.querySelector('.yantra-marquee__track');
+        const loopWidth = marquee.querySelector('.yantra-marquee__group')?.getBoundingClientRect().width;
+        const elapsed = Math.min(time - previousTime, 32);
+        if (track && loopWidth > 0) {
+          offset.current = (offset.current + elapsed * 0.025) % loopWidth;
+          track.style.transform = `translate3d(${-offset.current}px, 0, 0)`;
+        }
+      }
+      previousTime = time;
+      frameId = requestAnimationFrame(advance);
+    };
+
+    frameId = requestAnimationFrame(advance);
+    return () => cancelAnimationFrame(frameId);
+  }, []);
+
+  const handlePointerDown = (event) => {
+    if (!event.isPrimary || event.button !== 0) return;
+    dragState.current = { isDragging: false, startOffset: offset.current, startX: event.clientX };
+    event.currentTarget.setPointerCapture(event.pointerId);
+  };
+
+  const handlePointerMove = (event) => {
+    const drag = dragState.current;
+    if (!drag) return;
+
+    const deltaX = event.clientX - drag.startX;
+    if (Math.abs(deltaX) > 4) drag.isDragging = true;
+    if (!drag.isDragging) return;
+    event.preventDefault();
+    const track = marqueeRef.current.querySelector('.yantra-marquee__track');
+    const loopWidth = marqueeRef.current.querySelector('.yantra-marquee__group')?.getBoundingClientRect().width;
+    const nextOffset = drag.startOffset - deltaX;
+    offset.current = loopWidth > 0
+      ? ((nextOffset % loopWidth) + loopWidth) % loopWidth
+      : Math.max(0, nextOffset);
+    if (track) track.style.transform = `translate3d(${-offset.current}px, 0, 0)`;
+  };
+
+  const handlePointerUp = (event) => {
+    if (!dragState.current) return;
+    suppressClick.current = dragState.current.isDragging;
+    if (event.currentTarget.hasPointerCapture(event.pointerId)) {
+      event.currentTarget.releasePointerCapture(event.pointerId);
+    }
+    dragState.current = null;
+  };
+
+  const handleClick = (event) => {
+    if (!suppressClick.current) return;
+    suppressClick.current = false;
+    event.preventDefault();
+    event.stopPropagation();
+  };
+
+  return (
+    <div
+      ref={marqueeRef}
+      className="yantra-marquee mt-4"
+      role="region"
+      aria-label={ariaLabel}
+      onPointerDown={handlePointerDown}
+      onPointerMove={handlePointerMove}
+      onPointerUp={handlePointerUp}
+      onPointerCancel={handlePointerUp}
+      onClickCapture={handleClick}
+    >
+      <div className="yantra-marquee__track">
+        {[false, true].map((isDuplicate) => (
+          <div
+            key={isDuplicate ? 'duplicate' : 'products'}
+            className="yantra-marquee__group"
+            aria-hidden={isDuplicate ? 'true' : undefined}
+          >
+            {products.map((product, index) => (
+              <div className="yantra-marquee__item" key={`${product.name}-${product.image || index}-${isDuplicate ? 'duplicate' : 'original'}`}>
+                <CatalogCard product={product} isDuplicate={isDuplicate} />
+              </div>
+            ))}
+          </div>
+        ))}
+      </div>
+    </div>
   );
 };
 // --------------------Rudraksha Mandal Component--------------------
@@ -664,80 +808,6 @@ const RudrakshaBanner = () => (
 );
 
 const HomePage = () => {
-  const marqueeRef = useRef(null);
-  const marqueeDrag = useRef(null);
-  const suppressMarqueeClick = useRef(false);
-  const marqueeOffset = useRef(0);
-
-  useEffect(() => {
-    const marquee = marqueeRef.current;
-    if (!marquee || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return undefined;
-
-    let frameId;
-    let previousTime;
-    const advance = (time) => {
-      if (previousTime !== undefined && !marqueeDrag.current) {
-        const track = marquee.querySelector('.yantra-marquee__track');
-        const loopWidth = marquee.querySelector('.yantra-marquee__group')?.getBoundingClientRect().width;
-        const elapsed = Math.min(time - previousTime, 32);
-        if (track && loopWidth > 0) {
-          marqueeOffset.current = (marqueeOffset.current + elapsed * 0.035) % loopWidth;
-          track.style.transform = `translate3d(${-marqueeOffset.current}px, 0, 0)`;
-        }
-      }
-      previousTime = time;
-      frameId = requestAnimationFrame(advance);
-    };
-
-    frameId = requestAnimationFrame(advance);
-    return () => cancelAnimationFrame(frameId);
-  }, []);
-
-  const handleMarqueePointerDown = (event) => {
-    if (!event.isPrimary || event.button !== 0) return;
-    marqueeDrag.current = {
-      isDragging: false,
-      startOffset: marqueeOffset.current,
-      startX: event.clientX,
-    };
-    event.currentTarget.setPointerCapture(event.pointerId);
-  };
-
-  const handleMarqueePointerMove = (event) => {
-    const drag = marqueeDrag.current;
-    if (!drag) return;
-
-    const deltaX = event.clientX - drag.startX;
-    if (Math.abs(deltaX) > 4) drag.isDragging = true;
-    if (!drag.isDragging) return;
-    event.preventDefault();
-    const track = marqueeRef.current.querySelector('.yantra-marquee__track');
-    const loopWidth = marqueeRef.current.querySelector('.yantra-marquee__group')?.getBoundingClientRect().width;
-    const nextOffset = drag.startOffset - deltaX;
-    marqueeOffset.current = loopWidth > 0
-      ? ((nextOffset % loopWidth) + loopWidth) % loopWidth
-      : Math.max(0, nextOffset);
-    if (track) track.style.transform = `translate3d(${-marqueeOffset.current}px, 0, 0)`;
-  };
-
-  const handleMarqueePointerUp = (event) => {
-    const drag = marqueeDrag.current;
-    if (!drag) return;
-
-    suppressMarqueeClick.current = drag.isDragging;
-    if (event.currentTarget.hasPointerCapture(event.pointerId)) {
-      event.currentTarget.releasePointerCapture(event.pointerId);
-    }
-    marqueeDrag.current = null;
-  };
-
-  const handleMarqueeClick = (event) => {
-    if (!suppressMarqueeClick.current) return;
-    suppressMarqueeClick.current = false;
-    event.preventDefault();
-    event.stopPropagation();
-  };
-
   return (
   <div className="bg-[#f8f6f1]">
     {/* Hero */}
@@ -884,31 +954,53 @@ const HomePage = () => {
           </div>
         </div>
 
-        <div
-          ref={marqueeRef}
-          className="yantra-marquee mt-4"
-          role="region"
-          aria-label="Yantra products"
-          onPointerDown={handleMarqueePointerDown}
-          onPointerMove={handleMarqueePointerMove}
-          onPointerUp={handleMarqueePointerUp}
-          onPointerCancel={handleMarqueePointerUp}
-          onClickCapture={handleMarqueeClick}
-        >
-          <div className="yantra-marquee__track">
-            {[false, true].map((isDuplicate) => (
-              <div
-                key={isDuplicate ? 'duplicate' : 'products'}
-                className="yantra-marquee__group"
-                aria-hidden={isDuplicate ? 'true' : undefined}
-              >
-                {yantraProducts.filter((product) => product.exclusive).map((product) => (
-                  <div className="yantra-marquee__item" key={`${isDuplicate ? 'duplicate-' : ''}${product.name}`}>
-                    <YantraCard product={product} isDuplicate={isDuplicate} />
-                  </div>
-                ))}
-              </div>
-            ))}
+        <ProductMarquee
+          products={yantraProducts.filter((product) => product.exclusive)}
+          ariaLabel="Yantra products"
+        />
+      </div>
+    </section>
+
+    {/* Gemstone collection */}
+    <section className="bg-[#f5f1eb] px-4 pb-7 pt-0 sm:px-8 lg:pb-10 lg:pt-0">
+      <div className="mx-auto max-w-[1440px]">
+        <div className="text-center">
+          <h2 className="text-2xl font-bold leading-tight text-[#201b3a] sm:text-3xl">Certified Auspicious Gemstone</h2>
+          <p className="mx-auto mt-3 max-w-5xl text-sm leading-6 text-[#5b5470] sm:text-base">
+            Explore our carefully curated collection of gemstones, Siddh Yantras, Rudraksha, and Vedic remedies, thoughtfully selected to help you strengthen positive planetary influences and bring peace, confidence, and prosperity into your life.
+          </p>
+          <div className="mt-2 flex justify-end">
+            <a href="/products?category=Find%20your%20gemstone" className="inline-flex items-center gap-1 text-xs font-semibold text-[#201b3a] transition hover:text-[#cf092c]">
+              View all gemstones <ArrowRight className="h-3 w-3" />
+            </a>
+          </div>
+        </div>
+
+        <ProductMarquee products={gemstoneProducts} ariaLabel="Gemstone products" />
+      </div>
+    </section>
+
+    {/* Services banner */}
+    <section className="relative isolate min-h-[480px] overflow-hidden bg-[#07131b] px-6 py-12 sm:px-10 sm:py-14 lg:min-h-[600px] lg:px-16">
+      <img
+        src="/services.png"
+        alt=""
+        aria-hidden="true"
+        className="absolute inset-0 h-full w-full object-cover"
+      />
+      <div className="absolute inset-0 bg-[#041018]/55" aria-hidden="true" />
+      <div className="relative z-10 mx-auto max-w-[1440px]">
+        <h2 className="text-center text-3xl font-bold leading-tight text-white sm:text-4xl">Designing Your Future, One Planet at a Time</h2>
+        <p className="mx-auto mt-4 max-w-3xl text-center text-base leading-7 text-white/90 sm:text-lg">
+          We interpret planetary patterns through precise astrology, offering clear insight to help you find balance and move toward a brighter future.
+        </p>
+        <div className="relative mt-6 min-h-[340px] sm:mt-8 sm:min-h-[380px] lg:min-h-[440px]">
+          <div className="absolute inset-y-0 right-[-8%] flex w-[72%] translate-y-12 items-end justify-end md:right-[-10%] md:w-[64%] lg:right-[-16%]">
+            <img
+              src="/Sadhu.png"
+              alt="Vedic sage in meditation"
+              className="h-[300px] w-auto max-w-none object-contain sm:h-[380px] md:h-[500px] lg:h-[560px]"
+            />
           </div>
         </div>
       </div>
