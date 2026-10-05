@@ -1006,27 +1006,71 @@ const HomePage = () => {
       </div>
     </section>
 
-    {/* Shop by sign */}
-    <section className="bg-[#f5f1eb] py-7">
-      <div className="mx-auto max-w-[1440px] px-4 pb-3 sm:px-8">
-        <p className="text-left text-[0.85rem] font-semibold uppercase tracking-[0.18em] text-[#201b3a]/70">Shop by Sign</p>
-      </div>
-      <div className="mx-auto max-w-[1440px] px-4 sm:px-8">
-        <div className="flex w-full items-end justify-between gap-3 overflow-x-auto pb-1 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden sm:gap-4 md:gap-5 lg:gap-6">
-          {ZODIAC.map((sign) => (
+    {/* Services we offer */}
+    <section className="bg-[#f5f1eb] px-4 py-7 sm:px-8 lg:py-10">
+      <div className="mx-auto max-w-[1440px]">
+        <div className="mx-auto text-center">
+          <h2 className="text-3xl font-bold leading-tight text-[#201b3a] sm:text-4xl">
+            Services We Offer
+          </h2>
+          <p className="mx-auto mt-3 max-w-6xl text-sm leading-6 text-[#5b5470] sm:text-base md:line-clamp-2">
+            Explore expert astrology services including kundli analysis, Lal Kitab remedies, numerology guidance, and gemstone recommendations. Get personalized Vedic solutions to overcome challenges and bring clarity, success, and peace into your life.
+          </p>
+        </div>
+
+        <div className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          {[
+            {
+              title: 'Horoscope & Kundali',
+              image: '/horoscope-kundali-upload.jpg',
+              alt: 'Horoscope and kundali reading',
+            },
+            {
+              title: 'Lal Kitab Remedies',
+              image: '/lal-kitab-card.png',
+              alt: 'Lal Kitab remedies',
+            },
+            {
+              title: 'Spiritual Poojas',
+              image: '/spiritual-poojas-card.mp4',
+              mediaType: 'video',
+              alt: 'Spiritual pooja and astrology consultation',
+            },
+            {
+              title: 'Spiritual Guidance',
+              image: '/spiritual-guidance-card.jpg',
+              alt: 'Spiritual guidance',
+            },
+          ].map((service) => (
             <a
-              key={sign.name}
-              href={`/products?sign=${sign.name.toLowerCase()}`}
-              className="group flex flex-shrink-0 flex-col items-center gap-2 px-2 py-1 transition duration-200 ease-out hover:-translate-y-1"
-              title={sign.name}
+              key={service.title}
+              href="/products"
+              className="group overflow-hidden rounded-2xl border border-[#e8ddd0] bg-white shadow-[0_4px_16px_rgba(61,39,21,0.06)] transition duration-300 hover:-translate-y-1 hover:shadow-[0_12px_28px_rgba(61,39,21,0.12)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#9a5c23] focus-visible:ring-offset-2"
             >
-              <span
-                className="flex h-16 w-16 items-center justify-center rounded-full border text-[2rem] shadow-[0_0_0_1px_rgba(32,27,58,0.04)] transition duration-200 ease-out group-hover:shadow-[0_8px_18px_rgba(32,27,58,0.10)] sm:h-[4.25rem] sm:w-[4.25rem]"
-                style={{ borderColor: `${ELEMENT_COLORS[sign.element]}55`, color: ELEMENT_COLORS[sign.element], backgroundColor: 'rgba(255,255,255,0.05)' }}
-              >
-                {sign.glyph}
-              </span>
-              <span className="text-[0.72rem] font-medium tracking-normal text-[#201b3a] transition duration-200 group-hover:text-[#2b2250] sm:text-[0.8rem]">{sign.name}</span>
+              <div className="relative aspect-[4/3] overflow-hidden bg-gradient-to-br from-[#eee5da] to-[#f8f3ec]">
+                {service.mediaType === 'video' ? (
+                  <video
+                    src={service.image}
+                    aria-label={service.alt}
+                    autoPlay
+                    muted
+                    loop
+                    playsInline
+                    preload="metadata"
+                    className="absolute inset-0 h-full w-full object-cover object-center transition-transform duration-500 group-hover:scale-[1.03]"
+                  />
+                ) : (
+                  <img
+                    src={service.image}
+                    alt={service.alt}
+                    loading="lazy"
+                    className="absolute inset-0 h-full w-full object-cover object-center transition-transform duration-500 group-hover:scale-[1.03]"
+                  />
+                )}
+              </div>
+              <h3 className="flex min-h-16 items-center justify-center px-3 py-4 text-center text-base font-semibold text-[#4c3524] sm:text-lg">
+                {service.title}
+              </h3>
             </a>
           ))}
         </div>
