@@ -40,7 +40,7 @@ function App() {
         </Routes>
       </main>
 
-      <Footer className={pathname === '/login' ? 'mt-2' : undefined} />
+      <Footer className={pathname === '/' ? 'mt-0' : pathname === '/login' ? 'mt-2' : undefined} />
     </div>
   );
 }

@@ -807,6 +807,97 @@ const RudrakshaBanner = () => (
   </section>
 );
 
+const contactVideoLayout = [
+  { id: 5, size: 42, center: true },
+  { id: 1, angle: 0, size: 16 },
+  { id: 4, angle: 45, size: 16 },
+  { id: 6, angle: 90, size: 16 },
+  { id: 7, angle: 135, size: 16 },
+  { id: 9, angle: 180, size: 16 },
+  { id: 10, angle: 225, size: 16 },
+  { id: 11, angle: 270, size: 16 },
+  { id: 13, angle: 315, size: 16 },
+];
+
+const ContactVideoCluster = () => {
+  const reduceMotion = useReducedMotion();
+  const orbitTransition = { duration: 36, repeat: Infinity, ease: 'linear' };
+  const centerVideo = contactVideoLayout.find(({ center }) => center);
+
+  return (
+    <div className="relative flex w-full items-center justify-center">
+      <div className="relative aspect-square w-[min(86vw,460px)] sm:w-[min(70vw,540px)] lg:w-full lg:max-w-[min(580px,calc(100svh-7rem))]">
+        <motion.div
+          className="absolute inset-0"
+          animate={reduceMotion ? undefined : { rotate: 360 }}
+          transition={orbitTransition}
+        >
+          {contactVideoLayout.filter(({ center }) => !center).map(({ id, angle, size }) => {
+            const x = 50 + Math.cos((angle * Math.PI) / 180) * 39;
+            const y = 50 + Math.sin((angle * Math.PI) / 180) * 39;
+
+            return (
+              <div
+                key={`${id}-${angle}`}
+                className="absolute overflow-hidden rounded-full border-0 bg-transparent shadow-none"
+                style={{
+                  left: `${x}%`,
+                  top: `${y}%`,
+                  width: `${size}%`,
+                  height: `${size}%`,
+                  aspectRatio: '1 / 1',
+                  transform: 'translate(-50%, -50%)',
+                }}
+              >
+                <motion.div
+                  className="h-full w-full"
+                  animate={reduceMotion ? undefined : { rotate: -360 }}
+                  transition={orbitTransition}
+                >
+                  <video
+                    src={`/contact/${id}.mp4`}
+                    aria-label={`Contact gallery video ${id}`}
+                    autoPlay
+                    muted
+                    loop
+                    playsInline
+                    preload="metadata"
+                    className="h-full w-full rounded-full object-cover object-center scale-[1.4]"
+                    style={{ display: 'block', aspectRatio: '1 / 1', objectFit: 'cover', objectPosition: 'center' }}
+                  />
+                </motion.div>
+              </div>
+            );
+          })}
+        </motion.div>
+        {centerVideo && (
+          <div
+            className="absolute left-1/2 top-1/2 overflow-hidden rounded-full"
+            style={{
+              width: `${centerVideo.size}%`,
+              height: `${centerVideo.size}%`,
+              aspectRatio: '1 / 1',
+              transform: 'translate(-50%, -50%)',
+            }}
+          >
+            <video
+              src={`/contact/${centerVideo.id}.mp4`}
+              aria-label={`Contact gallery video ${centerVideo.id}`}
+              autoPlay
+              muted
+              loop
+              playsInline
+              preload="metadata"
+              className="h-full w-full rounded-full object-cover object-center scale-[1.4]"
+              style={{ display: 'block', aspectRatio: '1 / 1', objectFit: 'cover', objectPosition: 'center' }}
+            />
+          </div>
+        )}
+      </div>
+    </div>
+  );
+};
+
 const HomePage = () => {
   return (
   <div className="bg-[#f8f6f1]">
@@ -981,13 +1072,10 @@ const HomePage = () => {
     </section>
 
     {/* Services banner */}
-    <section className="relative isolate min-h-[480px] overflow-hidden bg-[#07131b] px-6 py-12 sm:px-10 sm:py-14 lg:min-h-[600px] lg:px-16">
-      <img
-        src="/services.png"
-        alt=""
-        aria-hidden="true"
-        className="absolute inset-0 h-full w-full object-cover"
-      />
+    <section
+      className="relative isolate min-h-[480px] overflow-hidden bg-[#07131b] bg-fixed bg-cover bg-center bg-no-repeat px-6 py-12 sm:px-10 sm:py-14 lg:min-h-[600px] lg:px-16"
+      style={{ backgroundImage: "url('/services.png')" }}
+    >
       <div className="absolute inset-0 bg-[#041018]/55" aria-hidden="true" />
       <div className="relative z-10 mx-auto max-w-[1440px]">
         <h2 className="text-center text-3xl font-bold leading-tight text-white sm:text-4xl">Designing Your Future, One Planet at a Time</h2>
@@ -1073,6 +1161,86 @@ const HomePage = () => {
               </h3>
             </a>
           ))}
+        </div>
+      </div>
+    </section>
+
+    {/* Guided destiny banner */}
+    <section
+      className="relative isolate flex min-h-[75svh] items-center justify-center overflow-hidden bg-[#081820] bg-fixed bg-cover bg-center bg-no-repeat px-4 py-8 sm:px-8 lg:min-h-[calc(100svh-6rem)] lg:px-16 lg:py-6"
+      style={{ backgroundImage: "url('/Rudra.jpg')" }}
+    >
+      <div className="absolute inset-0 bg-[#050915]/25" aria-hidden="true" />
+      <div className="relative z-10 mx-auto w-full max-w-[1440px]">
+        <div className="-translate-x-4 grid items-center gap-6 lg:-translate-x-28 lg:grid-cols-[minmax(0,1fr)_420px] lg:gap-12">
+          <div className="flex w-full items-center justify-center">
+            <ContactVideoCluster />
+          </div>
+
+          <form
+            className="w-full max-w-[420px] justify-self-center rounded-2xl border-2 border-white/80 p-6 shadow-[0_12px_40px_rgba(0,0,0,0.35)] sm:p-8"
+            aria-label="Contact inquiry form"
+          >
+            <h2 className="mb-5 text-center text-2xl font-bold tracking-tight text-white drop-shadow-lg sm:text-3xl">
+              Contact Us
+            </h2>
+            <div className="space-y-5">
+              <div>
+                <label htmlFor="inquiry-name" className="sr-only">Name</label>
+                <input
+                  id="inquiry-name"
+                  name="name"
+                  type="text"
+                  autoComplete="name"
+                  placeholder="Name"
+                  required
+                  className="w-full border-0 border-b border-white/75 bg-transparent px-1 py-4 text-sm font-medium text-white outline-none placeholder:text-white/90 focus:border-[#fff] focus:ring-0"
+                />
+              </div>
+              <div>
+                <label htmlFor="inquiry-phone" className="sr-only">Phone number</label>
+                <input
+                  id="inquiry-phone"
+                  name="phone"
+                  type="tel"
+                  autoComplete="tel"
+                  placeholder="Phone number"
+                  required
+                  className="w-full border-0 border-b border-white/75 bg-transparent px-1 py-4 text-sm font-medium text-white outline-none placeholder:text-white/90 focus:border-[#fff] focus:ring-0"
+                />
+              </div>
+              <div>
+                <label htmlFor="inquiry-email" className="sr-only">Email</label>
+                <input
+                  id="inquiry-email"
+                  name="email"
+                  type="email"
+                  autoComplete="email"
+                  placeholder="Email"
+                  required
+                  className="w-full border-0 border-b border-white/75 bg-transparent px-1 py-4 text-sm font-medium text-white outline-none placeholder:text-white/90 focus:border-[#fff] focus:ring-0"
+                />
+              </div>
+              <div>
+                <label htmlFor="inquiry-query" className="sr-only">Query</label>
+                <textarea
+                  id="inquiry-query"
+                  name="query"
+                  placeholder="Query"
+                  rows={4}
+                  required
+                  className="w-full resize-y border-0 border-b border-white/75 bg-transparent px-1 py-4 text-sm font-medium text-white outline-none placeholder:text-white/90 focus:border-[#fff] focus:ring-0"
+                />
+              </div>
+            </div>
+
+            <button
+              type="button"
+              className="mt-6 w-full rounded-md bg-white px-4 py-3 text-sm font-semibold text-[#171326] transition hover:bg-[#f4ef8a] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#f4ef8a]"
+            >
+              Submit
+            </button>
+          </form>
         </div>
       </div>
     </section>
