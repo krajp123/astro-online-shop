@@ -481,7 +481,7 @@ const ProductCard = ({ product, index }) => {
           <div aria-hidden="true" className="pointer-events-none absolute inset-0 -z-10 bg-[linear-gradient(180deg,rgba(67,0,21,0)_0%,#430015_20%)]" />
           <h3
             style={{ fontFamily: CARD_SERIF }}
-            className="line-clamp-2 min-h-[2.3rem] text-[1rem] leading-[1.3] text-[#fbf3ee]"
+            className="line-clamp-2 min-h-[2.3rem] text-sm leading-[1.3] text-[#fbf3ee]"
           >
             {product.name}
           </h3>
@@ -490,7 +490,7 @@ const ProductCard = ({ product, index }) => {
       </a>
 
       <div className="relative z-10 flex items-center justify-between gap-2 px-4 pb-4 sm:px-5">
-        <p style={{ fontFamily: CARD_SERIF }} className="min-w-0 flex-1 tabular-nums leading-none text-[#f7d3c4] text-[1.05rem] sm:text-[1.3rem]">
+        <p style={{ fontFamily: CARD_SERIF }} className="min-w-0 flex-1 tabular-nums leading-none text-[#f7d3c4] text-base sm:text-lg">
           <span className="mr-1 text-[0.65em] text-[#f7d3c4]/60">Rs.</span>
           {whole}
           {decimals && <span className="text-[0.65em] opacity-60">.{decimals}</span>}
@@ -561,7 +561,7 @@ const CatalogCard = ({ product, isDuplicate = false }) => {
           </div>
         </div>
         <div className="border-t border-[#201b3a]/10 px-4 py-4">
-          <h3 className={`text-center text-[0.95rem] font-medium leading-[1.2] text-[#8a6a1f] ${gemstoneCategory ? 'line-clamp-3 min-h-[2.75rem]' : 'line-clamp-2 min-h-[2.25rem]'}`}>
+          <h3 className={`text-center text-sm font-medium leading-[1.2] text-[#8a6a1f] ${gemstoneCategory ? 'line-clamp-3 min-h-[2.75rem]' : 'line-clamp-2 min-h-[2.25rem]'}`}>
             {gemstoneCategory ? (
               <>
                 <span className="block">{product.name}</span>
@@ -569,7 +569,7 @@ const CatalogCard = ({ product, isDuplicate = false }) => {
               </>
             ) : displayName}
           </h3>
-          <p className="text-center text-[0.95rem] font-semibold text-[#201b3a]">
+          <p className="text-center text-sm font-semibold text-[#201b3a]">
             {displayPrice || 'View details'}
           </p>
         </div>
@@ -786,17 +786,17 @@ const RudrakshaBanner = () => (
       className="absolute inset-0 h-full w-full scale-[1.06] object-cover object-[72%_center] origin-[72%_center]"
     />
     <div className="absolute inset-0 bg-gradient-to-r from-[#1b0802]/90 via-[#1b0802]/65 to-[#1b0802]/10" aria-hidden="true" />
-    <div className="relative z-10 mx-auto flex w-full max-w-[1440px] flex-col gap-8 px-6 py-12 sm:px-10 md:flex-row md:items-center md:gap-10 lg:min-h-[420px] lg:px-16 lg:py-7">
+    <div className="relative z-10 mx-auto flex w-full max-w-[1440px] flex-col gap-8 px-4 py-12 sm:px-8 md:flex-row md:items-center md:gap-10 lg:min-h-[420px] lg:px-8 lg:py-7">
       <div className="w-full text-white md:flex-1 lg:-translate-y-3">
-        <h2 className="max-w-2xl text-[clamp(2rem,3.5vw,3rem)] font-bold leading-[1.15] tracking-normal">
+        <h2 className="max-w-2xl text-[clamp(1.5rem,3vw,2.25rem)] font-bold leading-[1.15] tracking-normal">
           Discover the Divine Power of Authentic Rudraksha.
         </h2>
-        <p className="mt-4 text-left text-sm font-normal leading-6 text-white sm:text-base sm:leading-7">
+        <p className="mt-4 text-left text-[13px] leading-5 text-white sm:text-sm sm:leading-6">
           Sourced directly from the pristine foothills of the Himalayas, our lab-certified, 100% genuine beads are meticulously selected and sacredly energized to bring peace, protection, and prosperity to your life. Whether you are seeking spiritual alignment, stress relief, or a powerful shield against negative energies, explore our premium collection to find the perfect Mukhi destined for your journey.
         </p>
         <Link
           to="/rudraksha"
-          className="group mt-6 inline-flex min-h-11 items-center gap-3 rounded-full bg-[#f3c48c] px-6 py-3 text-sm font-semibold text-[#1b0802] transition-colors hover:bg-[#ffdbac] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-[#1b0802]"
+          className="group mt-5 inline-flex min-h-10 items-center gap-3 rounded-full bg-[#f3c48c] px-5 py-2.5 text-[13px] font-semibold text-[#1b0802] transition-colors hover:bg-[#ffdbac] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-[#1b0802]"
         >
           Shop now
           <ArrowRight className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-1" aria-hidden="true" />
@@ -917,19 +917,19 @@ const HomePage = () => {
 
       <div className="relative z-10 mx-auto flex min-h-[calc(100svh-66px)] max-w-[1440px] items-center px-4 py-6 sm:px-8 lg:py-8">
         <div className="w-full max-w-2xl lg:w-[58%] lg:pr-10">
-          <p className="mb-3 text-[clamp(0.7rem,1vw,0.85rem)] font-bold uppercase tracking-[0.22em] text-[#f3c969]">Personalised gemstone guidance</p>
-          <h1 className="max-w-xl text-[clamp(2.25rem,5vw,4rem)] font-bold leading-[1.15] tracking-normal text-white">
+          <p className="mb-3 text-[clamp(0.65rem,0.9vw,0.8rem)] font-bold uppercase tracking-[0.22em] text-[#f3c969]">Personalised gemstone guidance</p>
+          <h1 className="max-w-xl text-[clamp(1.75rem,4vw,3rem)] font-bold leading-[1.15] tracking-normal text-white">
             Unlock the power of your birth chart.
           </h1>
-          <p className="mt-5 max-w-lg text-[clamp(0.9rem,1.2vw,1.05rem)] leading-6 text-white/70">
+          <p className="mt-4 max-w-lg text-[13px] leading-5 text-white/70 sm:text-sm sm:leading-6">
             Natural gemstones and sacred jewellery matched to your sign, planet and intention. Sourced responsibly and verified before it reaches you.
           </p>
 
           <div className="mt-6 flex flex-wrap gap-3">
-            <a href="/products" className="inline-flex items-center gap-2 rounded-full bg-[#f3c969] px-6 py-3 text-sm font-bold text-[#17132d] transition hover:bg-white">
+            <a href="/products" className="inline-flex items-center gap-2 rounded-full bg-[#f3c969] px-5 py-2.5 text-[13px] font-semibold text-[#17132d] transition hover:bg-white">
               Shop the collection <ArrowRight className="h-4 w-4" />
             </a>
-            <a href="/quiz" className="rounded-full border border-white/30 px-6 py-3 text-sm font-bold text-white transition hover:border-[#f3c969] hover:text-[#f3c969]">
+            <a href="/quiz" className="rounded-full border border-white/30 px-5 py-2.5 text-[13px] font-semibold text-white transition hover:border-[#f3c969] hover:text-[#f3c969]">
               Find my stone
             </a>
           </div>
@@ -956,7 +956,7 @@ const HomePage = () => {
               className="h-20 w-auto object-contain transition duration-300 ease-out group-hover:scale-[1.04] sm:h-24 md:h-28 lg:h-32"
               style={{ background: 'transparent' }}
             />
-            <span className="mt-1 pb-1 text-[0.82rem] font-medium tracking-normal text-[#201b3a] transition duration-300 group-hover:text-[#2b2250] sm:text-[0.95rem]">
+            <span className="mt-1 pb-1 text-xs font-medium tracking-normal text-[#201b3a] transition duration-300 group-hover:text-[#2b2250] sm:text-sm">
               {stone.name}
             </span>
           </div>
@@ -977,21 +977,21 @@ const HomePage = () => {
       />
       <div className="absolute inset-0 bg-[#3c0019]/20" aria-hidden="true" />
 
-      <div className="relative z-10 mx-auto flex min-h-[360px] max-w-[1440px] items-center px-6 py-12 sm:min-h-[400px] sm:px-10 lg:min-h-[420px] lg:px-16">
+      <div className="relative z-10 mx-auto flex min-h-[360px] max-w-[1440px] items-center px-4 py-12 sm:min-h-[400px] sm:px-8 lg:min-h-[420px] lg:px-8">
         <div className="max-w-xl text-white lg:max-w-[55%]">
-          <h2 className="max-w-2xl text-[clamp(2rem,3.5vw,3rem)] font-bold leading-[1.15] tracking-normal">
+          <h2 className="max-w-2xl text-[clamp(1.5rem,3vw,2.25rem)] font-bold leading-[1.15] tracking-normal">
             Discover the Blueprint of Your Destiny
           </h2>
-          <p className="mt-4 text-[clamp(1rem,1.4vw,1.25rem)] font-semibold leading-7 text-white">
+          <p className="mt-3 text-[13px] font-semibold leading-5 text-white sm:text-sm sm:leading-6">
             Now Just One Exclusive Click Away
           </p>
           <a
             href="/products"
-            className="mt-12 inline-flex items-center rounded-md bg-[#ffd400] px-6 py-3 text-xs font-bold text-[#3d0017] transition hover:bg-white"
+            className="mt-8 inline-flex items-center rounded-md bg-[#ffd400] px-5 py-2.5 text-xs font-bold text-[#3d0017] transition hover:bg-white"
           >
             Get Your Exclusive Lal Kitab Now
           </a>
-          <p className="mt-8 text-[0.68rem] font-semibold leading-5 text-[#ffd400] sm:text-xs">
+          <p className="mt-6 text-[0.65rem] font-semibold leading-4 text-[#ffd400] sm:text-[11px]">
             <span aria-hidden="true">★ </span>
             Over 1 Lakh Verified Predictions Delivered — A Standard of Trust &amp; Accuracy
             <span aria-hidden="true"> ★</span>
@@ -1007,10 +1007,10 @@ const HomePage = () => {
       <div className="mx-auto max-w-[1440px]">
         <div className="flex flex-col items-center justify-between gap-3 pb-2 text-center">
           <div className="max-w-3xl">
-            <h2 className="text-2xl font-bold leading-tight tracking-normal text-[#201b3a] sm:text-3xl">
+            <h2 className="text-xl font-bold leading-tight tracking-normal text-[#201b3a] sm:text-2xl">
                 Trusted essentials, chosen by thousands.
             </h2>
-            <p className="mx-auto mt-2 max-w-3xl text-sm leading-5 text-[#5b5470]">
+            <p className="mx-auto mt-2 max-w-3xl text-[13px] leading-5 text-[#5b5470] sm:text-sm sm:leading-6">
                 Explore carefully selected products inspired by the timeless wisdom of Life, bringing traditional knowledge and modern quality together for balance, positivity, prosperity, and spiritual well-being.
             </p>
           </div>
@@ -1034,8 +1034,8 @@ const HomePage = () => {
     <section className="bg-[#f3efe9] px-4 py-7 sm:px-8 lg:py-10">
       <div className="mx-auto max-w-[1440px]">
         <div className="text-center">
-          <h2 className="text-2xl font-bold leading-tight text-[#201b3a] sm:text-3xl">Buy Siddh Yantra</h2>
-          <p className="mx-auto mt-3 max-w-5xl text-sm leading-6 text-[#5b5470] sm:text-base">
+          <h2 className="text-xl font-bold leading-tight text-[#201b3a] sm:text-2xl">Buy Siddh Yantra</h2>
+          <p className="mx-auto mt-3 max-w-5xl text-[13px] leading-5 text-[#5b5470] sm:text-sm sm:leading-6">
             Explore our collection of Siddh Yantras, prepared with authentic methods and guided by the wisdom of G.D. Vashist. Each Yantra is designed to help attract positive energy, overcome challenges, and support your journey toward success and harmony.
           </p>
           <div className="mt-2 flex justify-end">
@@ -1056,8 +1056,8 @@ const HomePage = () => {
     <section className="bg-[#f5f1eb] px-4 pb-7 pt-0 sm:px-8 lg:pb-10 lg:pt-0">
       <div className="mx-auto max-w-[1440px]">
         <div className="text-center">
-          <h2 className="text-2xl font-bold leading-tight text-[#201b3a] sm:text-3xl">Certified Auspicious Gemstone</h2>
-          <p className="mx-auto mt-3 max-w-5xl text-sm leading-6 text-[#5b5470] sm:text-base">
+          <h2 className="text-xl font-bold leading-tight text-[#201b3a] sm:text-2xl">Certified Auspicious Gemstone</h2>
+          <p className="mx-auto mt-3 max-w-5xl text-[13px] leading-5 text-[#5b5470] sm:text-sm sm:leading-6">
             Explore our carefully curated collection of gemstones, Siddh Yantras, Rudraksha, and Vedic remedies, thoughtfully selected to help you strengthen positive planetary influences and bring peace, confidence, and prosperity into your life.
           </p>
           <div className="mt-2 flex justify-end">
@@ -1078,8 +1078,8 @@ const HomePage = () => {
     >
       <div className="absolute inset-0 bg-[#041018]/55" aria-hidden="true" />
       <div className="relative z-10 mx-auto max-w-[1440px]">
-        <h2 className="text-center text-3xl font-bold leading-tight text-white sm:text-4xl">Designing Your Future, One Planet at a Time</h2>
-        <p className="mx-auto mt-4 max-w-3xl text-center text-base leading-7 text-white/90 sm:text-lg">
+        <h2 className="text-center text-2xl font-bold leading-tight text-white sm:text-3xl">Designing Your Future, One Planet at a Time</h2>
+        <p className="mx-auto mt-3 max-w-3xl text-center text-[13px] leading-5 text-white/90 sm:text-sm sm:leading-6">
           We interpret planetary patterns through precise astrology, offering clear insight to help you find balance and move toward a brighter future.
         </p>
         <div className="relative mt-6 min-h-[340px] sm:mt-8 sm:min-h-[380px] lg:min-h-[440px]">
@@ -1095,13 +1095,13 @@ const HomePage = () => {
     </section>
 
     {/* Services we offer */}
-    <section className="bg-[#f5f1eb] px-4 py-7 sm:px-8 lg:py-10">
+    <section id="services" className="bg-[#f5f1eb] px-4 py-7 sm:px-8 lg:py-10">
       <div className="mx-auto max-w-[1440px]">
         <div className="mx-auto text-center">
-          <h2 className="text-3xl font-bold leading-tight text-[#201b3a] sm:text-4xl">
+          <h2 className="text-2xl font-bold leading-tight text-[#201b3a] sm:text-3xl">
             Services We Offer
           </h2>
-          <p className="mx-auto mt-3 max-w-6xl text-sm leading-6 text-[#5b5470] sm:text-base md:line-clamp-2">
+          <p className="mx-auto mt-3 max-w-6xl text-[13px] leading-5 text-[#5b5470] sm:text-sm sm:leading-6 md:line-clamp-2">
             Explore expert astrology services including kundli analysis, Lal Kitab remedies, numerology guidance, and gemstone recommendations. Get personalized Vedic solutions to overcome challenges and bring clarity, success, and peace into your life.
           </p>
         </div>
@@ -1156,7 +1156,7 @@ const HomePage = () => {
                   />
                 )}
               </div>
-              <h3 className="flex min-h-16 items-center justify-center px-3 py-4 text-center text-base font-semibold text-[#4c3524] sm:text-lg">
+              <h3 className="flex min-h-14 items-center justify-center px-3 py-3 text-center text-sm font-semibold text-[#4c3524] sm:text-base">
                 {service.title}
               </h3>
             </a>
@@ -1167,8 +1167,14 @@ const HomePage = () => {
 
     {/* Guided destiny banner */}
     <section
-      className="relative isolate flex min-h-[75svh] items-center justify-center overflow-hidden bg-[#081820] bg-fixed bg-cover bg-center bg-no-repeat px-4 py-8 sm:px-8 lg:min-h-[calc(100svh-6rem)] lg:px-16 lg:py-6"
-      style={{ backgroundImage: "url('/Rudra.jpg')" }}
+      id="contact-us"
+      className="relative isolate flex min-h-[75svh] items-center justify-center overflow-hidden bg-[#081820] bg-cover bg-center bg-no-repeat px-4 py-8 sm:px-8 lg:min-h-[calc(100svh-6rem)] lg:px-16 lg:py-6"
+      style={{
+        backgroundImage: "url('/Rudra.png')",
+        backgroundAttachment: 'scroll',
+        backgroundSize: 'cover',
+        backgroundPosition: 'center center',
+      }}
     >
       <div className="absolute inset-0 bg-[#050915]/25" aria-hidden="true" />
       <div className="relative z-10 mx-auto w-full max-w-[1440px]">
@@ -1181,7 +1187,7 @@ const HomePage = () => {
             className="w-full max-w-[420px] justify-self-center rounded-2xl border-2 border-white/80 p-6 shadow-[0_12px_40px_rgba(0,0,0,0.35)] sm:p-8"
             aria-label="Contact inquiry form"
           >
-            <h2 className="mb-5 text-center text-2xl font-bold tracking-tight text-white drop-shadow-lg sm:text-3xl">
+            <h2 className="mb-4 text-center text-xl font-bold tracking-tight text-white drop-shadow-lg sm:text-2xl">
               Contact Us
             </h2>
             <div className="space-y-5">
@@ -1194,7 +1200,10 @@ const HomePage = () => {
                   autoComplete="name"
                   placeholder="Name"
                   required
-                  className="w-full border-0 border-b border-white/75 bg-transparent px-1 py-4 text-sm font-medium text-white outline-none placeholder:text-white/90 focus:border-[#fff] focus:ring-0"
+                  onChange={(event) => {
+                    event.target.value = event.target.value.replace(/[^\p{L}\p{M}\s.'’-]/gu, '');
+                  }}
+                  className="w-full border-0 border-b border-white/75 bg-transparent px-1 py-3 text-[13px] font-medium text-white outline-none placeholder:text-white/90 focus:border-[#fff] focus:ring-0"
                 />
               </div>
               <div>
@@ -1206,7 +1215,10 @@ const HomePage = () => {
                   autoComplete="tel"
                   placeholder="Phone number"
                   required
-                  className="w-full border-0 border-b border-white/75 bg-transparent px-1 py-4 text-sm font-medium text-white outline-none placeholder:text-white/90 focus:border-[#fff] focus:ring-0"
+                  onChange={(event) => {
+                    event.target.value = event.target.value.replace(/[^\d+\s()-]/g, '');
+                  }}
+                  className="w-full border-0 border-b border-white/75 bg-transparent px-1 py-3 text-[13px] font-medium text-white outline-none placeholder:text-white/90 focus:border-[#fff] focus:ring-0"
                 />
               </div>
               <div>
@@ -1218,7 +1230,7 @@ const HomePage = () => {
                   autoComplete="email"
                   placeholder="Email"
                   required
-                  className="w-full border-0 border-b border-white/75 bg-transparent px-1 py-4 text-sm font-medium text-white outline-none placeholder:text-white/90 focus:border-[#fff] focus:ring-0"
+                  className="w-full border-0 border-b border-white/75 bg-transparent px-1 py-3 text-[13px] font-medium text-white outline-none placeholder:text-white/90 focus:border-[#fff] focus:ring-0"
                 />
               </div>
               <div>
@@ -1229,14 +1241,14 @@ const HomePage = () => {
                   placeholder="Query"
                   rows={4}
                   required
-                  className="w-full resize-y border-0 border-b border-white/75 bg-transparent px-1 py-4 text-sm font-medium text-white outline-none placeholder:text-white/90 focus:border-[#fff] focus:ring-0"
+                  className="w-full resize-y border-0 border-b border-white/75 bg-transparent px-1 py-3 text-[13px] font-medium text-white outline-none placeholder:text-white/90 focus:border-[#fff] focus:ring-0"
                 />
               </div>
             </div>
 
             <button
               type="button"
-              className="mt-6 w-full rounded-md bg-white px-4 py-3 text-sm font-semibold text-[#171326] transition hover:bg-[#f4ef8a] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#f4ef8a]"
+              className="mt-5 w-full rounded-md bg-white px-4 py-2.5 text-[13px] font-semibold text-[#171326] transition hover:bg-[#f4ef8a] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#f4ef8a]"
             >
               Submit
             </button>

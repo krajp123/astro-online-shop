@@ -55,6 +55,7 @@ const menuSections = [
 
 const menuLink = (item) => {
   if (item === 'Rudraksha') return '/rudraksha';
+  if (item === 'Mantra Upchar') return '/mantra-upchar';
   const mukhiMatch = item.match(/^(\d+)\s+Mukhi$/);
   if (mukhiMatch) return `/rudraksha?category=beads&mukhi=${mukhiMatch[1]}`;
   if (item === 'Rudraksha Beads') return '/rudraksha?category=beads';

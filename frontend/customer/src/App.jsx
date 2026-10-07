@@ -10,6 +10,7 @@ import Yantra from './components/products/Yantra';
 import Navbar from './components/common/Navbar';
 import Footer from './components/common/Footer';
 import LoginPage from './pages/LoginPage';
+import MantraUpcharPage from './pages/MantraUpcharPage';
 
 function ScrollToTop() {
   const { pathname } = useLocation();
@@ -34,13 +35,14 @@ function App() {
           <Route path="/" element={<HomePage />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/products" element={<Yantra />} />
+          <Route path="/mantra-upchar" element={<MantraUpcharPage />} />
           <Route path="/rudraksha" element={<Rudraksha />} />
           <Route path="/cart" element={<CartPage />} />
           <Route path="/orders" element={<OrdersPage />} />
         </Routes>
       </main>
 
-      <Footer className={pathname === '/' ? 'mt-0' : pathname === '/login' ? 'mt-2' : undefined} />
+      <Footer className={pathname === '/' || pathname === '/mantra-upchar' ? 'mt-0' : pathname === '/login' ? 'mt-2' : undefined} />
     </div>
   );
 }
