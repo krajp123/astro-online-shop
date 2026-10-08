@@ -172,10 +172,10 @@ const Rudraksha = () => {
 
   return (
     <div className="w-full max-w-[2000px] bg-[#f5f1eb]">
-      <div className="mx-auto max-w-[1440px] bg-[#f5f1eb] px-4 pt-6 pb-10 sm:px-6 lg:pb-8">
+      <div className="mx-auto max-w-[1440px] bg-[#f5f1eb] px-4 pt-10 pb-10 sm:px-6 sm:pt-12 lg:pb-8 lg:pt-14">
         <div className="flex flex-col items-center gap-3 text-center">
           <div className="w-full max-w-2xl">
-            <h1 className="w-full text-center font-serif text-4xl font-bold leading-tight text-[#75665a] sm:text-5xl">Rudraksha Beads</h1>
+            <h1 className="w-full text-center font-serif text-[1.45rem] font-bold leading-tight text-[#75665a] sm:text-[1.8rem] lg:text-[2.35rem]">Rudraksha Beads</h1>
           </div>
           <p className="max-w-3xl text-center text-sm leading-7 text-[#5b5470] sm:text-base">
             Find the Mukhi that fits your spiritual path, from 0 Mukhi through 13 Mukhi.

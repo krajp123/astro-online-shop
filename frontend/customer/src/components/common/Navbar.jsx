@@ -54,6 +54,12 @@ const menuSections = [
 ];
 
 const menuLink = (item) => {
+  if (item === 'Lal Kitab Amrit') return '/lal-kitab';
+  if (item === 'Soap') return '/soap';
+  if (item === 'Dhoop') return '/dhoop';
+  if (item === 'Gemstones') return '/gemstone';
+  if (item === 'Standard Gemstones') return '/gemstone?quality=Standard';
+  if (item === 'Premium Gemstones') return '/gemstone?quality=Premium';
   if (item === 'Rudraksha') return '/rudraksha';
   if (item === 'Mantra Upchar') return '/mantra-upchar';
   const mukhiMatch = item.match(/^(\d+)\s+Mukhi$/);

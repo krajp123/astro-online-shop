@@ -8,12 +8,13 @@ const quickLinks = [
 ];
 
 const astroStoreLinks = [
-  { label: 'Gemstone', to: '/products?category=Gemstone' },
+  { label: 'Gemstone', to: '/gemstone' },
   { label: 'Yantra', to: '/products?category=Yantra' },
   { label: 'Lal Kitab Yantra', to: '/products?category=Lal%20Kitab%20Yantra' },
   { label: 'Mantra Upchar Potli', to: '/mantra-upchar' },
+  { label: 'Soap', to: '/soap' },
   { label: 'Shop', to: '/products' },
-  { label: 'Dhoop', to: '/products?category=Dhoop' },
+  { label: 'Dhoop', to: '/dhoop' },
 ];
 
 const infoLinks = [

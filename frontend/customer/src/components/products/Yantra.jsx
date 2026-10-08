@@ -1,5 +1,7 @@
 import { useMemo, useState } from 'react';
-import { ArrowRight } from 'lucide-react';
+import { ShoppingCart } from 'lucide-react';
+import { motion, useReducedMotion } from 'framer-motion';
+import { useCustomerStore } from '../../store/useCustomerStore';
 
 export const yantraProducts = [
   { name: 'Sarva Shakti Peeth Yantra', category: 'Exclusive Yantra', price: '₹2,450', tag: 'Best Seller', exclusive: true },
@@ -115,9 +117,22 @@ export const getProductImage = (product) => {
 };
 
 const ProductCard = ({ product }) => {
+  const imageCandidates = productImageMap[product.name] || ['/Yantra/yantra1.jpg'];
+  const cart = useCustomerStore((state) => state.cart);
+  const setCart = useCustomerStore((state) => state.setCart);
+  const isInCart = cart.some((item) => item.name === product.name);
+
+  const handleAddToCart = () => {
+    const existingItem = cart.find((item) => item.name === product.name);
+    setCart(existingItem
+      ? cart.map((item) => item.name === product.name
+        ? { ...item, quantity: (item.quantity || 1) + 1 }
+        : item)
+      : [...cart, { ...product, image: getProductImage(product), quantity: 1 }]);
+  };
+
   return (
-    <article className="group flex h-full flex-col overflow-hidden rounded-2xl border border-[#201b3a]/10 bg-white transition duration-300 hover:-translate-y-1 hover:border-[#4d001e]/30 hover:shadow-[0_18px_40px_rgba(32,27,58,0.12)]">
-      {/* Image */}
+    <article className="group overflow-hidden rounded-2xl border border-[#201b3a]/10 bg-white transition duration-300 hover:-translate-y-1 hover:border-[#4d001e]/30 hover:shadow-[0_18px_40px_rgba(32,27,58,0.12)]">
       <div className="relative aspect-square overflow-hidden bg-[#f7f2ea]">
         <img
           src={getProductImage(product)}
@@ -127,34 +142,37 @@ const ProductCard = ({ product }) => {
             event.currentTarget.onerror = null;
             event.currentTarget.src = '/Yantra/yantra1.jpg';
           }}
-          className="h-full w-full object-cover object-center transition duration-500 group-hover:scale-105"
+          className={`h-full w-full object-contain object-center transition-opacity duration-1000 ease-in-out ${imageCandidates[1] ? 'group-hover:opacity-0' : ''}`}
         />
+        {imageCandidates[1] && (
+          <img
+            src={imageCandidates[1]}
+            alt=""
+            aria-hidden="true"
+            loading="lazy"
+            className="absolute inset-0 h-full w-full object-contain object-center opacity-0 transition-opacity duration-1000 ease-in-out group-hover:opacity-100"
+          />
+        )}
       </div>
 
-      {/* Details */}
-      <div className="flex flex-1 flex-col p-4">
-        <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-[#4d001e]/70">
-          {product.category}
-        </p>
-
-        <h3 className="mt-1.5 line-clamp-2 min-h-[2.75rem] text-[15px] font-semibold leading-snug text-[#201b3a]">
-          {product.name}
-        </h3>
-
-        <div className="mt-2 flex items-center gap-2">
-          <span className="text-sm leading-none tracking-tight text-[#c9962b]">★★★★★</span>
-          <span className="text-xs text-[#201b3a]/55">(11 reviews)</span>
+      <div className="flex flex-col p-3 sm:p-4">
+        <div className="flex items-start justify-between gap-2">
+          <h3 className="text-sm font-semibold leading-snug text-[#201b3a]">{product.name}</h3>
         </div>
-
-        <div className="mt-auto flex items-end justify-between gap-3 border-t border-[#201b3a]/10 pt-4">
-          <div>
-            <p className="text-[10px] font-medium uppercase tracking-[0.16em] text-[#201b3a]/50">Price</p>
-            <p className="text-lg font-bold leading-tight text-[#201b3a]">{product.price}</p>
-          </div>
-
-          <button className="inline-flex items-center gap-1.5 rounded-lg bg-[#4d001e] px-4 py-2.5 text-xs font-semibold text-white transition hover:bg-[#3a0016] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#4d001e]/40 focus-visible:ring-offset-2">
-            View Details
-            <ArrowRight className="h-3.5 w-3.5 transition-transform duration-300 group-hover:translate-x-0.5" />
+        <div className="mt-1.5 flex items-center gap-2" aria-label="Rated 5 out of 5, 11 reviews">
+          <span className="text-sm leading-none tracking-tight text-[#c9962b]" aria-hidden="true">★★★★★</span>
+          <span className="text-xs text-[#201b3a]/75">(11 reviews)</span>
+        </div>
+        <div className="mt-3 flex items-center justify-between gap-3 border-t border-[#201b3a]/10 pt-3">
+          <p className="text-base font-bold text-[#201b3a]">{product.price}</p>
+          <button
+            type="button"
+            onClick={handleAddToCart}
+            aria-label={isInCart ? `Add another ${product.name} to cart` : `Add ${product.name} to cart`}
+            className="inline-flex min-h-9 items-center justify-center gap-1.5 rounded-lg bg-[#4d001e] px-3 py-2 text-xs font-semibold text-white transition hover:bg-[#3a0016] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#4d001e]/40 focus-visible:ring-offset-2"
+          >
+            <ShoppingCart className="h-4 w-4" aria-hidden="true" />
+            {isInCart ? 'Add another' : 'Add to cart'}
           </button>
         </div>
       </div>
@@ -163,6 +181,7 @@ const ProductCard = ({ product }) => {
 };
 
 const ProductsPage = () => {
+  const reduceMotion = useReducedMotion();
   const [selectedCategory, setSelectedCategory] = useState('Yantra');
   const [currentPage, setCurrentPage] = useState(1);
   const [isFilterOpen, setIsFilterOpen] = useState(false);
@@ -200,34 +219,44 @@ const ProductsPage = () => {
         <div className="absolute inset-0 flex items-start justify-start px-4 pt-5 sm:px-8 sm:pt-7 lg:px-12 xl:px-16 xl:pt-8">
           <div className="w-full max-w-[66rem] text-left">
             <div className="mb-6 flex items-center gap-4">
-                <h2 className="text-[1.45rem] font-black leading-none tracking-[-0.05em] text-[#f8f2e9] sm:text-[1.8rem] lg:text-[2.35rem]">
+                <h2 className="text-[1.45rem] font-black leading-none tracking-[-0.05em] text-white drop-shadow-[0_2px_12px_rgba(0,0,0,0.8)] sm:text-[1.8rem] lg:text-[2.35rem]">
                 Yantra
               </h2>
               <span className="hidden h-px flex-1 max-w-[22rem] bg-[#f4d69a] md:block" />
             </div>
 
-            <p className="max-w-[58rem] text-[0.58rem] leading-[1.7] font-medium text-[#f7ebdb] sm:text-[0.7rem] lg:text-[0.82rem] xl:text-[0.9rem] xl:leading-[1.8]">
+            <p className="max-w-[58rem] text-[0.58rem] leading-[1.7] font-medium text-white drop-shadow-[0_1px_6px_rgba(0,0,0,0.95)] sm:text-[0.7rem] lg:text-[0.82rem] xl:text-[0.9rem] xl:leading-[1.8]">
               All the special Yantra available at Astro Vastu Bazar and are beneficial for achieving specific goals such as business growth, health improvement, protection from enemies, and wealth creation. At our Website, you can also find Yantras related to your zodiac sign and Nakshatra, which are made from gold, silver, rose gold, and other pure metals. By using these Yantra, one can experience positive growth in business, enhanced aura and appearance, financial stability, and rectify the defects present in the birth chart (Janam Kundli). Consult with our expert astrologers to understand the proper method of wearing these Yantra and then proceed to wear them accordingly.
             </p>
 
-            <p className="mt-4 text-[0.62rem] font-medium text-[#f4d69a] sm:text-[0.75rem] lg:text-[0.92rem]">
+            <p className="mt-4 text-[0.62rem] font-medium text-white drop-shadow-[0_1px_6px_rgba(0,0,0,0.95)] sm:text-[0.75rem] lg:text-[0.92rem]">
               For a free consultation with our astrologers, call now: <span className="font-bold">xxxxxxxxxx</span>
             </p>
           </div>
         </div>
+        <svg
+          className="absolute inset-x-0 bottom-0 z-20 h-8 w-full sm:h-10"
+          viewBox="0 0 1440 80"
+          preserveAspectRatio="none"
+          aria-hidden="true"
+        >
+          <motion.path
+            d="M0 40 C180 86 330 8 520 38 C700 68 850 78 1030 38 C1200 8 1320 20 1440 44 V100 H0Z"
+            animate={reduceMotion ? undefined : {
+              d: [
+                'M0 40 C180 86 330 8 520 38 C700 68 850 78 1030 38 C1200 8 1320 20 1440 44 V100 H0Z',
+                'M0 44 C180 8 330 88 520 44 C700 10 850 12 1030 44 C1200 88 1320 72 1440 40 V100 H0Z',
+                'M0 40 C180 86 330 8 520 38 C700 68 850 78 1030 38 C1200 8 1320 20 1440 44 V100 H0Z',
+              ],
+            }}
+            transition={{ duration: 7, repeat: Infinity, ease: 'easeInOut' }}
+            fill="#f5f1eb"
+          />
+        </svg>
       </div>
 
-      <div className="mx-auto max-w-[1440px] bg-[#f5f1eb] px-4 py-10 sm:px-6 lg:py-8">
-        <div className="flex flex-col gap-3">
-          <div className="max-w-2xl">
-            <h1 className="text-3xl font-black leading-tight text-[#201b3a] sm:text-3xl">Yantra Collection</h1>
-          </div>
-          <p className="max-w-3xl text-sm leading-7 text-[#5b5470] sm:text-base">
-            Discover powerful <b>Yantras</b> Handcrafted for balance, protection, prosperity, spiritual focus, and alignment with your cosmic path.
-          </p>
-        </div>
-
-        <div className="mt-3 flex justify-start">
+      <div className="mx-auto max-w-[1440px] bg-[#f5f1eb] px-4 pt-10 pb-10 sm:px-6 sm:pt-12 lg:pb-8 lg:pt-14">
+        <div className="mt-3 flex justify-end">
           <div className="relative w-[185px]">
             <button
               type="button"
