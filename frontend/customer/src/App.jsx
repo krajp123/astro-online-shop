@@ -15,6 +15,7 @@ import LalKitabPage from './components/products/LalKitab';
 import GemstonePage from './components/products/Gemstone';
 import SoapPage from './components/products/Soap';
 import DhoopPage from './components/products/Dhoop';
+import PyritePage from './components/products/Pyrite';
 
 function ScrollToTop() {
   const { pathname } = useLocation();
@@ -43,6 +44,7 @@ function App() {
           <Route path="/gemstone" element={<GemstonePage />} />
           <Route path="/soap" element={<SoapPage />} />
           <Route path="/dhoop" element={<DhoopPage />} />
+          <Route path="/pyrite" element={<PyritePage />} />
           <Route path="/mantra-upchar" element={<MantraUpcharPage />} />
           <Route path="/rudraksha" element={<Rudraksha />} />
           <Route path="/cart" element={<CartPage />} />

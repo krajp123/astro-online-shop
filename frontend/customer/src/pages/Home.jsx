@@ -947,8 +947,9 @@ const HomePage = () => {
       </div>
       <div className="relative mx-auto flex w-full max-w-[1440px] items-end justify-between gap-3 overflow-x-auto px-4 sm:gap-4 sm:px-8 md:gap-5 lg:gap-6">
         {stoneShowcase.map((stone, index) => (
-          <div
+          <Link
             key={stone.name + index}
+            to={stone.name === 'Pyrite' ? '/pyrite' : '/gemstone'}
             className="group relative flex min-w-[120px] flex-col items-center justify-end text-center transition duration-300 ease-out hover:-translate-y-1 sm:min-w-[140px]"
           >
             <img
@@ -960,7 +961,7 @@ const HomePage = () => {
             <span className="mt-1 pb-1 text-xs font-medium tracking-normal text-[#201b3a] transition duration-300 group-hover:text-[#2b2250] sm:text-sm">
               {stone.name}
             </span>
-          </div>
+          </Link>
         ))}
       </div>
 
