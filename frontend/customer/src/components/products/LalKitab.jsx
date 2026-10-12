@@ -44,11 +44,11 @@ const LalKitabPage = () => {
 
     `}</style>
 
-    <section className="relative isolate min-h-[400px] overflow-hidden sm:min-h-[380px]">
+    <section className="product-hero group relative isolate min-h-[400px] overflow-hidden sm:min-h-[380px]">
       <img
         src="/lal-kitab%201.png"
         alt="Lal Kitab spiritual remedies"
-        className="absolute inset-0 h-full w-full object-cover object-center"
+        className="product-hero-image absolute inset-0 h-full w-full object-cover object-center"
       />
       <div className="absolute inset-0 bg-gradient-to-r from-[#20010d]/85 via-[#4a0019]/55 to-[#3d0714]/40" aria-hidden="true" />
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,_rgba(255,191,94,0.18),_transparent_28%),radial-gradient(circle_at_bottom_right,_rgba(255,123,66,0.16),_transparent_35%)]" aria-hidden="true" />

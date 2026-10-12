@@ -30,13 +30,13 @@ const SoapPage = () => {
 
   return (
     <main className="min-h-[60vh] bg-[#f5f1eb]">
-      <section className="relative isolate min-h-[360px] overflow-hidden bg-[#4d0010] sm:min-h-[380px]">
+      <section className="product-hero group relative isolate min-h-[360px] overflow-hidden bg-[#4d0010] sm:min-h-[380px]">
         <img
           src="/soap-hero.png"
           alt=""
           aria-hidden="true"
           fetchpriority="high"
-          className="absolute inset-0 h-full w-full object-cover object-[72%_center] sm:object-center"
+          className="product-hero-image absolute inset-0 h-full w-full object-cover object-[72%_center] sm:object-center"
         />
         <div className="absolute inset-0 bg-gradient-to-r from-[#0b0718]/75 via-[#0b0718]/45 to-transparent" aria-hidden="true" />
         <div className="relative z-10 mx-auto flex min-h-[360px] max-w-[1440px] items-center px-5 py-10 sm:min-h-[380px] sm:px-8 lg:px-11">
@@ -78,14 +78,14 @@ const SoapPage = () => {
 
       <section className="w-full px-4 pb-8 pt-10 sm:px-6 sm:pt-12 lg:px-8 lg:pb-10 lg:pt-14">
         {/* <h2 className="mb-6 text-center font-serif text-3xl font-bold text-[#32111a] sm:text-4xl">Our Soap Collection</h2> */}
-        <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+        <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
           {soapProducts.map((product) => {
             const isInCart = cart.some((item) => item.name === product.name);
 
             return (
               <article
                 key={product.name}
-                className="group overflow-hidden rounded-2xl border border-[#201b3a]/10 bg-white transition duration-300 hover:-translate-y-1 hover:border-[#4d001e]/30 hover:shadow-[0_18px_40px_rgba(32,27,58,0.12)]"
+                className="group flex h-full flex-col overflow-hidden rounded-2xl border border-[#201b3a]/10 bg-white transition duration-300 hover:-translate-y-1 hover:border-[#4d001e]/30 hover:shadow-[0_18px_40px_rgba(32,27,58,0.12)]"
               >
                 <div className="relative aspect-square overflow-hidden bg-[#f7f2ea]">
                   <img
@@ -102,13 +102,13 @@ const SoapPage = () => {
                     className="absolute inset-0 h-full w-full object-contain object-center opacity-0 transition-opacity duration-1000 ease-in-out group-hover:opacity-100"
                   />
                 </div>
-                <div className="flex flex-col p-3 sm:p-4">
-                  <h3 className="text-sm font-semibold leading-snug text-[#201b3a]">{product.name}</h3>
+                <div className="flex flex-1 flex-col p-3 sm:p-4">
+                  <h3 className="line-clamp-2 min-h-10 text-sm font-semibold leading-snug text-[#201b3a]">{product.name}</h3>
                   <div className="mt-1.5 flex items-center gap-2" aria-label="Rated 5 out of 5, 11 reviews">
                     <span className="text-sm leading-none tracking-tight text-[#c9962b]" aria-hidden="true">★★★★★</span>
                     <span className="text-xs text-[#201b3a]/75">(11 reviews)</span>
                   </div>
-                  <div className="mt-3 flex items-center justify-between gap-3 border-t border-[#201b3a]/10 pt-3">
+                  <div className="mt-auto flex items-center justify-between gap-3 border-t border-[#201b3a]/10 pt-3">
                     <p className="text-base font-bold text-[#201b3a]">{product.price}</p>
                     <button
                       type="button"

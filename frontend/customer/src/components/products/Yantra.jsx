@@ -132,7 +132,7 @@ const ProductCard = ({ product }) => {
   };
 
   return (
-    <article className="group overflow-hidden rounded-2xl border border-[#201b3a]/10 bg-white transition duration-300 hover:-translate-y-1 hover:border-[#4d001e]/30 hover:shadow-[0_18px_40px_rgba(32,27,58,0.12)]">
+    <article className="group flex h-full flex-col overflow-hidden rounded-2xl border border-[#201b3a]/10 bg-white transition duration-300 hover:-translate-y-1 hover:border-[#4d001e]/30 hover:shadow-[0_18px_40px_rgba(32,27,58,0.12)]">
       <div className="relative aspect-square overflow-hidden bg-[#f7f2ea]">
         <img
           src={getProductImage(product)}
@@ -155,15 +155,15 @@ const ProductCard = ({ product }) => {
         )}
       </div>
 
-      <div className="flex flex-col p-3 sm:p-4">
+      <div className="flex flex-1 flex-col p-3 sm:p-4">
         <div className="flex items-start justify-between gap-2">
-          <h3 className="text-sm font-semibold leading-snug text-[#201b3a]">{product.name}</h3>
+          <h3 className="line-clamp-2 min-h-10 text-sm font-semibold leading-snug text-[#201b3a]">{product.name}</h3>
         </div>
         <div className="mt-1.5 flex items-center gap-2" aria-label="Rated 5 out of 5, 11 reviews">
           <span className="text-sm leading-none tracking-tight text-[#c9962b]" aria-hidden="true">★★★★★</span>
           <span className="text-xs text-[#201b3a]/75">(11 reviews)</span>
         </div>
-        <div className="mt-3 flex items-center justify-between gap-3 border-t border-[#201b3a]/10 pt-3">
+        <div className="mt-auto flex items-center justify-between gap-3 border-t border-[#201b3a]/10 pt-3">
           <p className="text-base font-bold text-[#201b3a]">{product.price}</p>
           <button
             type="button"
@@ -207,11 +207,11 @@ const ProductsPage = () => {
 
   return (
     <section className="mx-auto w-full max-w-[2000px] bg-[#f5f1eb] px-0 py-0">
-      <div className="relative w-full overflow-hidden">
+      <div className="product-hero group relative w-full overflow-hidden">
         <img
           src="/Vastu.png"
           alt="Yantra astrology banner"
-          className="h-[220px] w-full object-cover object-center sm:h-[280px] lg:h-[330px]"
+          className="product-hero-image h-[220px] w-full object-cover object-center sm:h-[280px] lg:h-[330px]"
         />
 
         <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(90deg,rgba(20,4,2,0.92)_0%,rgba(30,8,2,0.84)_32%,rgba(53,15,6,0.52)_58%,rgba(53,15,6,0.18)_72%,rgba(53,15,6,0)_100%)]" />
@@ -303,7 +303,7 @@ const ProductsPage = () => {
           </div>
         </div>
 
-        <div className="mt-6 grid gap-5 sm:grid-cols-2 xl:grid-cols-4">
+        <div className="mt-6 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
           {paginatedProducts.map((product) => (
             <ProductCard key={product.name} product={product} />
           ))}

@@ -75,7 +75,7 @@ const GemstonePage = () => {
             return (
               <article
                 key={`${product.category}-${product.name}`}
-                className="group overflow-hidden rounded-2xl border border-[#201b3a]/10 bg-white transition duration-300 hover:-translate-y-1 hover:border-[#4d001e]/30 hover:shadow-[0_18px_40px_rgba(32,27,58,0.12)]"
+                className="group flex h-full flex-col overflow-hidden rounded-2xl border border-[#201b3a]/10 bg-white transition duration-300 hover:-translate-y-1 hover:border-[#4d001e]/30 hover:shadow-[0_18px_40px_rgba(32,27,58,0.12)]"
               >
                 <div className="relative aspect-square overflow-hidden bg-[#f7f2ea]">
                   <img
@@ -94,16 +94,16 @@ const GemstonePage = () => {
                     />
                   )}
                 </div>
-                <div className="flex flex-col p-3 sm:p-4">
+                <div className="flex flex-1 flex-col p-3 sm:p-4">
                   <p className="text-[10px] font-semibold uppercase tracking-[0.16em] text-[#4d001e]/70">
                     {product.category.replace('Gemstone - ', '')} Gemstone
                   </p>
-                  <h3 className="mt-1 text-sm font-semibold leading-snug text-[#201b3a]">{product.name}</h3>
+                  <h3 className="mt-1 line-clamp-2 min-h-10 text-sm font-semibold leading-snug text-[#201b3a]">{product.name}</h3>
                   <div className="mt-1.5 flex items-center gap-2" aria-label="Rated 5 out of 5, 11 reviews">
                     <span className="text-sm leading-none tracking-tight text-[#c9962b]" aria-hidden="true">★★★★★</span>
                     <span className="text-xs text-[#201b3a]/75">(11 reviews)</span>
                   </div>
-                  <div className="mt-3 flex items-center justify-between gap-3 border-t border-[#201b3a]/10 pt-3">
+                  <div className="mt-auto flex items-center justify-between gap-3 border-t border-[#201b3a]/10 pt-3">
                     <p className="text-base font-bold text-[#201b3a]">{product.price}</p>
                     <button
                       type="button"

@@ -1,8 +1,10 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useAuth } from '../../hooks/useAuth';
+import { useCustomerStore } from '../../store/useCustomerStore';
 
 const menuSections = [
+  { label: 'Home', to: '/' },
   {
     label: 'Product',
     items: [
@@ -28,29 +30,26 @@ const menuSections = [
     ],
   },
   {
-    label: 'Shop by purpose',
-    items: ['Money', 'Love', 'Health', 'Rashi', "Men's zodiac collection", "Women's zodiac collection", 'Protection'],
+    label: 'Stones',
+    items: [
+      { label: 'Pyrite', to: '/pyrite' },
+      { label: 'Garnet', to: '/garnet' },
+      { label: 'Citrine', to: '/citrine' },
+      { label: 'Tiger Eye', to: '/tiger-eye' },
+      { label: 'Amethyst', to: '/amethyst' },
+      { label: 'Selenite', to: '/selenite' },
+      { label: 'Rose Quartz', to: '/rose-quartz' },
+      { label: 'Lapis Lazuli', to: '/lapis-lazuli' },
+    ],
   },
   {
-    label: 'Shop by planets',
-    items: ['Sun', 'Moon', 'Mars', 'Mercury', 'Jupiter', 'Venus', 'Saturn', 'Rahu', 'Ketu'],
+    label: 'Remedies',
+    items: [
+      { label: 'Lal Kitab Remedies', to: '/lal-kitab' },
+    ],
   },
-  {
-    label: 'Shop by mulank',
-    items: ['Mulank 1', 'Mulank 2', 'Mulank 3', 'Mulank 4', 'Mulank 5', 'Mulank 6', 'Mulank 7', 'Mulank 8', 'Mulank 9'],
-  },
-  {
-    label: 'Siddh collection',
-    items: ['Siddh gemstones', 'Energised pendants', 'Siddh yantra'],
-  },
-  {
-    label: 'Spiritual jewellery',
-    items: ["Men's bracelets", "Women's bracelets", 'Couple bracelets'],
-  },
-  {
-    label: 'Vastu',
-    items: ['Vastu tortoise', 'Pyramids', 'Vastu stones', 'Towers & tumbles', 'Crystal dome trees'],
-  },
+  { label: 'About', to: '/about' },
+  { label: 'Contact us', to: '/#contact-us' },
 ];
 
 const menuLink = (item) => {
@@ -70,6 +69,8 @@ const menuLink = (item) => {
   return `/products?category=${encodeURIComponent(item)}`;
 };
 
+const menuItemLink = (item) => item.to || menuLink(item.label || item);
+const menuItemLabel = (item) => (typeof item === 'string' ? item : item.label);
 const menuGroupClasses = ['group/menu-level-0', 'group/menu-level-1', 'group/menu-level-2'];
 const submenuVisibilityClasses = [
   'group-hover/menu-level-0:block group-focus-within/menu-level-0:block',
@@ -77,25 +78,38 @@ const submenuVisibilityClasses = [
   'group-hover/menu-level-2:block group-focus-within/menu-level-2:block',
 ];
 
-const renderMenuItem = (item, depth = 0) => typeof item === 'string' ? (
-  <Link key={item} to={menuLink(item)} className={dropdownItem}>{item}</Link>
-) : (
-  <div key={item.label} className={`${menuGroupClasses[depth]} relative`}>
-    <Link to={menuLink(item.label)} className={`${dropdownItem} flex items-center justify-between gap-2 group-hover:bg-amber-50/70 group-hover:text-[#a87500]`}>
-      {item.label}
-      <Chevron className="-rotate-90 opacity-60" />
-    </Link>
-    <div className={`absolute left-full top-0 hidden w-56 pl-2 ${submenuVisibilityClasses[depth]}`}>
-      <div className={`${dropdownPanel} ${item.label === 'Rudraksha Beads' ? 'grid grid-cols-2 gap-x-1' : ''}`}>
-        {item.children.map((child) => renderMenuItem(child, depth + 1))}
+const renderMenuItem = (item, depth = 0) => {
+  const label = menuItemLabel(item);
+  const to = menuItemLink(item);
+
+  if (!item.children) {
+    return <Link key={label} to={to} className={dropdownItem}>{label}</Link>;
+  }
+
+  return (
+    <div key={label} className={`${menuGroupClasses[depth]} relative`}>
+      <Link to={to} className={`${dropdownItem} flex items-center justify-between gap-2 group-hover:bg-amber-50/70 group-hover:text-[#a87500]`}>
+        {label}
+        <Chevron className="-rotate-90 opacity-60" />
+      </Link>
+      <div className={`absolute left-full top-0 hidden w-56 pl-2 ${submenuVisibilityClasses[depth]}`}>
+        <div className={`${dropdownPanel} ${label === 'Rudraksha Beads' ? 'grid grid-cols-2 gap-x-1' : ''}`}>
+          {item.children.map((child) => renderMenuItem(child, depth + 1))}
+        </div>
       </div>
     </div>
-  </div>
-);
+  );
+};
 
-const flattenMenuItems = (items) => items.flatMap((item) => (
-  typeof item === 'string' ? [item] : [item.label, ...flattenMenuItems(item.children || [])]
-));
+const flattenMenuItems = (items) => items.flatMap((item) => {
+  if (typeof item === 'string') {
+    return [{ label: item, to: menuLink(item) }];
+  }
+  return [
+    { label: item.label, to: menuItemLink(item) },
+    ...flattenMenuItems(item.children || []),
+  ];
+});
 
 const iconProps = {
   viewBox: '0 0 24 24',
@@ -129,7 +143,7 @@ const MenuIcon = ({ open }) => (
 );
 
 const dropdownItem = 'block whitespace-nowrap rounded-lg px-3 py-2 text-[13px] font-medium text-slate-600 transition-colors hover:bg-amber-50/70 hover:text-[#a87500]';
-const dropdownPanel = 'rounded-xl border border-slate-200/80 bg-white p-2 shadow-[0_18px_40px_-12px_rgba(15,23,42,0.22)] [animation:nav-pop_160ms_ease-out]';
+const dropdownPanel = 'rounded-none border border-slate-200/80 bg-white p-2 shadow-[0_18px_40px_-12px_rgba(15,23,42,0.22)] [animation:nav-pop_160ms_ease-out]';
 const iconButton = 'flex h-9 w-9 items-center justify-center rounded-full border border-slate-200 bg-white text-slate-600 transition-all duration-200 group-hover:border-[#f3c969] group-hover:bg-amber-50/60 group-hover:text-[#a87500]';
 const iconLabel = 'hidden overflow-hidden max-w-0 text-[13px] font-semibold opacity-0 transition-all duration-200 group-hover:opacity-100 sm:inline-block';
 
@@ -138,38 +152,60 @@ const Navbar = () => {
   const [activeMenu, setActiveMenu] = useState(null);
   const [mobileMenu, setMobileMenu] = useState(null);
   const { isAuthenticated } = useAuth();
+  const cartCount = useCustomerStore((state) => state.cart.length);
 
   const accountLabel = isAuthenticated ? 'Profile' : 'Login';
   const accountRoute = isAuthenticated ? '/orders' : '/login';
 
   return (
-    <header className="sticky top-0 z-40 border-b border-slate-200/80 bg-white/95 text-slate-900 shadow-[0_1px_0_rgba(15,23,42,0.03),0_8px_24px_-12px_rgba(15,23,42,0.12)] backdrop-blur supports-[backdrop-filter]:bg-white/85">
+    <header className="sticky top-0 z-40 border-b border-slate-200/80 bg-white text-slate-900 shadow-[0_4px_16px_-12px_rgba(15,23,42,0.2)]">
       <style>{'@keyframes nav-pop{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:none}}'}</style>
-      <div className="mx-auto flex min-h-[68px] max-w-[1600px] items-center gap-3 px-4 sm:px-8 lg:gap-4">
-        <Link to="/" aria-label="astrovastubazar home" className="mr-3 shrink-0 text-[1.55rem] font-bold tracking-tight text-slate-900">
+      <div className="mx-auto flex min-h-[68px] max-w-[1440px] items-center gap-3 px-4 sm:px-8 lg:gap-6">
+        <Link to="/" aria-label="Astro Vastu Bazar home" className="shrink-0 text-[1.2rem] font-bold tracking-[-0.045em] text-slate-900 sm:text-[1.45rem]">
           astrovastubazar<span className="text-[#d39e25]">.</span>
         </Link>
 
-        <nav className="hidden min-w-0 flex-1 items-center justify-between gap-0 pr-2 xl:flex xl:pr-3" onMouseLeave={() => setActiveMenu(null)}>
+        <nav className="hidden min-w-0 flex-1 items-center justify-center gap-2 xl:flex 2xl:gap-4" onMouseLeave={() => setActiveMenu(null)}>
           {menuSections.map((section, index) => (
-            <div key={section.label} className="relative" onMouseEnter={() => setActiveMenu(index)}>
-              <button type="button" className={`relative flex items-center gap-1 whitespace-nowrap px-1.5 py-2.5 text-[11px] font-semibold tracking-[0.01em] transition-colors 2xl:px-2 2xl:text-[12.5px] ${activeMenu === index ? 'text-[#a87500]' : 'text-slate-700 hover:text-[#a87500]'}`} onClick={() => setActiveMenu(activeMenu === index ? null : index)} aria-expanded={activeMenu === index}>
-                {section.label}
-                <Chevron className={`transition-transform duration-200 ${activeMenu === index ? 'rotate-180' : ''}`} />
-                <span aria-hidden="true" className={`absolute inset-x-1.5 bottom-0 h-0.5 origin-left rounded-full bg-[#d39e25] transition-transform duration-200 2xl:inset-x-2 ${activeMenu === index ? 'scale-x-100' : 'scale-x-0'}`} />
-              </button>
-              {activeMenu === index && (
-                <div className="absolute left-0 top-full z-40 w-60 pt-2" onMouseEnter={() => setActiveMenu(index)}>
-                  <div className={dropdownPanel}>
-                    {section.items.map((item) => renderMenuItem(item))}
-                  </div>
-                </div>
+            <div
+              key={section.label}
+              className="relative"
+              onMouseEnter={() => section.items && setActiveMenu(index)}
+              onFocus={() => section.items && setActiveMenu(index)}
+            >
+              {section.items ? (
+                <>
+                  <button
+                    type="button"
+                    className={`relative flex items-center gap-1 whitespace-nowrap rounded-md px-2.5 py-2.5 text-[13px] font-semibold transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#d9b75e] focus-visible:ring-offset-2 ${activeMenu === index ? 'text-[#946b13]' : 'text-slate-700 hover:text-[#946b13]'}`}
+                    onClick={() => setActiveMenu(activeMenu === index ? null : index)}
+                    aria-expanded={activeMenu === index}
+                  >
+                    {section.label}
+                    <Chevron className={`transition-transform duration-200 ${activeMenu === index ? 'rotate-180' : ''}`} />
+                    <span aria-hidden="true" className={`absolute inset-x-2 bottom-0 h-0.5 origin-left rounded-full bg-[#c69a32] transition-transform duration-200 ${activeMenu === index ? 'scale-x-100' : 'scale-x-0'}`} />
+                  </button>
+                  {activeMenu === index && (
+                    <div className="absolute left-0 top-full z-40 w-60 pt-2">
+                      <div className={dropdownPanel}>
+                        {section.items.map((item) => renderMenuItem(item))}
+                      </div>
+                    </div>
+                  )}
+                </>
+              ) : (
+                <Link
+                  to={section.to}
+                  className="block whitespace-nowrap rounded-md px-2.5 py-2.5 text-[13px] font-semibold text-slate-700 transition-colors hover:text-[#946b13] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#d9b75e] focus-visible:ring-offset-2"
+                >
+                  {section.label}
+                </Link>
               )}
             </div>
           ))}
         </nav>
 
-        <div className="ml-2 hidden h-10 w-[180px] shrink-0 items-center rounded-full border border-slate-200 bg-slate-50 px-4 text-sm text-slate-400 transition-all duration-200 focus-within:border-[#d39e25] focus-within:bg-white focus-within:shadow-[0_0_0_3px_rgba(211,158,37,0.15)] xl:flex 2xl:w-[200px]">
+        <div className="hidden h-10 w-[210px] shrink-0 items-center rounded-full border border-slate-200 bg-slate-50 px-4 text-sm text-slate-400 transition-colors focus-within:border-[#c69a32] focus-within:bg-white xl:flex">
           <SearchIcon className="mr-2.5 h-[17px] w-[17px] shrink-0 text-slate-400" />
           <input aria-label="Search products" className="min-w-0 flex-1 bg-transparent text-[13px] text-slate-700 outline-none placeholder:text-slate-400" placeholder="Search gems, pendants, birthstones..." />
         </div>
@@ -183,37 +219,58 @@ const Navbar = () => {
             <span className={iconButton}><HeartIcon /></span>
             <span className={`${iconLabel} group-hover:max-w-[80px]`}>Wishlist</span>
           </button>
-          <Link to="/cart" className="group flex items-center gap-2 text-slate-700 transition-colors hover:text-[#a87500]" aria-label="Cart">
+          <Link to="/cart" className="group flex items-center gap-2 text-slate-700 transition-colors hover:text-[#a87500]" aria-label={`Cart${cartCount ? `, ${cartCount} items` : ''}`}>
             <span className={`${iconButton} relative`}>
               <BagIcon />
-              <span className="absolute -right-1.5 -top-1.5 flex h-[18px] min-w-[18px] items-center justify-center rounded-full bg-[#d39e25] px-1 text-[10px] font-bold text-white ring-2 ring-white">0</span>
+              <span className="absolute -right-1.5 -top-1.5 flex h-[18px] min-w-[18px] items-center justify-center rounded-full bg-[#d39e25] px-1 text-[10px] font-bold text-white ring-2 ring-white">{cartCount}</span>
             </span>
             <span className={`${iconLabel} group-hover:max-w-[80px]`}>Cart</span>
           </Link>
-          <button type="button" className="flex h-10 w-10 items-center justify-center rounded-full border border-slate-200 bg-white text-slate-700 transition-colors hover:border-[#f3c969] hover:text-[#a87500] xl:hidden" aria-label="Toggle menu" onClick={() => setMenuOpen((open) => !open)}><MenuIcon open={menuOpen} /></button>
+          <button type="button" className="flex h-10 w-10 items-center justify-center rounded-full border border-slate-200 bg-white text-slate-700 transition-colors hover:border-[#d9b75e] hover:text-[#946b13] xl:hidden" aria-label={menuOpen ? 'Close menu' : 'Open menu'} aria-expanded={menuOpen} onClick={() => setMenuOpen((open) => !open)}><MenuIcon open={menuOpen} /></button>
         </div>
       </div>
-
-      <div className="mx-auto flex max-w-[1440px] items-center gap-2 overflow-x-auto border-t border-slate-100 px-4 py-2.5 text-[12px] font-semibold tracking-normal text-slate-600 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden xl:hidden sm:px-8">
-        {menuSections.map((section, index) => <button type="button" key={section.label} className={`shrink-0 whitespace-nowrap rounded-full border px-3.5 py-1.5 transition-colors ${mobileMenu === index ? 'border-[#f3c969] bg-amber-50 text-[#a87500]' : 'border-slate-200 bg-white hover:border-[#f3c969]'}`} onClick={() => setMobileMenu(mobileMenu === index ? null : index)}>{section.label}</button>)}
-      </div>
-
-      {mobileMenu !== null && (
-        <div className="border-t border-slate-200 bg-white px-4 py-4 xl:hidden">
-          <div className="grid grid-cols-2 gap-2 sm:grid-cols-3">
-            {flattenMenuItems(menuSections[mobileMenu].items).map((item) => <Link key={item} to={menuLink(item)} className="rounded-lg border border-slate-200 px-3 py-3 text-xs font-semibold text-slate-600 transition-colors hover:border-[#f3c969] hover:bg-amber-50/60 hover:text-[#a87500]">{item}</Link>)}
-          </div>
-        </div>
-      )}
 
       {menuOpen && (
-        <div className="border-t border-slate-200 bg-white px-4 py-4 xl:hidden">
-          <div className="mb-3 flex items-center rounded-full border border-slate-200 bg-slate-50 px-4 py-2.5 text-sm text-slate-500 focus-within:border-[#d39e25] focus-within:bg-white">
-            <SearchIcon className="mr-2.5 h-[17px] w-[17px] text-[#a87500]" />
-            <input aria-label="Mobile search products" className="min-w-0 flex-1 bg-transparent outline-none placeholder:text-slate-400" placeholder="Search gems and birthstones" />
+        <div className="border-t border-slate-200 bg-white px-4 py-4 shadow-[0_16px_24px_-24px_rgba(15,23,42,0.4)] xl:hidden sm:px-8">
+          <div className="mx-auto max-w-[1440px]">
+            <div className="mb-4 flex items-center rounded-full border border-slate-200 bg-slate-50 px-4 py-2.5 text-sm text-slate-500 focus-within:border-[#c69a32] focus-within:bg-white">
+              <SearchIcon className="mr-2.5 h-[17px] w-[17px] text-[#a87500]" />
+              <input aria-label="Mobile search products" className="min-w-0 flex-1 bg-transparent outline-none placeholder:text-slate-400" placeholder="Search gems and birthstones" />
+            </div>
+            <nav aria-label="Main navigation" className="divide-y divide-slate-100">
+              {menuSections.map((section, index) => section.items ? (
+                <div key={section.label} className="py-1">
+                  <button
+                    type="button"
+                    className="flex w-full items-center justify-between py-3 text-left text-sm font-semibold text-slate-800 transition-colors hover:text-[#946b13]"
+                    onClick={() => setMobileMenu(mobileMenu === index ? null : index)}
+                    aria-expanded={mobileMenu === index}
+                  >
+                    {section.label}
+                    <Chevron className={`transition-transform duration-200 ${mobileMenu === index ? 'rotate-180' : ''}`} />
+                  </button>
+                  {mobileMenu === index && (
+                    <div className="grid grid-cols-2 gap-2 pb-3 sm:grid-cols-3">
+                      {flattenMenuItems(section.items).map((item) => (
+                        <Link
+                          key={`${item.label}-${item.to}`}
+                          to={item.to}
+                          onClick={() => setMenuOpen(false)}
+                          className="rounded-lg bg-slate-50 px-3 py-2.5 text-xs font-medium text-slate-600 transition-colors hover:bg-amber-50 hover:text-[#946b13]"
+                        >
+                          {item.label}
+                        </Link>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              ) : (
+                <Link key={section.label} to={section.to} onClick={() => setMenuOpen(false)} className="block py-3 text-sm font-semibold text-slate-800 transition-colors hover:text-[#946b13]">
+                  {section.label}
+                </Link>
+              ))}
+            </nav>
           </div>
-          <Link to="/orders" className="block border-b border-slate-100 py-3 text-sm font-semibold text-slate-700">Profile & orders</Link>
-          <Link to="/cart" className="block py-3 text-sm font-semibold text-slate-700">Wishlist & bag</Link>
         </div>
       )}
     </header>

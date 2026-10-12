@@ -48,26 +48,27 @@ const stoneShowcase = [
     benefits: 'Boosts confidence, strengthens focus, and attracts clarity in business and decision-making.',
     whoCanWear: 'Ideal for entrepreneurs, professionals, and anyone seeking courage, discipline, and prosperity.',
   },
-  {
-    name: 'Garnet',
-    scientificName: 'Grossular Garnet',
-    image: '/2.png',
-    description: 'A deep red gemstone associated with vitality, passion, and energetic renewal.',
-    benefits: 'Improves motivation, supports heart health energy, and helps build emotional resilience.',
-    whoCanWear: 'Best for students, professionals, and anyone who needs a fresh start or inner strength.',
-  },
-  {
+    {
     name: 'Citrine',
     scientificName: 'Silicon Dioxide / Quartz',
-    image: '/3.png',
+    image: '/4.png',
     description: 'A bright golden crystal linked with confidence, joy, and manifesting success.',
     benefits: 'Encourages optimism, helps attract wealth, and supports confident self-expression.',
     whoCanWear: 'Perfect for anyone working on career growth, abundance, and confidence-building.',
   },
   {
-    name: 'Tiger Eye',
+    name: 'Garnet',
+    scientificName: 'Grossular Garnet',
+    image: '/3.png',
+    description: 'A deep red gemstone associated with vitality, passion, and energetic renewal.',
+    benefits: 'Improves motivation, supports heart health energy, and helps build emotional resilience.',
+    whoCanWear: 'Best for students, professionals, and anyone who needs a fresh start or inner strength.',
+  },
+
+  {
+    name: 'Amethyst',
     scientificName: 'Quartz with Iron Inclusions',
-    image: '/4.png',
+    image: '/7.png',
     description: 'A grounding stone valued for courage, protection, and steady willpower.',
     benefits: 'Supports timing decisions, promotes calm focus, and defends against negativity.',
     whoCanWear: 'Great for leaders, risk-takers, and those who want strength during uncertain times.',
@@ -75,7 +76,7 @@ const stoneShowcase = [
   {
     name: 'Rose Quartz',
     scientificName: 'Silicon Dioxide / Quartz',
-    image: '/5.png',
+    image: '/2.png',
     description: 'A soft pink stone of love, compassion, and emotional balance.',
     benefits: 'Helps heal emotional wounds, improves self-love, and nurtures relationships.',
     whoCanWear: 'Recommended for anyone looking for love, harmony, or emotional gentleness in daily life.',
@@ -83,15 +84,15 @@ const stoneShowcase = [
   {
     name: 'Lapis Lazuli',
     scientificName: 'Lazurite',
-    image: '/6.png',
+    image: '/5.png',
     description: 'A royal blue crystal connected to wisdom, truth, and spiritual awareness.',
     benefits: 'Enhances intuition, improves communication, and deepens inner truth and self-expression.',
     whoCanWear: 'Ideal for thinkers, creatives, and anyone seeking honest communication and spiritual clarity.',
   },
   {
-    name: 'Amethyst',
+    name: 'Tiger Eye',
     scientificName: 'Quartz (Violet Variety)',
-    image: '/7.png',
+    image: '/6.png',
     description: 'A purple stone associated with calm, protection, and spiritual growth.',
     benefits: 'Eases stress, supports meditation, and helps calm the mind for deeper insight.',
     whoCanWear: 'Perfect for anyone needing emotional calm, spiritual focus, or better sleep.',
@@ -949,7 +950,17 @@ const HomePage = () => {
         {stoneShowcase.map((stone, index) => (
           <Link
             key={stone.name + index}
-            to={stone.name === 'Pyrite' ? '/pyrite' : '/gemstone'}
+            to={
+              stone.name === 'Pyrite' ? '/pyrite'
+                : stone.name === 'Citrine' ? '/citrine'
+                  : stone.name === 'Tiger Eye' ? '/tiger-eye'
+                    : stone.name === 'Garnet' ? '/garnet'
+                      : stone.name === 'Amethyst' ? '/amethyst'
+                        : stone.name === 'Selenite' ? '/selenite'
+                          : stone.name === 'Rose Quartz' ? '/rose-quartz'
+                            : stone.name === 'Lapis Lazuli' ? '/lapis-lazuli'
+                              : '/gemstone'
+            }
             className="group relative flex min-w-[120px] flex-col items-center justify-end text-center transition duration-300 ease-out hover:-translate-y-1 sm:min-w-[140px]"
           >
             <img
@@ -987,12 +998,12 @@ const HomePage = () => {
           <p className="mt-3 text-[13px] font-semibold leading-5 text-white sm:text-sm sm:leading-6">
             Now Just One Exclusive Click Away
           </p>
-          <a
-            href="/products"
+          <Link
+            to="/lal-kitab"
             className="mt-8 inline-flex items-center rounded-md bg-[#ffd400] px-5 py-2.5 text-xs font-bold text-[#3d0017] transition hover:bg-white"
           >
             Get Your Exclusive Lal Kitab Now
-          </a>
+          </Link>
           <p className="mt-6 text-[0.65rem] font-semibold leading-4 text-[#ffd400] sm:text-[11px]">
             <span aria-hidden="true">★ </span>
             Over 1 Lakh Verified Predictions Delivered — A Standard of Trust &amp; Accuracy

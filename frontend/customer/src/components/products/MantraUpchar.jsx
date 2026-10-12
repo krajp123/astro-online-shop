@@ -66,12 +66,12 @@ const MantraUpcharPage = () => {
 
   return (
     <main className="min-h-[60vh] bg-[#f5f1eb]">
-      <section className="relative min-h-[360px] overflow-hidden sm:min-h-[380px]">
+      <section className="product-hero group relative min-h-[360px] overflow-hidden sm:min-h-[380px]">
         <img
           src="/Mantra-Upchar.png"
           alt=""
           aria-hidden="true"
-          className="absolute inset-0 h-full w-full object-cover object-[72%_center]"
+          className="product-hero-image absolute inset-0 h-full w-full object-cover object-[72%_center]"
         />
         <div className="absolute inset-0 bg-gradient-to-r from-[#0b0718]/75 via-[#0b0718]/45 to-transparent" aria-hidden="true" />
         <div className="relative z-10 px-5 pb-6 pt-5 sm:px-8 sm:pb-8 sm:pt-6 lg:px-11 lg:pt-7">
@@ -120,14 +120,14 @@ const MantraUpcharPage = () => {
           <h2 className="text-center text-xl font-bold leading-tight text-[#201b3a] sm:text-2xl">Mantra Upchar</h2>
         </div>
 
-        <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5">
+        <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
           {mantraProducts.map((product) => {
             const isInCart = cart.some((item) => item.name === product.name);
 
             return (
               <article
                 key={product.name}
-                className="group overflow-hidden rounded-2xl border border-[#201b3a]/10 bg-white transition duration-300 hover:-translate-y-1 hover:border-[#4d001e]/30 hover:shadow-[0_18px_40px_rgba(32,27,58,0.12)]"
+                className="group flex h-full flex-col overflow-hidden rounded-2xl border border-[#201b3a]/10 bg-white transition duration-300 hover:-translate-y-1 hover:border-[#4d001e]/30 hover:shadow-[0_18px_40px_rgba(32,27,58,0.12)]"
               >
                 <div className="relative aspect-square overflow-hidden bg-[#f7f2ea]">
                   <img
@@ -160,15 +160,15 @@ const MantraUpcharPage = () => {
                     </>
                   )}
                 </div>
-                <div className="flex flex-col p-3 sm:p-4">
+                <div className="flex flex-1 flex-col p-3 sm:p-4">
                   <div className="flex items-start justify-between gap-2">
-                    <h3 className="text-sm font-semibold leading-snug text-[#201b3a]">{product.name}</h3>
+                    <h3 className="line-clamp-2 min-h-10 text-sm font-semibold leading-snug text-[#201b3a]">{product.name}</h3>
                   </div>
                   <div className="mt-1.5 flex items-center gap-2" aria-label="Rated 5 out of 5, 11 reviews">
                     <span className="text-sm leading-none tracking-tight text-[#c9962b]" aria-hidden="true">★★★★★</span>
                     <span className="text-xs text-[#201b3a]/75">(11 reviews)</span>
                   </div>
-                  <div className="mt-3 flex items-center justify-between gap-3 border-t border-[#201b3a]/10 pt-3">
+                  <div className="mt-auto flex items-center justify-between gap-3 border-t border-[#201b3a]/10 pt-3">
                     <p className="text-base font-bold text-[#201b3a]">{product.price}</p>
                     <button
                       type="button"

@@ -32,6 +32,7 @@ const RudrakshaProductCard = ({ product }) => {
   const wishlist = useCustomerStore((state) => state.wishlist);
   const setCart = useCustomerStore((state) => state.setCart);
   const setWishlist = useCustomerStore((state) => state.setWishlist);
+  const isInCart = cart.some((item) => item.name === product.name);
   const isWishlisted = wishlist.some((item) => item.name === product.name);
 
   const handleAddToCart = () => {
@@ -48,8 +49,8 @@ const RudrakshaProductCard = ({ product }) => {
   };
 
   return (
-    <article className="group flex h-full flex-col overflow-hidden rounded-2xl border border-[#201b3a]/10 bg-white shadow-[0_4px_14px_rgba(32,27,58,0.08)] transition duration-300 hover:-translate-y-1 hover:border-[#4d001e]/30 hover:shadow-[0_18px_40px_rgba(32,27,58,0.12)]">
-      <div className="relative aspect-[5/4] overflow-hidden bg-[#f7f2ea]">
+    <article className="group flex h-full flex-col overflow-hidden rounded-2xl border border-[#201b3a]/10 bg-white transition duration-300 hover:-translate-y-1 hover:border-[#4d001e]/30 hover:shadow-[0_18px_40px_rgba(32,27,58,0.12)]">
+      <div className="relative aspect-square overflow-hidden bg-[#f7f2ea]">
         <button
           type="button"
           onClick={handleToggleWishlist}
@@ -78,27 +79,24 @@ const RudrakshaProductCard = ({ product }) => {
         </div>
       </div>
 
-      <div className="flex flex-1 flex-col p-4">
+      <div className="flex flex-1 flex-col p-3 sm:p-4">
         <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-[#4d001e]/70">
           {product.category}
         </p>
-        <h3 className="mt-1.5 line-clamp-2 min-h-[2.75rem] text-[15px] font-semibold leading-snug text-[#201b3a]">
+        <h3 className="mt-1 line-clamp-2 min-h-10 text-sm font-semibold leading-snug text-[#201b3a]">
           {product.name}
         </h3>
 
-        <div className="mt-auto border-t border-[#201b3a]/10 pt-4">
-          <div className="flex items-end justify-between gap-3">
-            <p className="text-[10px] font-medium uppercase tracking-[0.16em] text-[#201b3a]/50">Price</p>
-            <p className="text-sm font-bold leading-tight text-[#201b3a]">{product.price}</p>
-          </div>
+        <div className="mt-auto flex items-center justify-between gap-3 border-t border-[#201b3a]/10 pt-3">
+          <p className="text-base font-bold text-[#201b3a]">{product.price}</p>
           <button
             type="button"
             onClick={handleAddToCart}
-            aria-label={`Add ${product.name} to cart`}
-            className="mt-3 inline-flex w-full items-center justify-center gap-2 rounded-lg bg-[#4d001e] px-4 py-2.5 text-xs font-semibold text-white transition hover:bg-[#3a0016] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#4d001e]/40 focus-visible:ring-offset-2"
+            aria-label={isInCart ? `Add another ${product.name} to cart` : `Add ${product.name} to cart`}
+            className="inline-flex min-h-9 items-center justify-center gap-1.5 rounded-lg bg-[#4d001e] px-3 py-2 text-xs font-semibold text-white transition hover:bg-[#3a0016] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#4d001e]/40 focus-visible:ring-offset-2"
           >
             <ShoppingCart className="h-4 w-4" aria-hidden="true" />
-            Add to cart
+            {isInCart ? 'Add another' : 'Add to cart'}
           </button>
         </div>
       </div>
@@ -260,7 +258,7 @@ const Rudraksha = () => {
         </div>
 
         {paginatedProducts.length > 0 ? (
-          <div ref={productsRef} className="mt-6 scroll-mt-28 grid gap-5 sm:grid-cols-2 xl:grid-cols-4">
+          <div ref={productsRef} className="mt-6 scroll-mt-28 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
             {paginatedProducts.map((product) => (
               <RudrakshaProductCard key={product.mukhi} product={product} />
             ))}
