@@ -167,28 +167,9 @@ const ChartWheel = () => {
   );
 };
 
-const RotatingLalKitab = () => {
+const RotatingLalKitab = ({ className = '' }) => {
   const [rotation, setRotation] = useState(0);
   const isDragging = useRef(false);
-
-  useEffect(() => {
-    let animationFrame;
-    let previousTime = performance.now();
-
-    const animate = (time) => {
-      const elapsed = time - previousTime;
-      previousTime = time;
-
-      if (!isDragging.current) {
-        setRotation((currentRotation) => currentRotation + elapsed * 0.018);
-      }
-
-      animationFrame = requestAnimationFrame(animate);
-    };
-
-    animationFrame = requestAnimationFrame(animate);
-    return () => cancelAnimationFrame(animationFrame);
-  }, []);
 
   const handlePointerDown = (event) => {
     if (event.button !== 0) return;
@@ -214,11 +195,17 @@ const RotatingLalKitab = () => {
 
   return (
     <div
-      className="pointer-events-auto absolute right-[4%] top-1/2 w-[42%] max-w-[520px] -translate-y-1/2 cursor-grab touch-none select-none active:cursor-grabbing sm:right-[3%] sm:w-[38%] lg:right-[5%] lg:w-[30%]"
+      className={`pointer-events-auto relative mx-auto w-[min(45vw,160px)] shrink-0 cursor-grab touch-none select-none active:cursor-grabbing sm:absolute sm:right-[3%] sm:top-1/2 sm:mx-0 sm:w-[38%] sm:max-w-[300px] sm:-translate-y-1/2 lg:right-[5%] lg:w-[30%] ${className}`}
       onPointerDown={handlePointerDown}
       onPointerMove={handlePointerMove}
       onPointerUp={stopDragging}
       onPointerCancel={stopDragging}
+      onKeyDown={(event) => {
+        if (event.key === 'ArrowLeft' || event.key === 'ArrowRight') {
+          event.preventDefault();
+          setRotation((currentRotation) => currentRotation + (event.key === 'ArrowRight' ? 5 : -5));
+        }
+      }}
       onLostPointerCapture={() => {
         isDragging.current = false;
       }}
@@ -434,7 +421,7 @@ const ProductCard = ({ product, index }) => {
         className="relative z-10 block rounded-[30px] outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[#e8b4a0]"
       >
         {/* The doorway */}
-        <div className="px-[11%] pt-6">
+        <div className="px-[11%] pt-3 sm:pt-6">
           <div className="relative">
             <span
               aria-hidden="true"
@@ -459,12 +446,12 @@ const ProductCard = ({ product, index }) => {
         </div>
 
         {/* Name + price */}
-        <motion.div variants={variants.text} className="relative px-4 pb-2 pt-4 sm:px-5">
+        <motion.div variants={variants.text} className="relative px-2 pb-2 pt-3 sm:px-5 sm:pt-4">
           {/* Masks the zodiac halo behind the text so the name stays readable */}
           <div aria-hidden="true" className="pointer-events-none absolute inset-0 -z-10 bg-[linear-gradient(180deg,rgba(67,0,21,0)_0%,#430015_20%)]" />
           <h3
             style={{ fontFamily: CARD_SERIF }}
-            className="line-clamp-2 min-h-[2.3rem] text-sm leading-[1.3] text-[#fbf3ee]"
+            className="line-clamp-2 min-h-[2.1rem] text-xs leading-[1.3] text-[#fbf3ee] sm:min-h-[2.3rem] sm:text-sm"
           >
             {product.name}
           </h3>
@@ -472,8 +459,8 @@ const ProductCard = ({ product, index }) => {
         </motion.div>
       </a>
 
-      <div className="relative z-10 flex items-center justify-between gap-2 px-4 pb-4 sm:px-5">
-        <p style={{ fontFamily: CARD_SERIF }} className="min-w-0 flex-1 tabular-nums leading-none text-[#f7d3c4] text-base sm:text-lg">
+      <div className="relative z-10 flex items-center justify-between gap-2 px-2 pb-3 sm:px-5 sm:pb-4">
+        <p style={{ fontFamily: CARD_SERIF }} className="min-w-0 flex-1 tabular-nums leading-none text-sm text-[#f7d3c4] sm:text-lg">
           <span className="mr-1 text-[0.65em] text-[#f7d3c4]/60">Rs.</span>
           {whole}
           {decimals && <span className="text-[0.65em] opacity-60">.{decimals}</span>}
@@ -483,7 +470,7 @@ const ProductCard = ({ product, index }) => {
           onClick={handleAddToCart}
           aria-label={isInCart ? `Add another ${product.name} to cart` : `Add ${product.name} to cart`}
           title={isInCart ? 'Add another to cart' : 'Add to cart'}
-          className="inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-md border border-[#e8b4a0]/45 text-[#fbf3ee] transition hover:bg-[#e8b4a0]/15 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#e8b4a0]"
+          className="inline-flex h-7 w-7 shrink-0 items-center justify-center rounded-md border border-[#e8b4a0]/45 text-[#fbf3ee] transition hover:bg-[#e8b4a0]/15 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#e8b4a0] sm:h-8 sm:w-8"
         >
           <ShoppingCartPlus className="h-4 w-4" aria-hidden="true" />
         </button>
@@ -493,7 +480,7 @@ const ProductCard = ({ product, index }) => {
           aria-pressed={isWishlisted}
           aria-label={isWishlisted ? `Remove ${product.name} from wishlist` : `Add ${product.name} to wishlist`}
           title={isWishlisted ? 'Remove from wishlist' : 'Add to wishlist'}
-          className="inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-md border border-[#e8b4a0]/45 text-[#fbf3ee] transition hover:bg-[#e8b4a0]/15 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#e8b4a0]"
+          className="inline-flex h-7 w-7 shrink-0 items-center justify-center rounded-md border border-[#e8b4a0]/45 text-[#fbf3ee] transition hover:bg-[#e8b4a0]/15 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#e8b4a0] sm:h-8 sm:w-8"
         >
           <Heart className="h-4 w-4" fill={isWishlisted ? 'currentColor' : 'none'} aria-hidden="true" />
         </button>
@@ -942,11 +929,11 @@ const HomePage = () => {
     </section>
 
     {/* Stone strip */}
-    <section className="relative z-0 w-full overflow-visible bg-[#f5f1eb] px-0 pb-4 pt-2">
-      <div className="mx-auto max-w-[1440px] px-4 pb-2 pt-1 sm:px-8">
-        <p className="text-left text-[0.85rem] font-semibold uppercase tracking-[0.18em] text-[#201b3a]/70">Shop by Stones</p>
+    <section className="relative z-0 w-full bg-[#f5f1eb] px-0 py-5 sm:py-7">
+      <div className="mx-auto max-w-[1440px] px-4 sm:px-8">
+        <p className="text-center text-xs font-semibold uppercase tracking-[0.18em] text-[#201b3a]/70 sm:text-left sm:text-sm">Shop by Stones</p>
       </div>
-      <div className="relative mx-auto flex w-full max-w-[1440px] items-end justify-between gap-3 overflow-x-auto px-4 sm:gap-4 sm:px-8 md:gap-5 lg:gap-6">
+      <div className="mx-auto mt-4 grid w-full max-w-[1440px] grid-cols-3 gap-x-2 gap-y-4 px-4 sm:grid-cols-4 sm:gap-x-4 sm:px-8 md:mt-5 md:grid-cols-6 lg:grid-cols-8 lg:gap-x-6">
         {stoneShowcase.map((stone, index) => (
           <Link
             key={stone.name + index}
@@ -961,15 +948,15 @@ const HomePage = () => {
                             : stone.name === 'Lapis Lazuli' ? '/lapis-lazuli'
                               : '/gemstone'
             }
-            className="group relative flex min-w-[120px] flex-col items-center justify-end text-center transition duration-300 ease-out hover:-translate-y-1 sm:min-w-[140px]"
+            className="group flex min-w-0 flex-col items-center justify-end rounded-xl px-1 py-2 text-center transition duration-300 ease-out hover:-translate-y-1 hover:bg-white/70 sm:px-2"
           >
             <img
               src={stone.image}
               alt={stone.name}
-              className="h-20 w-auto object-contain transition duration-300 ease-out group-hover:scale-[1.04] sm:h-24 md:h-28 lg:h-32"
+              className="h-16 w-full object-contain transition duration-300 ease-out group-hover:scale-[1.04] sm:h-20 md:h-24 lg:h-28"
               style={{ background: 'transparent' }}
             />
-            <span className="mt-1 pb-1 text-xs font-medium tracking-normal text-[#201b3a] transition duration-300 group-hover:text-[#2b2250] sm:text-sm">
+            <span className="mt-2 max-w-full text-xs font-medium leading-tight tracking-normal text-[#201b3a] transition duration-300 group-hover:text-[#2b2250] sm:text-sm">
               {stone.name}
             </span>
           </Link>
@@ -981,7 +968,7 @@ const HomePage = () => {
     <div className="h-8 bg-[#f5f1eb]" aria-hidden="true" />
 
     {/* Lal Kitab promotion */}
-    <section className="relative isolate min-h-[360px] overflow-hidden bg-[#4d001e] sm:min-h-[400px] lg:min-h-[420px]">
+    <section className="relative isolate min-h-[430px] overflow-hidden bg-[#4d001e] sm:min-h-[460px] lg:min-h-[460px]">
       <img
         src="/lal-kitab%201.png"
         alt=""
@@ -990,8 +977,8 @@ const HomePage = () => {
       />
       <div className="absolute inset-0 bg-[#3c0019]/20" aria-hidden="true" />
 
-      <div className="relative z-10 mx-auto flex min-h-[360px] max-w-[1440px] items-center px-4 py-12 sm:min-h-[400px] sm:px-8 lg:min-h-[420px] lg:px-8">
-        <div className="max-w-xl text-white lg:max-w-[55%]">
+      <div className="relative z-10 mx-auto flex min-h-[430px] w-full max-w-[1440px] flex-col items-stretch justify-center gap-1 px-4 py-8 sm:min-h-[460px] sm:flex-row sm:items-center sm:justify-start sm:px-8 sm:py-12 lg:min-h-[460px] lg:px-8">
+        <div className="max-w-xl text-white sm:w-[52%] sm:max-w-[36rem] lg:w-[45%] lg:max-w-[34rem]">
           <h2 className="max-w-2xl text-[clamp(1.5rem,3vw,2.25rem)] font-bold leading-[1.15] tracking-normal">
             Discover the Blueprint of Your Destiny
           </h2>
@@ -1000,18 +987,18 @@ const HomePage = () => {
           </p>
           <Link
             to="/lal-kitab"
-            className="mt-8 inline-flex items-center rounded-md bg-[#ffd400] px-5 py-2.5 text-xs font-bold text-[#3d0017] transition hover:bg-white"
+            className="mt-5 inline-flex max-w-full items-center justify-center rounded-md bg-[#ffd400] px-4 py-3 text-center text-xs font-bold leading-snug text-[#3d0017] transition hover:bg-white sm:mt-8 sm:px-5"
           >
             Get Your Exclusive Lal Kitab Now
           </Link>
-          <p className="mt-6 text-[0.65rem] font-semibold leading-4 text-[#ffd400] sm:text-[11px]">
+          <p className="mt-4 max-w-lg text-[0.65rem] font-semibold leading-4 text-[#ffd400] sm:mt-6 sm:text-[11px]">
             <span aria-hidden="true">★ </span>
             Over 1 Lakh Verified Predictions Delivered — A Standard of Trust &amp; Accuracy
             <span aria-hidden="true"> ★</span>
           </p>
         </div>
 
-        <RotatingLalKitab />
+        <RotatingLalKitab className="mt-1 sm:mt-0" />
       </div>
     </section>
 
@@ -1029,9 +1016,9 @@ const HomePage = () => {
           </div>
         </div>
 
-        <div className="mt-5 flex gap-4 overflow-x-auto pb-2 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+        <div className="mt-5 grid grid-cols-2 gap-3 pb-2 sm:gap-4 lg:grid-cols-4">
           {topProducts.map((product, index) => (
-            <div key={product.name} className="min-w-[220px] flex-1 lg:min-w-0">
+            <div key={product.name} className="min-w-0">
               <ProductCard product={product} index={index} />
             </div>
           ))}
@@ -1181,23 +1168,22 @@ const HomePage = () => {
     {/* Guided destiny banner */}
     <section
       id="contact-us"
-      className="relative isolate flex min-h-[75svh] items-center justify-center overflow-hidden bg-[#081820] bg-cover bg-center bg-no-repeat px-4 py-8 sm:px-8 lg:min-h-[calc(100svh-6rem)] lg:px-16 lg:py-6"
+      className="relative isolate flex min-h-[75svh] items-center justify-center overflow-hidden bg-[#081820] bg-cover bg-[position:62%_center] bg-no-repeat px-4 py-8 sm:bg-center sm:px-8 lg:min-h-[calc(100svh-6rem)] lg:px-16 lg:py-6"
       style={{
         backgroundImage: "url('/Rudra.png')",
         backgroundAttachment: 'scroll',
         backgroundSize: 'cover',
-        backgroundPosition: 'center center',
       }}
     >
-      <div className="absolute inset-0 bg-[#050915]/25" aria-hidden="true" />
+      <div className="absolute inset-0 bg-[#050915]/55 sm:bg-[#050915]/40" aria-hidden="true" />
       <div className="relative z-10 mx-auto w-full max-w-[1440px]">
-        <div className="-translate-x-4 grid items-center gap-6 lg:-translate-x-28 lg:grid-cols-[minmax(0,1fr)_420px] lg:gap-12">
-          <div className="flex w-full items-center justify-center">
+        <div className="grid items-center gap-5 sm:gap-6 lg:grid-cols-[minmax(0,1fr)_420px] lg:gap-12 lg:-translate-x-28">
+          <div className="flex w-full items-center justify-center sm:mx-auto sm:max-w-[420px] lg:max-w-none">
             <ContactVideoCluster />
           </div>
 
           <form
-            className="w-full max-w-[420px] justify-self-center rounded-2xl border-2 border-white/80 p-6 shadow-[0_12px_40px_rgba(0,0,0,0.35)] sm:p-8"
+            className="w-full max-w-[420px] justify-self-center rounded-2xl border border-white/65 bg-[#3a0717]/70 p-5 shadow-[0_16px_44px_rgba(0,0,0,0.32)] backdrop-blur-sm sm:p-8"
             aria-label="Contact inquiry form"
           >
             <h2 className="mb-4 text-center text-xl font-bold tracking-tight text-white drop-shadow-lg sm:text-2xl">

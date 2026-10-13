@@ -1,6 +1,6 @@
 // Root app component for the customer frontend.
 // Serves the buyer-facing routes and app shell.
-import { useEffect } from 'react';
+import { useLayoutEffect } from 'react';
 import { Route, Routes, useLocation } from 'react-router-dom';
 import CartPage from './pages/Cart';
 import HomePage from './pages/Home';
@@ -19,18 +19,20 @@ import PyritePage from './components/products/Pyrite';
 import CitrinePage from './components/products/Citrine';
 import TigerEyePage from './components/products/TigerEye';
 import GarnetPage from './components/products/Garnet';
-import StoneCollectionPage from './components/products/StoneCollectionPage';
-import amethystProducts from './data/amethystProducts';
-import seleniteProducts from './data/seleniteProducts';
-import roseQuartzProducts from './data/roseQuartzProducts';
-import lapisLazuliProducts from './data/lapisLazuliProducts';
+import AmethystPage from './components/products/Amethyst';
+import SelenitePage from './components/products/Selenite';
+import RoseQuartzPage from './components/products/RoseQuartz';
+import LapisLazuliPage from './components/products/LapisLazuli';
+import KarungaliPage from './components/products/Karungali';
+import BraceletsPage from './components/products/Bracelets';
+import PendantsPage from './components/products/Pendants';
 import AboutPage from './pages/About';
 
 function ScrollToTop() {
   const { pathname } = useLocation();
 
-  useEffect(() => {
-    window.scrollTo(0, 0);
+  useLayoutEffect(() => {
+    window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
   }, [pathname]);
 
   return null;
@@ -58,10 +60,13 @@ function App() {
           <Route path="/citrine" element={<CitrinePage />} />
           <Route path="/tiger-eye" element={<TigerEyePage />} />
           <Route path="/garnet" element={<GarnetPage />} />
-          <Route path="/amethyst" element={<StoneCollectionPage name="Amethyst" heroImage="/Amthyst/Amethyst.png" description="Explore Amethyst crystals, jewellery, and Aquarius designs." products={amethystProducts} />} />
-          <Route path="/selenite" element={<StoneCollectionPage name="Selenite" heroImage="/Selenite/Selenite.png" description="Explore Selenite crystals, cleansing plates, and spiritual collections." products={seleniteProducts} />} />
-          <Route path="/rose-quartz" element={<StoneCollectionPage name="Rose Quartz" heroImage="/Rose Quartz/Rose Quartz.png" description="Shop Rose Quartz crystals, jewellery, and love-attraction designs." products={roseQuartzProducts} />} />
-          <Route path="/lapis-lazuli" element={<StoneCollectionPage name="Lapis Lazuli" heroImage="/Lapis lazuli/Lapis Lazuli.png" description="Explore Lapis Lazuli crystals, zodiac jewellery, and symbolic designs." products={lapisLazuliProducts} />} />
+          <Route path="/amethyst" element={<AmethystPage />} />
+          <Route path="/selenite" element={<SelenitePage />} />
+          <Route path="/rose-quartz" element={<RoseQuartzPage />} />
+          <Route path="/lapis-lazuli" element={<LapisLazuliPage />} />
+          <Route path="/bracelets" element={<BraceletsPage />} />
+          <Route path="/pendants" element={<PendantsPage />} />
+          <Route path="/karungali" element={<KarungaliPage />} />
           <Route path="/mantra-upchar" element={<MantraUpcharPage />} />
           <Route path="/rudraksha" element={<Rudraksha />} />
           <Route path="/cart" element={<CartPage />} />
@@ -69,7 +74,7 @@ function App() {
         </Routes>
       </main>
 
-      <Footer className={pathname === '/' || pathname === '/mantra-upchar' || pathname === '/lal-kitab' || pathname === '/gemstone' || pathname === '/soap' || pathname === '/dhoop' || pathname === '/citrine' || pathname === '/tiger-eye' || pathname === '/garnet' || pathname === '/amethyst' || pathname === '/selenite' || pathname === '/rose-quartz' || pathname === '/lapis-lazuli' || pathname === '/about' ? 'mt-0' : pathname === '/login' ? 'mt-2' : undefined} />
+      <Footer className={pathname === '/' || pathname === '/mantra-upchar' || pathname === '/lal-kitab' || pathname === '/gemstone' || pathname === '/soap' || pathname === '/dhoop' || pathname === '/citrine' || pathname === '/tiger-eye' || pathname === '/garnet' || pathname === '/amethyst' || pathname === '/selenite' || pathname === '/rose-quartz' || pathname === '/lapis-lazuli' || pathname === '/bracelets' || pathname === '/pendants' || pathname === '/karungali' || pathname === '/about' ? 'mt-0' : pathname === '/login' ? 'mt-2' : undefined} />
     </div>
   );
 }

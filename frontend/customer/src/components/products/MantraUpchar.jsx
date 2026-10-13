@@ -115,12 +115,12 @@ const MantraUpcharPage = () => {
         </svg>
       </section>
 
-      <section className="w-full px-4 pb-8 pt-10 sm:px-6 sm:pt-12 lg:px-8 lg:pb-10 lg:pt-14 2xl:px-12">
+      <section className="mx-auto w-full max-w-[1440px] px-4 pb-8 pt-10 sm:px-6 sm:pt-12 lg:px-8 lg:pb-10 lg:pt-14 2xl:px-12">
         <div className="mb-6">
           <h2 className="text-center text-xl font-bold leading-tight text-[#201b3a] sm:text-2xl">Mantra Upchar</h2>
         </div>
 
-        <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="grid grid-cols-2 gap-3 sm:gap-5 lg:grid-cols-4">
           {mantraProducts.map((product) => {
             const isInCart = cart.some((item) => item.name === product.name);
 
@@ -160,23 +160,23 @@ const MantraUpcharPage = () => {
                     </>
                   )}
                 </div>
-                <div className="flex flex-1 flex-col p-3 sm:p-4">
+                <div className="flex flex-1 flex-col p-2 sm:p-4">
                   <div className="flex items-start justify-between gap-2">
-                    <h3 className="line-clamp-2 min-h-10 text-sm font-semibold leading-snug text-[#201b3a]">{product.name}</h3>
+                    <h3 className="line-clamp-2 min-h-8 text-xs font-semibold leading-snug text-[#201b3a] sm:min-h-10 sm:text-sm">{product.name}</h3>
                   </div>
-                  <div className="mt-1.5 flex items-center gap-2" aria-label="Rated 5 out of 5, 11 reviews">
-                    <span className="text-sm leading-none tracking-tight text-[#c9962b]" aria-hidden="true">★★★★★</span>
-                    <span className="text-xs text-[#201b3a]/75">(11 reviews)</span>
+                  <div className="mt-1.5 flex items-center gap-1.5 sm:gap-2" aria-label="Rated 5 out of 5, 11 reviews">
+                    <span className="text-xs leading-none tracking-tight text-[#c9962b] sm:text-sm" aria-hidden="true">★★★★★</span>
+                    <span className="hidden text-xs text-[#201b3a]/75 sm:inline">(11 reviews)</span>
                   </div>
-                  <div className="mt-auto flex items-center justify-between gap-3 border-t border-[#201b3a]/10 pt-3">
-                    <p className="text-base font-bold text-[#201b3a]">{product.price}</p>
+                  <div className="mt-auto flex flex-col items-stretch gap-2 border-t border-[#201b3a]/10 pt-2 sm:flex-row sm:items-center sm:justify-between sm:gap-3 sm:pt-3">
+                    <p className="text-sm font-bold text-[#201b3a] sm:text-base">{product.price}</p>
                     <button
                       type="button"
                       onClick={() => handleAddToCart(product)}
                       aria-label={`Add ${product.name} to cart`}
-                      className="inline-flex min-h-9 items-center justify-center gap-1.5 rounded-lg bg-[#4d001e] px-3 py-2 text-xs font-semibold text-white transition hover:bg-[#3a0016] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#4d001e]/40 focus-visible:ring-offset-2"
+                      className="inline-flex min-h-8 items-center justify-center gap-1 rounded-lg bg-[#4d001e] px-2 py-1.5 text-[10px] font-semibold text-white transition hover:bg-[#3a0016] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#4d001e]/40 focus-visible:ring-offset-2 sm:min-h-9 sm:gap-1.5 sm:px-3 sm:py-2 sm:text-xs"
                     >
-                      <ShoppingCart className="h-4 w-4" aria-hidden="true" />
+                      <ShoppingCart className="h-3.5 w-3.5 sm:h-4 sm:w-4" aria-hidden="true" />
                       {isInCart ? 'Add another' : 'Add to cart'}
                     </button>
                   </div>

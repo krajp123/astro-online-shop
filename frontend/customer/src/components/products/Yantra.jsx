@@ -155,23 +155,23 @@ const ProductCard = ({ product }) => {
         )}
       </div>
 
-      <div className="flex flex-1 flex-col p-3 sm:p-4">
+      <div className="flex flex-1 flex-col p-2 sm:p-4">
         <div className="flex items-start justify-between gap-2">
-          <h3 className="line-clamp-2 min-h-10 text-sm font-semibold leading-snug text-[#201b3a]">{product.name}</h3>
+          <h3 className="line-clamp-2 min-h-8 text-xs font-semibold leading-snug text-[#201b3a] sm:min-h-10 sm:text-sm">{product.name}</h3>
         </div>
-        <div className="mt-1.5 flex items-center gap-2" aria-label="Rated 5 out of 5, 11 reviews">
-          <span className="text-sm leading-none tracking-tight text-[#c9962b]" aria-hidden="true">★★★★★</span>
-          <span className="text-xs text-[#201b3a]/75">(11 reviews)</span>
+        <div className="mt-1.5 flex items-center gap-1.5 sm:gap-2" aria-label="Rated 5 out of 5, 11 reviews">
+          <span className="text-xs leading-none tracking-tight text-[#c9962b] sm:text-sm" aria-hidden="true">★★★★★</span>
+          <span className="hidden text-xs text-[#201b3a]/75 sm:inline">(11 reviews)</span>
         </div>
-        <div className="mt-auto flex items-center justify-between gap-3 border-t border-[#201b3a]/10 pt-3">
-          <p className="text-base font-bold text-[#201b3a]">{product.price}</p>
+        <div className="mt-auto flex flex-col items-stretch gap-2 border-t border-[#201b3a]/10 pt-2 sm:flex-row sm:items-center sm:justify-between sm:gap-3 sm:pt-3">
+          <p className="text-sm font-bold text-[#201b3a] sm:text-base">{product.price}</p>
           <button
             type="button"
             onClick={handleAddToCart}
             aria-label={isInCart ? `Add another ${product.name} to cart` : `Add ${product.name} to cart`}
-            className="inline-flex min-h-9 items-center justify-center gap-1.5 rounded-lg bg-[#4d001e] px-3 py-2 text-xs font-semibold text-white transition hover:bg-[#3a0016] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#4d001e]/40 focus-visible:ring-offset-2"
+            className="inline-flex min-h-8 items-center justify-center gap-1 rounded-lg bg-[#4d001e] px-2 py-1.5 text-[10px] font-semibold text-white transition hover:bg-[#3a0016] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#4d001e]/40 focus-visible:ring-offset-2 sm:min-h-9 sm:gap-1.5 sm:px-3 sm:py-2 sm:text-xs"
           >
-            <ShoppingCart className="h-4 w-4" aria-hidden="true" />
+            <ShoppingCart className="h-3.5 w-3.5 sm:h-4 sm:w-4" aria-hidden="true" />
             {isInCart ? 'Add another' : 'Add to cart'}
           </button>
         </div>
@@ -211,12 +211,12 @@ const ProductsPage = () => {
         <img
           src="/Vastu.png"
           alt="Yantra astrology banner"
-          className="product-hero-image h-[220px] w-full object-cover object-center sm:h-[280px] lg:h-[330px]"
+          className="product-hero-image absolute inset-0 h-full w-full object-cover object-center"
         />
 
         <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(90deg,rgba(20,4,2,0.92)_0%,rgba(30,8,2,0.84)_32%,rgba(53,15,6,0.52)_58%,rgba(53,15,6,0.18)_72%,rgba(53,15,6,0)_100%)]" />
 
-        <div className="absolute inset-0 flex items-start justify-start px-4 pt-5 sm:px-8 sm:pt-7 lg:px-12 xl:px-16 xl:pt-8">
+        <div className="relative z-10 flex min-h-[220px] items-start justify-start px-4 pb-14 pt-5 sm:min-h-[280px] sm:px-8 sm:pt-7 lg:min-h-[330px] lg:px-12 xl:px-16 xl:pt-8">
           <div className="w-full max-w-[66rem] text-left">
             <div className="mb-6 flex items-center gap-4">
                 <h2 className="text-[1.45rem] font-black leading-none tracking-[-0.05em] text-white drop-shadow-[0_2px_12px_rgba(0,0,0,0.8)] sm:text-[1.8rem] lg:text-[2.35rem]">
@@ -225,11 +225,11 @@ const ProductsPage = () => {
               <span className="hidden h-px flex-1 max-w-[22rem] bg-[#f4d69a] md:block" />
             </div>
 
-            <p className="max-w-[58rem] text-[0.58rem] leading-[1.7] font-medium text-white drop-shadow-[0_1px_6px_rgba(0,0,0,0.95)] sm:text-[0.7rem] lg:text-[0.82rem] xl:text-[0.9rem] xl:leading-[1.8]">
+            <p className="max-w-[58rem] text-[0.72rem] leading-[1.6] font-medium text-white drop-shadow-[0_1px_6px_rgba(0,0,0,0.95)] sm:text-[0.7rem] lg:text-[0.82rem] xl:text-[0.9rem] xl:leading-[1.8]">
               All the special Yantra available at Astro Vastu Bazar and are beneficial for achieving specific goals such as business growth, health improvement, protection from enemies, and wealth creation. At our Website, you can also find Yantras related to your zodiac sign and Nakshatra, which are made from gold, silver, rose gold, and other pure metals. By using these Yantra, one can experience positive growth in business, enhanced aura and appearance, financial stability, and rectify the defects present in the birth chart (Janam Kundli). Consult with our expert astrologers to understand the proper method of wearing these Yantra and then proceed to wear them accordingly.
             </p>
 
-            <p className="mt-4 text-[0.62rem] font-medium text-white drop-shadow-[0_1px_6px_rgba(0,0,0,0.95)] sm:text-[0.75rem] lg:text-[0.92rem]">
+            <p className="mt-4 text-[0.7rem] leading-5 font-medium text-white drop-shadow-[0_1px_6px_rgba(0,0,0,0.95)] sm:text-[0.75rem] lg:text-[0.92rem]">
               For a free consultation with our astrologers, call now: <span className="font-bold">xxxxxxxxxx</span>
             </p>
           </div>
@@ -303,7 +303,7 @@ const ProductsPage = () => {
           </div>
         </div>
 
-        <div className="mt-6 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="mt-6 grid grid-cols-2 gap-3 sm:gap-5 lg:grid-cols-4">
           {paginatedProducts.map((product) => (
             <ProductCard key={product.name} product={product} />
           ))}

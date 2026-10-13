@@ -20,7 +20,7 @@ const menuSections = [
           'Rudraksha Pendant',
         ],
       },
-      'Bracelets & Malas',
+      'Bracelets',
       'Karungali Malas',
       'Vastu',
       'Ring',
@@ -32,6 +32,8 @@ const menuSections = [
   {
     label: 'Stones',
     items: [
+      { label: 'Bracelets', to: '/bracelets' },
+      { label: 'Pendants', to: '/pendants' },
       { label: 'Pyrite', to: '/pyrite' },
       { label: 'Garnet', to: '/garnet' },
       { label: 'Citrine', to: '/citrine' },
@@ -60,6 +62,9 @@ const menuLink = (item) => {
   if (item === 'Standard Gemstones') return '/gemstone?quality=Standard';
   if (item === 'Premium Gemstones') return '/gemstone?quality=Premium';
   if (item === 'Rudraksha') return '/rudraksha';
+  if (item === 'Karungali Malas') return '/karungali';
+  if (item === 'Bracelets') return '/bracelets';
+  if (item === 'Pendant' || item === 'Pendants') return '/pendants';
   if (item === 'Mantra Upchar') return '/mantra-upchar';
   const mukhiMatch = item.match(/^(\d+)\s+Mukhi$/);
   if (mukhiMatch) return `/rudraksha?category=beads&mukhi=${mukhiMatch[1]}`;
@@ -101,16 +106,6 @@ const renderMenuItem = (item, depth = 0) => {
   );
 };
 
-const flattenMenuItems = (items) => items.flatMap((item) => {
-  if (typeof item === 'string') {
-    return [{ label: item, to: menuLink(item) }];
-  }
-  return [
-    { label: item.label, to: menuItemLink(item) },
-    ...flattenMenuItems(item.children || []),
-  ];
-});
-
 const iconProps = {
   viewBox: '0 0 24 24',
   fill: 'none',
@@ -147,10 +142,69 @@ const dropdownPanel = 'rounded-none border border-slate-200/80 bg-white p-2 shad
 const iconButton = 'flex h-9 w-9 items-center justify-center rounded-full border border-slate-200 bg-white text-slate-600 transition-all duration-200 group-hover:border-[#f3c969] group-hover:bg-amber-50/60 group-hover:text-[#a87500]';
 const iconLabel = 'hidden overflow-hidden max-w-0 text-[13px] font-semibold opacity-0 transition-all duration-200 group-hover:opacity-100 sm:inline-block';
 
+const MobileMenuItem = ({ item, path, depth = 0, openItems, setOpenItems, onNavigate }) => {
+  const label = menuItemLabel(item);
+  const to = menuItemLink(item);
+  const isOpen = openItems.includes(path);
+
+  if (!item.children) {
+    return (
+      <Link
+        to={to}
+        onClick={onNavigate}
+        className="block rounded-lg px-3 py-2.5 text-sm font-medium text-slate-600 transition-colors hover:bg-amber-50 hover:text-[#946b13]"
+      >
+        {label}
+      </Link>
+    );
+  }
+
+  return (
+    <div className="rounded-lg bg-slate-50/80">
+      <div className="flex items-center gap-1">
+        <Link
+          to={to}
+          onClick={onNavigate}
+          className="min-w-0 flex-1 px-3 py-2.5 text-sm font-medium text-slate-700"
+        >
+          {label}
+        </Link>
+        <button
+          type="button"
+          aria-label={`${isOpen ? 'Hide' : 'Show'} ${label} options`}
+          aria-expanded={isOpen}
+          onClick={() => setOpenItems((items) => (
+            isOpen ? items.filter((itemPath) => itemPath !== path) : [...items, path]
+          ))}
+          className="mr-1 flex h-9 w-9 shrink-0 items-center justify-center rounded-md text-slate-500 hover:bg-white"
+        >
+          <Chevron className={`transition-transform ${isOpen ? 'rotate-180' : ''}`} />
+        </button>
+      </div>
+      {isOpen && (
+        <div className={`grid gap-1 border-t border-slate-200/70 p-1.5 ${depth > 0 ? 'grid-cols-2' : 'grid-cols-1'}`}>
+          {item.children.map((child) => (
+            <MobileMenuItem
+              key={`${path}-${menuItemLabel(child)}`}
+              item={child}
+              path={`${path}-${menuItemLabel(child)}`}
+              depth={depth + 1}
+              openItems={openItems}
+              setOpenItems={setOpenItems}
+              onNavigate={onNavigate}
+            />
+          ))}
+        </div>
+      )}
+    </div>
+  );
+};
+
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [activeMenu, setActiveMenu] = useState(null);
   const [mobileMenu, setMobileMenu] = useState(null);
+  const [openMobileItems, setOpenMobileItems] = useState([]);
   const { isAuthenticated } = useAuth();
   const cartCount = useCustomerStore((state) => state.cart.length);
 
@@ -160,8 +214,8 @@ const Navbar = () => {
   return (
     <header className="sticky top-0 z-40 border-b border-slate-200/80 bg-white text-slate-900 shadow-[0_4px_16px_-12px_rgba(15,23,42,0.2)]">
       <style>{'@keyframes nav-pop{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:none}}'}</style>
-      <div className="mx-auto flex min-h-[68px] max-w-[1440px] items-center gap-3 px-4 sm:px-8 lg:gap-6">
-        <Link to="/" aria-label="Astro Vastu Bazar home" className="shrink-0 text-[1.2rem] font-bold tracking-[-0.045em] text-slate-900 sm:text-[1.45rem]">
+      <div className="mx-auto flex min-h-[64px] max-w-[1440px] items-center gap-2 px-3 sm:min-h-[68px] sm:gap-3 sm:px-8 lg:gap-6">
+        <Link to="/" aria-label="Astro Vastu Bazar home" className="shrink-0 text-[clamp(0.95rem,4.3vw,1.2rem)] font-bold tracking-[-0.045em] text-slate-900 sm:text-[1.45rem]">
           astrovastubazar<span className="text-[#d39e25]">.</span>
         </Link>
 
@@ -210,28 +264,28 @@ const Navbar = () => {
           <input aria-label="Search products" className="min-w-0 flex-1 bg-transparent text-[13px] text-slate-700 outline-none placeholder:text-slate-400" placeholder="Search gems, pendants, birthstones..." />
         </div>
 
-        <div className="ml-auto flex shrink-0 items-center gap-3 sm:gap-4 xl:ml-0">
+        <div className="ml-auto flex shrink-0 items-center gap-1.5 sm:gap-4 xl:ml-0">
           <Link to={accountRoute} className="group flex items-center gap-2 text-slate-700 transition-colors hover:text-[#a87500]" aria-label={accountLabel}>
-            <span className={iconButton}><UserIcon /></span>
+            <span className={`${iconButton} h-8 w-8 sm:h-9 sm:w-9`}><UserIcon /></span>
             <span className={`${iconLabel} group-hover:max-w-[90px]`}>{accountLabel}</span>
           </Link>
           <button className="group flex items-center gap-2 text-slate-700 transition-colors hover:text-[#a87500]" aria-label="Wishlist">
-            <span className={iconButton}><HeartIcon /></span>
+            <span className={`${iconButton} h-8 w-8 sm:h-9 sm:w-9`}><HeartIcon /></span>
             <span className={`${iconLabel} group-hover:max-w-[80px]`}>Wishlist</span>
           </button>
           <Link to="/cart" className="group flex items-center gap-2 text-slate-700 transition-colors hover:text-[#a87500]" aria-label={`Cart${cartCount ? `, ${cartCount} items` : ''}`}>
-            <span className={`${iconButton} relative`}>
+            <span className={`${iconButton} relative h-8 w-8 sm:h-9 sm:w-9`}>
               <BagIcon />
               <span className="absolute -right-1.5 -top-1.5 flex h-[18px] min-w-[18px] items-center justify-center rounded-full bg-[#d39e25] px-1 text-[10px] font-bold text-white ring-2 ring-white">{cartCount}</span>
             </span>
             <span className={`${iconLabel} group-hover:max-w-[80px]`}>Cart</span>
           </Link>
-          <button type="button" className="flex h-10 w-10 items-center justify-center rounded-full border border-slate-200 bg-white text-slate-700 transition-colors hover:border-[#d9b75e] hover:text-[#946b13] xl:hidden" aria-label={menuOpen ? 'Close menu' : 'Open menu'} aria-expanded={menuOpen} onClick={() => setMenuOpen((open) => !open)}><MenuIcon open={menuOpen} /></button>
+          <button type="button" className="flex h-9 w-9 items-center justify-center rounded-full border border-slate-200 bg-white text-slate-700 transition-colors hover:border-[#d9b75e] hover:text-[#946b13] sm:h-10 sm:w-10 xl:hidden" aria-label={menuOpen ? 'Close menu' : 'Open menu'} aria-expanded={menuOpen} onClick={() => setMenuOpen((open) => !open)}><MenuIcon open={menuOpen} /></button>
         </div>
       </div>
 
       {menuOpen && (
-        <div className="border-t border-slate-200 bg-white px-4 py-4 shadow-[0_16px_24px_-24px_rgba(15,23,42,0.4)] xl:hidden sm:px-8">
+        <div className="max-h-[calc(100svh-4rem)] overflow-y-auto border-t border-slate-200 bg-white px-4 py-4 shadow-[0_16px_24px_-24px_rgba(15,23,42,0.4)] xl:hidden sm:px-8">
           <div className="mx-auto max-w-[1440px]">
             <div className="mb-4 flex items-center rounded-full border border-slate-200 bg-slate-50 px-4 py-2.5 text-sm text-slate-500 focus-within:border-[#c69a32] focus-within:bg-white">
               <SearchIcon className="mr-2.5 h-[17px] w-[17px] text-[#a87500]" />
@@ -250,16 +304,16 @@ const Navbar = () => {
                     <Chevron className={`transition-transform duration-200 ${mobileMenu === index ? 'rotate-180' : ''}`} />
                   </button>
                   {mobileMenu === index && (
-                    <div className="grid grid-cols-2 gap-2 pb-3 sm:grid-cols-3">
-                      {flattenMenuItems(section.items).map((item) => (
-                        <Link
-                          key={`${item.label}-${item.to}`}
-                          to={item.to}
-                          onClick={() => setMenuOpen(false)}
-                          className="rounded-lg bg-slate-50 px-3 py-2.5 text-xs font-medium text-slate-600 transition-colors hover:bg-amber-50 hover:text-[#946b13]"
-                        >
-                          {item.label}
-                        </Link>
+                    <div className="grid gap-1.5 pb-3">
+                      {section.items.map((item) => (
+                        <MobileMenuItem
+                          key={menuItemLabel(item)}
+                          item={item}
+                          path={`${section.label}-${menuItemLabel(item)}`}
+                          openItems={openMobileItems}
+                          setOpenItems={setOpenMobileItems}
+                          onNavigate={() => setMenuOpen(false)}
+                        />
                       ))}
                     </div>
                   )}

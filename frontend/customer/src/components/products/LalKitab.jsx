@@ -52,7 +52,7 @@ const LalKitabPage = () => {
       />
       <div className="absolute inset-0 bg-gradient-to-r from-[#20010d]/85 via-[#4a0019]/55 to-[#3d0714]/40" aria-hidden="true" />
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,_rgba(255,191,94,0.18),_transparent_28%),radial-gradient(circle_at_bottom_right,_rgba(255,123,66,0.16),_transparent_35%)]" aria-hidden="true" />
-      <div className="relative z-10 w-full max-w-[calc(100%-145px)] px-5 pb-16 pt-8 text-left text-[13px] leading-6 text-white drop-shadow-[0_1px_6px_rgba(0,0,0,0.95)] sm:max-w-[68%] sm:px-8 sm:pb-16 sm:pt-10 sm:text-sm lg:max-w-[min(70%,1120px)] lg:px-11">
+      <div className="relative z-10 w-full max-w-none px-5 pb-0 pt-8 text-left text-[13px] leading-6 text-white drop-shadow-[0_1px_6px_rgba(0,0,0,0.95)] sm:max-w-[60%] sm:px-8 sm:pb-16 sm:pt-10 sm:text-sm lg:max-w-[min(62%,900px)] lg:px-11">
         <div className="mb-4 flex items-center gap-4">
           <h1 className="text-[1.45rem] font-bold leading-tight text-white sm:text-[1.8rem] lg:text-[2.35rem]">
             Lal Kitab
@@ -75,7 +75,7 @@ const LalKitabPage = () => {
         <div className="absolute inset-[-8%] rounded-full bg-[radial-gradient(ellipse_at_center,rgba(255,230,164,0.42)_0%,rgba(255,190,71,0.2)_34%,rgba(255,148,42,0.08)_55%,transparent_72%)] blur-2xl" />
         <div className="sunlight-rays absolute inset-[-18%] rounded-full opacity-75" />
       </div>
-      <div className="absolute bottom-12 right-2 z-30 aspect-square w-[36%] max-w-[320px] bg-gradient-to-br from-[#fff1a3] via-[#f4c542] to-[#d99517] p-[3px] shadow-[0_0_10px_rgba(255,210,74,0.9),0_0_26px_rgba(255,186,35,0.65),0_12px_22px_rgba(0,0,0,0.4)] [clip-path:polygon(30%_0,70%_0,100%_30%,100%_70%,70%_100%,30%_100%,0_70%,0_30%)] sm:right-[4%] sm:w-[min(34vw,320px)]">
+      <div className="relative z-30 mx-auto mb-14 mt-6 aspect-square w-[min(38vw,220px)] bg-gradient-to-br from-[#fff1a3] via-[#f4c542] to-[#d99517] p-[3px] shadow-[0_0_10px_rgba(255,210,74,0.9),0_0_26px_rgba(255,186,35,0.65),0_12px_22px_rgba(0,0,0,0.4)] [clip-path:polygon(30%_0,70%_0,100%_30%,100%_70%,70%_100%,30%_100%,0_70%,0_30%)] sm:absolute sm:bottom-12 sm:right-[4%] sm:mx-0 sm:mb-0 sm:mt-0 sm:w-[min(34vw,320px)]">
         <img
           src="/Lal%20Kitab/4.png"
           alt="Lal Kitab Amrit astrology book"

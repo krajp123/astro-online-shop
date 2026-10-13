@@ -56,9 +56,9 @@ const RudrakshaProductCard = ({ product }) => {
           onClick={handleToggleWishlist}
           aria-label={isWishlisted ? `Remove ${product.name} from wishlist` : `Add ${product.name} to wishlist`}
           aria-pressed={isWishlisted}
-          className="absolute right-3 top-3 z-20 flex h-10 w-10 items-center justify-center rounded-full bg-white/90 text-[#4d001e] shadow-sm transition hover:bg-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#4d001e]"
+          className="absolute right-2 top-2 z-20 flex h-8 w-8 items-center justify-center rounded-full bg-white/90 text-[#4d001e] shadow-sm transition hover:bg-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#4d001e] sm:right-3 sm:top-3 sm:h-10 sm:w-10"
         >
-          <Heart className="h-5 w-5" fill={isWishlisted ? 'currentColor' : 'none'} aria-hidden="true" />
+          <Heart className="h-4 w-4 sm:h-5 sm:w-5" fill={isWishlisted ? 'currentColor' : 'none'} aria-hidden="true" />
         </button>
         <div className="absolute inset-0 flex items-center justify-center">
           <motion.div
@@ -71,7 +71,7 @@ const RudrakshaProductCard = ({ product }) => {
             src={product.image}
             alt={product.name}
             loading="lazy"
-            className="h-full aspect-square w-auto max-w-full object-contain p-5"
+            className="h-full aspect-square w-auto max-w-full object-contain p-3 sm:p-5"
             animate={reduceMotion ? undefined : { rotate: 360 }}
             whileHover={reduceMotion ? undefined : { scale: 1.05 }}
             transition={{ rotate: { duration: 30, repeat: Infinity, ease: 'linear' }, scale: { duration: 0.3 } }}
@@ -79,23 +79,23 @@ const RudrakshaProductCard = ({ product }) => {
         </div>
       </div>
 
-      <div className="flex flex-1 flex-col p-3 sm:p-4">
-        <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-[#4d001e]/70">
+      <div className="flex flex-1 flex-col p-2 sm:p-4">
+        <p className="text-[9px] font-semibold uppercase tracking-[0.1em] text-[#4d001e]/70 sm:text-[11px] sm:tracking-[0.16em]">
           {product.category}
         </p>
-        <h3 className="mt-1 line-clamp-2 min-h-10 text-sm font-semibold leading-snug text-[#201b3a]">
+        <h3 className="mt-1 line-clamp-2 min-h-8 text-xs font-semibold leading-snug text-[#201b3a] sm:min-h-10 sm:text-sm">
           {product.name}
         </h3>
 
-        <div className="mt-auto flex items-center justify-between gap-3 border-t border-[#201b3a]/10 pt-3">
-          <p className="text-base font-bold text-[#201b3a]">{product.price}</p>
+        <div className="mt-auto flex flex-col items-stretch gap-2 border-t border-[#201b3a]/10 pt-2 sm:flex-row sm:items-center sm:justify-between sm:gap-3 sm:pt-3">
+          <p className="text-sm font-bold text-[#201b3a] sm:text-base">{product.price}</p>
           <button
             type="button"
             onClick={handleAddToCart}
             aria-label={isInCart ? `Add another ${product.name} to cart` : `Add ${product.name} to cart`}
-            className="inline-flex min-h-9 items-center justify-center gap-1.5 rounded-lg bg-[#4d001e] px-3 py-2 text-xs font-semibold text-white transition hover:bg-[#3a0016] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#4d001e]/40 focus-visible:ring-offset-2"
+            className="inline-flex min-h-8 items-center justify-center gap-1 rounded-lg bg-[#4d001e] px-2 py-1.5 text-[10px] font-semibold text-white transition hover:bg-[#3a0016] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#4d001e]/40 focus-visible:ring-offset-2 sm:min-h-9 sm:gap-1.5 sm:px-3 sm:py-2 sm:text-xs"
           >
-            <ShoppingCart className="h-4 w-4" aria-hidden="true" />
+            <ShoppingCart className="h-3.5 w-3.5 sm:h-4 sm:w-4" aria-hidden="true" />
             {isInCart ? 'Add another' : 'Add to cart'}
           </button>
         </div>
@@ -258,7 +258,7 @@ const Rudraksha = () => {
         </div>
 
         {paginatedProducts.length > 0 ? (
-          <div ref={productsRef} className="mt-6 scroll-mt-28 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+          <div ref={productsRef} className="mt-6 scroll-mt-28 grid grid-cols-2 gap-3 sm:gap-5 lg:grid-cols-4">
             {paginatedProducts.map((product) => (
               <RudrakshaProductCard key={product.mukhi} product={product} />
             ))}
