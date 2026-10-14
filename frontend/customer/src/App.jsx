@@ -11,7 +11,9 @@ import Navbar from './components/common/Navbar';
 import Footer from './components/common/Footer';
 import LoginPage from './pages/Login';
 import MantraUpcharPage from './components/products/MantraUpchar';
+import MantraUpcharDetailsPage from './components/products/MantraUpcharDetails';
 import LalKitabPage from './components/products/LalKitab';
+import LalKitabDetailsPage from './components/products/LalKitabDetails';
 import GemstonePage from './components/products/Gemstone';
 import SoapPage from './components/products/Soap';
 import DhoopPage from './components/products/Dhoop';
@@ -53,6 +55,7 @@ function App() {
           <Route path="/login" element={<LoginPage />} />
           <Route path="/products" element={<Yantra />} />
           <Route path="/lal-kitab" element={<LalKitabPage />} />
+          <Route path="/lal-kitab-details" element={<LalKitabDetailsPage />} />
           <Route path="/gemstone" element={<GemstonePage />} />
           <Route path="/soap" element={<SoapPage />} />
           <Route path="/dhoop" element={<DhoopPage />} />
@@ -68,13 +71,14 @@ function App() {
           <Route path="/pendants" element={<PendantsPage />} />
           <Route path="/karungali" element={<KarungaliPage />} />
           <Route path="/mantra-upchar" element={<MantraUpcharPage />} />
+          <Route path="/mantra-upchar/:slug" element={<MantraUpcharDetailsPage />} />
           <Route path="/rudraksha" element={<Rudraksha />} />
           <Route path="/cart" element={<CartPage />} />
           <Route path="/orders" element={<OrdersPage />} />
         </Routes>
       </main>
 
-      <Footer className={pathname === '/' || pathname === '/mantra-upchar' || pathname === '/lal-kitab' || pathname === '/gemstone' || pathname === '/soap' || pathname === '/dhoop' || pathname === '/citrine' || pathname === '/tiger-eye' || pathname === '/garnet' || pathname === '/amethyst' || pathname === '/selenite' || pathname === '/rose-quartz' || pathname === '/lapis-lazuli' || pathname === '/bracelets' || pathname === '/pendants' || pathname === '/karungali' || pathname === '/about' ? 'mt-0' : pathname === '/login' ? 'mt-2' : undefined} />
+      <Footer className={pathname === '/' || pathname === '/mantra-upchar' || pathname === '/lal-kitab' || pathname === '/lal-kitab-details' || pathname === '/gemstone' || pathname === '/soap' || pathname === '/dhoop' || pathname === '/citrine' || pathname === '/tiger-eye' || pathname === '/garnet' || pathname === '/amethyst' || pathname === '/selenite' || pathname === '/rose-quartz' || pathname === '/lapis-lazuli' || pathname === '/bracelets' || pathname === '/pendants' || pathname === '/karungali' || pathname === '/about' ? 'mt-0' : pathname === '/login' ? 'mt-2' : undefined} />
     </div>
   );
 }

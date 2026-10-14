@@ -22,8 +22,6 @@ const menuSections = [
       },
       'Bracelets',
       'Karungali Malas',
-      'Vastu',
-      'Ring',
       'Pendant',
       'Soap',
       'Dhoop',
@@ -32,8 +30,6 @@ const menuSections = [
   {
     label: 'Stones',
     items: [
-      { label: 'Bracelets', to: '/bracelets' },
-      { label: 'Pendants', to: '/pendants' },
       { label: 'Pyrite', to: '/pyrite' },
       { label: 'Garnet', to: '/garnet' },
       { label: 'Citrine', to: '/citrine' },

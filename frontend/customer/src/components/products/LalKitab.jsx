@@ -1,4 +1,5 @@
 import { ShoppingCart } from 'lucide-react';
+import { Link } from 'react-router-dom';
 import { useCustomerStore } from '../../store/useCustomerStore';
 
 const lalKitabProduct = {
@@ -95,40 +96,45 @@ const LalKitabPage = () => {
 
     <section className="w-full px-5 pb-8 pt-10 sm:px-8 sm:pt-12 lg:px-10 lg:pb-10 lg:pt-14">
       <article className="group w-full max-w-[320px] overflow-hidden rounded-2xl border border-[#201b3a]/10 bg-white transition duration-300 hover:-translate-y-1 hover:border-[#4d001e]/30 hover:shadow-[0_18px_40px_rgba(32,27,58,0.12)]">
-        <div className="relative aspect-square overflow-hidden bg-[#f7f2ea]">
-          <img
-            src={lalKitabProduct.image}
-            alt="Lal Kitab Amrit book"
-            loading="lazy"
-            className="h-full w-full object-cover object-center transition-opacity duration-700 ease-in-out group-hover:opacity-0"
-          />
-          <img
-            src={lalKitabProduct.hoverImage}
-            alt=""
-            aria-hidden="true"
-            loading="lazy"
-            className="absolute inset-0 h-full w-full object-cover object-center opacity-0 transition-opacity duration-700 ease-in-out group-hover:opacity-100"
-          />
-        </div>
+        <Link to="/lal-kitab-details" aria-label={`View details for ${lalKitabProduct.name}`} className="block focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#4d001e]/60 focus-visible:ring-inset">
+          <div className="relative aspect-square overflow-hidden bg-[#f7f2ea]">
+            <img
+              src={lalKitabProduct.image}
+              alt="Lal Kitab Amrit book"
+              loading="lazy"
+              className="h-full w-full object-cover object-center transition-opacity duration-700 ease-in-out group-hover:opacity-0"
+            />
+            <img
+              src={lalKitabProduct.hoverImage}
+              alt=""
+              aria-hidden="true"
+              loading="lazy"
+              className="absolute inset-0 h-full w-full object-cover object-center opacity-0 transition-opacity duration-700 ease-in-out group-hover:opacity-100"
+            />
+          </div>
 
-        <div className="flex flex-col p-3 sm:p-4">
-          <h3 className="text-sm font-semibold leading-snug text-[#201b3a]">{lalKitabProduct.name}</h3>
+          <div className="flex flex-col px-3 pt-3 sm:px-4 sm:pt-4">
+            <h3 className="text-sm font-semibold leading-snug text-[#201b3a]">{lalKitabProduct.name}</h3>
           <div className="mt-1.5 flex items-center gap-2" aria-label="Rated 5 out of 5, 11 reviews">
             <span className="text-sm leading-none tracking-tight text-[#c9962b]" aria-hidden="true">★★★★★</span>
             <span className="text-base text-[#201b3a]/75">(11 reviews)</span>
           </div>
-          <div className="mt-3 flex items-center justify-between gap-3 border-t border-[#201b3a]/10 pt-3">
-            <p className="text-base font-bold text-[#201b3a]">{lalKitabProduct.price}</p>
+          </div>
+        </Link>
+
+        <div className="flex items-center justify-between gap-3 p-3 pt-2 sm:p-4 sm:pt-3">
+          <Link to="/lal-kitab-details" className="text-base font-bold text-[#201b3a] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#4d001e]/60 focus-visible:ring-offset-2">
+            {lalKitabProduct.price}
+          </Link>
             <button
               type="button"
               onClick={handleAddToCart}
               aria-label={isInCart ? `Add another ${lalKitabProduct.name} to cart` : `Add ${lalKitabProduct.name} to cart`}
-              className="inline-flex min-h-9 items-center justify-center gap-1.5 rounded-lg bg-[#4d001e] px-3 py-2 text-xs font-semibold text-white transition hover:bg-[#3a0016] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#4d001e]/40 focus-visible:ring-offset-2"
+              className="relative z-20 inline-flex min-h-9 items-center justify-center gap-1.5 rounded-lg bg-[#4d001e] px-3 py-2 text-xs font-semibold text-white transition hover:bg-[#3a0016] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#4d001e]/40 focus-visible:ring-offset-2"
             >
               <ShoppingCart className="h-4 w-4" aria-hidden="true" />
               {isInCart ? 'Add another' : 'Add to cart'}
             </button>
-          </div>
         </div>
       </article>
     </section>

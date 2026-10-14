@@ -1,23 +1,13 @@
 import { Pause, Play, ShoppingCart } from 'lucide-react';
 import { useEffect, useRef, useState } from 'react';
 import { motion, useReducedMotion } from 'framer-motion';
+import { Link, useNavigate } from 'react-router-dom';
 import { useCustomerStore } from '../../store/useCustomerStore';
-
-const mantraProducts = [
-  { name: 'Mangal Mantra Upchar Potli', image: '/Mantra/Mangal-mantra-upchar-potli.png', hoverImage: '/Mantra/2.png', audio: '/Mantra/Mantra%20Audio/MANGAL.mp3', price: '₹3,100.00' },
-  { name: 'Sarva Sidhi Mantra Upchar Potli', image: '/Mantra/Sarva%20Sidhi%20Mantra%20Upchar%20Potli.png', hoverImage: '/Mantra/3.png', audio: '/Mantra/Mantra%20Audio/Sarv_Siddhi.mp3', price: '₹3,500.00' },
-  { name: 'Sukra Mantra Upchar Potli', image: '/Mantra/Sukra-mantra-upchar-potli.png', hoverImage: '/Mantra/6.png', audio: '/Mantra/Mantra%20Audio/SHUKRA.mp3', price: '₹3,100.00' },
-  { name: 'Budh Mantra Upchar Potli', image: '/Mantra/budhmantra-upchar-potli.png', hoverImage: '/Mantra/4.png', audio: '/Mantra/Mantra%20Audio/BUDH.mp3', price: '₹3,100.00' },
-  { name: 'Chandra Mantra Upchar', image: '/Mantra/chandra-mantra-upchar.png', hoverImage: '/Mantra/6.png', audio: '/Mantra/Mantra%20Audio/CHANDRA.mp3', price: '₹3,100.00' },
-  { name: 'Guru Mantra Upchar Potli', image: '/Mantra/guru-mantra-upchar-potli.png', hoverImage: '/Mantra/3.png', audio: '/Mantra/Mantra%20Audio/GURU.mp3', price: '₹3,100.00' },
-  { name: 'Ketu Mantra Upchar Potli', image: '/Mantra/ketu-mantra-upchar-potli.png', hoverImage: '/Mantra/7.png', audio: '/Mantra/Mantra%20Audio/KETU.mp3', price: '₹3,100.00' },
-  { name: 'Rahu Mantra Upchar', image: '/Mantra/rahu-mantra-upchar.png', hoverImage: '/Mantra/5.png', audio: '/Mantra/Mantra%20Audio/RAHU.mp3', price: '₹3,100.00' },
-  { name: 'Shani Mantra Upchar', image: '/Mantra/shani--mantra-upchar.png', hoverImage: '/Mantra/1.png', audio: '/Mantra/Mantra%20Audio/SHANI.mp3', price: '₹3,100.00' },
-  { name: 'Surya Mantra Upchar Potli', image: '/Mantra/surya-mantra-upchar-potli.png', hoverImage: '/Mantra/2.png', audio: '/Mantra/Mantra%20Audio/SURYA.mp3', price: '₹3,100.00' },
-];
+import { mantraProducts } from '../../data/mantraUpcharProducts';
 
 const MantraUpcharPage = () => {
   const reduceMotion = useReducedMotion();
+  const navigate = useNavigate();
   const audioRef = useRef(null);
   const [playingProduct, setPlayingProduct] = useState(null);
   const cart = useCustomerStore((state) => state.cart);
@@ -83,15 +73,12 @@ const MantraUpcharPage = () => {
           </div>
           <div className="mt-3 max-w-full space-y-1.5 text-left text-[13px] leading-5 text-white drop-shadow-[0_1px_6px_rgba(0,0,0,0.95)] sm:mt-4 sm:space-y-2 sm:text-sm sm:leading-6 lg:max-w-[76%]">
             <p>
-              In the birth chart, when a planet is not favorable, its energy can strongly affect our aura. On our website, we offer a special &quot;mantra upchar potli&quot; (healing pouch)
-               <p> that absorbs the negative energy of these inauspicious planets. This can bring positive changes to your health and mindset. Instead of following  a 43-day </p> remedy, you can use the mantra upchar potli to resolve your problems in the following way:
+              In the birth chart, when a planet is not favorable, its energy can strongly affect our aura. On our website, we offer a special &quot;mantra upchar potli&quot; (healing pouch) that absorbs the negative energy of these inauspicious planets. This can bring positive changes to your health and mindset. Instead of following a 43-day remedy, you can use the mantra upchar potli to resolve your problems in the following way:
             </p>
-            <br />
-            <p>- Move the potli seven times in a counter clockwise direction around your head, then immerse it in water.</p>
-            <p>- If you don&apos;t have access to a river or pond, you can bury it in barren land where no living creature walks.</p>
-            {/* <p>
-              You can download the <strong>Astroscience App</strong>, go to the Luck Meter, and find out which planets are unfavorable for you. Then, you can purchase the corresponding mantra upchar potli. For more assistance, you can contact our experts at 9999990522
-            </p> */}
+            <ul className="list-disc space-y-1 pl-5">
+              <li>Move the potli seven times in a counter clockwise direction around your head, then immerse it in water.</li>
+              <li>If you don&apos;t have access to a river or pond, you can bury it in barren land where no living creature walks.</li>
+            </ul>
           </div>
         </div>
         <svg
@@ -127,7 +114,16 @@ const MantraUpcharPage = () => {
             return (
               <article
                 key={product.name}
-                className="group flex h-full flex-col overflow-hidden rounded-2xl border border-[#201b3a]/10 bg-white transition duration-300 hover:-translate-y-1 hover:border-[#4d001e]/30 hover:shadow-[0_18px_40px_rgba(32,27,58,0.12)]"
+                role="button"
+                tabIndex={0}
+                onClick={() => navigate(`/mantra-upchar/${product.slug}`)}
+                onKeyDown={(event) => {
+                  if (event.key === 'Enter' || event.key === ' ') {
+                    event.preventDefault();
+                    navigate(`/mantra-upchar/${product.slug}`);
+                  }
+                }}
+                className="group flex h-full cursor-pointer flex-col overflow-hidden rounded-2xl border border-[#201b3a]/10 bg-white transition duration-300 hover:-translate-y-1 hover:border-[#4d001e]/30 hover:shadow-[0_18px_40px_rgba(32,27,58,0.12)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#4d001e]/40"
               >
                 <div className="relative aspect-square overflow-hidden bg-[#f7f2ea]">
                   <img
@@ -149,7 +145,10 @@ const MantraUpcharPage = () => {
                     <>
                       <button
                         type="button"
-                        onClick={() => handleAudioToggle(product)}
+                        onClick={(event) => {
+                          event.stopPropagation();
+                          handleAudioToggle(product);
+                        }}
                         aria-label={`${playingProduct === product.name ? 'Pause' : 'Play'} ${product.name} audio`}
                         className="absolute bottom-[17%] right-3 z-10 inline-flex h-9 w-9 items-center justify-center rounded-full border border-white/80 bg-[#4d001e] text-white shadow-md transition hover:bg-[#3a0016] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/80"
                       >
@@ -170,15 +169,27 @@ const MantraUpcharPage = () => {
                   </div>
                   <div className="mt-auto flex flex-col items-stretch gap-2 border-t border-[#201b3a]/10 pt-2 sm:flex-row sm:items-center sm:justify-between sm:gap-3 sm:pt-3">
                     <p className="text-sm font-bold text-[#201b3a] sm:text-base">{product.price}</p>
-                    <button
-                      type="button"
-                      onClick={() => handleAddToCart(product)}
-                      aria-label={`Add ${product.name} to cart`}
-                      className="inline-flex min-h-8 items-center justify-center gap-1 rounded-lg bg-[#4d001e] px-2 py-1.5 text-[10px] font-semibold text-white transition hover:bg-[#3a0016] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#4d001e]/40 focus-visible:ring-offset-2 sm:min-h-9 sm:gap-1.5 sm:px-3 sm:py-2 sm:text-xs"
-                    >
-                      <ShoppingCart className="h-3.5 w-3.5 sm:h-4 sm:w-4" aria-hidden="true" />
-                      {isInCart ? 'Add another' : 'Add to cart'}
-                    </button>
+                    <div className="flex items-center gap-2">
+                      <Link
+                        to={`/mantra-upchar/${product.slug}`}
+                        onClick={(event) => event.stopPropagation()}
+                        className="inline-flex min-h-8 items-center justify-center rounded-lg border border-[#201b3a]/10 bg-[#f6efe9] px-2 py-1.5 text-[10px] font-semibold text-[#201b3a] transition hover:border-[#4d001e]/30 hover:bg-[#f1e5dd] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#4d001e]/40 focus-visible:ring-offset-2 sm:min-h-9 sm:px-3 sm:py-2 sm:text-xs"
+                      >
+                        Details
+                      </Link>
+                      <button
+                        type="button"
+                        onClick={(event) => {
+                          event.stopPropagation();
+                          handleAddToCart(product);
+                        }}
+                        aria-label={`Add ${product.name} to cart`}
+                        className="inline-flex min-h-8 items-center justify-center gap-1 rounded-lg bg-[#4d001e] px-2 py-1.5 text-[10px] font-semibold text-white transition hover:bg-[#3a0016] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#4d001e]/40 focus-visible:ring-offset-2 sm:min-h-9 sm:gap-1.5 sm:px-3 sm:py-2 sm:text-xs"
+                      >
+                        <ShoppingCart className="h-3.5 w-3.5 sm:h-4 sm:w-4" aria-hidden="true" />
+                        {isInCart ? 'Add another' : 'Add to cart'}
+                      </button>
+                    </div>
                   </div>
                 </div>
               </article>
