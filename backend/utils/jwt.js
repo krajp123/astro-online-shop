@@ -1,5 +1,5 @@
 // JWT helper placeholder.
-// Centralizes token creation and verification for customer, seller, and admin auth.
+// Centralizes token creation and verification for customer and admin auth.
 import jwt from 'jsonwebtoken';
 
 export const signToken = (payload, secret, expiresIn) => {

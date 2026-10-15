@@ -1,5 +1,5 @@
 // Cloudinary configuration placeholder.
-// This file will configure image uploads for seller products and marketing assets.
+// This file will configure image uploads for store products and marketing assets.
 import dotenv from 'dotenv';
 
 dotenv.config();

@@ -11,7 +11,7 @@ const LoginPage = () => {
     : Boolean(identifier.trim());
 
   return (
-    <section className="w-full bg-[#f3efe9]">
+    <section className="w-full bg-[#f8f6f1]">
       <div className="mx-auto flex max-w-[1320px] items-center justify-center px-4 pb-0 pt-3 sm:px-8 sm:pb-0 sm:pt-4">
         <div className="grid w-full max-w-4xl overflow-hidden rounded-[10px] border border-[#201b3a]/10 bg-[#f7f3ee] shadow-[0_20px_60px_rgba(23,19,45,0.08)] lg:min-h-[calc(100svh-96px)] lg:max-h-[calc(100svh-80px)] lg:grid-cols-2">
           <div className="relative hidden min-h-[500px] overflow-hidden bg-[#15112f] p-8 text-white lg:flex lg:flex-col lg:justify-end">

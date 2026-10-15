@@ -29,7 +29,7 @@ const DhoopPage = () => {
   };
 
   return (
-    <main className="min-h-[60vh] bg-[#f5f1eb]">
+    <main className="min-h-[60vh] bg-[#f8f6f1]">
       <section className="product-hero group relative isolate min-h-[360px] overflow-hidden bg-[#4d0010] sm:min-h-[380px]">
         <img
           src="/Dhoop.png"
@@ -71,7 +71,7 @@ const DhoopPage = () => {
               ],
             }}
             transition={{ duration: 7, repeat: Infinity, ease: 'easeInOut' }}
-            fill="#f5f1eb"
+            fill="#f8f6f1"
           />
         </svg>
       </section>

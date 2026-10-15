@@ -13,7 +13,6 @@ export const env = {
   JWT_REFRESH_SECRET: process.env.JWT_REFRESH_SECRET || 'change-me-refresh',
   CLIENT_ORIGINS: {
     customer: process.env.CUSTOMER_APP_URL || 'http://localhost:5173',
-    seller: process.env.SELLER_APP_URL || 'http://localhost:5174',
     admin: process.env.ADMIN_APP_URL || 'http://localhost:5175'
   }
 };

@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { ArrowRight, Heart, Plus, ShoppingCart } from 'lucide-react';
 import { useCustomerStore } from '../store/useCustomerStore';
-import { getProductImage, yantraProducts } from '../components/products/Yantra';
+import { getProductImage, yantraProducts } from '../data/yantraProducts';
 import gemstoneProducts from '../data/gemstoneProducts';
 import { Link } from 'react-router-dom';
 import {
@@ -1045,10 +1045,12 @@ const HomePage = () => {
           </div>
         </div>
 
-        <ProductMarquee
-          products={yantraProducts.filter((product) => product.exclusive)}
-          ariaLabel="Yantra products"
-        />
+        {yantraProducts.some((product) => product.exclusive) && (
+          <ProductMarquee
+            products={yantraProducts.filter((product) => product.exclusive)}
+            ariaLabel="Yantra products"
+          />
+        )}
       </div>
     </section>
 

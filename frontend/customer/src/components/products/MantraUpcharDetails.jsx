@@ -1,8 +1,19 @@
 import { useEffect, useMemo, useState } from 'react';
 import { Minus, Package, Plus, ShoppingBag, Star, Truck } from 'lucide-react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import { useCustomerStore } from '../../store/useCustomerStore';
-import { getMantraProductBySlug } from '../../data/mantraUpcharProducts';
+import { getMantraProductBySlug, mantraProducts } from '../../data/mantraUpcharProducts';
+
+const getRandomRelatedProducts = (currentSlug) => {
+  const products = mantraProducts.filter((item) => item.slug !== currentSlug);
+
+  for (let index = products.length - 1; index > 0; index -= 1) {
+    const randomIndex = Math.floor(Math.random() * (index + 1));
+    [products[index], products[randomIndex]] = [products[randomIndex], products[index]];
+  }
+
+  return products.slice(0, 5);
+};
 
 const MantraUpcharDetails = () => {
   const { slug } = useParams();
@@ -10,6 +21,8 @@ const MantraUpcharDetails = () => {
   const product = useMemo(() => getMantraProductBySlug(slug), [slug]);
   const [quantity, setQuantity] = useState(1);
   const [activeImage, setActiveImage] = useState(0);
+  const [descriptionLanguage, setDescriptionLanguage] = useState('en');
+  const [relatedProducts, setRelatedProducts] = useState(() => getRandomRelatedProducts(product.slug));
   const cart = useCustomerStore((state) => state.cart);
   const setCart = useCustomerStore((state) => state.setCart);
   const gallery = useMemo(
@@ -19,6 +32,8 @@ const MantraUpcharDetails = () => {
 
   useEffect(() => {
     setActiveImage(0);
+    setDescriptionLanguage('en');
+    setRelatedProducts(getRandomRelatedProducts(product.slug));
   }, [product]);
 
   const handleAddToCart = () => {
@@ -40,20 +55,20 @@ const MantraUpcharDetails = () => {
   };
 
   return (
-    <main className="min-h-screen bg-[#FBF9F7] px-4 text-[#231416] sm:px-6 lg:px-8">
+    <main className="min-h-screen bg-[#f8f6f1] px-4 text-[#231416] sm:px-6 xl:px-10">
       <style>{`
         .mantra-audio {
           accent-color: #7A1519;
         }
         .mantra-audio::-webkit-media-controls-panel {
-          background-color: #FBF9F7;
+          background-color: #f8f6f1;
         }
       `}</style>
-      <div className="mx-auto max-w-[1240px]">
-        <section className="grid items-start gap-7 py-8 lg:grid-cols-2 lg:gap-12 lg:py-10">
-          <div className="min-w-0 lg:sticky lg:top-6">
+      <div className="mx-auto max-w-[1440px]">
+        <section className="grid items-start gap-6 py-6 pb-2 sm:gap-8 sm:py-8 sm:pb-3 lg:grid-cols-2 lg:gap-8 lg:py-10 lg:pb-4 xl:gap-10">
+          <div className="mx-auto min-w-0 w-full max-w-md lg:max-w-none">
             <div className="flex flex-col gap-3">
-              <div className="flex aspect-square items-center justify-center overflow-hidden bg-[#F5ECE9] border-0">
+              <div className="flex aspect-square items-center justify-center overflow-hidden bg-transparent">
                 <img
                   key={gallery[activeImage]}
                   src={gallery[activeImage]}
@@ -70,13 +85,13 @@ const MantraUpcharDetails = () => {
                       onClick={() => setActiveImage(index)}
                       aria-label={`Show product image ${index + 1}`}
                       aria-pressed={activeImage === index}
-                      className={`h-16 w-16 overflow-hidden border bg-[#F5ECE9] transition sm:h-[76px] sm:w-[76px] ${
+                      className={`h-14 w-14 shrink-0 overflow-hidden border bg-white transition sm:h-16 sm:w-16 xl:h-[72px] xl:w-[72px] ${
                         activeImage === index
                           ? 'border-[#7A1519] ring-1 ring-[#7A1519]'
                           : 'border-[#231416]/10 opacity-70 hover:opacity-100'
                       }`}
                     >
-                      <img src={image} alt="" className="h-full w-full object-contain p-1" />
+                      <img src={image} alt="" className="h-full w-full object-contain" />
                     </button>
                   ))}
                 </div>
@@ -84,23 +99,23 @@ const MantraUpcharDetails = () => {
             </div>
           </div>
 
-          <div className="min-w-0 py-1 lg:py-0">
+          <div className="min-w-0">
             <h1
-              className="mt-2 font-sans font-bold leading-[1.1] tracking-tight lg:mt-0"
-              style={{ color: '#925C2D', fontSize: 'clamp(1.75rem, 3vw, 2.25rem)' }}
+              className="font-sans font-bold leading-[1.12] tracking-tight"
+              style={{ color: '#925C2D', fontSize: 'clamp(1.75rem, 2.4vw, 2.25rem)' }}
             >
               {product.name}
             </h1>
 
             <p
               lang="hi"
-              className="mt-3 lg:mt-2"
+              className="mt-3"
               style={{
                 color: '#302522',
                 fontFamily: "'Nirmala UI', 'Mangal', sans-serif",
-                fontSize: '15px',
-                letterSpacing: '0.01em',
-                lineHeight: 1.4,
+                fontSize: '16px',
+                letterSpacing: 'normal',
+                lineHeight: 1.5,
                 textAlign: 'left',
                 whiteSpace: 'pre-line',
               }}
@@ -108,7 +123,23 @@ const MantraUpcharDetails = () => {
               {product.description}
             </p>
 
-            <div className="mt-4 flex flex-wrap items-center gap-x-2.5 gap-y-1 lg:mt-3">
+            {product.keyBenefits?.length > 0 && (
+              <section className="mt-4" aria-labelledby="product-key-benefits">
+                <h2
+                  id="product-key-benefits"
+                  className="font-serif text-lg font-semibold text-[#925C2D]"
+                >
+                  Key Benefits:
+                </h2>
+                <ul className="mt-1 list-disc pl-5 text-sm leading-5 text-[#231416]">
+                  {product.keyBenefits.map((benefit) => (
+                    <li key={benefit}>{benefit}</li>
+                  ))}
+                </ul>
+              </section>
+            )}
+
+            <div className="mt-4 flex flex-wrap items-center gap-x-2.5 gap-y-1">
               <span
                 className="flex items-center gap-0.5 text-[#C9973A]"
                 aria-label={`${product.rating} out of 5 stars`}
@@ -127,11 +158,11 @@ const MantraUpcharDetails = () => {
               <span className="text-xs text-[#7A1519]">{product.reviews} reviews</span>
             </div>
 
-            <div className="mt-5 flex flex-wrap items-baseline gap-x-3 gap-y-1 lg:mt-3">
+            <div className="mt-4 flex flex-wrap items-baseline gap-x-3 gap-y-1">
               <span className="text-base font-semibold text-[#231416]">{product.price}</span>
             </div>
 
-            <div className="mt-6 border-y border-[#231416]/15 py-4 lg:mt-4 lg:py-2.5">
+            <div className="mt-5 border-y border-[#231416]/15 py-3 sm:mt-6 sm:py-4">
               <audio
                 key={product.audio}
                 controls
@@ -144,7 +175,7 @@ const MantraUpcharDetails = () => {
               </audio>
             </div>
 
-            <div className="mt-5 flex flex-wrap items-center gap-3 lg:mt-4">
+            <div className="mt-4 grid grid-cols-[auto_minmax(0,1fr)] items-stretch gap-2 sm:mt-5 sm:grid-cols-[auto_minmax(0,1fr)_minmax(0,1fr)] sm:gap-3">
               <div className="flex h-11 items-center border border-[#231416]/20">
                 <button
                   type="button"
@@ -168,7 +199,7 @@ const MantraUpcharDetails = () => {
               <button
                 type="button"
                 onClick={handleAddToCart}
-                className="inline-flex min-h-11 flex-1 items-center justify-center gap-2 bg-[#7A1519] px-5 py-2.5 text-sm font-semibold text-[#FBEBC4] transition hover:bg-[#5E0F13] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#7A1519]/40 focus-visible:ring-offset-2"
+                className="inline-flex min-h-11 min-w-0 items-center justify-center gap-1.5 bg-[#7A1519] px-2.5 py-2.5 text-xs font-semibold text-[#FBEBC4] transition hover:bg-[#5E0F13] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#7A1519]/40 focus-visible:ring-offset-2 sm:gap-2 sm:px-4 sm:text-sm"
               >
                 <ShoppingBag className="h-4 w-4" aria-hidden="true" />
                 Add to cart
@@ -177,14 +208,14 @@ const MantraUpcharDetails = () => {
               <button
                 type="button"
                 onClick={handleBuyNow}
-                className="min-h-11 flex-1 border border-[#7A1519] px-5 py-2.5 text-sm font-semibold text-[#7A1519] transition hover:bg-[#F8F1EF] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#7A1519]/40 focus-visible:ring-offset-2"
+                className="col-span-2 min-h-11 min-w-0 border border-[#7A1519] px-2.5 py-2.5 text-xs font-semibold text-[#7A1519] transition hover:bg-[#F8F1EF] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#7A1519]/40 focus-visible:ring-offset-2 sm:col-span-1 sm:px-4 sm:text-sm"
               >
                 Buy it now
               </button>
             </div>
 
             <div
-              className="mt-4 space-y-3 text-[#231416]"
+              className="mt-4 space-y-3 text-[#231416] sm:mt-5"
               style={{ fontSize: '15px', lineHeight: 1.4 }}
             >
               <p className="flex items-center gap-3">
@@ -199,6 +230,99 @@ const MantraUpcharDetails = () => {
           </div>
         </section>
       </div>
+
+      <section aria-label="Product description">
+        <div className="mx-auto max-w-[1440px] pt-2 pb-8 sm:pt-3 sm:pb-10 lg:pt-4">
+          <div role="tablist" aria-label="Description language" className="flex gap-6 border-b border-[#231416]/10">
+            {[
+              { id: 'en', label: 'English Description' },
+              { id: 'hi', label: 'हिंदी विवरण' },
+            ].map((tab) => (
+              <button
+                key={tab.id}
+                type="button"
+                role="tab"
+                id={`mantra-description-tab-${tab.id}`}
+                aria-selected={descriptionLanguage === tab.id}
+                aria-controls="mantra-description-panel"
+                onClick={() => setDescriptionLanguage(tab.id)}
+                className={`border-b-2 px-1 pb-2 text-sm font-medium transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#7A1519] ${
+                  descriptionLanguage === tab.id
+                    ? 'border-[#7A1519] text-[#7A1519]'
+                    : 'border-transparent text-[#6F6063] hover:text-[#231416]'
+                }`}
+              >
+                {tab.label}
+              </button>
+            ))}
+          </div>
+
+          <div
+            id="mantra-description-panel"
+            role="tabpanel"
+            aria-labelledby={`mantra-description-tab-${descriptionLanguage}`}
+            lang={descriptionLanguage === 'hi' ? 'hi' : 'en'}
+            className="space-y-5 pt-5 text-base leading-7 text-[#3a2c2e]"
+            style={descriptionLanguage === 'hi' ? { fontFamily: "'Nirmala UI', 'Mangal', sans-serif" } : undefined}
+          >
+            {(descriptionLanguage === 'hi'
+              ? product.descriptionHindi || product.description
+              : product.descriptionEnglish || product.description
+            )
+              .split(/\n+/)
+              .map((paragraph, index) => paragraph.trim() && <p key={index}>{paragraph.trim()}</p>)}
+          </div>
+        </div>
+      </section>
+
+      <section aria-labelledby="mantra-related-products-heading" className="bg-[#f8f6f1]">
+        <div className="mx-auto max-w-[1440px] border-t border-[#231416]/10 px-4 pt-12 pb-8 sm:px-6 sm:pt-14 sm:pb-10 xl:px-10">
+          <h2
+            id="mantra-related-products-heading"
+            className="mb-6 text-center text-[1.6rem] font-extrabold tracking-[-0.03em] text-[#201b3a] sm:text-[2rem]"
+          >
+            Related Products
+          </h2>
+          <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 sm:gap-4 lg:grid-cols-5">
+            {relatedProducts.map((relatedProduct) => (
+              <Link
+                key={relatedProduct.slug}
+                to={`/mantra-upchar/${relatedProduct.slug}`}
+                aria-label={`View ${relatedProduct.name}`}
+                className="group flex h-full flex-col overflow-hidden rounded-2xl border border-[#201b3a]/10 bg-white shadow-[0_8px_18px_rgba(32,27,58,0.06)] transition duration-200 hover:-translate-y-1 hover:border-[#4d001e]/30 hover:shadow-[0_16px_34px_rgba(32,27,58,0.12)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#4d001e]/40"
+              >
+                <div className="aspect-square overflow-hidden bg-[#f7f2ea]">
+                  <img
+                    src={relatedProduct.image}
+                    alt={relatedProduct.name}
+                    loading="lazy"
+                    className="h-full w-full object-contain transition-transform duration-300 group-hover:scale-[1.04]"
+                  />
+                </div>
+                <div className="flex flex-1 flex-col gap-2 p-3 sm:p-4">
+                  <h3 className="line-clamp-2 min-h-10 text-sm font-bold leading-snug text-[#201b3a] sm:text-[0.98rem]">
+                    {relatedProduct.name}
+                  </h3>
+                  <div className="flex items-center gap-1.5" aria-label={`${relatedProduct.rating} out of 5 stars, ${relatedProduct.reviews} reviews`}>
+                    <span className="flex items-center text-xs tracking-tight text-[#c9962b]" aria-hidden="true">
+                      {[...Array(5)].map((_, index) => (
+                        <Star
+                          key={index}
+                          className={`h-3.5 w-3.5 fill-current ${index < Math.round(relatedProduct.rating) ? '' : 'text-[#d8d4d0]'}`}
+                        />
+                      ))}
+                    </span>
+                    <span className="text-[11px] text-[#6F6063]">{relatedProduct.reviews} reviews</span>
+                  </div>
+                  <p className="mt-auto border-t border-[#201b3a]/10 pt-2 text-sm font-extrabold text-[#4d001e] sm:text-base">
+                    {relatedProduct.price}
+                  </p>
+                </div>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
     </main>
   );
 };

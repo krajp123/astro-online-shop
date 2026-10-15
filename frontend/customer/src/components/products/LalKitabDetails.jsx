@@ -6,7 +6,7 @@ import gemstoneProducts from '../../data/gemstoneProducts';
 import karungaliProducts from '../../data/karungaliProducts';
 import pyriteProducts from '../../data/pyriteProducts';
 import tigerEyeProducts from '../../data/tigerEyeProducts';
-import { getProductImage, yantraProducts } from './Yantra';
+import { getProductImage, yantraProducts } from '../../data/yantraProducts';
 
 /* ------------------------------------------------------------------ */
 /* Design tokens                                                       */
@@ -54,7 +54,9 @@ const kundliForOptions = [
 const trackedFields = ['name', 'gender', 'dateOfBirth', 'timeOfBirth', 'placeOfBirth', 'whatsappNumber'];
 const totalReviews = 37;
 const relatedProducts = [
-  { ...yantraProducts[0], image: getProductImage(yantraProducts[0]), href: '/products', categoryLabel: 'Yantra' },
+  ...(yantraProducts[0]
+    ? [{ ...yantraProducts[0], image: getProductImage(yantraProducts[0]), href: '/products', categoryLabel: 'Yantra' }]
+    : []),
   { ...gemstoneProducts[0], href: '/gemstone', categoryLabel: 'Gemstone' },
   { ...karungaliProducts[0], href: '/karungali', categoryLabel: 'Karungali Mala' },
   { ...tigerEyeProducts[0], href: '/tiger-eye', categoryLabel: 'Tiger Eye' },
@@ -386,7 +388,7 @@ const LalKitabDetailsPage = () => {
   };
 
   return (
-    <main className="lk-page bg-[#FBF9F7] text-[#231416]">
+    <main className="lk-page bg-[#f8f6f1] text-[#231416]">
       <style>{styles}</style>
 
       {/* ============================ Hero ============================ */}
@@ -630,7 +632,7 @@ const LalKitabDetailsPage = () => {
       </div>
 
       {/* ======================= Report description ======================= */}
-      <section aria-label="Lal Kitab report description" className="bg-[#FBF9F7]">
+      <section aria-label="Lal Kitab report description" className="bg-[#f8f6f1]">
         <div className={`${containerClass} py-8 pb-4 sm:py-10 sm:pb-5`}>
           <div role="tablist" aria-label="Description language" className="flex gap-6 border-b border-[#231416]/10">
             {[
@@ -742,7 +744,7 @@ const LalKitabDetailsPage = () => {
       </section>
 
       {/* ========================= Related products ========================= */}
-      <section aria-labelledby="related-products-heading" className="bg-[#FBF9F7]">
+      <section aria-labelledby="related-products-heading" className="bg-[#f8f6f1]">
         <div className={`${containerClass} border-t border-[#231416]/15 py-8 sm:py-10`}>
           <h2 id="related-products-heading" className="mb-5 font-sans text-xl font-bold tracking-tight text-black sm:text-2xl">
             Related Products

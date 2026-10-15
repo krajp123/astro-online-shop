@@ -7,6 +7,7 @@ import HomePage from './pages/Home';
 import OrdersPage from './pages/Orders';
 import Rudraksha from './components/products/Rudraksha';
 import Yantra from './components/products/Yantra';
+import YantraDetails from './components/products/YantraDetails';
 import Navbar from './components/common/Navbar';
 import Footer from './components/common/Footer';
 import LoginPage from './pages/Login';
@@ -44,7 +45,7 @@ function App() {
   const { pathname } = useLocation();
 
   return (
-    <div className="min-h-screen bg-[#f5f1eb] text-[#201b3a]">
+    <div className="min-h-screen bg-[#f8f6f1] text-[#201b3a]">
       <ScrollToTop />
       <Navbar />
 
@@ -54,6 +55,7 @@ function App() {
           <Route path="/about" element={<AboutPage />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/products" element={<Yantra />} />
+          <Route path="/products/:slug" element={<YantraDetails />} />
           <Route path="/lal-kitab" element={<LalKitabPage />} />
           <Route path="/lal-kitab-details" element={<LalKitabDetailsPage />} />
           <Route path="/gemstone" element={<GemstonePage />} />

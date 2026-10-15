@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 
 const AboutPage = () => (
-  <main className="min-h-[60vh] bg-[#f5f1eb]">
+  <main className="min-h-[60vh] bg-[#f8f6f1]">
     <section className="bg-[#201b3a] px-5 py-16 text-white sm:px-8 sm:py-20">
       <div className="mx-auto max-w-4xl text-center">
         <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[#f3c969]">About us</p>

@@ -50,7 +50,7 @@ const StoneHero = ({ name, image, eyebrow, headline, description, imagePosition 
             ],
           }}
           transition={{ duration: 7, repeat: Infinity, ease: 'easeInOut' }}
-          fill="#f5f1eb"
+          fill="#f8f6f1"
         />
       </svg>
     </section>

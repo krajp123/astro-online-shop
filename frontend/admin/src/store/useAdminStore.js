@@ -1,12 +1,12 @@
 // Zustand store for the admin app.
-// Holds platform-wide state such as users, sellers, and moderation metrics.
+// Holds store administration state such as products, users, and sales metrics.
 import { create } from 'zustand';
 
 export const useAdminStore = create((set) => ({
   stats: null,
+  products: [],
   users: [],
-  sellers: [],
   setStats: (stats) => set({ stats }),
-  setUsers: (users) => set({ users }),
-  setSellers: (sellers) => set({ sellers })
+  setProducts: (products) => set({ products }),
+  setUsers: (users) => set({ users })
 }));

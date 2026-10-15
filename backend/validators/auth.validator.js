@@ -1,5 +1,5 @@
 // Zod validation schema placeholder for auth inputs.
-// Used by customer, seller, and admin authentication flows.
+// Used by customer and admin authentication flows.
 import { z } from 'zod';
 
 export const registerSchema = z.object({

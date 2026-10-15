@@ -24,7 +24,7 @@ const LalKitabPage = () => {
   };
 
   return (
-  <main className="min-h-[60vh] bg-[#f5f1eb] text-[#201b3a]">
+  <main className="min-h-[60vh] bg-[#f8f6f1] text-[#201b3a]">
     <style>{`
       .sunlight-rays {
         background: repeating-conic-gradient(
@@ -90,7 +90,7 @@ const LalKitabPage = () => {
         preserveAspectRatio="none"
         aria-hidden="true"
       >
-        <path d="M0 40 C180 86 330 8 520 38 C700 68 850 78 1030 38 C1200 8 1320 20 1440 44 V100 H0Z" fill="#f5f1eb" />
+        <path d="M0 40 C180 86 330 8 520 38 C700 68 850 78 1030 38 C1200 8 1320 20 1440 44 V100 H0Z" fill="#f8f6f1" />
       </svg>
     </section>
 
@@ -139,7 +139,7 @@ const LalKitabPage = () => {
       </article>
     </section>
 
-    <section className="bg-[#f5f1eb] px-5 py-5 sm:px-8 sm:py-6 lg:px-10">
+    <section className="bg-[#f8f6f1] px-5 py-5 sm:px-8 sm:py-6 lg:px-10">
       <article className="w-full space-y-6 text-[14px] leading-[1.5] tracking-[0.01em] text-[#32111a]">
         <p>
           Have you ever questioned what lies ahead for you? Have you tried reading horoscopes and receiving astrological predictions but felt like something was missing? If so, you may want to think about ordering a customised Lal Kitab Amrit horoscope.

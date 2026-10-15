@@ -1,9 +1,9 @@
 // Route configuration for the admin app.
-// Contains protected admin routes, management screens, and role enforcement.
+// Contains protected owner-admin routes, management screens, and role enforcement.
 export const adminRoutes = [
   { path: '/', name: 'Overview' },
+  { path: '/products', name: 'Products' },
   { path: '/users', name: 'Users' },
-  { path: '/sellers', name: 'Sellers' },
   { path: '/orders', name: 'Orders' }
 ];
 

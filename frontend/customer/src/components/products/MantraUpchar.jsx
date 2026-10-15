@@ -55,7 +55,7 @@ const MantraUpcharPage = () => {
   };
 
   return (
-    <main className="min-h-[60vh] bg-[#f5f1eb]">
+    <main className="min-h-[60vh] bg-[#f8f6f1]">
       <section className="product-hero group relative min-h-[360px] overflow-hidden sm:min-h-[380px]">
         <img
           src="/Mantra-Upchar.png"
@@ -97,7 +97,7 @@ const MantraUpcharPage = () => {
               ],
             }}
             transition={{ duration: 7, repeat: Infinity, ease: 'easeInOut' }}
-            fill="#f5f1eb"
+            fill="#f8f6f1"
           />
         </svg>
       </section>

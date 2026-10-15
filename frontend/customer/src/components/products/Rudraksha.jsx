@@ -169,8 +169,8 @@ const Rudraksha = () => {
       : mukhiCategories.find((category) => category.value === selectedMukhi)?.label;
 
   return (
-    <div className="w-full max-w-[2000px] bg-[#f5f1eb]">
-      <div className="mx-auto max-w-[1440px] bg-[#f5f1eb] px-4 pt-10 pb-10 sm:px-6 sm:pt-12 lg:pb-8 lg:pt-14">
+    <div className="w-full max-w-[2000px] bg-[#f8f6f1]">
+      <div className="mx-auto max-w-[1440px] bg-[#f8f6f1] px-4 pt-10 pb-10 sm:px-6 sm:pt-12 lg:pb-8 lg:pt-14">
         <div className="flex flex-col items-center gap-3 text-center">
           <div className="w-full max-w-2xl">
             <h1 className="w-full text-center font-serif text-[1.45rem] font-bold leading-tight text-[#75665a] sm:text-[1.8rem] lg:text-[2.35rem]">Rudraksha Beads</h1>

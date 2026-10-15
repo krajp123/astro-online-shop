@@ -38,7 +38,7 @@ const GemstonePage = () => {
   };
 
   return (
-    <main className="min-h-[60vh] bg-[#f5f1eb]">
+    <main className="min-h-[60vh] bg-[#f8f6f1]">
       <section className="mx-auto w-full max-w-[1440px] px-4 pb-8 pt-10 sm:px-6 sm:pt-12 lg:px-8 lg:pb-10 lg:pt-14 2xl:px-12">
         <div className="mb-6">
           <div className="flex flex-col items-center gap-2 text-center">

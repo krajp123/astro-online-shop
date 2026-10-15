@@ -6,7 +6,7 @@ const AmethystPage = () => {
   const description = 'Explore Amethyst crystals, jewellery, and Aquarius designs.';
 
   return (
-    <main className="min-h-[60vh] bg-[#f5f1eb]">
+    <main className="min-h-[60vh] bg-[#f8f6f1]">
       <StoneHero
         name="Amethyst"
         image="/Amthyst/Amethyst.png"

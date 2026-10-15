@@ -6,7 +6,7 @@ const SelenitePage = () => {
   const description = 'Explore Selenite crystals, cleansing plates, and spiritual collections.';
 
   return (
-    <main className="min-h-[60vh] bg-[#f5f1eb]">
+    <main className="min-h-[60vh] bg-[#f8f6f1]">
       <StoneHero
         name="Selenite"
         image="/Selenite/Selenite.png"

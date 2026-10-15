@@ -7,7 +7,7 @@ const KarungaliPage = () => {
   const description = 'Explore our Karungali collection of authentic ebony wood malas, bracelets, and spiritual designs.';
 
   return (
-    <main className="min-h-[60vh] bg-[#f5f1eb]">
+    <main className="min-h-[60vh] bg-[#f8f6f1]">
       <section className="product-hero group relative isolate min-h-[420px] overflow-hidden bg-[#21100b] sm:min-h-[480px]">
         <img
           src="/Karungali/Karungali.png"
@@ -54,7 +54,7 @@ const KarungaliPage = () => {
               ],
             }}
             transition={{ duration: 7, repeat: Infinity, ease: 'easeInOut' }}
-            fill="#f5f1eb"
+            fill="#f8f6f1"
           />
         </svg>
       </section>

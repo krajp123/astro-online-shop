@@ -1,12 +1,11 @@
 # E-Commerce Monorepo
 
-This repository is a full-stack e-commerce platform scaffold with three separate frontend apps:
+This repository is a full-stack single-owner e-commerce platform scaffold with two frontend apps:
 
 - Customer app: storefront and buyer workflow
-- Seller app: store management and order analytics
-- Admin app: platform administration and moderation
+- Admin app: owner-only store management and administration
 
-All three frontend apps share one common backend service.
+Both frontend apps share one common backend service. The store owner manages the catalog and orders through the Admin app.
 
 ## Architecture overview
 
@@ -15,7 +14,7 @@ All three frontend apps share one common backend service.
 - State: Zustand
 - API client: Axios
 - Backend: Node.js + Express.js
-- PostgreSQL + Prisma: transactions, users, sellers, orders, payments, payouts, inventory, coupons
+- PostgreSQL + Prisma: transactions, users, orders, payments, inventory, coupons
 - MongoDB + Mongoose: product catalog, reviews, cart, wishlist
 
 ## Database split
@@ -28,7 +27,6 @@ All three frontend apps share one common backend service.
 ```text
 /frontend
   /customer
-  /seller
   /admin
 /backend
 /docs
@@ -41,7 +39,7 @@ All three frontend apps share one common backend service.
 
 1. Copy `backend/.env.example` to `backend/.env` and update values.
 2. Run `docker-compose up --build` to start infrastructure.
-3. Start each app separately with its own package scripts.
+3. Start the backend, customer app, and admin app with their package scripts.
 
 ## Notes
 
