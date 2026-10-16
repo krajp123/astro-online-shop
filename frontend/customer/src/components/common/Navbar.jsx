@@ -43,7 +43,7 @@ const menuSections = [
   {
     label: 'Remedies',
     items: [
-      { label: 'Lal Kitab Remedies', to: '/lal-kitab' },
+      { label: 'Lal Kitab Remedies', to: '/lal-kitab-remedies' },
     ],
   },
   { label: 'About', to: '/about' },

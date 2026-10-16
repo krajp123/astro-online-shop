@@ -57,11 +57,11 @@ const ProductsPage = () => {
 
       <ProductCollectionGrid
         name="Yantra"
-        description="Explore our complete collection of special, zodiac, and Nakshatra yantras."
         products={yantraProducts}
         id="yantra-products"
         pageSize={12}
         productDetailLinks
+        showHeading={false}
       />
 
       <div className="mx-auto max-w-[1440px] bg-[#f8f6f1] px-4 pt-10 pb-10 sm:px-6 sm:pt-12 lg:pb-8 lg:pt-14">

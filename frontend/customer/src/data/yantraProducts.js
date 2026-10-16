@@ -6,6 +6,47 @@ const samplePrices = [
   1499, 1599, 1399, 1299, 1199,
 ];
 
+const productLocketImages = {
+  'Vishakha Locket': '/Yantra/vishakha_locket.webp',
+  'Anuradha Locket': '/Yantra/anuradha_locket.webp',
+  'Mesh (Aries) Rashi Yantra': '/Yantra/mesh-locket.webp',
+  'Vrishabh (Taurus) Rashi Yantra': '/Yantra/vrishabh-locket.webp',
+  'Mithun (Gemini) Rashi Yantra': '/Yantra/mithun-locket.webp',
+  'Kark (Cancer) Rashi Yantra': '/Yantra/kark-locket.webp',
+  'Singh (Leo) Rashi Yantra': '/Yantra/singh-locket.webp',
+  'Kanya (Virgo) Rashi Yantra': '/Yantra/kanya-locket.webp',
+  'Tula (Libra) Rashi Yantra': '/Yantra/tula-locket.webp',
+  'Vrishchik (Scorpio) Rashi Yantra': '/Yantra/vrishchik-locket.webp',
+  'Dhanu (Sagittarius) Rashi Yantra': '/Yantra/dhanu-locket.webp',
+  'Makar (Capricorn) Rashi Yantra': '/Yantra/makar-locket.webp',
+  'Kumbh (Aquarius) Rashi Yantra': '/Yantra/kumbh-locket.webp',
+  'Meen (Pisces) Rashi Yantra': '/Yantra/meen-locket.webp',
+  'Ashwini Nakshatra Yantra': '/Yantra/ashwani_locket_6a5856ba-da37-4bd8-9aea-6dffca0e79f6.webp',
+  'Bharani Nakshatra Yantra': '/Yantra/bharni_locket.webp',
+  'Krittika Nakshatra Yantra': '/Yantra/kritika_locket.webp',
+  'Rohini Nakshatra Yantra': '/Yantra/rohini_locket.webp',
+  'Mrigashira Nakshatra Yantra': '/Yantra/mrigshira_locket.webp',
+  'Ardra Nakshatra Yantra': '/Yantra/Ardra_locket.webp',
+  'Punarvasu Nakshatra Yantra': '/Yantra/punarvasu_locket.webp',
+  'Pushya Nakshatra Yantra': '/Yantra/pushya_locket.webp',
+  'Magha Nakshatra Yantra': '/Yantra/magha_locket.webp',
+  'Purva Phalguni Nakshatra Yantra': '/Yantra/purva-faalguni_locket.webp',
+  'Uttara Phalguni Nakshatra Yantra': '/Yantra/utra-phalguni_locket.webp',
+  'Hasta Nakshatra Yantra': '/Yantra/hast_locket.webp',
+  'Chitra Nakshatra Yantra': '/Yantra/chitra_locket.webp',
+  'Swati Nakshatra Yantra': '/Yantra/swati_locket.webp',
+  'Jyeshtha Nakshatra Yantra': '/Yantra/jyestha_locket.webp',
+  'Mula Nakshatra Yantra': '/Yantra/moola_locket.webp',
+  'Purva Ashadha Nakshatra Yantra': '/Yantra/purva-shaada_locket.webp',
+  'Shravana Nakshatra Yantra': '/Yantra/shravan_locket_1.webp',
+  'Dhanishtha Nakshatra Yantra': '/Yantra/dhanistha_locket.webp',
+  'Shatabhisha Nakshatra Yantra': '/Yantra/shatbhisha_locket.webp',
+  'Purva Bhadrapada Nakshatra Yantra': '/Yantra/purva-bhadarpad_locket.webp',
+  'Revati Nakshatra Yantra': '/Yantra/revti_locket.webp',
+  'Ashlesha Nakshatra Yantra': '/Yantra/yantra2.webp',
+  'Uttara Bhadrapada Nakshatra Yantra': '/Yantra/3_1f1520c3-a148-490f-b53c-1151de6f6539.webp',
+};
+
 const yantraProducts = [
 
   { name: 'Madhya Shakti Peeth Yantra', category: 'Special Yantra', image: '/Yantra/madhya-shakti-peeth-yantra.webp' },
@@ -18,7 +59,7 @@ const yantraProducts = [
   { name: 'Rog Nivaran Yantra', category: 'Special Yantra', image: '/Yantra/rog-nivaran-yantra.webp' },
   { name: 'Shani Yantra', category: 'Special Yantra', image: '/Yantra/shakni-yantra.webp' },
   { name: 'Vyapar Yantra', category: 'Special Yantra', image: '/Yantra/yvapar-yantra.webp' },
-  { name: 'Sacred Mantra Yantra Coin', category: 'Special Yantra', image: '/Yantra/4_17b816da-cf12-45e2-878d-5a65c129b2f0.webp' },
+  { name: 'Uttara Bhadrapada Nakshatra Yantra', category: 'Nakshatra Yantra', image: '/Yantra/4_17b816da-cf12-45e2-878d-5a65c129b2f0.webp' },
 
   { name: 'Mesh (Aries) Rashi Yantra', category: 'Rashi Yantra', image: '/Yantra/mesh-rashi-2.webp' },
   { name: 'Vrishabh (Taurus) Rashi Yantra', category: 'Rashi Yantra', image: '/Yantra/vrishabh-rashi.webp' },
@@ -61,6 +102,21 @@ const yantraProducts = [
   { name: 'Revati Nakshatra Yantra', category: 'Nakshatra Yantra', image: '/Yantra/revti_yantra.webp' },
 ].map((product, index) => ({
   ...product,
+  ...(productLocketImages[product.name]
+    ? {
+        images: [product.image, productLocketImages[product.name]],
+        locketImage: productLocketImages[product.name],
+        locketPrice: `₹${(2500 + ((index * 137) % 2500)).toLocaleString('en-IN')}.00`,
+        ...(product.name === 'Vishakha Locket' || product.name === 'Anuradha Locket'
+          ? {
+              variantNames: {
+                Yantra: `${product.name.split(' ')[0]} Nakshatra Yantra`,
+                Locket: `${product.name.split(' ')[0]} Nakshatra Yantra Locket`,
+              },
+            }
+          : {}),
+      }
+    : {}),
   price: `₹${samplePrices[index].toLocaleString('en-IN')}.00`,
 }));
 

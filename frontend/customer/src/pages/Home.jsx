@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { ArrowRight, Heart, Plus, ShoppingCart } from 'lucide-react';
+import { ArrowRight, ChevronLeft, ChevronRight, Heart, Plus, ShoppingCart } from 'lucide-react';
 import { useCustomerStore } from '../store/useCustomerStore';
 import { getProductImage, yantraProducts } from '../data/yantraProducts';
 import gemstoneProducts from '../data/gemstoneProducts';
@@ -108,12 +108,12 @@ const stoneShowcase = [
 ];
 
 const topProducts = [
-  { name: 'Shakti Peeth Yantra', price: 'Rs. 2,550.00', image: '/top%20products/1.png' },
-  { name: 'Ashtasiddhi Yantra ', price: 'Rs. 41,000.00', image: '/top%20products/4.jpg' },
-  { name: 'Lal Kitab Amrit ', price: 'Rs. 2,550.00', image: '/top%20products/3.jpg' },
-  { name: 'Shukra Amrit Soap', price: 'Rs. 479.00', image: '/top%20products/2.jpg' },
-  { name: 'Rahu Mantra Upchar Potli', price: 'Rs. 3,100.00', image: '/top%20products/6.png' },
-  { name: 'Shani Amrit Dhoop', price: 'Rs. 409.00', image: '/top%20products/5.jpg' },
+  { name: 'Shakti Peeth Yantra', price: 'Rs. 2,550.00', image: '/top%20products/1.png', href: '/products/shakti-peeth-yantra' },
+  { name: 'Ashtasiddhi Yantra ', price: 'Rs. 41,000.00', image: '/top%20products/4.jpg', href: '/featured-products/ashtasiddhi-yantra' },
+  { name: 'Lal Kitab Amrit ', price: 'Rs. 2,550.00', image: '/top%20products/3.jpg', href: '/lal-kitab-details' },
+  { name: 'Shukra Amrit Soap', price: 'Rs. 479.00', image: '/top%20products/2.jpg', href: '/featured-products/shukra-amrit-soap' },
+  { name: 'Rahu Mantra Upchar Potli', price: 'Rs. 3,100.00', image: '/top%20products/6.png', href: '/mantra-upchar/rahu-mantra-upchar' },
+  { name: 'Shani Amrit Dhoop', price: 'Rs. 409.00', image: '/top%20products/5.jpg', href: '/featured-products/shani-amrit-dhoop' },
   
 ];
 
@@ -317,7 +317,7 @@ const HaloWheel = ({ rotation }) => (
   </motion.div>
 );
 
-const ProductCard = ({ product, index }) => {
+const ProductCard = ({ product, index, isFeatured = false }) => {
   const cart = useCustomerStore((state) => state.cart);
   const wishlist = useCustomerStore((state) => state.wishlist);
   const setCart = useCustomerStore((state) => state.setCart);
@@ -398,7 +398,11 @@ const ProductCard = ({ product, index }) => {
       onPointerMove={handlePointerMove}
       onPointerLeave={handlePointerLeave}
       style={{ rotateX, rotateY, transformPerspective: 900 }}
-      className="group relative isolate overflow-hidden rounded-[28px] bg-[linear-gradient(180deg,#4a0217_0%,#430015_100%)] ring-1 ring-[#e8b4a0]/15"
+      className={`group relative isolate overflow-hidden rounded-[28px] bg-[linear-gradient(180deg,#4a0217_0%,#430015_100%)] ${
+        isFeatured
+          ? 'ring-2 ring-[#e8b4a0]/45 shadow-[0_24px_48px_rgba(32,27,58,0.28)]'
+          : 'ring-1 ring-[#e8b4a0]/15'
+      }`}
     >
       {/* Cursor-following light */}
       <motion.div
@@ -416,8 +420,8 @@ const ProductCard = ({ product, index }) => {
         </motion.div>
       </div>
 
-      <a
-        href="/products"
+      <Link
+        to={product.href || '/products'}
         className="relative z-10 block rounded-[30px] outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[#e8b4a0]"
       >
         {/* The doorway */}
@@ -457,7 +461,7 @@ const ProductCard = ({ product, index }) => {
           </h3>
 
         </motion.div>
-      </a>
+      </Link>
 
       <div className="relative z-10 flex items-center justify-between gap-2 px-2 pb-3 sm:px-5 sm:pb-4">
         <p style={{ fontFamily: CARD_SERIF }} className="min-w-0 flex-1 tabular-nums leading-none text-sm text-[#f7d3c4] sm:text-lg">
@@ -489,7 +493,7 @@ const ProductCard = ({ product, index }) => {
   );
 };
 
-const CatalogCard = ({ product, isDuplicate = false }) => {
+const CatalogCard = ({ product, isDuplicate = false, isFeatured = false }) => {
   const gemstoneCategory = product.category?.startsWith('Gemstone -') ? product.category : null;
   const displayName = gemstoneCategory ? `${product.name} ${gemstoneCategory}` : product.name;
   const displayPrice = product.price?.startsWith('₹') && !product.price.includes('.')
@@ -497,9 +501,13 @@ const CatalogCard = ({ product, isDuplicate = false }) => {
     : product.price;
 
   return (
-    <article className="group h-full w-full overflow-hidden rounded-lg border border-[#201b3a]/10 bg-white transition duration-200 hover:border-[#201b3a]/20 hover:shadow-md">
-      <a
-        href="/products"
+    <article className={`group h-full w-full overflow-hidden rounded-lg border bg-white transition duration-200 ${
+      isFeatured
+        ? 'border-[#b58a3d]/50 shadow-[0_24px_48px_rgba(32,27,58,0.22)]'
+        : 'border-[#201b3a]/10 hover:border-[#201b3a]/20 hover:shadow-md'
+    }`}>
+      <Link
+      to={gemstoneCategory ? '/gemstone' : '/products'}
         aria-label={`View ${displayName}`}
         tabIndex={isDuplicate ? -1 : undefined}
         draggable="false"
@@ -543,107 +551,125 @@ const CatalogCard = ({ product, isDuplicate = false }) => {
             {displayPrice || 'View details'}
           </p>
         </div>
-      </a>
+      </Link>
     </article>
   );
 };
 
-const ProductMarquee = ({ products, ariaLabel }) => {
-  const marqueeRef = useRef(null);
-  const dragState = useRef(null);
-  const suppressClick = useRef(false);
-  const offset = useRef(0);
+const FocusProductCarousel = ({
+  products,
+  ariaLabel,
+  itemLabel,
+  cardClassName,
+  slideInFromEdge = false,
+  arrowsAtBottom = false,
+  renderCard = (product) => <CatalogCard product={product} />,
+}) => {
+  const [activeIndex, setActiveIndex] = useState(0);
+  const reduceMotion = useReducedMotion();
 
   useEffect(() => {
-    const marquee = marqueeRef.current;
-    if (!marquee || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return undefined;
+    if (reduceMotion || products.length < 2) return undefined;
 
-    let frameId;
-    let previousTime;
-    const advance = (time) => {
-      if (previousTime !== undefined && !dragState.current) {
-        const track = marquee.querySelector('.yantra-marquee__track');
-        const loopWidth = marquee.querySelector('.yantra-marquee__group')?.getBoundingClientRect().width;
-        const elapsed = Math.min(time - previousTime, 32);
-        if (track && loopWidth > 0) {
-          offset.current = (offset.current + elapsed * 0.025) % loopWidth;
-          track.style.transform = `translate3d(${-offset.current}px, 0, 0)`;
-        }
-      }
-      previousTime = time;
-      frameId = requestAnimationFrame(advance);
-    };
+    const intervalId = window.setInterval(() => {
+      setActiveIndex((index) => (index + 1) % products.length);
+    }, 3200);
 
-    frameId = requestAnimationFrame(advance);
-    return () => cancelAnimationFrame(frameId);
-  }, []);
+    return () => window.clearInterval(intervalId);
+  }, [products.length, reduceMotion]);
 
-  const handlePointerDown = (event) => {
-    if (!event.isPrimary || event.button !== 0) return;
-    dragState.current = { isDragging: false, startOffset: offset.current, startX: event.clientX };
-    event.currentTarget.setPointerCapture(event.pointerId);
+  const showPrevious = () => {
+    setActiveIndex((index) => (index - 1 + products.length) % products.length);
   };
 
-  const handlePointerMove = (event) => {
-    const drag = dragState.current;
-    if (!drag) return;
-
-    const deltaX = event.clientX - drag.startX;
-    if (Math.abs(deltaX) > 4) drag.isDragging = true;
-    if (!drag.isDragging) return;
-    event.preventDefault();
-    const track = marqueeRef.current.querySelector('.yantra-marquee__track');
-    const loopWidth = marqueeRef.current.querySelector('.yantra-marquee__group')?.getBoundingClientRect().width;
-    const nextOffset = drag.startOffset - deltaX;
-    offset.current = loopWidth > 0
-      ? ((nextOffset % loopWidth) + loopWidth) % loopWidth
-      : Math.max(0, nextOffset);
-    if (track) track.style.transform = `translate3d(${-offset.current}px, 0, 0)`;
+  const showNext = () => {
+    setActiveIndex((index) => (index + 1) % products.length);
   };
 
-  const handlePointerUp = (event) => {
-    if (!dragState.current) return;
-    suppressClick.current = dragState.current.isDragging;
-    if (event.currentTarget.hasPointerCapture(event.pointerId)) {
-      event.currentTarget.releasePointerCapture(event.pointerId);
-    }
-    dragState.current = null;
-  };
+  if (products.length === 0) return null;
 
-  const handleClick = (event) => {
-    if (!suppressClick.current) return;
-    suppressClick.current = false;
-    event.preventDefault();
-    event.stopPropagation();
-  };
+  const positions = slideInFromEdge ? [-3, -2, -1, 0, 1, 2, 3] : [-2, -1, 0, 1, 2];
 
   return (
-    <div
-      ref={marqueeRef}
-      className="yantra-marquee mt-4"
-      role="region"
-      aria-label={ariaLabel}
-      onPointerDown={handlePointerDown}
-      onPointerMove={handlePointerMove}
-      onPointerUp={handlePointerUp}
-      onPointerCancel={handlePointerUp}
-      onClickCapture={handleClick}
-    >
-      <div className="yantra-marquee__track">
-        {[false, true].map((isDuplicate) => (
-          <div
-            key={isDuplicate ? 'duplicate' : 'products'}
-            className="yantra-marquee__group"
-            aria-hidden={isDuplicate ? 'true' : undefined}
-          >
-            {products.map((product, index) => (
-              <div className="yantra-marquee__item" key={`${product.name}-${product.image || index}-${isDuplicate ? 'duplicate' : 'original'}`}>
-                <CatalogCard product={product} isDuplicate={isDuplicate} />
-              </div>
-            ))}
-          </div>
-        ))}
+    <div role="region" aria-label={ariaLabel} aria-roledescription="carousel" className="mt-4">
+      <div
+        className="relative mx-auto h-[350px] w-full max-w-[1320px] overflow-hidden sm:h-[380px] lg:h-[400px]"
+        style={{ perspective: '1200px' }}
+      >
+        {positions.map((position) => {
+          const productIndex = (activeIndex + position + products.length) % products.length;
+          const product = products[productIndex];
+          const distance = Math.abs(position);
+
+          return (
+            <div
+              key={product.name}
+              role="group"
+              aria-roledescription="slide"
+              aria-label={`${product.name}, ${productIndex + 1} of ${products.length}`}
+              className={`absolute left-1/2 -translate-x-1/2 ${
+                cardClassName || 'top-5 w-[min(62vw,250px)] sm:top-3 sm:w-[min(36vw,270px)] lg:w-[min(22vw,290px)]'
+              }`}
+              style={{ zIndex: 10 - distance }}
+            >
+              <motion.div
+                className="w-full"
+                initial={false}
+                animate={{
+                  x: `${position * 82}%`,
+                  y: position === 0 ? -24 : 10,
+                  scale: distance === 0 ? 1.03 : distance === 1 ? 0.84 : 0.72,
+                }}
+                transition={reduceMotion
+                  ? { duration: 0 }
+                  : { type: 'spring', stiffness: 115, damping: 22, mass: 0.9 }}
+              >
+                {renderCard(product, productIndex, position === 0)}
+              </motion.div>
+            </div>
+          );
+        })}
+        {!arrowsAtBottom && (
+          <>
+            <button
+              type="button"
+              onClick={showPrevious}
+              aria-label={`Show previous ${itemLabel}`}
+              className="absolute left-[7%] top-1/2 z-20 inline-flex h-9 w-9 -translate-y-1/2 items-center justify-center rounded-full border border-[#201b3a]/20 bg-white/95 text-[#201b3a] shadow-md transition hover:border-[#4d001e] hover:bg-[#4d001e] hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#4d001e]/40"
+            >
+              <ChevronLeft className="h-5 w-5" aria-hidden="true" />
+            </button>
+            <button
+              type="button"
+              onClick={showNext}
+              aria-label={`Show next ${itemLabel}`}
+              className="absolute right-[7%] top-1/2 z-20 inline-flex h-9 w-9 -translate-y-1/2 items-center justify-center rounded-full border border-[#201b3a]/20 bg-white/95 text-[#201b3a] shadow-md transition hover:border-[#4d001e] hover:bg-[#4d001e] hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#4d001e]/40"
+            >
+              <ChevronRight className="h-5 w-5" aria-hidden="true" />
+            </button>
+          </>
+        )}
       </div>
+      {arrowsAtBottom && (
+        <div className="mt-2 flex justify-center gap-3">
+          <button
+            type="button"
+            onClick={showPrevious}
+            aria-label={`Show previous ${itemLabel}`}
+            className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-[#201b3a]/20 bg-white/95 text-[#201b3a] shadow-md transition hover:border-[#4d001e] hover:bg-[#4d001e] hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#4d001e]/40"
+          >
+            <ChevronLeft className="h-5 w-5" aria-hidden="true" />
+          </button>
+          <button
+            type="button"
+            onClick={showNext}
+            aria-label={`Show next ${itemLabel}`}
+            className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-[#201b3a]/20 bg-white/95 text-[#201b3a] shadow-md transition hover:border-[#4d001e] hover:bg-[#4d001e] hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#4d001e]/40"
+          >
+            <ChevronRight className="h-5 w-5" aria-hidden="true" />
+          </button>
+        </div>
+      )}
     </div>
   );
 };
@@ -915,9 +941,9 @@ const HomePage = () => {
           </p>
 
           <div className="mt-6 flex flex-wrap gap-3">
-            <a href="/products" className="inline-flex items-center gap-2 rounded-full bg-[#f3c969] px-5 py-2.5 text-[13px] font-semibold text-[#17132d] transition hover:bg-white">
+            <Link to="/products" className="inline-flex items-center gap-2 rounded-full bg-[#f3c969] px-5 py-2.5 text-[13px] font-semibold text-[#17132d] transition hover:bg-white">
               Shop the collection <ArrowRight className="h-4 w-4" />
-            </a>
+            </Link>
             <a href="/quiz" className="rounded-full border border-white/30 px-5 py-2.5 text-[13px] font-semibold text-white transition hover:border-[#f3c969] hover:text-[#f3c969]">
               Find my stone
             </a>
@@ -929,7 +955,7 @@ const HomePage = () => {
     </section>
 
     {/* Stone strip */}
-    <section className="relative z-0 w-full bg-[#f5f1eb] px-0 py-5 sm:py-7">
+    <section className="relative z-0 w-full bg-[#f5f1eb] px-0 py-7 lg:py-10">
       <div className="mx-auto max-w-[1440px] px-4 sm:px-8">
         <p className="text-center text-xs font-semibold uppercase tracking-[0.18em] text-[#201b3a]/70 sm:text-left sm:text-sm">Shop by Stones</p>
       </div>
@@ -1003,7 +1029,7 @@ const HomePage = () => {
     </section>
 
     {/* Top products */}
-    <section className="bg-[#f3efe9] px-4 py-6 sm:px-8 lg:py-10">
+    <section className="bg-[#f3efe9] px-4 py-7 sm:px-8 lg:py-10">
       <div className="mx-auto max-w-[1440px]">
         <div className="flex flex-col items-center justify-between gap-3 pb-2 text-center">
           <div className="max-w-3xl">
@@ -1016,13 +1042,15 @@ const HomePage = () => {
           </div>
         </div>
 
-        <div className="mt-5 grid grid-cols-2 gap-3 pb-2 sm:gap-4 lg:grid-cols-4">
-          {topProducts.map((product, index) => (
-            <div key={product.name} className="min-w-0">
-              <ProductCard product={product} index={index} />
-            </div>
-          ))}
-        </div>
+        <FocusProductCarousel
+          products={topProducts}
+          ariaLabel="Trusted essentials"
+          itemLabel="product"
+          cardClassName="top-8 w-[min(50vw,190px)] sm:top-8 sm:w-[min(34vw,220px)] lg:w-[min(18vw,250px)]"
+          renderCard={(product, index, isFeatured) => (
+            <ProductCard product={product} index={index} isFeatured={isFeatured} />
+          )}
+        />
       </div>
     </section>
 
@@ -1039,23 +1067,28 @@ const HomePage = () => {
             Explore our collection of Siddh Yantras, prepared with authentic methods and guided by the wisdom of G.D. Vashist. Each Yantra is designed to help attract positive energy, overcome challenges, and support your journey toward success and harmony.
           </p>
           <div className="mt-2 flex justify-end">
-            <a href="/products" className="inline-flex items-center gap-1 text-xs font-semibold text-[#201b3a] transition hover:text-[#cf092c]">
+            <Link to="/products" className="inline-flex items-center gap-1 text-xs font-semibold text-[#201b3a] transition hover:text-[#cf092c]">
               View all products <ArrowRight className="h-3 w-3" />
-            </a>
+            </Link>
           </div>
         </div>
 
-        {yantraProducts.some((product) => product.exclusive) && (
-          <ProductMarquee
-            products={yantraProducts.filter((product) => product.exclusive)}
-            ariaLabel="Yantra products"
-          />
-        )}
+        <FocusProductCarousel
+          products={yantraProducts}
+          ariaLabel="Siddh Yantra products"
+          itemLabel="Yantra"
+          slideInFromEdge
+          arrowsAtBottom
+        />
       </div>
     </section>
 
+    <div className="bg-[#f5f1eb] px-4 sm:px-8" aria-hidden="true">
+      <div className="mx-auto h-px max-w-[1440px] bg-[#201b3a]/10" />
+    </div>
+
     {/* Gemstone collection */}
-    <section className="bg-[#f5f1eb] px-4 pb-7 pt-0 sm:px-8 lg:pb-10 lg:pt-0">
+    <section className="bg-[#f5f1eb] px-4 py-7 sm:px-8 lg:py-10">
       <div className="mx-auto max-w-[1440px]">
         <div className="text-center">
           <h2 className="text-xl font-bold leading-tight text-[#201b3a] sm:text-2xl">Certified Auspicious Gemstone</h2>
@@ -1063,13 +1096,19 @@ const HomePage = () => {
             Explore our carefully curated collection of gemstones, Siddh Yantras, Rudraksha, and Vedic remedies, thoughtfully selected to help you strengthen positive planetary influences and bring peace, confidence, and prosperity into your life.
           </p>
           <div className="mt-2 flex justify-end">
-            <a href="/gemstone" className="inline-flex items-center gap-1 text-xs font-semibold text-[#201b3a] transition hover:text-[#cf092c]">
+            <Link to="/gemstone" className="inline-flex items-center gap-1 text-xs font-semibold text-[#201b3a] transition hover:text-[#cf092c]">
               View all gemstones <ArrowRight className="h-3 w-3" />
-            </a>
+            </Link>
           </div>
         </div>
 
-        <ProductMarquee products={gemstoneProducts} ariaLabel="Gemstone products" />
+        <FocusProductCarousel
+          products={gemstoneProducts}
+          ariaLabel="Gemstone products"
+          itemLabel="gemstone"
+          slideInFromEdge
+          arrowsAtBottom
+        />
       </div>
     </section>
 
@@ -1132,9 +1171,9 @@ const HomePage = () => {
               alt: 'Spiritual guidance',
             },
           ].map((service) => (
-            <a
+            <Link
               key={service.title}
-              href="/products"
+              to="/products"
               className="group overflow-hidden rounded-2xl border border-[#e8ddd0] bg-white shadow-[0_4px_16px_rgba(61,39,21,0.06)] transition duration-300 hover:-translate-y-1 hover:shadow-[0_12px_28px_rgba(61,39,21,0.12)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#9a5c23] focus-visible:ring-offset-2"
             >
               <div className="relative aspect-[4/3] overflow-hidden bg-gradient-to-br from-[#eee5da] to-[#f8f3ec]">
@@ -1161,7 +1200,7 @@ const HomePage = () => {
               <h3 className="flex min-h-14 items-center justify-center px-3 py-3 text-center text-sm font-semibold text-[#4c3524] sm:text-base">
                 {service.title}
               </h3>
-            </a>
+            </Link>
           ))}
         </div>
       </div>

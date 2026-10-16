@@ -14,11 +14,12 @@ const CartPage = () => {
       {cart.length ? (
         <div className="mt-10 space-y-4">
           {cart.map((item) => (
-            <article key={`${item.name}-${item.image}`} className="flex items-center gap-4 rounded-2xl border border-[#201b3a]/10 bg-white p-4">
+            <article key={`${item.name}-${item.variant || 'Yantra'}-${item.image}`} className="flex items-center gap-4 rounded-2xl border border-[#201b3a]/10 bg-white p-4">
               <img src={item.image} alt={item.name} className="h-20 w-20 rounded-xl bg-[#f8f3ec] object-contain" />
               <div className="min-w-0 flex-1">
                 <p className="text-xs font-semibold uppercase tracking-wide text-[#75665a]">{item.category}</p>
                 <h2 className="mt-1 font-bold text-[#201b3a]">{item.name}</h2>
+                {item.variant && <p className="mt-1 text-sm text-[#5b5470]">Style: {item.variant}</p>}
                 <p className="mt-1 text-sm text-[#5b5470]">Quantity: {item.quantity || 1}</p>
               </div>
               <p className="shrink-0 font-bold text-[#201b3a]">{item.price}</p>

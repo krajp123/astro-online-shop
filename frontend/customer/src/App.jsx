@@ -1,7 +1,7 @@
 // Root app component for the customer frontend.
 // Serves the buyer-facing routes and app shell.
-import { useLayoutEffect } from 'react';
-import { Route, Routes, useLocation } from 'react-router-dom';
+import { useLayoutEffect, useRef } from 'react';
+import { Route, Routes, useLocation, useNavigationType } from 'react-router-dom';
 import CartPage from './pages/Cart';
 import HomePage from './pages/Home';
 import OrdersPage from './pages/Orders';
@@ -15,6 +15,7 @@ import MantraUpcharPage from './components/products/MantraUpchar';
 import MantraUpcharDetailsPage from './components/products/MantraUpcharDetails';
 import LalKitabPage from './components/products/LalKitab';
 import LalKitabDetailsPage from './components/products/LalKitabDetails';
+import LalKitabRemediesPage from './components/products/LalKitabRemedies';
 import GemstonePage from './components/products/Gemstone';
 import SoapPage from './components/products/Soap';
 import DhoopPage from './components/products/Dhoop';
@@ -30,13 +31,32 @@ import KarungaliPage from './components/products/Karungali';
 import BraceletsPage from './components/products/Bracelets';
 import PendantsPage from './components/products/Pendants';
 import AboutPage from './pages/About';
+import FeaturedProductDetails from './components/products/FeaturedProductDetails';
 
 function ScrollToTop() {
-  const { pathname } = useLocation();
+  const location = useLocation();
+  const navigationType = useNavigationType();
+  const scrollPositions = useRef(new Map());
+  const activeLocationKey = useRef(location.key);
 
   useLayoutEffect(() => {
-    window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
-  }, [pathname]);
+    if (activeLocationKey.current !== location.key) {
+      scrollPositions.current.set(activeLocationKey.current, window.scrollY);
+    }
+
+    if (navigationType === 'POP') {
+      window.scrollTo({
+        top: scrollPositions.current.get(location.key) || 0,
+        left: 0,
+        behavior: 'instant',
+      });
+    } else {
+      scrollPositions.current.set(location.key, 0);
+      window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+    }
+
+    activeLocationKey.current = location.key;
+  }, [location.key, navigationType]);
 
   return null;
 }
@@ -56,7 +76,9 @@ function App() {
           <Route path="/login" element={<LoginPage />} />
           <Route path="/products" element={<Yantra />} />
           <Route path="/products/:slug" element={<YantraDetails />} />
+          <Route path="/featured-products/:slug" element={<FeaturedProductDetails />} />
           <Route path="/lal-kitab" element={<LalKitabPage />} />
+          <Route path="/lal-kitab-remedies" element={<LalKitabRemediesPage />} />
           <Route path="/lal-kitab-details" element={<LalKitabDetailsPage />} />
           <Route path="/gemstone" element={<GemstonePage />} />
           <Route path="/soap" element={<SoapPage />} />
@@ -80,7 +102,7 @@ function App() {
         </Routes>
       </main>
 
-      <Footer className={pathname === '/' || pathname === '/mantra-upchar' || pathname === '/lal-kitab' || pathname === '/lal-kitab-details' || pathname === '/gemstone' || pathname === '/soap' || pathname === '/dhoop' || pathname === '/citrine' || pathname === '/tiger-eye' || pathname === '/garnet' || pathname === '/amethyst' || pathname === '/selenite' || pathname === '/rose-quartz' || pathname === '/lapis-lazuli' || pathname === '/bracelets' || pathname === '/pendants' || pathname === '/karungali' || pathname === '/about' ? 'mt-0' : pathname === '/login' ? 'mt-2' : undefined} />
+      <Footer className={pathname === '/' || pathname === '/mantra-upchar' || pathname === '/lal-kitab' || pathname === '/lal-kitab-remedies' || pathname === '/lal-kitab-details' || pathname === '/gemstone' || pathname === '/soap' || pathname === '/dhoop' || pathname === '/citrine' || pathname === '/tiger-eye' || pathname === '/garnet' || pathname === '/amethyst' || pathname === '/selenite' || pathname === '/rose-quartz' || pathname === '/lapis-lazuli' || pathname === '/bracelets' || pathname === '/pendants' || pathname === '/karungali' || pathname === '/about' ? 'mt-0' : pathname === '/login' ? 'mt-2' : undefined} />
     </div>
   );
 }

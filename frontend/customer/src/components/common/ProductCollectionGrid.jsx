@@ -1,19 +1,44 @@
 import { ShoppingCart } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import { getYantraProductSlug } from '../../data/yantraProducts';
 import { useCustomerStore } from '../../store/useCustomerStore';
 
-const ProductCollectionGrid = ({ name, description, products, id = 'stone-products', pageSize, productDetailLinks = false }) => {
-  const [currentPage, setCurrentPage] = useState(1);
+const ProductCollectionGrid = ({ name, description, products, id = 'stone-products', pageSize, productDetailLinks = false, showHeading = true }) => {
+  const totalPages = pageSize ? Math.ceil(products.length / pageSize) : 1;
+  const returnPositionKey = `product-collection:${id}:return`;
+  const [returnPosition] = useState(() => {
+    const storedPosition = window.sessionStorage.getItem(returnPositionKey);
+    if (!storedPosition) {
+      return null;
+    }
+
+    const parsedPosition = JSON.parse(storedPosition);
+    return parsedPosition
+      && typeof parsedPosition === 'object'
+      && Number.isInteger(parsedPosition.page)
+      && parsedPosition.page >= 1
+      && parsedPosition.page <= totalPages
+      && Number.isFinite(parsedPosition.scrollY)
+      && parsedPosition.scrollY >= 0
+      ? parsedPosition
+      : null;
+  });
+  const [currentPage, setCurrentPage] = useState(() => returnPosition?.page ?? 1);
   const collectionRef = useRef(null);
   const previousPage = useRef(currentPage);
   const cart = useCustomerStore((state) => state.cart);
   const setCart = useCustomerStore((state) => state.setCart);
-  const totalPages = pageSize ? Math.ceil(products.length / pageSize) : 1;
   const visibleProducts = pageSize
     ? products.slice((currentPage - 1) * pageSize, currentPage * pageSize)
     : products;
+
+  useLayoutEffect(() => {
+    if (returnPosition) {
+      window.scrollTo({ top: returnPosition.scrollY, left: 0, behavior: 'instant' });
+      window.sessionStorage.removeItem(returnPositionKey);
+    }
+  }, [returnPosition, returnPositionKey]);
 
   useEffect(() => {
     if (previousPage.current !== currentPage) {
@@ -33,17 +58,50 @@ const ProductCollectionGrid = ({ name, description, products, id = 'stone-produc
       : [...cart, { ...product, quantity: 1 }]);
   };
 
+  const rememberCollectionPosition = (event) => {
+    if (event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) {
+      return;
+    }
+
+    window.sessionStorage.setItem(returnPositionKey, JSON.stringify({
+      page: currentPage,
+      scrollY: window.scrollY,
+    }));
+  };
+
   return (
     <section ref={collectionRef} id={id} className="mx-auto scroll-mt-20 w-full max-w-[1440px] px-4 pb-8 pt-4 sm:px-6 sm:pt-5 lg:px-8 lg:pb-10 lg:pt-6 2xl:px-12">
-      <div className="mb-6 flex flex-col items-center gap-2 text-center">
-        <h2 className="font-serif text-[1.45rem] font-bold leading-tight text-[#75665a] sm:text-[1.8rem] lg:text-[2.35rem]">{name} collection</h2>
-        <p className="max-w-3xl text-sm leading-7 text-[#5b5470] sm:text-base">{description}</p>
-      </div>
+      {showHeading && (
+        <div className="mb-6 flex flex-col items-center gap-2 text-center">
+          <h2 className="font-serif text-[1.45rem] font-bold leading-tight text-[#75665a] sm:text-[1.8rem] lg:text-[2.35rem]">{name} collection</h2>
+          <p className="max-w-3xl text-sm leading-7 text-[#5b5470] sm:text-base">{description}</p>
+        </div>
+      )}
 
       <div className="grid grid-cols-2 gap-3 sm:gap-5 lg:grid-cols-4">
         {visibleProducts.map((product) => {
           const isInCart = cart.some((item) => item.name === product.name && item.image === product.image);
           const hasPrice = Boolean(product.price);
+          const alternateImage = product.images?.[1];
+          const productImage = (
+            <>
+              <img
+                src={product.image}
+                alt={product.name}
+                loading="lazy"
+                className="h-full w-full object-contain object-center"
+              />
+              {alternateImage && (
+                <img
+                  src={alternateImage}
+                  alt=""
+                  aria-hidden="true"
+                  loading="lazy"
+                  className="absolute inset-0 h-full w-full object-contain object-center opacity-0 transition-opacity duration-500 ease-in-out group-hover:opacity-100 group-focus-within:opacity-100"
+                />
+              )}
+            </>
+          );
 
           return (
             <article
@@ -52,33 +110,31 @@ const ProductCollectionGrid = ({ name, description, products, id = 'stone-produc
             >
               <div className="relative aspect-square overflow-hidden bg-[#f7f2ea]">
                 {productDetailLinks ? (
-                  <Link to={`/products/${getYantraProductSlug(product.name)}`} aria-label={`View ${product.name} details`}>
-                    <img
-                      src={product.image}
-                      alt={product.name}
-                      loading="lazy"
-                      className="h-full w-full object-contain object-center transition-opacity duration-1000 ease-in-out"
-                    />
+                  <Link
+                    to={`/products/${getYantraProductSlug(product.name)}`}
+                    aria-label={`View ${product.name} details`}
+                    onClick={rememberCollectionPosition}
+                  >
+                    <div className="relative h-full w-full">{productImage}</div>
                   </Link>
                 ) : (
-                  <img
-                    src={product.image}
-                    alt={product.name}
-                    loading="lazy"
-                    className="h-full w-full object-contain object-center transition-opacity duration-1000 ease-in-out"
-                  />
+                  <div className="relative h-full w-full">{productImage}</div>
                 )}
               </div>
               <div className="flex flex-1 flex-col p-2 sm:p-4">
                 <p className="text-[9px] font-semibold uppercase tracking-[0.1em] text-[#4d001e]/70 sm:text-[10px] sm:tracking-[0.16em]">{product.category}</p>
-                <h3 className="mt-1 min-h-8 text-xs font-semibold leading-snug text-[#201b3a] sm:min-h-10 sm:text-sm">
+                <h3 className="mt-1 text-xs font-semibold leading-snug text-[#201b3a] sm:text-sm">
                   {productDetailLinks ? (
-                    <Link to={`/products/${getYantraProductSlug(product.name)}`} className="line-clamp-2 hover:underline">
+                    <Link
+                      to={`/products/${getYantraProductSlug(product.name)}`}
+                      className="line-clamp-2 hover:underline"
+                      onClick={rememberCollectionPosition}
+                    >
                       {product.name}
                     </Link>
                   ) : product.name}
                 </h3>
-                <div className="mt-1.5 flex items-center gap-1.5 sm:gap-2" aria-label="Rated 5 out of 5, 11 reviews">
+                <div className="flex items-center gap-1.5 sm:gap-2" aria-label="Rated 5 out of 5, 11 reviews">
                   <span className="text-xs leading-none tracking-tight text-[#c9962b] sm:text-sm" aria-hidden="true">★★★★★</span>
                   <span className="hidden text-xs text-[#201b3a]/75 sm:inline">(11 reviews)</span>
                 </div>
