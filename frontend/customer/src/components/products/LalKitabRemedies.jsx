@@ -1,138 +1,145 @@
-                                                                                                                                                                                              import { motion, useReducedMotion } from 'framer-motion';
+import { motion, useReducedMotion } from "framer-motion";
+import { Link } from "react-router-dom";
 
-                                                                                                                                                                                              const planets = [
-                                                                                                                                                                                                {
-                                                                                                                                                                                                  name: 'Sun',
-                                                                                                                                                                                                  image: '/Planets/Sun.png',
-                                                                                                                                                                                                  remedy: 'Offer water to the Sun (Surya Arghya) every morning',
-                                                                                                                                                                                                },
-                                                                                                                                                                                                {
-                                                                                                                                                                                                  name: 'Moon',
-                                                                                                                                                                                                  image: '/Planets/Moon.png',
-                                                                                                                                                                                                  remedy: 'Donate white items, wear pearl or moonstone',
-                                                                                                                                                                                                },
-                                                                                                                                                                                                {
-                                                                                                                                                                                                  name: 'Mars',
-                                                                                                                                                                                                  image: '/Planets/Mars.png',
-                                                                                                                                                                                                  remedy: 'Donate red lentils on Tuesdays, recite Hanuman Chalisa',
-                                                                                                                                                                                                },
-                                                                                                                                                                                                {
-                                                                                                                                                                                                  name: 'Mercury',
-                                                                                                                                                                                                  image: '/Planets/Mercury.png',
-                                                                                                                                                                                                  remedy: 'Feed green grass to cows, donate green vegetables',
-                                                                                                                                                                                                },
-                                                                                                                                                                                                {
-                                                                                                                                                                                                  name: 'Jupiter',
-                                                                                                                                                                                                  image: '/Planets/Jupiter.png',
-                                                                                                                                                                                                  remedy: 'Donate yellow items on Thursdays, respect teachers',
-                                                                                                                                                                                                },
-                                                                                                                                                                                                {
-                                                                                                                                                                                                  name: 'Venus',
-                                                                                                                                                                                                  image: '/Planets/Venus.png',
-                                                                                                                                                                                                  remedy: 'Donate white sweets, help young girls',
-                                                                                                                                                                                                },
-                                                                                                                                                                                                {
-                                                                                                                                                                                                  name: 'Saturn',
-                                                                                                                                                                                                  image: '/Planets/Saturn.png',
-                                                                                                                                                                                                  remedy: 'Donate black items on Saturdays, feed crows',
-                                                                                                                                                                                                },
-                                                                                                                                                                                                {
-                                                                                                                                                                                                  name: 'Rahu',
-                                                                                                                                                                                                  image: '/Planets/Rahu.png',
-                                                                                                                                                                                                  remedy: 'Donate blue or black items, feed dogs',
-                                                                                                                                                                                                },
-                                                                                                                                                                                                {
-                                                                                                                                                                                                  name: 'Ketu',
-                                                                                                                                                                                                  image: '/Planets/Ketu.png',
-                                                                                                                                                                                                  remedy: 'Donate brown items',
-                                                                                                                                                                                                },
-                                                                                                                                                                                              ];
+const planets = [
+  {
+    name: "Sun",
+    image: "/Planets/Sun.png",
+    remedy: "Offer water to the Sun (Surya Arghya) every morning",
+  },
+  {
+    name: "Moon",
+    image: "/Planets/Moon.png",
+    remedy: "Donate white items, wear pearl or moonstone",
+  },
+  {
+    name: "Mars",
+    image: "/Planets/Mars.png",
+    remedy: "Donate red lentils on Tuesdays, recite Hanuman Chalisa",
+  },
+  {
+    name: "Mercury",
+    image: "/Planets/Mercury.png",
+    remedy: "Feed green grass to cows, donate green vegetables",
+  },
+  {
+    name: "Jupiter",
+    image: "/Planets/Jupiter.png",
+    remedy: "Donate yellow items on Thursdays, respect teachers",
+  },
+  {
+    name: "Venus",
+    image: "/Planets/Venus.png",
+    remedy: "Donate white sweets, help young girls",
+  },
+  {
+    name: "Saturn",
+    image: "/Planets/Saturn.png",
+    remedy: "Donate black items on Saturdays, feed crows",
+  },
+  {
+    name: "Rahu",
+    image: "/Planets/Rahu.png",
+    remedy: "Donate blue or black items, feed dogs",
+  },
+  {
+    name: "Ketu",
+    image: "/Planets/Ketu.png",
+    remedy: "Donate brown items",
+  },
+];
 
-                                                                                                                                                                                              const problemRemedies = [
-                                                                                                                                                                                                {
-                                                                                                                                                                                                  title: 'Lal Kitab Remedies to Prevent Divorce',
-                                                                                                                                                                                                  description: 'Don’t Let Your Marriage Fall Apart—Try These Lal Kitab Remedies to Prevent Divorce',
-                                                                                                                                                                                                  emoji: '💔',
-                                                                                                                                                                                                },
-                                                                                                                                                                                                {
-                                                                                                                                                                                                  title: 'Lal Kitab Remedies for Career Problems',
-                                                                                                                                                                                                  description: 'Facing Career Struggles? Try These Lal Kitab Remedies for Success',
-                                                                                                                                                                                                  emoji: '💼',
-                                                                                                                                                                                                },
-                                                                                                                                                                                                {
-                                                                                                                                                                                                  title: 'Lal Kitab Remedies for Financial Problems',
-                                                                                                                                                                                                  description: 'Struggling with Money Issues? Try These Lal Kitab Remedies',
-                                                                                                                                                                                                  emoji: '💰',
-                                                                                                                                                                                                },
-                                                                                                                                                                                                {
-                                                                                                                                                                                                  title: 'Lal Kitab Remedies for Delay in Marriage',
-                                                                                                                                                                                                  description: 'Is your marriage getting delayed again and again? Try these proven Lal Kitab remedies today',
-                                                                                                                                                                                                  emoji: '💍',
-                                                                                                                                                                                                },
-                                                                                                                                                                                                {
-                                                                                                                                                                                                  title: 'Lal Kitab Remedies for Health Problems',
-                                                                                                                                                                                                  description: 'Struggling with health issues? Discover powerful Lal Kitab remedies for healing and well-being.',
-                                                                                                                                                                                                  emoji: '🏥',
-                                                                                                                                                                                                },
-                                                                                                                                                                                                {
-                                                                                                                                                                                                  title: 'Education Problems ke Lal Kitab Remedies',
-                                                                                                                                                                                                  description: 'Strengthen Mercury and Jupiter, perform remedies for academic success',
-                                                                                                                                                                                                  emoji: '📚',
-                                                                                                                                                                                                },
-                                                                                                                                                                                              ];
+const problemRemedies = [
+  {
+    title: "Lal Kitab Remedies to Prevent Divorce",
+    description:
+      "Don’t Let Your Marriage Fall Apart—Try These Lal Kitab Remedies to Prevent Divorce",
+    emoji: "💔",
+  },
+  {
+    title: "Lal Kitab Remedies for Career Problems",
+    description:
+      "Facing Career Struggles? Try These Lal Kitab Remedies for Success",
+    emoji: "💼",
+  },
+  {
+    title: "Lal Kitab Remedies for Financial Problems",
+    description: "Struggling with Money Issues? Try These Lal Kitab Remedies",
+    emoji: "💰",
+  },
+  {
+    title: "Lal Kitab Remedies for Delay in Marriage",
+    description:
+      "Is your marriage getting delayed again and again? Try these proven Lal Kitab remedies today",
+    emoji: "💍",
+  },
+  {
+    title: "Lal Kitab Remedies for Health Problems",
+    description:
+      "Struggling with health issues? Discover powerful Lal Kitab remedies for healing and well-being.",
+    emoji: "🏥",
+  },
+  {
+    title: "Education Problems ke Lal Kitab Remedies",
+    description:
+      "Strengthen Mercury and Jupiter, perform remedies for academic success",
+    emoji: "📚",
+  },
+];
 
-                                                                                                                                                                                              const remedyBenefits = [
-                                                                                                                                                                                                { title: 'Simple and practical remedies', emoji: '✨' },
-                                                                                                                                                                                                { title: 'No mantra or expensive pooja required', emoji: '🙏' },
-                                                                                                                                                                                                { title: 'Low cost and easy to follow', emoji: '💰' },
-                                                                                                                                                                                                { title: 'Focus on karmic balance', emoji: '⚖️' },
-                                                                                                                                                                                                { title: 'Safe and non-harmful', emoji: '🛡️' },
-                                                                                                                                                                                                { title: 'Results-oriented approach', emoji: '🎯' },
-                                                                                                                                                                                              ];
+const remedyBenefits = [
+  { title: "Simple and practical remedies", emoji: "✨" },
+  { title: "No mantra or expensive pooja required", emoji: "🙏" },
+  { title: "Low cost and easy to follow", emoji: "💰" },
+  { title: "Focus on karmic balance", emoji: "⚖️" },
+  { title: "Safe and non-harmful", emoji: "🛡️" },
+  { title: "Results-oriented approach", emoji: "🎯" },
+];
 
-                                                                                                                                                                                              const frequentlyAskedQuestions = [
-                                                                                                                                                                                                {
-                                                                                                                                                                                                  question: 'What are Lal Kitab remedies?',
-                                                                                                                                                                                                  answer:
-                                                                                                                                                                                                    'Lal Kitab remedies are simple, practical measures suggested to reduce the negative effects of planets and strengthen positive influences in a birth chart.',
-                                                                                                                                                                                                },
-                                                                                                                                                                                                {
-                                                                                                                                                                                                  question: 'How are Lal Kitab remedies different from traditional Vedic remedies?',
-                                                                                                                                                                                                  answer:
-                                                                                                                                                                                                    'Unlike traditional remedies, Lal Kitab remedies usually do not involve mantras, yantras, or complex rituals. They focus more on everyday actions, charity, and behavioral corrections.',
-                                                                                                                                                                                                },
-                                                                                                                                                                                                {
-                                                                                                                                                                                                  question: 'Are Lal Kitab remedies scientifically proven?',
-                                                                                                                                                                                                  answer:
-                                                                                                                                                                                                    'Lal Kitab remedies are based on astrological principles and belief systems rather than scientific validation. Their effectiveness is largely experiential and faith-based.',
-                                                                                                                                                                                                },
-                                                                                                                                                                                                {
-                                                                                                                                                                                                  question: 'How long does it take for Lal Kitab remedies to show results?',
-                                                                                                                                                                                                  answer:
-                                                                                                                                                                                                    'Results vary depending on the individual, the planet involved, and consistency. Some people notice changes quickly, while others may see gradual improvements.',
-                                                                                                                                                                                                },
-                                                                                                                                                                                                {
-                                                                                                                                                                                                  question: 'Can Lal Kitab remedies be done without a horoscope?',
-                                                                                                                                                                                                  answer:
-                                                                                                                                                                                                    'Basic remedies can be done without a horoscope, but personalized remedies are more effective when based on an accurate Lal Kitab chart analysis.',
-                                                                                                                                                                                                },
-                                                                                                                                                                                              ];
+const frequentlyAskedQuestions = [
+  {
+    question: "What are Lal Kitab remedies?",
+    answer:
+      "Lal Kitab remedies are simple, practical measures suggested to reduce the negative effects of planets and strengthen positive influences in a birth chart.",
+  },
+  {
+    question:
+      "How are Lal Kitab remedies different from traditional Vedic remedies?",
+    answer:
+      "Unlike traditional remedies, Lal Kitab remedies usually do not involve mantras, yantras, or complex rituals. They focus more on everyday actions, charity, and behavioral corrections.",
+  },
+  {
+    question: "Are Lal Kitab remedies scientifically proven?",
+    answer:
+      "Lal Kitab remedies are based on astrological principles and belief systems rather than scientific validation. Their effectiveness is largely experiential and faith-based.",
+  },
+  {
+    question: "How long does it take for Lal Kitab remedies to show results?",
+    answer:
+      "Results vary depending on the individual, the planet involved, and consistency. Some people notice changes quickly, while others may see gradual improvements.",
+  },
+  {
+    question: "Can Lal Kitab remedies be done without a horoscope?",
+    answer:
+      "Basic remedies can be done without a horoscope, but personalized remedies are more effective when based on an accurate Lal Kitab chart analysis.",
+  },
+];
 
-                                                                                                                                                                                              const LalKitabRemediesPage = () => {
+const LalKitabRemediesPage = () => {
   const reduceMotion = useReducedMotion();
   const imageAnimation = reduceMotion
     ? { initial: false, animate: { opacity: 1, x: 0 } }
     : {
         initial: { opacity: 0, x: -64 },
         animate: { opacity: 1, x: 0 },
-        transition: { duration: 0.8, ease: 'easeOut' },
+        transition: { duration: 0.8, ease: "easeOut" },
       };
   const contentAnimation = reduceMotion
     ? { initial: false, animate: { opacity: 1, x: 0 } }
     : {
         initial: { opacity: 0, x: 64 },
         animate: { opacity: 1, x: 0 },
-        transition: { duration: 0.8, delay: 0.12, ease: 'easeOut' },
+        transition: { duration: 0.8, delay: 0.12, ease: "easeOut" },
       };
 
   return (
@@ -147,15 +154,18 @@
             aria-hidden="true"
             initial={reduceMotion ? false : { scaleY: 0 }}
             animate={{ scaleY: 1 }}
-            transition={{ duration: 0.65, delay: side * 0.08, ease: 'easeOut' }}
+            transition={{ duration: 0.65, delay: side * 0.08, ease: "easeOut" }}
             className={`pointer-events-none absolute inset-y-8 z-0 w-px origin-top bg-[#9b6847]/50 sm:inset-y-10 ${
-              side === 0 ? 'left-2' : 'right-2'
+              side === 0 ? "left-2" : "right-2"
             }`}
           />
         ))}
 
         <div className="relative z-10 min-w-0 overflow-hidden py-2">
-          <motion.div {...imageAnimation} className="flex w-full justify-center">
+          <motion.div
+            {...imageAnimation}
+            className="flex w-full justify-center"
+          >
             <img
               src="/Lal%20Kitab/Lal%20Kitab%20Remedies%20Infographic.png"
               alt="Lal Kitab remedies for business, money, career, health, love, and other life concerns"
@@ -174,13 +184,25 @@
             </h1>
             <div className="space-y-3 text-base leading-6 text-black sm:text-lg sm:leading-7">
               <p>
-                Lal Kitab remedies are simple, practical astrological solutions rooted in the ancient wisdom of the Lal Kitab. Unlike traditional astrology that often relies on complex rituals, mantras, or expensive gemstones, Lal Kitab focuses on karma correction and daily-life actions to reduce the negative effects of planetary imbalances.
+                Lal Kitab remedies are simple, practical astrological solutions
+                rooted in the ancient wisdom of the Lal Kitab. Unlike
+                traditional astrology that often relies on complex rituals,
+                mantras, or expensive gemstones, Lal Kitab focuses on karma
+                correction and daily-life actions to reduce the negative effects
+                of planetary imbalances.
               </p>
               <p>
-                These remedies are easy to perform, affordable, and designed to bring gradual but meaningful positive changes in areas such as career, relationships, health, and finances. By following Lal Kitab remedies with consistency and sincerity, one can restore balance between actions and destiny, allowing planetary energies to work in a more supportive way.
+                These remedies are easy to perform, affordable, and designed to
+                bring gradual but meaningful positive changes in areas such as
+                career, relationships, health, and finances. By following Lal
+                Kitab remedies with consistency and sincerity, one can restore
+                balance between actions and destiny, allowing planetary energies
+                to work in a more supportive way.
               </p>
               <p>
-                Lal Kitab remedies emphasize responsibility, discipline, and conscious behavior—making them suitable for anyone seeking practical and non-harmful astrological guidance in modern life.
+                Lal Kitab remedies emphasize responsibility, discipline, and
+                conscious behavior—making them suitable for anyone seeking
+                practical and non-harmful astrological guidance in modern life.
               </p>
             </div>
           </motion.div>
@@ -229,10 +251,7 @@
         </div>
       </section>
 
-      <div
-        aria-hidden="true"
-        className="h-px w-full bg-[#946b13]/45"
-      />
+      <div aria-hidden="true" className="h-px w-full bg-[#946b13]/45" />
 
       <section
         aria-labelledby="problem-remedies-heading"
@@ -257,7 +276,10 @@
               className="flex flex-col rounded-none rounded-bl-2xl border border-[#946b13]/35 bg-white px-4 py-4 shadow-[0_8px_24px_rgba(77,0,30,0.2),0_3px_8px_rgba(148,107,19,0.22)] transition duration-200 hover:-translate-y-1 hover:shadow-[0_14px_30px_rgba(77,0,30,0.28),0_5px_12px_rgba(148,107,19,0.3)] sm:px-5 sm:py-5"
             >
               <div className="flex items-start gap-3">
-                <span aria-hidden="true" className="mt-0.5 shrink-0 text-xl sm:text-2xl">
+                <span
+                  aria-hidden="true"
+                  className="mt-0.5 shrink-0 text-xl sm:text-2xl"
+                >
                   {problem.emoji}
                 </span>
                 <h3 className="min-w-0 flex-1 font-serif text-sm font-semibold leading-snug text-[#946b13]">
@@ -305,6 +327,30 @@
             </article>
           ))}
         </div>
+      </section>
+
+      <section
+        aria-labelledby="lal-kitab-cta-heading"
+        className="border-t border-[#946b13]/45 px-2 py-5 text-center sm:px-4 sm:py-7 lg:px-8 lg:py-8"
+      >
+        <h2
+          id="lal-kitab-cta-heading"
+          className="font-serif text-2xl font-bold text-black sm:text-3xl lg:text-4xl"
+        >
+          “Every Problem, One Lal Kitab Solution”
+        </h2>
+        <p className="mx-auto mt-4 max-w-2xl text-sm leading-5 text-[#594b41] sm:mt-5 sm:text-base">
+          Discover simple and effective Lal Kitab remedies for health, wealth,
+          career, relationships, and peace of mind. Explore astrological
+          guidance and practical solutions to help bring positivity and balance
+          into your life.
+        </p>
+        <Link
+          to="/lal-kitab-details"
+          className="mt-4 inline-flex min-h-11 items-center justify-center rounded-none rounded-bl-xl bg-[#946b13] px-6 py-2.5 text-sm font-semibold text-white transition hover:bg-[#7d5a0f] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#946b13] focus-visible:ring-offset-2 sm:mt-5 sm:text-base"
+        >
+          Make your lal kitab kundli
+        </Link>
       </section>
 
       <div aria-hidden="true" className="h-px w-full bg-[#946b13]/45" />

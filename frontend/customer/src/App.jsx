@@ -15,7 +15,8 @@ import MantraUpcharPage from './components/products/MantraUpchar';
 import MantraUpcharDetailsPage from './components/products/MantraUpcharDetails';
 import LalKitabPage from './components/products/LalKitab';
 import LalKitabDetailsPage from './components/products/LalKitabDetails';
-import LalKitabRemediesPage from './components/products/LalKitabRemedies';
+import LalKitabRemediesPage from './pages/LalKitabRemedies';
+import LalKitabPlanetRemediesPage from './pages/LalKitabPlanetRemedies';
 import GemstonePage from './components/products/Gemstone';
 import SoapPage from './components/products/Soap';
 import DhoopPage from './components/products/Dhoop';
@@ -78,6 +79,7 @@ function App() {
           <Route path="/products/:slug" element={<YantraDetails />} />
           <Route path="/featured-products/:slug" element={<FeaturedProductDetails />} />
           <Route path="/lal-kitab" element={<LalKitabPage />} />
+          <Route path="/lal-kitab-remedies/details" element={<LalKitabPlanetRemediesPage />} />
           <Route path="/lal-kitab-remedies" element={<LalKitabRemediesPage />} />
           <Route path="/lal-kitab-details" element={<LalKitabDetailsPage />} />
           <Route path="/gemstone" element={<GemstonePage />} />
@@ -102,7 +104,7 @@ function App() {
         </Routes>
       </main>
 
-      <Footer className={pathname === '/' || pathname === '/mantra-upchar' || pathname === '/lal-kitab' || pathname === '/lal-kitab-remedies' || pathname === '/lal-kitab-details' || pathname === '/gemstone' || pathname === '/soap' || pathname === '/dhoop' || pathname === '/citrine' || pathname === '/tiger-eye' || pathname === '/garnet' || pathname === '/amethyst' || pathname === '/selenite' || pathname === '/rose-quartz' || pathname === '/lapis-lazuli' || pathname === '/bracelets' || pathname === '/pendants' || pathname === '/karungali' || pathname === '/about' ? 'mt-0' : pathname === '/login' ? 'mt-2' : undefined} />
+      <Footer className={pathname === '/' || pathname === '/mantra-upchar' || pathname === '/lal-kitab' || pathname === '/lal-kitab-remedies' || pathname === '/lal-kitab-remedies/details' || pathname === '/lal-kitab-details' || pathname === '/gemstone' || pathname === '/soap' || pathname === '/dhoop' || pathname === '/citrine' || pathname === '/tiger-eye' || pathname === '/garnet' || pathname === '/amethyst' || pathname === '/selenite' || pathname === '/rose-quartz' || pathname === '/lapis-lazuli' || pathname === '/bracelets' || pathname === '/pendants' || pathname === '/karungali' || pathname === '/about' ? 'mt-0' : pathname === '/login' ? 'mt-2' : undefined} />
     </div>
   );
 }
