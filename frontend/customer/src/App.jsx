@@ -1,7 +1,7 @@
 // Root app component for the customer frontend.
 // Serves the buyer-facing routes and app shell.
 import { useLayoutEffect, useRef } from 'react';
-import { Route, Routes, useLocation, useNavigationType } from 'react-router-dom';
+import { Navigate, Route, Routes, useLocation, useNavigationType } from 'react-router-dom';
 import CartPage from './pages/Cart';
 import HomePage from './pages/Home';
 import OrdersPage from './pages/Orders';
@@ -17,7 +17,9 @@ import LalKitabPage from './components/products/LalKitab';
 import LalKitabDetailsPage from './components/products/LalKitabDetails';
 import LalKitabRemediesPage from './pages/LalKitabRemedies';
 import LalKitabPlanetRemediesPage from './pages/LalKitabPlanetRemedies';
+import ProblemWiseLalKitabRemediesPage from './pages/ProblemWiseLalKitabRemedies';
 import GemstonePage from './components/products/Gemstone';
+import GemstoneDetailsPage from './components/products/GemstoneDetails';
 import SoapPage from './components/products/Soap';
 import DhoopPage from './components/products/Dhoop';
 import PyritePage from './components/products/Pyrite';
@@ -80,8 +82,11 @@ function App() {
           <Route path="/featured-products/:slug" element={<FeaturedProductDetails />} />
           <Route path="/lal-kitab" element={<LalKitabPage />} />
           <Route path="/lal-kitab-remedies/details" element={<LalKitabPlanetRemediesPage />} />
+          <Route path="/lal-kitab-remedies/problems/:problemSlug" element={<ProblemWiseLalKitabRemediesPage />} />
+          <Route path="/lal-kitab-remedies/problems" element={<Navigate to="/lal-kitab-remedies" replace />} />
           <Route path="/lal-kitab-remedies" element={<LalKitabRemediesPage />} />
           <Route path="/lal-kitab-details" element={<LalKitabDetailsPage />} />
+          <Route path="/gemstone/:slug" element={<GemstoneDetailsPage />} />
           <Route path="/gemstone" element={<GemstonePage />} />
           <Route path="/soap" element={<SoapPage />} />
           <Route path="/dhoop" element={<DhoopPage />} />
@@ -104,7 +109,7 @@ function App() {
         </Routes>
       </main>
 
-      <Footer className={pathname === '/' || pathname === '/mantra-upchar' || pathname === '/lal-kitab' || pathname === '/lal-kitab-remedies' || pathname === '/lal-kitab-remedies/details' || pathname === '/lal-kitab-details' || pathname === '/gemstone' || pathname === '/soap' || pathname === '/dhoop' || pathname === '/citrine' || pathname === '/tiger-eye' || pathname === '/garnet' || pathname === '/amethyst' || pathname === '/selenite' || pathname === '/rose-quartz' || pathname === '/lapis-lazuli' || pathname === '/bracelets' || pathname === '/pendants' || pathname === '/karungali' || pathname === '/about' ? 'mt-0' : pathname === '/login' ? 'mt-2' : undefined} />
+      <Footer className={pathname === '/' || pathname === '/mantra-upchar' || pathname === '/lal-kitab' || pathname === '/lal-kitab-remedies' || pathname === '/lal-kitab-remedies/details' || pathname.startsWith('/lal-kitab-remedies/problems') || pathname === '/lal-kitab-details' || pathname === '/gemstone' || pathname === '/soap' || pathname === '/dhoop' || pathname === '/citrine' || pathname === '/tiger-eye' || pathname === '/garnet' || pathname === '/amethyst' || pathname === '/selenite' || pathname === '/rose-quartz' || pathname === '/lapis-lazuli' || pathname === '/bracelets' || pathname === '/pendants' || pathname === '/karungali' || pathname === '/about' ? 'mt-0' : pathname === '/login' ? 'mt-2' : undefined} />
     </div>
   );
 }

@@ -179,6 +179,14 @@ const RotatingLalKitab = ({ className = '' }) => {
     event.currentTarget.setPointerCapture(event.pointerId);
   };
 
+  useEffect(() => {
+    const timer = window.setInterval(() => {
+      setRotation((currentRotation) => currentRotation + 0.8);
+    }, 20);
+
+    return () => window.clearInterval(timer);
+  }, []);
+
   const handlePointerMove = (event) => {
     if (!isDragging.current) return;
 
@@ -195,7 +203,7 @@ const RotatingLalKitab = ({ className = '' }) => {
 
   return (
     <div
-      className={`pointer-events-auto relative mx-auto w-[min(45vw,160px)] shrink-0 cursor-grab touch-none select-none active:cursor-grabbing sm:absolute sm:right-[3%] sm:top-1/2 sm:mx-0 sm:w-[38%] sm:max-w-[300px] sm:-translate-y-1/2 lg:right-[5%] lg:w-[30%] ${className}`}
+      className={`pointer-events-auto relative mx-auto w-[min(55vw,210px)] shrink-0 cursor-grab touch-none select-none active:cursor-grabbing sm:absolute sm:right-[3%] sm:top-1/2 sm:mx-0 sm:w-[38%] sm:max-w-[360px] sm:-translate-y-1/2 lg:right-[4%] lg:w-[32%] ${className}`}
       onPointerDown={handlePointerDown}
       onPointerMove={handlePointerMove}
       onPointerUp={stopDragging}
@@ -220,8 +228,8 @@ const RotatingLalKitab = ({ className = '' }) => {
         src="/lal-kitab%201.1.png"
         alt="Lal Kitab astrology book"
         draggable="false"
-        className="pointer-events-none block w-full object-contain"
-        style={{ transform: `rotate(${rotation}deg)` }}
+        className="pointer-events-none block w-full object-contain drop-shadow-[0_18px_26px_rgba(0,0,0,0.28)]"
+        style={{ transform: `rotate(${rotation + 12}deg)` }}
       />
     </div>
   );
@@ -1119,11 +1127,168 @@ const HomePage = () => {
     >
       <div className="absolute inset-0 bg-[#041018]/55" aria-hidden="true" />
       <div className="relative z-10 mx-auto max-w-[1440px]">
-        <h2 className="text-center text-2xl font-bold leading-tight text-white sm:text-3xl">Designing Your Future, One Planet at a Time</h2>
-        <p className="mx-auto mt-3 max-w-3xl text-center text-[13px] leading-5 text-white/90 sm:text-sm sm:leading-6">
-          We interpret planetary patterns through precise astrology, offering clear insight to help you find balance and move toward a brighter future.
-        </p>
-        <div className="relative mt-6 min-h-[340px] sm:mt-8 sm:min-h-[380px] lg:min-h-[440px]">
+        <div className="relative flex min-h-[340px] items-center sm:min-h-[380px] lg:min-h-[440px]">
+          <div className="w-full max-w-[760px] rounded-[28px] border border-[#d6b0c2]/15 bg-[#17142e]/15 px-4 py-4 shadow-[0_20px_50px_rgba(14,10,29,0.12)] backdrop-blur-[1px] sm:px-6 lg:px-7 lg:py-6">
+            <h2 className="text-center text-[clamp(1.7rem,2vw,2.4rem)] font-black leading-[1.05] tracking-[-0.04em] text-white">
+              Make Your Kundali with us
+            </h2>
+            <p className="mx-auto mt-3 max-w-[900px] text-center text-[11px] font-medium leading-[1.5] text-[#f1e7ef] sm:text-[12px] lg:text-[14px]">
+              Experience a meticulously prepared Kundali designed to decode your destiny with accuracy, wisdom, and transformative guidance.
+            </p>
+
+            <form className="mt-6 space-y-4 text-white" onSubmit={(event) => event.preventDefault()}>
+              <div className="grid gap-3 md:grid-cols-2 xl:grid-cols-3">
+                <div className="space-y-1.5">
+                  <label htmlFor="kundali-name" className="block text-[0.62rem] font-bold uppercase tracking-[0.14em] text-[#f3d9d1]">Full Name*</label>
+                  <input
+                    id="kundali-name"
+                    type="text"
+                    placeholder="Enter Name"
+                    autoComplete="name"
+                    onChange={(event) => {
+                      event.target.value = event.target.value.replace(/[^\p{L}\p{M}\s.'’-]/gu, '');
+                    }}
+                    className="w-full rounded-lg border border-[#d4b7c6]/70 bg-[#161323]/25 px-3 py-2.5 text-sm text-[#f8f4f7] placeholder:text-[#f4eaf2]/75 focus:border-[#f2c59d] focus:outline-none"
+                  />
+                  <p className="text-[11px] text-[#f0c5c1]">Full Name is required</p>
+                </div>
+
+                <div className="space-y-1.5">
+                  <label htmlFor="kundali-phone" className="block text-[0.62rem] font-bold uppercase tracking-[0.14em] text-[#f3d9d1]">Phone*</label>
+                  <div className="flex items-center overflow-hidden rounded-lg border border-[#d4b7c6]/70 bg-[#161323]/25 focus-within:border-[#f2c59d]">
+                    <span className="border-r border-[#d4b7c6]/70 px-3 py-2.5 text-sm font-medium text-[#f8f4f7]">+91</span>
+                    <input
+                      id="kundali-phone"
+                      type="tel"
+                      inputMode="numeric"
+                      pattern="[0-9+\-\s()]*"
+                      autoComplete="tel"
+                      placeholder="Enter phone"
+                      onChange={(event) => {
+                        event.target.value = event.target.value.replace(/[^0-9+\-\s()]/g, '');
+                      }}
+                      className="w-full bg-transparent px-3 py-2.5 text-sm text-[#f8f4f7] placeholder:text-[#f4eaf2]/75 focus:outline-none"
+                    />
+                  </div>
+                  <p className="text-[11px] text-[#f0c5c1]">Phone is required</p>
+                </div>
+
+                <div className="space-y-1.5">
+                  <label htmlFor="kundali-email" className="block text-[0.62rem] font-bold uppercase tracking-[0.14em] text-[#f3d9d1]">Email</label>
+                  <input
+                    id="kundali-email"
+                    type="email"
+                    placeholder="Enter email"
+                    autoComplete="email"
+                    className="w-full rounded-lg border border-[#d4b7c6]/70 bg-[#d5d0d0]/40 px-3 py-2.5 text-sm text-[#17142e] placeholder:text-[#454158] focus:border-[#f2c59d] focus:outline-none"
+                  />
+                </div>
+              </div>
+
+              <div className="grid gap-3 md:grid-cols-2 xl:grid-cols-3">
+                <div className="space-y-1.5">
+                  <label htmlFor="kundali-date" className="block text-[0.62rem] font-bold uppercase tracking-[0.14em] text-[#f3d9d1]">Date of Birth*</label>
+                  <div className="grid grid-cols-3 gap-2">
+                    <input
+                      type="text"
+                      inputMode="numeric"
+                      maxLength={2}
+                      placeholder="DD"
+                      onChange={(event) => {
+                        event.target.value = event.target.value.replace(/\D/g, '').slice(0, 2);
+                      }}
+                      className="rounded-lg border border-[#d4b7c6]/70 bg-[#d5d0d0]/40 px-2.5 py-2.5 text-sm text-[#17142e] placeholder:text-[#454158] focus:border-[#f2c59d] focus:outline-none"
+                    />
+                    <input
+                      type="text"
+                      inputMode="numeric"
+                      maxLength={2}
+                      placeholder="MM"
+                      onChange={(event) => {
+                        event.target.value = event.target.value.replace(/\D/g, '').slice(0, 2);
+                      }}
+                      className="rounded-lg border border-[#d4b7c6]/70 bg-[#d5d0d0]/40 px-2.5 py-2.5 text-sm text-[#17142e] placeholder:text-[#454158] focus:border-[#f2c59d] focus:outline-none"
+                    />
+                    <input
+                      type="text"
+                      inputMode="numeric"
+                      maxLength={4}
+                      placeholder="YYYY"
+                      onChange={(event) => {
+                        event.target.value = event.target.value.replace(/\D/g, '').slice(0, 4);
+                      }}
+                      className="rounded-lg border border-[#d4b7c6]/70 bg-[#d5d0d0]/40 px-2.5 py-2.5 text-sm text-[#17142e] placeholder:text-[#454158] focus:border-[#f2c59d] focus:outline-none"
+                    />
+                  </div>
+                </div>
+
+                <div className="space-y-1.5">
+                  <label htmlFor="kundali-time" className="block text-[0.62rem] font-bold uppercase tracking-[0.14em] text-[#f3d9d1]">Time of Birth*</label>
+                  <div className="grid grid-cols-3 gap-2">
+                    <select className="rounded-lg border border-[#d4b7c6]/70 bg-[#d5d0d0]/40 px-2.5 py-2.5 text-sm text-[#17142e] focus:border-[#f2c59d] focus:outline-none">
+                      <option value="">HH</option>
+                      <option>01</option>
+                      <option>02</option>
+                      <option>03</option>
+                      <option>04</option>
+                      <option>05</option>
+                      <option>06</option>
+                      <option>07</option>
+                      <option>08</option>
+                      <option>09</option>
+                      <option>10</option>
+                      <option>11</option>
+                      <option>12</option>
+                    </select>
+                    <select className="rounded-lg border border-[#d4b7c6]/70 bg-[#d5d0d0]/40 px-2.5 py-2.5 text-sm text-[#17142e] focus:border-[#f2c59d] focus:outline-none">
+                      <option value="">MM</option>
+                      {Array.from({ length: 60 }, (_, i) => (
+                        <option key={i}>{String(i).padStart(2, '0')}</option>
+                      ))}
+                    </select>
+                    <select className="rounded-lg border border-[#d4b7c6]/70 bg-[#d5d0d0]/40 px-2.5 py-2.5 text-sm text-[#17142e] focus:border-[#f2c59d] focus:outline-none">
+                      <option value="">AM</option>
+                      <option>AM</option>
+                      <option>PM</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div className="space-y-1.5">
+                  <label htmlFor="kundali-place" className="block text-[0.62rem] font-bold uppercase tracking-[0.14em] text-[#f3d9d1]">Place of Birth*</label>
+                  <input
+                    id="kundali-place"
+                    type="text"
+                    placeholder="Enter place"
+                    autoComplete="address-level2"
+                    onChange={(event) => {
+                      event.target.value = event.target.value.replace(/[^\p{L}\p{M}\s.'’-]/gu, '');
+                    }}
+                    className="w-full rounded-lg border border-[#d4b7c6]/70 bg-[#d5d0d0]/40 px-3 py-2.5 text-sm text-[#17142e] placeholder:text-[#454158] focus:border-[#f2c59d] focus:outline-none"
+                  />
+                </div>
+              </div>
+
+              <div className="grid items-end gap-3 md:grid-cols-[minmax(0,1fr)_minmax(0,1.2fr)] xl:grid-cols-[minmax(0,0.72fr)_minmax(0,1.2fr)]">
+                <div className="space-y-1.5">
+                  <label htmlFor="kundali-gender" className="block text-[0.62rem] font-bold uppercase tracking-[0.14em] text-[#f3d9d1]">Gender*</label>
+                  <select id="kundali-gender" className="w-full rounded-lg border border-[#d4b7c6]/70 bg-[#d5d0d0]/40 px-3 py-2.5 text-sm text-[#17142e] focus:border-[#f2c59d] focus:outline-none">
+                    <option>Male</option>
+                    <option>Female</option>
+                    <option>Other</option>
+                  </select>
+                </div>
+
+                <button
+                  type="submit"
+                  className="w-full rounded-lg bg-[#f2b646]/90 px-5 py-3 text-base font-bold text-[#201b3a] shadow-[0_10px_20px_rgba(242,182,70,0.2)] transition hover:bg-[#f7c96a] focus:outline-none focus:ring-2 focus:ring-[#f7c96a] focus:ring-offset-2 focus:ring-offset-[#17142e]"
+                >
+                  Get Kundli
+                </button>
+              </div>
+            </form>
+          </div>
+
           <div className="absolute inset-y-0 right-[-8%] flex w-[72%] translate-y-12 items-end justify-end md:right-[-10%] md:w-[64%] lg:right-[-16%]">
             <img
               src="/Sadhu.png"
@@ -1138,7 +1303,7 @@ const HomePage = () => {
     {/* Services we offer */}
     <section id="services" className="bg-[#f5f1eb] px-4 py-7 sm:px-8 lg:py-10">
       <div className="mx-auto max-w-[1440px]">
-        <div className="mx-auto text-center">
+        <div className="mx-auto mt-8 text-center">
           <h2 className="text-2xl font-bold leading-tight text-[#201b3a] sm:text-3xl">
             Services We Offer
           </h2>
@@ -1224,7 +1389,7 @@ const HomePage = () => {
           </div>
 
           <form
-            className="w-full max-w-[420px] justify-self-center rounded-2xl border border-white/65 bg-[#3a0717]/70 p-5 shadow-[0_16px_44px_rgba(0,0,0,0.32)] backdrop-blur-sm sm:p-8"
+            className="w-full max-w-[420px] justify-self-center rounded-2xl border border-white/65 bg-[#3a0717]/20 p-5 shadow-[0_16px_44px_rgba(0,0,0,0.22)] backdrop-blur-[2px] sm:p-8"
             aria-label="Contact inquiry form"
           >
             <h2 className="mb-4 text-center text-xl font-bold tracking-tight text-white drop-shadow-lg sm:text-2xl">

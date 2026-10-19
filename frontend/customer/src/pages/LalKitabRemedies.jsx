@@ -1,5 +1,6 @@
                                                                                                                                                                                               import { motion, useReducedMotion } from 'framer-motion';
                                                                                                                                                                                               import { Link } from 'react-router-dom';
+                                                                                                                                                                                              import problemRemedies from '../data/lalKitabProblemRemedies';
 
                                                                                                                                                                                               const planets = [
                                                                                                                                                                                                 {
@@ -46,39 +47,6 @@
                                                                                                                                                                                                   name: 'Ketu',
                                                                                                                                                                                                   image: '/Planets/Ketu.png',
                                                                                                                                                                                                   remedy: 'Donate brown items',
-                                                                                                                                                                                                },
-                                                                                                                                                                                              ];
-
-                                                                                                                                                                                              const problemRemedies = [
-                                                                                                                                                                                                {
-                                                                                                                                                                                                  title: 'Lal Kitab Remedies to Prevent Divorce',
-                                                                                                                                                                                                  description: 'Don’t Let Your Marriage Fall Apart—Try These Lal Kitab Remedies to Prevent Divorce',
-                                                                                                                                                                                                  emoji: '💔',
-                                                                                                                                                                                                },
-                                                                                                                                                                                                {
-                                                                                                                                                                                                  title: 'Lal Kitab Remedies for Career Problems',
-                                                                                                                                                                                                  description: 'Facing Career Struggles? Try These Lal Kitab Remedies for Success',
-                                                                                                                                                                                                  emoji: '💼',
-                                                                                                                                                                                                },
-                                                                                                                                                                                                {
-                                                                                                                                                                                                  title: 'Lal Kitab Remedies for Financial Problems',
-                                                                                                                                                                                                  description: 'Struggling with Money Issues? Try These Lal Kitab Remedies',
-                                                                                                                                                                                                  emoji: '💰',
-                                                                                                                                                                                                },
-                                                                                                                                                                                                {
-                                                                                                                                                                                                  title: 'Lal Kitab Remedies for Delay in Marriage',
-                                                                                                                                                                                                  description: 'Is your marriage getting delayed again and again? Try these proven Lal Kitab remedies today',
-                                                                                                                                                                                                  emoji: '💍',
-                                                                                                                                                                                                },
-                                                                                                                                                                                                {
-                                                                                                                                                                                                  title: 'Lal Kitab Remedies for Health Problems',
-                                                                                                                                                                                                  description: 'Struggling with health issues? Discover powerful Lal Kitab remedies for healing and well-being.',
-                                                                                                                                                                                                  emoji: '🏥',
-                                                                                                                                                                                                },
-                                                                                                                                                                                                {
-                                                                                                                                                                                                  title: 'Education Problems ke Lal Kitab Remedies',
-                                                                                                                                                                                                  description: 'Strengthen Mercury and Jupiter, perform remedies for academic success',
-                                                                                                                                                                                                  emoji: '📚',
                                                                                                                                                                                                 },
                                                                                                                                                                                               ];
 
@@ -255,9 +223,11 @@
 
         <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3 lg:gap-4">
           {problemRemedies.map((problem) => (
-            <article
-              key={problem.title}
-              className="flex flex-col rounded-none rounded-bl-2xl border border-[#946b13]/35 bg-white px-4 py-4 shadow-[0_8px_24px_rgba(77,0,30,0.2),0_3px_8px_rgba(148,107,19,0.22)] transition duration-200 hover:-translate-y-1 hover:shadow-[0_14px_30px_rgba(77,0,30,0.28),0_5px_12px_rgba(148,107,19,0.3)] sm:px-5 sm:py-5"
+            <Link
+              key={problem.slug}
+              to={`/lal-kitab-remedies/problems/${problem.slug}`}
+              aria-label={`Read details: ${problem.title}`}
+              className="flex flex-col rounded-none rounded-bl-2xl border border-[#946b13]/35 bg-white px-4 py-4 shadow-[0_8px_24px_rgba(77,0,30,0.2),0_3px_8px_rgba(148,107,19,0.22)] transition duration-200 hover:-translate-y-1 hover:shadow-[0_14px_30px_rgba(77,0,30,0.28),0_5px_12px_rgba(148,107,19,0.3)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#946b13] focus-visible:ring-offset-2 sm:px-5 sm:py-5"
             >
               <div className="flex items-start gap-3">
                 <span aria-hidden="true" className="mt-0.5 shrink-0 text-xl sm:text-2xl">
@@ -270,7 +240,7 @@
               <p className="mt-2 text-xs leading-4 text-black sm:text-sm sm:leading-5">
                 {problem.description}
               </p>
-            </article>
+            </Link>
           ))}
         </div>
       </section>

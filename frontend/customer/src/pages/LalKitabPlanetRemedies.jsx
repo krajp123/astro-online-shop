@@ -63,6 +63,8 @@ const planetDetails = [
     focus:
       "In traditional astrology, Saturn is associated with patience, discipline, and responsibility.",
     remedy: "Donate black items on Saturdays, feed crows",
+    heroDescription:
+      "In Lal Kitab astrology, Saturn represents discipline, hard work, patience, karma, responsibility, delays, and the lessons life teaches over time. It shows where you may struggle in the beginning, but also where lasting success can come through honesty, patience, and consistency. A strong Saturn is traditionally associated with practicality, maturity, and the strength to handle difficult situations. When Saturn is weak or afflicted, astrology associates it with delays in work, loneliness, fear, family stress, financial pressure, or repeated obstacles.\n\nUnderstanding Saturn in each house can help you reflect on where life may be testing you and explore traditional Lal Kitab practices for stability, peace, and balance.",
   },
   {
     name: "Rahu",
@@ -70,6 +72,8 @@ const planetDetails = [
     focus:
       "In traditional astrology, Rahu is associated with ambition, change, and unconventional pursuits.",
     remedy: "Donate blue or black items, feed dogs",
+    heroDescription:
+      "In Lal Kitab, Rahu is associated with desires, ambitions, and experiences that push you out of your comfort zone. It is traditionally linked to the way you chase goals, take risks, and connect with the world, sometimes through foreign contacts or sudden opportunities. A strong Rahu is associated with boldness, vision, and ambition. When Rahu is considered weak or troubled, traditional astrology describes confusion or unexpected challenges in relationships, career, or money. Understanding Rahu in each house can offer a cultural lens for reflection, while practical decisions and simple, safe traditions can help you feel grounded.",
   },
   {
     name: "Ketu",
@@ -77,6 +81,8 @@ const planetDetails = [
     focus:
       "In traditional astrology, Ketu is associated with introspection, detachment, and spiritual pursuits.",
     remedy: "Donate brown items",
+    heroDescription:
+      "In Lal Kitab, Ketu is associated with detachment, intuition, and spiritual growth that can come from facing uncertainty. It is traditionally linked to how you process past experiences, navigate change, and explore life’s deeper meaning. Ketu’s lessons may feel confusing or disruptive, while its positive themes include intuition and resilience. Astrology also associates a difficult Ketu placement with isolation, sudden losses, or career stagnation; these are traditional interpretations, not certainties. Understanding Ketu in each house can offer a reflective perspective, while practical choices and safe, meaningful practices can help you feel grounded.",
   },
 ];
 
@@ -1062,6 +1068,480 @@ const venusHouseDetails = [
   },
 ];
 
+const saturnHouseDetails = [
+  {
+    title: "1st House - Self & Personality",
+    benefic:
+      "A quiet, private home and keeping finances in a secure, low-light place are traditional Saturn associations. You may have a sharp mind and the potential to build lasting prosperity through discipline. Alcohol or legal disputes are traditionally considered possible sources of setbacks, so patience, practical decisions, and a calm living space are encouraged.",
+    malefic:
+      "A quick temper or changing jobs too often may affect financial stability. The traditional guidance advises avoiding alcohol and meat and exercising patience through your late 30s and 40s. It also suggests waiting until after age 52 to build a house; consider major property decisions based on your circumstances and qualified advice rather than astrology alone.",
+    remedies: [
+      "If you often have disagreements with your father or brother, face repeated trouble at work, or keep losing money, feed monkeys for 11 days and then continue every Tuesday.",
+      "Donate an iron griddle, tongs, and a small stove once every year.",
+      "The traditional practice of burying kohl or salt is omitted; choose a safe, lawful charity or donation instead.",
+    ],
+  },
+  {
+    title: "2nd House - Wealth & Family",
+    benefic:
+      "You may be a natural leader with a sharp mind for business and a spiritual side that keeps you grounded. Strategic thinking may support financial security, especially in work with grains or spices. Traditional suggestions include using a red or yellow vehicle and a daily milk or curd tilak to balance ambition with a stable home life.",
+    malefic:
+      "Saving may feel difficult if expenses tend to catch up with income. Traditional guidance cautions against black or black-and-white vehicles and pets. Generosity, measured habits, and a practical budget can help support peace at home and financial stability.",
+    remedies: [
+      "Apply a tilak of milk, curd, or pure ghee on your forehead every day.",
+      "Use coconut oil on your face instead of creams if it suits your skin.",
+      "Avoid applying mustard oil to your body or hair if it irritates your skin.",
+    ],
+  },
+  {
+    title: "3rd House - Courage & Siblings",
+    benefic:
+      "You may have a knack for deep, technical work such as engineering or medicine and may acquire property, though high spending can sometimes leave you short on cash. A traditional suggestion is to keep savings in a secure, dimly lit place to the right of the front door. Trust your instincts, consider opportunities from the West, and turn ideas into practical plans.",
+    malefic:
+      "The same traditional reading describes technical strengths and property potential, alongside a tendency to spend heavily and feel short on cash. Organising savings, trusting your judgement, and taking practical steps toward opportunities may help create more stability.",
+    remedies: [
+      "Avoid living in a house that faces south, east, or southeast, if this is a practical choice for you.",
+      "Donate eye medicines only through a registered charitable clinic or medical centre, following its accepted donation process.",
+    ],
+  },
+  {
+    title: "4th House - Home & Mother",
+    benefic:
+      "You may travel often and find opportunities through travel. Property, a happy home, and careers such as medicine or construction materials are traditional themes for this placement. With maturity, you may become respected and spiritually inclined. Keeping your word and enjoying music can help you feel balanced as you work toward success.",
+    malefic:
+      "Travel and work in fields such as medicine or construction may be recurring themes. The traditional description also associates maturity, spirituality, keeping promises, and an interest in music with a more balanced life.",
+    remedies: [
+      "For 43 days, offer milk and rice through an appropriate water-harvesting or community donation programme; do not put food into public drainage systems.",
+      "Avoid offerings of alcohol at temples; make a lawful, non-alcoholic donation if you wish to give.",
+      "Keep Ganga water in a clean silver plate or silver vessel at home.",
+      "Carry a small silver square in your pocket.",
+      "Avoid laying a house foundation after sunset if that is part of your chosen tradition.",
+    ],
+  },
+  {
+    title: "5th House - Children & Creativity",
+    benefic:
+      "You may appear unassuming while being sharp about your goals. A solid foundation and respect for tradition may help you secure family inheritance. Honesty, avoiding shortcuts, and staying flexible can help you turn your potential into practical success.",
+    malefic:
+      "The traditional reading warns of possible financial and health difficulties and advises honesty, humility, and care in family relationships. Major construction or renovation decisions should be based on practical, professional advice rather than predictions of harm to relatives.",
+    remedies: [
+      "Feed monkeys with roasted gram where this is permitted and safe.",
+      "Avoid hurting children or making promises you cannot keep.",
+      "Donate black clothes on Saturdays.",
+      "Light a mustard oil lamp under a Peepal tree only where permitted and safe; never leave an unattended flame.",
+    ],
+  },
+  {
+    title: "6th House - Health & Enemies",
+    benefic:
+      "This placement is traditionally associated with learning, family happiness, and roles involving law, justice, or investigation. Night work may suit some people. The reading advises patience through difficult periods and describes prosperity as something that can develop steadily over time.",
+    malefic:
+      "The traditional account raises concerns about early marriage, family stress, and keeping business matters private. It also refers to children’s health or development; these are not omens or measures of luck. Any health or developmental concern should be discussed with a qualified professional, and family or financial choices should not be based on predictions of harm.",
+    remedies: [
+      "Consider a night schedule only if it suits your health, responsibilities, and work requirements.",
+      "Starting a project during the dark phase of the moon is a traditional timing preference, not a requirement for success.",
+      "Worship the Black Goddess and offer sweets to people who welcome them.",
+      "For six Saturdays, donate six whole almonds through a suitable food or charity programme; do not leave food in standing water.",
+      "Care for a black dog responsibly, including its health and welfare.",
+    ],
+  },
+  {
+    title: "7th House - Marriage & Partnership",
+    benefic:
+      "You may have a gift for strategy and persuasion, supporting careers such as medicine, engineering, or consulting. The traditional reading links luck with caring for the home’s main entrance and maintaining a loyal, supportive marriage. Travel and earnings may feature in life; moderation and principled choices can support family well-being.",
+    malefic:
+      "Ego and cutting corners may create difficulties. The traditional reading advises against marrying very young and stresses loyalty, professionalism, and caution with business partnerships involving relatives. Keeping the home’s front door in good repair is described as a practical symbol of stability.",
+    remedies: [
+      "Apply white kohl (surma) only if it is a regulated product intended for use around the eyes and is safe for you.",
+      "Serve and care for a black cow through a responsible, reputable shelter.",
+    ],
+  },
+  {
+    title: "8th House - Transformation & Longevity",
+    benefic:
+      "Collaborating on studies may bring breakthroughs and personal growth. Curiosity and a desire to help others are described as strengths. The traditional reading associates family growth with your arrival and suggests that continued learning can help maintain momentum.",
+    malefic:
+      "The traditional reading connects luck and health with the home environment and personal conduct. It suggests clearing stored fuel, oil, rusted iron, or wood from the roof, avoiding major construction during a partner’s pregnancy, and reducing suspicion or conflict with family. Keep the home safe and well maintained.",
+    remedies: [
+      "Do not put large quantities of food, oil, or other materials into waterways; choose a local donation or waste-disposal programme instead.",
+      "Keep a small square piece of silver with you.",
+      "On 8 consecutive Mondays, donate rice and milk through a local food charity rather than releasing them into flowing water.",
+      "If you add milk to bath water, use a non-slip surface and stop if it irritates your skin.",
+    ],
+  },
+  {
+    title: "9th House - Fortune & Spirituality",
+    benefic:
+      "Your talent for persuasion and commitment to family may support a high-ranking career, particularly in real estate, contracting, or timber. You may own multiple homes and gain financial independence, though progress can be gradual. Keeping the roof clear of scrap and avoiding unfinished roofless walls are traditional suggestions. Staying connected to family and managing your temper may support a happier home life.",
+    malefic:
+      "Traditional guidance links well-being with maintaining a safe, clean roof and avoiding construction projects that create financial or legal strain. Stay humble, avoid family conflicts, and take care of your health and reputation.",
+    remedies: [
+      "Visit a temple and offer sweets such as mishri, patashe, khoya treats, or sweet puffed grains, if accepted there.",
+      "Keep your roof clear of wood, iron scraps, or junk, and avoid earning through dishonest means.",
+      "Sprinkle chickpeas on your roof only if it is safe and will not attract pests or create litter; otherwise donate them as food.",
+      "Avoid breaking walls or adding windows or doors without appropriate building advice and permits.",
+    ],
+  },
+  {
+    title: "10th House - Career & Status",
+    benefic:
+      "You may gain respect and wealth through engineering, machinery, or leadership. The traditional reading highlights ages 33, 39, 45, and 57 as notable milestones, and associates building a home before age 48 with good fortune. Practical kindness, sound decisions, and family connections may support your status and career growth.",
+    malefic:
+      "The traditional reading cautions that being overly soft-hearted or relying only on rituals may distract from practical financial decisions. It suggests choosing work that suits your needs, maintaining a good relationship with your father, avoiding daytime drinking, and planning home construction thoughtfully. Career and property decisions should reflect your actual circumstances.",
+    remedies: [
+      "Wear gold if suitable for you.",
+      "Apply a saffron tilak daily on your navel, tongue, and forehead only if it is safe for your skin and use.",
+      "Donate Saturn-associated items such as mustard oil, iron, or black lentils through an appropriate charity or temple.",
+      "Respect and support your elders and teachers regularly.",
+    ],
+  },
+  {
+    title: "11th House - Gains & Friendships",
+    benefic:
+      "Your sharp mind may help you outpace competitors. Practical confidence and initiative may support wealth, family property, and a comfortable lifestyle. Being clever and bold while acting responsibly can help turn potential into progress.",
+    malefic:
+      "The traditional reading warns against major home-building decisions before age 45 or a south-facing entrance, and associates these with family, health, and financial strain. Body hair is not a reliable indicator of wealth. Avoid alcohol and infidelity, and seek practical advice for education, family, and career challenges.",
+    remedies: [
+      "Keep a clean water pot at home, use it regularly, and keep it filled with fresh water.",
+      "Carry a small silver square in your pocket.",
+      "Display a Jupiter-associated charm in your home if it is meaningful to you.",
+      "Wear gold if suitable for you.",
+      "Share sweets every Tuesday.",
+    ],
+  },
+  {
+    title: "12th House - Liberation & Expenses",
+    benefic:
+      "A calm, comfortable home and an organised place for finances are traditional themes for this placement. Staying alert, avoiding conflict, and making thoughtful choices may help your business and family life. Hair thinning is not a reliable sign of family prosperity; focus on practical care and support.",
+    malefic:
+      "The traditional reading cautions against dishonesty, infidelity, gossip, alcohol, and legal disputes, and describes a dimly lit home as a preference. Make financial and health decisions using practical evidence and qualified advice rather than fear of omens.",
+    remedies: [
+      "Keep a secure storage space in the southeast or southwest of your home and store whole almonds in an iron box there if safe and practical.",
+      "Every Saturday, donate almond pieces through an appropriate food or animal-welfare programme; do not put food into public waterways.",
+      "Continue home-building or repair plans according to qualified professional advice and your circumstances.",
+      "Visit a temple barefoot only if the grounds are safe and accessible; otherwise follow the temple’s guidance.",
+    ],
+  },
+];
+
+const rahuHouseDetails = [
+  {
+    title: "1st House - Self & Personality",
+    benefic:
+      "Trusting your intuition and making independent decisions may support social confidence and valuable connections. The traditional reading associates this placement with sudden opportunities, improved family comforts, and joyful news about children. It advises thoughtful choices in business, especially when working with electronics or in-laws.",
+    malefic:
+      "Restless thoughts or mental turbulence may affect behaviour and relationships. The traditional reading advises moderation and avoiding alcohol, and describes work changes or family challenges as possible themes. These are not predictions; focus on wellbeing, communication, and practical support when challenges arise.",
+    remedies: [
+      "If practical, consider your preferences for home orientation when choosing a residence; do not make major housing decisions based on fear of direction.",
+      "Wear a square silver piece or silver chain if comfortable.",
+      "Donate roasted wheat with jaggery through a school or community programme.",
+      "Choose colours that you enjoy; colour choices do not determine your luck.",
+      "Avoid arguments when anyone has been drinking; discuss important matters when everyone is sober.",
+    ],
+  },
+  {
+    title: "2nd House - Wealth & Family",
+    benefic:
+      "The traditional reading associates this placement with ambition, material comfort, and spiritual or charitable connections. Financial circumstances may fluctuate, and planning large expenses carefully can help maintain stability.",
+    malefic:
+      "The source text describes family and financial instability, legal stress, and difficult life periods as possible traditional interpretations. These are not certainties or predictions of imprisonment. Make kitchen, property, and financial decisions using practical, legal, and professional advice.",
+    remedies: [
+      "Keep northwest, north, or west areas of your home clear and safe, following applicable building and fire-safety guidance.",
+      "Keep saffron in a clean silver box if you wish, and use a saffron tilak only if it is suitable for your skin.",
+      "A blue sapphire requires professional gem advice; do not wear one solely on the basis of a general remedy.",
+      "Visit a temple, make an appropriate donation, and receive blessings if meaningful to you.",
+      "Carry a small silver pellet if comfortable.",
+    ],
+  },
+  {
+    title: "3rd House - Courage & Siblings",
+    benefic:
+      "This placement is traditionally associated with wealth, progress, sharp intuition, and vivid dreams. The reading highlights age 22 as a possible turning point and encourages care with speech to avoid misunderstandings. Courage and quick thinking may help you work through competition and pursue leadership.",
+    malefic:
+      "Strained relationships with relatives or rivals may create stress, including financial or property concerns. The source text mentions ivory as an object to remove; never keep or acquire ivory. Choose a lawful symbolic alternative such as a white-coloured ornament.",
+    remedies: [
+      "Do not keep or wear elephant tusks or ivory, including ornaments; use a lawful symbolic alternative if desired.",
+      "A copper ring with coral is a traditional suggestion; seek qualified advice before wearing gemstones.",
+    ],
+  },
+  {
+    title: "4th House - Home & Mother",
+    benefic:
+      "The traditional reading associates this placement with wisdom, spirituality, travel, and a harmonious home. It suggests that financial progress may begin after age 24, with rewards increasing later. Keep home renovations planned and safe, and maintain a clean, comfortable environment for the whole family.",
+    malefic:
+      "The source text links certain home renovations with family or financial difficulties. These are traditional beliefs, not established predictions. Plan bathroom, roof, furnace, and other work according to building codes, household needs, and qualified professional advice.",
+    remedies: [
+      "If a roof-only structure is causing concern, consult a qualified astrologer or faith leader if you want a cultural ritual; no ritual is required for construction safety.",
+      "Make furnace, tandoor, heater, and cooking-area decisions based on fire safety and professional guidance.",
+      "A pearl necklace is a traditional suggestion; seek qualified advice before wearing gemstones.",
+    ],
+  },
+  {
+    title: "5th House - Children & Creativity",
+    benefic:
+      "This placement is traditionally associated with kindness, spirituality, social respect, and family happiness. It is described as favourable for children and material comfort.",
+    malefic:
+      "The supplied tradition describes this placement as generally favourable and advises avoiding pride, overconfidence, and excessive attachment. These are reflective themes, not fixed outcomes.",
+    remedies: [
+      "Place a silver strip at the entrance threshold only if it can be installed safely and without creating a trip hazard.",
+      "Serve and care for cows through a responsible shelter or animal-welfare organisation.",
+      "Avoid alcohol or other habits if they negatively affect your wellbeing or relationships; seek support if needed.",
+      "Keep a silver-coloured keepsake in a secure place if meaningful to you.",
+      "Share rice and jaggery puffed sweets with children through a school or community centre, following its food policies.",
+    ],
+  },
+  {
+    title: "6th House - Health & Enemies",
+    benefic:
+      "The traditional reading associates personal spending, courage, intellect, and principled conduct with good fortune. It suggests foreign opportunities and career growth, and highlights the value of positive relationships with siblings. Treat omens such as a sneeze before a journey as cultural beliefs, not reasons to fear or cancel necessary plans.",
+    malefic:
+      "The source text links sibling conflict with household stress and describes challenges in travel, work, and wellbeing. These are not medical predictions. Keep communication respectful, plan travel sensibly, and seek professional support for health concerns.",
+    remedies: [
+      "Care for a black dog only if you can meet its needs responsibly; otherwise support a reputable animal shelter.",
+      "Wear sunglasses only when they suit the light and your eye-care needs.",
+      "Donate mustard oil or black urad dal to a temple or community organisation on Saturdays.",
+      "Do not bury flowers in deserted land; offer them at a place of worship or compost them where permitted.",
+    ],
+  },
+  {
+    title: "7th House - Marriage & Partnership",
+    benefic:
+      "Even without extensive formal education, practical intelligence may help you guide others and progress in business or career. The traditional reading describes kindness and generosity, and suggests that emotional balance and thoughtful spending can support a stable life.",
+    malefic:
+      "The source text contains frightening claims about marriage, death, pets, and financial ruin. These are not reliable predictions. Relationship and career outcomes are not determined by astrology; base decisions on consent, safety, communication, and sound professional advice.",
+    remedies: [
+      "Offer marigold, jasmine, or mogra flowers at a temple on Wednesdays if welcomed there.",
+      "Apply a white sandalwood tilak if suitable for your skin.",
+      "Carry a square piece of silver if comfortable.",
+      "Collect silver items only if affordable and meaningful; there is no need to buy something every year.",
+      "Do not put coconuts or other objects into flowing water; offer them at a temple or compost them appropriately.",
+    ],
+  },
+  {
+    title: "8th House - Transformation & Longevity",
+    benefic:
+      "The traditional reading associates this placement with support from in-laws, honest work, loyalty, and the possibility of success after earlier hardships. It suggests waiting until after age 21 to marry, but marriage timing should be based on personal readiness and consent rather than an astrological rule.",
+    malefic:
+      "The source text describes risks related to impulsive choices, dishonesty, and health. These are not predictions. Build trust through honest decisions, and seek qualified medical or relationship support when needed.",
+    remedies: [
+      "Do not store sugar sacks on a roof if this may attract pests or create a hazard; donate sugar through an appropriate food programme instead.",
+      "Do not break metal into pieces or immerse it in waterways; recycle metal through an approved service or donate it.",
+    ],
+  },
+  {
+    title: "9th House - Fortune & Spirituality",
+    benefic:
+      "The traditional reading associates family connection, faith, charity, and the ability to guide others with happiness and good fortune. Ages 21 and 42 are described as possible turning points, while maintaining respectful relationships with family may support a sense of connection.",
+    malefic:
+      "The source text links family tension, financial uncertainty, and household objects with misfortune. These are traditional beliefs, not predictions. Remove broken or damp items for practical safety, maintain family boundaries, and make decisions without fear of omens.",
+    remedies: [
+      "Care for a dog responsibly, or support an animal-welfare organisation.",
+      "Maintain respectful relationships with your brother and parents where safe and appropriate.",
+      "A pearl necklace in a gold chain is a traditional suggestion; seek qualified advice before wearing gemstones.",
+      "Use a saffron tilak only if it is suitable for your skin.",
+      "Avoid conflict with in-laws while maintaining healthy boundaries.",
+    ],
+  },
+  {
+    title: "10th House - Career & Status",
+    benefic:
+      "This placement is traditionally associated with kindness, respect, and business or leadership opportunities, including fitness-related work. The reading suggests that professional opposition may pass with time and advises thoughtful choices about food and reputation.",
+    malefic:
+      "The traditional account repeats themes of respect, leadership, and fitness-related work, and cautions about reputation. Career success and public standing depend on many practical factors, not a single planetary placement.",
+    remedies: [
+      "Cover your head with a comfortable cap, turban, or light-coloured cloth if you wish.",
+      "Offer raw sugar at a temple or through a community food programme; do not put it into flowing water.",
+      "Donate red lentils to a suitable food programme instead of immersing them in water.",
+    ],
+  },
+  {
+    title: "11th House - Gains & Friendships",
+    benefic:
+      "The traditional reading associates this placement with self-made success, property, vehicles, family traditions, and increasing career progress after age 36. It encourages independence, loyalty to family, and earning through consistent effort rather than relying on favours.",
+    malefic:
+      "The source text makes alarming claims about accidents, illness, death, and financial ruin based on colours or objects. These are not reliable predictions. Focus on practical safety, financial planning, and support for family or career concerns.",
+    remedies: [
+      "Use a saffron tilak if suitable for your skin.",
+      "If you smoke, consider seeking support to quit rather than using a broken or unsafe holder.",
+      "Choose clothing and home colours based on preference; black or dark blue does not cause harm.",
+      "Do not wear gemstones such as Neelam without qualified advice.",
+      "Do not break metal into pieces or immerse it in water; recycle it responsibly or make a suitable donation.",
+    ],
+  },
+  {
+    title: "12th House - Liberation & Expenses",
+    benefic:
+      "This placement is traditionally associated with respectful speech, social connection, fitness, spirituality, and supporting family. The reading suggests that helping others and maintaining responsibilities may support a sense of purpose and connection.",
+    malefic:
+      "The source text describes financial strain, family stress, and emotional distress. These are not predictions or a diagnosis. If you or someone close to you is struggling emotionally, reach out to a trusted person or qualified mental-health professional; urgent concerns deserve immediate local support.",
+    remedies: [
+      "Do not feed sugarcane or other food to elephants directly; support a reputable elephant sanctuary or conservation organisation instead.",
+      "Eat meals wherever comfortable and practical.",
+      "Support your sisters or daughters in ways that respect everyone’s needs and circumstances.",
+      "Choose home colours based on preference and practical considerations.",
+      "Care for cows only through responsible, reputable animal-welfare services.",
+    ],
+  },
+];
+
+const ketuHouseDetails = [
+  {
+    title: "1st House - Self & Personality",
+    benefic:
+      "The traditional reading associates this placement with living away from one’s ancestral home, hard work, forgiveness, and gradually rebuilding family prosperity. Leadership and career efforts may bring early fulfilment. It also highlights protecting others and supporting people going through difficulty as strengths.",
+    malefic:
+      "The source describes overthinking, family tension, and concerns about career or wellbeing as possible themes. Claims about a person’s birth harming a place, relatives facing ruin, or a specific child’s sex are not reliable predictions. Seek appropriate support for health, family, or financial concerns.",
+    remedies: [
+      "Share jaggery and wheat through a suitable community food or animal-welfare programme.",
+      "Maintain respectful, supportive relationships with your sisters where safe and appropriate.",
+      "A ruby is a traditional suggestion; seek qualified gem advice before wearing one.",
+      "Choose a balanced diet that suits your health and personal or religious values; avoid alcohol if it affects your wellbeing.",
+      "Donate a black-and-white blanket through a shelter or community service for 11 days if practical.",
+    ],
+  },
+  {
+    title: "2nd House - Wealth & Family",
+    benefic:
+      "With guidance from elders and mentors, travel and communication may open opportunities. The traditional reading highlights charity, family support, and professional progress, and describes age 24 as a possible milestone toward financial independence.",
+    malefic:
+      "The source describes financial uncertainty, career changes, and family stress as possible interpretations. It also makes predictions about isolation and lack of support from children; these are not certainties. Build savings and make career or housing decisions using practical advice.",
+    remedies: [
+      "Use a saffron tilak only if it is suitable for your skin.",
+      "Share sweet-and-sour food through a school or community programme, following its food-safety policies.",
+      "Working away from home is a traditional suggestion, not a requirement; choose work and housing based on your needs and circumstances.",
+    ],
+  },
+  {
+    title: "3rd House - Courage & Siblings",
+    benefic:
+      "This placement is traditionally associated with supportive siblings and in-laws, gratitude, kindness, and spiritual travel. Family connections may bring joy, while travel or education can be important themes. The reading describes career recognition and possible financial growth after age 24.",
+    malefic:
+      "The source links impulsive advice with family strain and mentions legal disputes or relationship difficulties. These outcomes are not fixed. Thoughtful communication, clear boundaries, and appropriate legal advice can help when challenges arise.",
+    remedies: [
+      "Wear a gold chain if affordable and comfortable.",
+      "Use a saffron tilak if it is suitable for your skin.",
+      "Do not put lentils or other items into flowing water; donate split chickpeas through a food charity on Thursdays instead.",
+      "Care for a dog only if you can meet its needs responsibly; otherwise support a reputable animal shelter.",
+    ],
+  },
+  {
+    title: "4th House - Home & Mother",
+    benefic:
+      "The traditional reading associates this placement with wise leadership, agriculture or business, steady reputation, and resolving family or inheritance matters over time. Persistence and guidance from elders may support comfort and social standing.",
+    malefic:
+      "The source describes possible impulsiveness, family strain, and concerns involving a mother’s wellbeing after certain ages. These are not medical or family predictions. Seek qualified healthcare and practical support when needed, and maintain respectful relationships where safe.",
+    remedies: [
+      "If a ritual is meaningful to you, discuss it with a trusted faith leader; it is not a substitute for practical financial, work, or healthcare support.",
+      "Do not put lentils or other offerings into flowing water; donate them through a food programme on Thursdays.",
+      "Keep a clean brass vessel with water and silver-coloured keepsakes if this is meaningful to you.",
+      "If helping with studies, donate bananas through a school or community programme.",
+    ],
+  },
+  {
+    title: "5th House - Children & Creativity",
+    benefic:
+      "The traditional reading associates this placement with overcoming early study challenges, a peaceful home, and financial stability. It also describes discipline in youth as supportive of family life. Claims about a required number or sex of children are not reliable predictions.",
+    malefic:
+      "Academic difficulty or stress can be challenging, but they do not determine someone’s future or family outcomes. Seek learning support or professional advice if concerns arise.",
+    remedies: [
+      "For 43 days, donate rice and raw sugar through a food charity if practical; share any temple prasad only with permission and in line with food-safety guidance.",
+      "Wear a gold chain if affordable and comfortable.",
+      "Do not wear gemstones such as blue sapphire without qualified advice.",
+    ],
+  },
+  {
+    title: "6th House - Health & Enemies",
+    benefic:
+      "The traditional reading associates this placement with education, comfort, and support from maternal relatives. It encourages self-reflection about balancing personal interests with care for others and describes mentors as a source of guidance.",
+    malefic:
+      "The source discusses family support, reputation, and health concerns using physical features as omens. Body features do not predict character, health, or a child’s future. Consult qualified health professionals for medical concerns.",
+    remedies: [
+      "Care for a dog only if you can provide responsible, long-term care; never replace a deceased pet as a ritual obligation.",
+      "A gold ring on the left hand is a traditional suggestion; wear jewellery only if safe and comfortable.",
+      "Share bananas through a school or children’s programme for 43 days if practical.",
+      "Show care to grandchildren and family members while respecting their needs and boundaries.",
+    ],
+  },
+  {
+    title: "7th House - Marriage & Partnership",
+    benefic:
+      "The traditional reading associates this placement with partnership, financial opportunity, honesty, and keeping promises. It describes ages 24 and 34 as possible career milestones and encourages a helpful nature and fair conduct.",
+    malefic:
+      "Arrogance, harsh speech, or broken promises can strain relationships. Claims that someone’s marriage or fertility is destined to fail are not reliable predictions. Focus on mutual respect, consent, and communication, and seek qualified support for relationship or fertility concerns.",
+    remedies: [
+      "Support cow care through a responsible animal-welfare organisation.",
+      "Maintain considerate relationships with sisters-in-law while respecting everyone’s boundaries.",
+      "Do not treat family size or the sex of children as a measure of prosperity.",
+      "Support local animal shelters by donating food or supplies they specifically request.",
+    ],
+  },
+  {
+    title: "8th House - Transformation & Longevity",
+    benefic:
+      "This placement is traditionally associated with strategic thinking, support from family and in-laws, and learning to navigate change. Maintaining harmony with siblings and relatives may support emotional wellbeing. Claims about predicting the end of life or a child’s longevity are not reliable.",
+    malefic:
+      "The source describes family conflict, fault-finding, and health worries as possible themes, and includes omens involving dogs. These are not diagnoses or predictions. Seek professional advice for health concerns and respond to animal behaviour with practical care rather than fear.",
+    remedies: [
+      "Donate split chickpeas in a yellow cloth through a temple or food charity; do not put them into waterways.",
+      "Use a saffron tilak if it is suitable for your skin.",
+      "Donate a black-and-white blanket through a shelter or community service.",
+      "Wear gold in your ears only if safe and comfortable.",
+      "Care for dogs responsibly or support a reputable shelter.",
+    ],
+  },
+  {
+    title: "9th House - Fortune & Spirituality",
+    benefic:
+      "The traditional reading associates this placement with courage, loyalty, forgiveness, and offering thoughtful advice. Artistic work or skilled labour may be important themes. Family and in-laws may be sources of support, and assets may grow through steady effort.",
+    malefic:
+      "The source describes family tension, work interference, travel dissatisfaction, and concerns about ancestral property. These are not fixed outcomes. Clear communication, practical planning, and healthy boundaries can help manage family and work challenges.",
+    remedies: [
+      "Care for dogs through responsible ownership or support a reputable shelter; animal sex is not relevant to whether care is beneficial.",
+      "Wear gold in your ears only if safe and comfortable.",
+      "Worship Lord Ganesha if this is meaningful to you.",
+      "Make financial decisions about gold based on your needs; avoid pawning or selling only if it is financially practical for you.",
+      "Offer kind wishes to others, without promising or implying control over fertility or a child’s sex.",
+    ],
+  },
+  {
+    title: "10th House - Career & Status",
+    benefic:
+      "The traditional reading associates this placement with comfort, financial growth, property, and business potential. Forgiveness and integrity in family relationships are described as supportive strengths, with opportunities continuing into midlife.",
+    malefic:
+      "The supplied benefic and malefic descriptions are similar, both highlighting integrity, family relationships, business, and property. They are traditional interpretations, not guarantees of wealth or success. Make financial decisions based on sound planning.",
+    remedies: [
+      "Do not bury honey or metal in a house foundation or public land; keep a clean silver vessel with honey at home if safe, or make a suitable donation.",
+      "Care for a dog only if you can provide responsible, long-term care; never abandon an adopted animal.",
+      "Set clear boundaries around gifts or financial support from relatives, and seek professional advice for difficult financial choices.",
+    ],
+  },
+  {
+    title: "11th House - Gains & Friendships",
+    benefic:
+      "This placement is traditionally associated with self-made success, property, social recognition, and a harmonious home. Close bonds with family and supportive children are described as positive themes.",
+    malefic:
+      "The source describes possible concerns around housing, family support, finances, and omens when interrupted before work. These are not predictions. Use practical planning and do not let omens create fear or prevent necessary activities.",
+    remedies: [
+      "Care for a dog responsibly or support an animal shelter.",
+      "Donate black sesame seeds, mustard oil, or black cloth through a suitable community organisation.",
+      "Instead of leaving radishes beside a pillow, donate fresh produce through a food bank or community kitchen.",
+    ],
+  },
+  {
+    title: "12th House - Liberation & Expenses",
+    benefic:
+      "The traditional reading associates this placement with family happiness, prosperity, and children’s future success. Supportive relationships, practical planning, and a positive outlook can contribute to a sense of security.",
+    malefic:
+      "The source includes alarming claims involving pets, health, debt, and family separation. These are not reliable predictions. If emotional distress becomes overwhelming, contact someone you trust or a qualified mental-health professional; urgent concerns deserve immediate local support.",
+    remedies: [
+      "Care for a black-and-white dog only if you can provide safe, ongoing care; do not replace a pet as a ritual obligation.",
+      "Worship Lord Ganesha if meaningful to you.",
+      "Wear gold only if affordable and comfortable.",
+      "A turmeric foot soak is optional; avoid it if it irritates your skin or creates a slipping risk.",
+    ],
+  },
+];
+
 const sunFaqs = [
   {
     question: "What does the Sun represent in Lal Kitab astrology?",
@@ -1233,6 +1713,90 @@ const venusFaqs = [
   },
 ];
 
+const saturnFaqs = [
+  {
+    question: "If Saturn is weak in the 2nd house, what remedy should follow?",
+    answer:
+      "A traditional suggestion is to apply a milk or curd tilak daily and speak humbly. Treat this as a cultural practice, not a guaranteed way to change financial outcomes.",
+  },
+  {
+    question: "What is a simple Saturday remedy for Saturn?",
+    answer:
+      "Some people donate mustard oil, black lentils, or iron items, or support animal welfare. Choose a safe, lawful donation that suits your circumstances.",
+  },
+  {
+    question: "If Saturn is causing career problems, what remedy can help?",
+    answer:
+      "A traditional practice is feeding monkeys for 11 days and then weekly. Only do so where permitted and safely; patience, skills, and practical career planning remain important.",
+  },
+  {
+    question: "What remedy should we do if Saturn is creating financial stress?",
+    answer:
+      "Traditional suggestions include carrying a small silver square or donating black clothes or food on Saturdays. Budgeting and qualified financial guidance can also help address financial stress.",
+  },
+  {
+    question: "Is there any daily remedy for Saturn that is easy to follow?",
+    answer:
+      "Respect elders, stay disciplined, be honest, and keep your behaviour calm. These habits are simple traditional Saturn remedies and useful practices in everyday life.",
+  },
+];
+
+const rahuFaqs = [
+  {
+    question: "Why are Rahu remedies important?",
+    answer:
+      "In Lal Kitab tradition, they are used to reflect on Rahu when life feels confusing or changeable. They are cultural practices, not guaranteed outcomes.",
+  },
+  {
+    question: "How do Rahu remedies help in daily life?",
+    answer:
+      "Many people use them as reminders to pause, reflect, and respond calmly to unexpected situations.",
+  },
+  {
+    question: "What are the most common Rahu remedies?",
+    answer:
+      "Traditional suggestions include helping animals, wearing silver, and practising discipline. Choose safe, lawful options that suit you.",
+  },
+  {
+    question: "How often should Rahu remedies be performed?",
+    answer:
+      "Some traditions suggest daily or weekly practices, but there is no required schedule. Keep any practice safe and manageable.",
+  },
+  {
+    question: "Can Rahu remedies reduce confusion and overthinking?",
+    answer:
+      "A calming routine may help some people feel grounded, but remedies cannot guarantee mental-health outcomes. Consider talking with a qualified professional if distress continues.",
+  },
+];
+
+const ketuFaqs = [
+  {
+    question: "How do Ketu remedies actually work?",
+    answer:
+      "In Lal Kitab tradition, remedies are symbolic practices connected with charity, discipline, and mindful habits. They may offer a personal routine, but they are not guaranteed to change planetary effects.",
+  },
+  {
+    question: "What happens when Ketu is not strong?",
+    answer:
+      "Traditional astrology associates a challenging Ketu placement with confusion, sudden changes, isolation, or career concerns. These are interpretations, not certain predictions.",
+  },
+  {
+    question: "Which remedies are most effective for Ketu?",
+    answer:
+      "Common traditional suggestions include helping animals, donating selected items, maintaining good relationships, and following thoughtful routines. Choose safe practices that suit your circumstances.",
+  },
+  {
+    question: "How long do Ketu remedies take to show results?",
+    answer:
+      "There is no established timeline or guaranteed result. If you follow a cultural practice, keep it safe and manageable rather than feeling obliged to follow a fixed duration.",
+  },
+  {
+    question: "Can anyone do Ketu remedies, or do I need guidance?",
+    answer:
+      "Simple cultural practices can be chosen by anyone, but personalised astrological guidance is a matter of belief. For health, financial, or relationship decisions, rely on qualified practical advice.",
+  },
+];
+
 const LalKitabPlanetRemediesPage = () => {
   const location = useLocation();
   const reduceMotion = useReducedMotion();
@@ -1249,6 +1813,9 @@ const LalKitabPlanetRemediesPage = () => {
     "Mercury",
     "Jupiter",
     "Venus",
+    "Saturn",
+    "Rahu",
+    "Ketu",
   ].includes(
     selectedPlanet?.name,
   );
@@ -1355,7 +1922,13 @@ const LalKitabPlanetRemediesPage = () => {
                       ? mercuryHouseDetails
                       : selectedPlanet.name === "Jupiter"
                         ? jupiterHouseDetails
-                        : venusHouseDetails
+                        : selectedPlanet.name === "Venus"
+                          ? venusHouseDetails
+                          : selectedPlanet.name === "Saturn"
+                            ? saturnHouseDetails
+                            : selectedPlanet.name === "Rahu"
+                              ? rahuHouseDetails
+                              : ketuHouseDetails
               ).map((house) => {
                 const isHouseOpen = openHouse === house.title;
                 const detailsId = `${selectedPlanet.name.toLowerCase()}-house-${house.title
@@ -1573,7 +2146,13 @@ const LalKitabPlanetRemediesPage = () => {
                         ? jupiterFaqs
                         : selectedPlanet.name === "Venus"
                           ? venusFaqs
-                          : sunFaqs
+                          : selectedPlanet.name === "Saturn"
+                            ? saturnFaqs
+                            : selectedPlanet.name === "Rahu"
+                              ? rahuFaqs
+                              : selectedPlanet.name === "Ketu"
+                                ? ketuFaqs
+                                : sunFaqs
                 ).map((faq, index) => {
                   const isFaqOpen = Boolean(openFaqs[faq.question]);
                   const answerId = `${selectedPlanet.name.toLowerCase()}-faq-answer-${index + 1}`;
@@ -1648,7 +2227,10 @@ const LalKitabPlanetRemediesPage = () => {
         selectedPlanet.name !== "Mars" &&
         selectedPlanet.name !== "Mercury" &&
         selectedPlanet.name !== "Jupiter" &&
-        selectedPlanet.name !== "Venus" ? (
+        selectedPlanet.name !== "Venus" &&
+        selectedPlanet.name !== "Saturn" &&
+        selectedPlanet.name !== "Rahu" &&
+        selectedPlanet.name !== "Ketu" ? (
           <>
             <article className="rounded-none rounded-bl-2xl border border-[#946b13]/35 bg-white p-4 shadow-[0_8px_24px_rgba(77,0,30,0.2),0_3px_8px_rgba(148,107,19,0.22)] sm:p-6">
               <div className="flex items-center gap-3 border-b border-[#946b13]/20 pb-4 sm:gap-4">

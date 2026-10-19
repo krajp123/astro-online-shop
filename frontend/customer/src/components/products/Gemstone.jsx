@@ -1,7 +1,7 @@
 import { ShoppingCart } from 'lucide-react';
-import { useSearchParams } from 'react-router-dom';
+import { Link, useSearchParams } from 'react-router-dom';
 import { useCustomerStore } from '../../store/useCustomerStore';
-import gemstoneProducts from '../../data/gemstoneProducts';
+import gemstoneProducts, { getGemstoneProductSlug } from '../../data/gemstoneProducts';
 
 const qualityOptions = [
   { value: 'all', label: 'All Gemstones' },
@@ -77,28 +77,34 @@ const GemstonePage = () => {
                 key={`${product.category}-${product.name}`}
                 className="group flex h-full flex-col overflow-hidden rounded-2xl border border-[#201b3a]/10 bg-white transition duration-300 hover:-translate-y-1 hover:border-[#4d001e]/30 hover:shadow-[0_18px_40px_rgba(32,27,58,0.12)]"
               >
-                <div className="relative aspect-square overflow-hidden bg-[#f7f2ea]">
-                  <img
-                    src={product.image}
-                    alt={product.name}
-                    loading="lazy"
-                    className={`h-full w-full object-contain object-center transition-opacity duration-1000 ease-in-out ${product.hoverImage ? 'group-hover:opacity-0' : ''}`}
-                  />
-                  {product.hoverImage && (
+                <Link to={`/gemstone/${getGemstoneProductSlug(product.name)}`} className="block">
+                  <div className="relative aspect-square overflow-hidden bg-[#f7f2ea]">
                     <img
-                      src={product.hoverImage}
-                      alt=""
-                      aria-hidden="true"
+                      src={product.image}
+                      alt={product.name}
                       loading="lazy"
-                      className="absolute inset-0 h-full w-full object-contain object-center opacity-0 transition-opacity duration-1000 ease-in-out group-hover:opacity-100"
+                      className={`h-full w-full object-contain object-center transition-opacity duration-1000 ease-in-out ${product.hoverImage ? 'group-hover:opacity-0' : ''}`}
                     />
-                  )}
-                </div>
+                    {product.hoverImage && (
+                      <img
+                        src={product.hoverImage}
+                        alt=""
+                        aria-hidden="true"
+                        loading="lazy"
+                        className="absolute inset-0 h-full w-full object-contain object-center opacity-0 transition-opacity duration-1000 ease-in-out group-hover:opacity-100"
+                      />
+                    )}
+                  </div>
+                </Link>
                 <div className="flex flex-1 flex-col p-2 sm:p-4">
                   <p className="text-[9px] font-semibold uppercase tracking-[0.1em] text-[#4d001e]/70 sm:text-[10px] sm:tracking-[0.16em]">
                     {product.category.replace('Gemstone - ', '')} Gemstone
                   </p>
-                  <h3 className="mt-1 line-clamp-2 min-h-8 text-xs font-semibold leading-snug text-[#201b3a] sm:min-h-10 sm:text-sm">{product.name}</h3>
+                  <h3 className="mt-1 line-clamp-2 min-h-8 text-xs font-semibold leading-snug text-[#201b3a] sm:min-h-10 sm:text-sm">
+                    <Link to={`/gemstone/${getGemstoneProductSlug(product.name)}`} className="hover:text-[#4d001e] focus-visible:outline-none focus-visible:underline">
+                      {product.name}
+                    </Link>
+                  </h3>
                   <div className="mt-1.5 flex items-center gap-1.5 sm:gap-2" aria-label="Rated 5 out of 5, 11 reviews">
                     <span className="text-xs leading-none tracking-tight text-[#c9962b] sm:text-sm" aria-hidden="true">★★★★★</span>
                     <span className="hidden text-xs text-[#201b3a]/75 sm:inline">(11 reviews)</span>

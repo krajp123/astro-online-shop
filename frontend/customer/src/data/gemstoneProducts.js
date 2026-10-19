@@ -17,4 +17,9 @@ const gemstoneProducts = [
   { name: 'Blue Sapphire (Neelam)', category: 'Gemstone - Premium', price: 'Rs. 66,800.00', image: '/Gemstone/Premium/neelam-premium-2.webp' },
 ];
 
+export const getGemstoneProductSlug = (name) => name
+  .toLowerCase()
+  .replace(/[^a-z0-9]+/g, '-')
+  .replace(/^-|-$/g, '');
+
 export default gemstoneProducts;
