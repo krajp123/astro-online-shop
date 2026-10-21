@@ -41,6 +41,9 @@ const PyritePage = () => {
         name="Pyrite"
         description="Carefully curated pyrite pieces for vastu, wealth attraction and personal adornment."
         products={orderedPyriteProducts}
+        id="pyrite-products"
+        productDetailLinks
+        productDetailBasePath="/pyrite"
       />
     </main>
   );

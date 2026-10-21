@@ -4,7 +4,7 @@ import { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import { getYantraProductSlug } from '../../data/yantraProducts';
 import { useCustomerStore } from '../../store/useCustomerStore';
 
-const ProductCollectionGrid = ({ name, description, products, id = 'stone-products', pageSize, productDetailLinks = false, showHeading = true }) => {
+const ProductCollectionGrid = ({ name, description, products, id = 'stone-products', pageSize, productDetailLinks = false, productDetailBasePath, showHeading = true }) => {
   const totalPages = pageSize ? Math.ceil(products.length / pageSize) : 1;
   const returnPositionKey = `product-collection:${id}:return`;
   const [returnPosition] = useState(() => {
@@ -69,6 +69,12 @@ const ProductCollectionGrid = ({ name, description, products, id = 'stone-produc
     }));
   };
 
+  const getProductDetailPath = (product) => (
+    productDetailBasePath
+      ? `${productDetailBasePath}/${getYantraProductSlug(product.name)}`
+      : `/products/${getYantraProductSlug(product.name)}`
+  );
+
   return (
     <section ref={collectionRef} id={id} className="mx-auto scroll-mt-20 w-full max-w-[1440px] px-4 pb-8 pt-4 sm:px-6 sm:pt-5 lg:px-8 lg:pb-10 lg:pt-6 2xl:px-12">
       {showHeading && (
@@ -111,7 +117,7 @@ const ProductCollectionGrid = ({ name, description, products, id = 'stone-produc
               <div className="relative aspect-square overflow-hidden bg-[#f7f2ea]">
                 {productDetailLinks ? (
                   <Link
-                    to={`/products/${getYantraProductSlug(product.name)}`}
+                    to={getProductDetailPath(product)}
                     aria-label={`View ${product.name} details`}
                     onClick={rememberCollectionPosition}
                   >
@@ -126,7 +132,7 @@ const ProductCollectionGrid = ({ name, description, products, id = 'stone-produc
                 <h3 className="mt-1 text-xs font-semibold leading-snug text-[#201b3a] sm:text-sm">
                   {productDetailLinks ? (
                     <Link
-                      to={`/products/${getYantraProductSlug(product.name)}`}
+                      to={getProductDetailPath(product)}
                       className="line-clamp-2 hover:underline"
                       onClick={rememberCollectionPosition}
                     >

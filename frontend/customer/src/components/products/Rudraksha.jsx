@@ -1,16 +1,9 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { Heart, ShoppingCart } from 'lucide-react';
 import { motion, useReducedMotion } from 'framer-motion';
-import { useSearchParams } from 'react-router-dom';
+import { Link, useSearchParams } from 'react-router-dom';
+import { getRudrakshaProductSlug, rudrakshaProducts } from '../../data/rudrakshaProducts';
 import { useCustomerStore } from '../../store/useCustomerStore';
-
-const rudrakshaProducts = Array.from({ length: 14 }, (_, mukhi) => ({
-  mukhi,
-  name: `${mukhi} Mukhi Rudraksha`,
-  category: 'Authentic Rudraksha',
-  price: 'Price on request',
-  image: `/Rudraksha/${mukhi}%20${mukhi === 12 ? 'mukhi' : 'Mukhi'}.png`,
-}));
 
 const rudrakshaCategories = [
   { value: 'beads', label: 'Rudraksha Beads' },
@@ -67,15 +60,21 @@ const RudrakshaProductCard = ({ product }) => {
             animate={reduceMotion ? undefined : { opacity: [0.55, 0.9, 0.55], scale: [0.9, 1.08, 0.9] }}
             transition={{ duration: 3.5, repeat: Infinity, ease: 'easeInOut' }}
           />
-          <motion.img
-            src={product.image}
-            alt={product.name}
-            loading="lazy"
-            className="h-full aspect-square w-auto max-w-full object-contain p-3 sm:p-5"
-            animate={reduceMotion ? undefined : { rotate: 360 }}
-            whileHover={reduceMotion ? undefined : { scale: 1.05 }}
-            transition={{ rotate: { duration: 30, repeat: Infinity, ease: 'linear' }, scale: { duration: 0.3 } }}
-          />
+          <Link
+            to={`/rudraksha/${getRudrakshaProductSlug(product.name)}`}
+            aria-label={`View ${product.name} details`}
+            className="relative z-10 flex h-full w-full items-center justify-center focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[#4d001e]"
+          >
+            <motion.img
+              src={product.image}
+              alt={product.name}
+              loading="lazy"
+              className="h-full aspect-square w-auto max-w-full object-contain p-3 sm:p-5"
+              animate={reduceMotion ? undefined : { rotate: 360 }}
+              whileHover={reduceMotion ? undefined : { scale: 1.05 }}
+              transition={{ rotate: { duration: 30, repeat: Infinity, ease: 'linear' }, scale: { duration: 0.3 } }}
+            />
+          </Link>
         </div>
       </div>
 
@@ -84,7 +83,12 @@ const RudrakshaProductCard = ({ product }) => {
           {product.category}
         </p>
         <h3 className="mt-1 line-clamp-2 min-h-8 text-xs font-semibold leading-snug text-[#201b3a] sm:min-h-10 sm:text-sm">
-          {product.name}
+          <Link
+            to={`/rudraksha/${getRudrakshaProductSlug(product.name)}`}
+            className="hover:underline focus-visible:outline-none focus-visible:underline"
+          >
+            {product.name}
+          </Link>
         </h3>
 
         <div className="mt-auto flex flex-col items-stretch gap-2 border-t border-[#201b3a]/10 pt-2 sm:flex-row sm:items-center sm:justify-between sm:gap-3 sm:pt-3">

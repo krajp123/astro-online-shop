@@ -6,6 +6,7 @@ import CartPage from './pages/Cart';
 import HomePage from './pages/Home';
 import OrdersPage from './pages/Orders';
 import Rudraksha from './components/products/Rudraksha';
+import RudrakshaDetails from './components/products/RudrakshaDetails';
 import Yantra from './components/products/Yantra';
 import YantraDetails from './components/products/YantraDetails';
 import Navbar from './components/common/Navbar';
@@ -23,6 +24,7 @@ import GemstoneDetailsPage from './components/products/GemstoneDetails';
 import SoapPage from './components/products/Soap';
 import DhoopPage from './components/products/Dhoop';
 import PyritePage from './components/products/Pyrite';
+import PyriteDetails from './components/products/PyriteDetails';
 import CitrinePage from './components/products/Citrine';
 import TigerEyePage from './components/products/TigerEye';
 import GarnetPage from './components/products/Garnet';
@@ -90,6 +92,7 @@ function App() {
           <Route path="/gemstone" element={<GemstonePage />} />
           <Route path="/soap" element={<SoapPage />} />
           <Route path="/dhoop" element={<DhoopPage />} />
+          <Route path="/pyrite/:slug" element={<PyriteDetails />} />
           <Route path="/pyrite" element={<PyritePage />} />
           <Route path="/citrine" element={<CitrinePage />} />
           <Route path="/tiger-eye" element={<TigerEyePage />} />
@@ -103,6 +106,7 @@ function App() {
           <Route path="/karungali" element={<KarungaliPage />} />
           <Route path="/mantra-upchar" element={<MantraUpcharPage />} />
           <Route path="/mantra-upchar/:slug" element={<MantraUpcharDetailsPage />} />
+          <Route path="/rudraksha/:slug" element={<RudrakshaDetails />} />
           <Route path="/rudraksha" element={<Rudraksha />} />
           <Route path="/cart" element={<CartPage />} />
           <Route path="/orders" element={<OrdersPage />} />
