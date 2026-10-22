@@ -257,8 +257,8 @@ const PyriteDetails = () => {
                 </ProductAccordion>
 
                 <ProductAccordion title={"Best day to place"}>
-                  <p className="mt-1">Friday is traditionally considered an auspicious day to place the stone in its intended spot.</p>
-                </ProductAccordion>
+                  <p className="mt-1"></p>
+                </ProductAccordion>Establish the Pyrite Stone in its intended spot on a Friday to align with money and abundance energies.
 
                 <ProductAccordion title={"Care Instructions"}>
                   <ul className="mt-1 list-inside list-disc space-y-1">

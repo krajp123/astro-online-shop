@@ -8,6 +8,28 @@ const gemstoneDetails = {
   'neelam-blue-sapphire': {
     nameHindi: 'नीलम',
     nameEnglish: 'Blue Sapphire',
+    descriptionEnglish: `Unlock rapid success and powerful transformation with Neelam (Blue Sapphire). Known for its fast-acting energy, this gemstone brings financial growth, sharp focus, and inner strength. It helps you overcome obstacles, reduce stress, and stay disciplined—while attracting luck and protection from negative energies. If Saturn’s influence is strong in your chart, Neelam can be life-changing. Don’t miss out—wear it as a ring or pendant and experience the shift. Order yours today!
+
+Astrovastubazar’s Premium Neelam Stone Key Features:
+1. Eye-Clean Clarity
+2. Intense Royal Blue
+3. Expert Polish with No Scratches
+4. Flawless Surface with Luxurious Feel
+5. Even Tone, No Dullness/Grayish Tints
+6. Precision-cut for Optimal Brilliance, Symmetry, and Light Reflection
+
+By correctly wearing the Neelam stone, individuals can lessen the negative effects of Saturn in their Kundali (birth chart) and bring favourable outcomes of the powerful planet. Enhance focus and provide strength to overcome challenges you face in different areas of life. Consult a prominent Astrology Sansthan like Astrovastubazar for more benefits of Neelam according to your individual needs stated in your birth chart. Contact us for more accurate astrology predictions and remedies.`,
+    descriptionHindi: `नीलम (ब्लू सैफायर) के साथ तेज़ सफलता और शक्तिशाली बदलाव की ओर बढ़ें। तेज़ प्रभाव वाली ऊर्जा के लिए जाना जाने वाला यह रत्न आर्थिक प्रगति, तेज़ एकाग्रता और आंतरिक शक्ति प्रदान करता है। यह बाधाओं पर काबू पाने, तनाव कम करने और अनुशासित रहने में मदद करता है, साथ ही सौभाग्य और नकारात्मक ऊर्जा से सुरक्षा को आकर्षित करता है। यदि आपकी कुंडली में शनि का प्रभाव प्रबल है, तो नीलम जीवन में बड़ा बदलाव ला सकता है। इसे अंगूठी या पेंडेंट के रूप में पहनकर बदलाव का अनुभव करें। आज ही ऑर्डर करें!
+
+Astrovastubazar के प्रीमियम नीलम की मुख्य विशेषताएँ:
+1. आँखों से साफ़ दिखाई देने वाली स्पष्टता
+2. गहरा रॉयल ब्लू रंग
+3. बिना खरोंच की विशेषज्ञ पॉलिश
+4. शानदार एहसास वाली दोषरहित सतह
+5. एकसमान रंगत, बिना मटमैलेपन या धूसर झलक के
+6. बेहतरीन चमक, समरूपता और प्रकाश परावर्तन के लिए सटीक कटाई
+
+नीलम को सही तरीके से धारण करने से व्यक्ति अपनी कुंडली में शनि के नकारात्मक प्रभावों को कम कर सकता है और इस शक्तिशाली ग्रह के अनुकूल परिणाम पा सकता है। यह एकाग्रता बढ़ाने और जीवन के विभिन्न क्षेत्रों की चुनौतियों पर काबू पाने की शक्ति देने में सहायक है। अपनी जन्म कुंडली में बताई गई व्यक्तिगत आवश्यकताओं के अनुसार नीलम के लाभ जानने के लिए Astrovastubazar जैसे प्रतिष्ठित ज्योतिष संस्थान से सलाह लें। अधिक सटीक ज्योतिषीय भविष्यवाणियों और उपायों के लिए हमसे संपर्क करें।`,
     benefitsTitleHindi: 'Benefits of Neelam (Blue Sapphire)',
     benefitsTitleEnglish: 'Benefits of Wearing Blue Sapphire',
     wearingMethodTitleHindi: 'नीलम रत्न धारण करने की विधि',
@@ -22,6 +44,26 @@ const gemstoneDetails = {
   'pukhraj-yellow-sapphire': {
     nameHindi: 'पुखराज',
     nameEnglish: 'Yellow Sapphire',
+    descriptionEnglish: `Bring wisdom, wealth, and success into your life with Pukhraj, the stunning Yellow Sapphire. This powerful gemstone channels the positive energy of Jupiter to boost financial stability, strengthen relationships, and protect you from harm. It attracts prosperity, good fortune, and helps you achieve your goals. Wear it as a ring on your index finger or as a pendant around your neck—ideally on a Thursday. Don’t wait—experience its life-changing energy today!
+
+Astrovastubazar’s Premium Yellow Sapphire Key Features:
+1. Vivid, Uniform "Canary Yellow" Color
+2. No Dullness/Grayish Tints
+3. Precision-cut for Maximum Light Reflection
+4. Natural, Untreated Color
+5. Flawless, Unheated for a Luxurious Feel
+
+Attract the positive and spiritual qualities of Yellow Sapphire (Pukhraj). Ward off the negative forces and attract luck. Harness the blessings of the auspicious planet Jupiter in the horoscope (Kundali). Consult a prominent Astrology Sansthan like Astrovastubazar for more benefits of the Yellow Sapphire according to your individual needs stated in your birth chart. Contact us for more accurate astrology predictions and remedies.`,
+    descriptionHindi: `सुंदर पीले सैफायर पुखराज के साथ अपने जीवन में ज्ञान, धन और सफलता लाएँ। यह शक्तिशाली रत्न बृहस्पति की सकारात्मक ऊर्जा के माध्यम से आर्थिक स्थिरता बढ़ाने, रिश्तों को मज़बूत करने और हानि से बचाने में सहायक माना जाता है। यह समृद्धि और सौभाग्य आकर्षित करता है तथा लक्ष्य प्राप्त करने में मदद करता है। इसे तर्जनी उंगली में अंगूठी या गले में पेंडेंट के रूप में पहनें—बेहतर है कि गुरुवार से शुरुआत करें। देर न करें—आज ही इसकी बदलाव लाने वाली ऊर्जा का अनुभव करें!
+
+Astrovastubazar के प्रीमियम येलो सैफायर की मुख्य विशेषताएँ:
+1. चमकीला, एकसमान "कैनरी येलो" रंग
+2. बिना मटमैलेपन या धूसर झलक के
+3. अधिकतम प्रकाश परावर्तन के लिए सटीक कटाई
+4. प्राकृतिक, बिना उपचारित रंग
+5. शानदार एहसास के लिए दोषरहित और बिना गर्मी से उपचारित
+
+येलो सैफायर (पुखराज) के सकारात्मक और आध्यात्मिक गुणों को आकर्षित करें। नकारात्मक शक्तियों को दूर रखें और सौभाग्य को आमंत्रित करें। अपनी कुंडली में शुभ ग्रह बृहस्पति के आशीर्वाद प्राप्त करें। अपनी जन्म कुंडली में बताई गई व्यक्तिगत आवश्यकताओं के अनुसार येलो सैफायर के लाभ जानने के लिए Astrovastubazar जैसे प्रतिष्ठित ज्योतिष संस्थान से सलाह लें। अधिक सटीक ज्योतिषीय भविष्यवाणियों और उपायों के लिए हमसे संपर्क करें।`,
     benefitsTitleHindi: 'Benefits of Pukhraj (Yellow Sapphire)',
     benefitsTitleEnglish: 'Benefits of Wearing Yellow Sapphire',
     wearingMethodTitleHindi: 'रत्न धारण करने की विधि',
@@ -36,6 +78,26 @@ const gemstoneDetails = {
   'panna-emerald': {
     nameHindi: 'पन्ना',
     nameEnglish: 'Emerald',
+    descriptionEnglish: `The Panna (Emerald) stone is a captivating gemstone known for its rich green hue and powerful benefits. Commonly worn as a ring, pendant, or bracelet, it symbolizes positivity, intelligence, clear communication, humor, and success. It is believed to reduce stress, improve mental well-being, and support career growth. Spiritually, the Panna is associated with the planet Mercury, enhancing its positive effects and reducing negative influences in one’s horoscope. For best results, wear a Panna ring on the little finger of your right hand. This gemstone is ideal for those seeking beauty, balance, inner peace, and overall life enhancement.
+
+Astrovastubazar’s Premium Emerald Key Features:
+1. Bright Luster
+2. Origin Proof
+3. Rich, Intense "Emerald Green"
+4. High Transparency, Excellent Clarity
+5. Cut Precision, Symmetrical facets to maximize brilliance
+
+Avail the several benefits of Emerald in a captivating, vivid green colour as a ring or pendant. Attract positivity, good communication, intellect, humour, success, and overall well-being. Consult a prominent Astrology Sansthan like Astrovastubazar for more benefits of the Emerald according to your individual needs stated in your birth chart. Contact us for more accurate astrology predictions and remedies.`,
+    descriptionHindi: `पन्ना (एमराल्ड) अपने गहरे हरे रंग और शक्तिशाली लाभों के लिए जाना जाने वाला एक आकर्षक रत्न है। इसे आमतौर पर अंगूठी, पेंडेंट या ब्रेसलेट के रूप में पहना जाता है और यह सकारात्मकता, बुद्धिमत्ता, स्पष्ट संवाद, हास्य और सफलता का प्रतीक है। मान्यता है कि यह तनाव कम करने, मानसिक कल्याण बेहतर करने और करियर की उन्नति में सहायक है। आध्यात्मिक रूप से पन्ना बुध ग्रह से जुड़ा है; इसे कुंडली में बुध के सकारात्मक प्रभाव बढ़ाने और नकारात्मक प्रभाव कम करने वाला माना जाता है। बेहतर परिणामों के लिए पन्ने की अंगूठी दाहिने हाथ की छोटी उंगली में पहनें। यह रत्न सुंदरता, संतुलन, आंतरिक शांति और जीवन में समग्र उन्नति चाहने वालों के लिए उपयुक्त है।
+
+Astrovastubazar के प्रीमियम एमराल्ड की मुख्य विशेषताएँ:
+1. चमकदार आभा
+2. उत्पत्ति का प्रमाण
+3. गहरा, समृद्ध "एमराल्ड ग्रीन" रंग
+4. उच्च पारदर्शिता और उत्कृष्ट स्पष्टता
+5. चमक बढ़ाने के लिए सटीक कटाई और सममित पहलू
+
+आकर्षक, चमकीले हरे रंग की अंगूठी या पेंडेंट के रूप में एमराल्ड के अनेक लाभ पाएँ। सकारात्मकता, बेहतर संवाद, बुद्धिमत्ता, हास्य, सफलता और समग्र कल्याण को आकर्षित करें। अपनी जन्म कुंडली में बताई गई व्यक्तिगत आवश्यकताओं के अनुसार एमराल्ड के लाभ जानने के लिए Astrovastubazar जैसे प्रतिष्ठित ज्योतिष संस्थान से सलाह लें। अधिक सटीक ज्योतिषीय भविष्यवाणियों और उपायों के लिए हमसे संपर्क करें।`,
     benefitsTitleHindi: 'Benefits of Panna (Emerald)',
     benefitsTitleEnglish: 'Benefits of Panna (Emerald)',
     wearingMethodTitleHindi: 'रत्न पहनने की विधि',
@@ -50,6 +112,26 @@ const gemstoneDetails = {
   'lahsuniya-cat-s-eye': {
     nameHindi: 'लहसुनिया',
     nameEnglish: "Cat's Eye (Lehsunia)",
+    descriptionEnglish: `Astrovastubazar’s Premium Cat’s Eye Lahsuniya, also called Cat’s Eye stone, is a strong and pure gemstone linked to the planet Ketu. Wearing it is believed to bring Ketu’s blessings, remove negative energy, and help with financial stability and success. It also boosts wisdom, knowledge, and helps balance past karma. The stone is known for its unique look, which resembles a cat’s eye, and is great for people who want respect and recognition.
+
+Key Features:
+1. Sharp, bright, and perfectly centered silver-white "eye" that glides smoothly under light
+2. Color remains vibrant in all lighting
+3. Expertly cut to maximize the "eye’s" effect
+4. Symmetrical and well-proportioned
+5. Aligns strongly with Ketu’s energy, enhances intuition, protection, and spiritual growth
+
+As a sacred and powerful stone, Cat’s Eye should be worn based on astrological guidance. You can consult an astrology expert to choose the right gemstone for you. Reputable astrology firms combine ancient wisdom with modern techniques to help individuals understand their life prediction and find remedies for any planetary affliction (dosh) in their birth chart. Consult a prominent Astrology Sansthan like Astrovastubazar for more benefits of Cat’s Eye (Lahsuniya) according to your individual needs stated in your birth chart. Contact us for more accurate astrology predictions and remedies.`,
+    descriptionHindi: `Astrovastubazar का प्रीमियम कैट्स आई लहसुनिया, जिसे कैट्स आई स्टोन भी कहा जाता है, एक शक्तिशाली और शुद्ध रत्न है जिसका संबंध केतु ग्रह से है। मान्यता है कि इसे धारण करने से केतु का आशीर्वाद मिलता है, नकारात्मक ऊर्जा दूर होती है तथा आर्थिक स्थिरता और सफलता में मदद मिलती है। यह बुद्धिमत्ता और ज्ञान बढ़ाने तथा पिछले कर्मों को संतुलित करने में भी सहायक माना जाता है। बिल्ली की आँख जैसी अनूठी बनावट वाला यह रत्न सम्मान और पहचान चाहने वालों के लिए उपयुक्त है।
+
+मुख्य विशेषताएँ:
+1. तेजस्वी, चमकदार और बीच में सटीक स्थित चाँदी-सफेद "आँख", जो रोशनी में आसानी से सरकती दिखाई देती है
+2. हर तरह की रोशनी में रंग जीवंत बना रहता है
+3. "आँख" के प्रभाव को बढ़ाने के लिए विशेषज्ञता से तराशा गया
+4. सममित और संतुलित अनुपात
+5. केतु की ऊर्जा से मज़बूत जुड़ाव; अंतर्ज्ञान, सुरक्षा और आध्यात्मिक विकास को बढ़ावा
+
+एक पवित्र और शक्तिशाली रत्न होने के कारण कैट्स आई ज्योतिषीय मार्गदर्शन के अनुसार ही धारण करना चाहिए। अपने लिए सही रत्न चुनने हेतु किसी ज्योतिष विशेषज्ञ से सलाह लें। प्रतिष्ठित ज्योतिष संस्थान प्राचीन ज्ञान और आधुनिक तकनीकों के मेल से लोगों को जीवन की संभावनाएँ समझने और जन्म कुंडली के ग्रह दोषों के उपाय खोजने में मदद करते हैं। अपनी जन्म कुंडली में बताई गई व्यक्तिगत आवश्यकताओं के अनुसार कैट्स आई (लहसुनिया) के लाभ जानने के लिए Astrovastubazar जैसे प्रतिष्ठित ज्योतिष संस्थान से सलाह लें। अधिक सटीक ज्योतिषीय भविष्यवाणियों और उपायों के लिए हमसे संपर्क करें।`,
     benefitsTitleHindi: "Benefits of Lahsuniya (Cat's Eye)",
     benefitsTitleEnglish: "Benefits of Lehsunia (Cat's Eye)",
     wearingMethodTitleHindi: 'रत्न पहनने की विधि',
@@ -64,6 +146,26 @@ const gemstoneDetails = {
   'gomed-hessonite-garnet': {
     nameHindi: 'गोमेद',
     nameEnglish: 'Hessonite (Gomed)',
+    descriptionEnglish: `Gomed, also known as Hessonite Garnet, is a powerful gemstone with spiritual importance. In astrology, it is linked to the planet Rahu and is believed to reduce its bad effects. Wearing Gomed brings protection, success, peace of mind, and spiritual growth. It helps the wearer overcome stress, negative thoughts, and anxiety while also supporting career and financial progress. Gomed stones come in different colors like orange-brown, deep yellow, maroon, honey yellow, and reddish brown. Gomed is worn to reduce Rahu’s negative energy and to receive its blessings. Wear the ring on the middle finger of the right hand, starting on a Wednesday. You can also wear it as a pendant around the neck.
+
+Astrovastubazar’s Premium Hessonite Garnet Key Features:
+1. Rich, warm "honey-brown" or "cinnamon" hue with a vibrant, uniform glow
+2. Expertly faceted (oval/cabochon) to maximize color depth and astrological potency
+3. Naturally untreated, with lab certification
+4. Aligns strongly with Rahu’s planetary energy
+5. Resists scratches due to optimal hardness
+
+Wearing Astrovastubazar’s Premium Hessonite Garnet (Gomed) helps mitigate the malefic effects of Rahu, offering protection, success, and mental stability. Wear Astrovastubazar’s 100% original Hessonite Garnet to overcome stress, anxiety, and negativity while promoting spiritual growth. Consult a prominent Astrology Sansthan like Astrovastubazar for more benefits of Hessonite Garnet (Gomed) according to your individual needs stated in your birth chart. Contact us for more accurate astrology predictions and remedies.`,
+    descriptionHindi: `गोमेद, जिसे हेसोनाइट गार्नेट भी कहा जाता है, आध्यात्मिक महत्व वाला एक शक्तिशाली रत्न है। ज्योतिष में इसका संबंध राहु ग्रह से है और मान्यता है कि यह राहु के बुरे प्रभावों को कम करता है। गोमेद धारण करने से सुरक्षा, सफलता, मन की शांति और आध्यात्मिक विकास मिलता है। यह तनाव, नकारात्मक विचारों और चिंता पर काबू पाने में मदद करता है तथा करियर और आर्थिक प्रगति को भी सहारा देता है। गोमेद नारंगी-भूरे, गहरे पीले, मैरून, शहद जैसे पीले और लाल-भूरे सहित कई रंगों में मिलता है। राहु की नकारात्मक ऊर्जा कम करने और उसका आशीर्वाद पाने के लिए गोमेद पहना जाता है। अंगूठी बुधवार से दाहिने हाथ की मध्यमा उंगली में पहनें। इसे गले में पेंडेंट के रूप में भी धारण कर सकते हैं।
+
+Astrovastubazar के प्रीमियम हेसोनाइट गार्नेट की मुख्य विशेषताएँ:
+1. जीवंत और एकसमान चमक के साथ गहरा, गर्म "हनी-ब्राउन" या "सिनेमन" रंग
+2. रंग की गहराई और ज्योतिषीय प्रभाव बढ़ाने के लिए विशेषज्ञता से ओवल/कैबोशॉन कटाई
+3. प्राकृतिक, बिना उपचारित; लैब प्रमाणपत्र सहित
+4. राहु की ग्रहीय ऊर्जा से मज़बूत सामंजस्य
+5. उपयुक्त कठोरता के कारण खरोंचों का प्रतिरोध
+
+Astrovastubazar का प्रीमियम हेसोनाइट गार्नेट (गोमेद) धारण करने से राहु के अशुभ प्रभावों को कम करने तथा सुरक्षा, सफलता और मानसिक स्थिरता पाने में मदद मिलती है। तनाव, चिंता और नकारात्मकता पर काबू पाने तथा आध्यात्मिक विकास को बढ़ावा देने के लिए Astrovastubazar का 100% असली हेसोनाइट गार्नेट धारण करें। अपनी जन्म कुंडली में बताई गई व्यक्तिगत आवश्यकताओं के अनुसार हेसोनाइट गार्नेट (गोमेद) के लाभ जानने के लिए Astrovastubazar जैसे प्रतिष्ठित ज्योतिष संस्थान से सलाह लें। अधिक सटीक ज्योतिषीय भविष्यवाणियों और उपायों के लिए हमसे संपर्क करें।`,
     benefitsTitleHindi: 'Benefits of Gomed (Hessonite Garnet)',
     benefitsTitleEnglish: 'Benefits of Hessonite (Gomed)',
     wearingMethodTitleHindi: 'रत्न पहनने की विधि',
@@ -78,6 +180,24 @@ const gemstoneDetails = {
   'moonga-red-coral': {
     nameHindi: 'मूंगा',
     nameEnglish: 'Red Coral',
+    descriptionEnglish: `Unlock the power of Moonga (Red Coral), a potent gemstone revered in astrology for calming Mars's harmful effects and attracting strength, courage, and vitality. Known to boost positivity and physical wellness, it channels divine energy for a balanced life. Worn on the right-hand ring finger starting Tuesday, Munga is also available in pendants. Embrace spiritual harmony and empower your destiny—bring home this powerful gemstone today!
+
+Astrovastubazar’s Premium Red Coral Key Features:
+1. Hand-polished for Optimal Energy Flow
+2. Perfectly Aligns with Mars (Mangal) Energy
+3. Natural, Untreated Color
+4. Rich, Blood-red Color with Uniform Saturation
+
+The powerful Red Coral’s metaphysical properties and spiritual qualities calm the malefic (harmful) effect of the planet Mars in an individual's birth (horoscope) and signify its favourable outcomes. Moonga Ratna symbolizes power, courage, positivity, and physical wellness. Consult a prominent Astrology Sansthan like Astrovastubazar for more benefits of the Red Coral according to your individual needs stated in your birth chart. Contact us for more accurate astrology predictions and remedies.`,
+    descriptionHindi: `मूंगा (रेड कोरल) की शक्ति को अपनाएँ—यह एक प्रभावशाली रत्न है जिसे ज्योतिष में मंगल के हानिकारक प्रभावों को शांत करने और शक्ति, साहस तथा जीवनशक्ति आकर्षित करने के लिए जाना जाता है। सकारात्मकता और शारीरिक कल्याण को बढ़ावा देने वाला यह रत्न संतुलित जीवन के लिए दिव्य ऊर्जा प्रदान करता है। इसे मंगलवार से दाहिने हाथ की अनामिका में पहना जाता है; यह पेंडेंट के रूप में भी उपलब्ध है। आध्यात्मिक सामंजस्य अपनाएँ और अपने भाग्य को सशक्त करें—आज ही इस शक्तिशाली रत्न को घर लाएँ!
+
+Astrovastubazar के प्रीमियम रेड कोरल की मुख्य विशेषताएँ:
+1. ऊर्जा के बेहतर प्रवाह के लिए हाथ से पॉलिश किया गया
+2. मंगल की ऊर्जा के साथ पूर्ण सामंजस्य
+3. प्राकृतिक, बिना उपचारित रंग
+4. गहरा, रक्तिम लाल रंग और एकसमान रंगत
+
+शक्तिशाली रेड कोरल के आध्यात्मिक और सूक्ष्म गुण जन्म कुंडली में मंगल ग्रह के अशुभ (हानिकारक) प्रभाव को शांत करने और उसके अनुकूल परिणामों का संकेत देने में सहायक माने जाते हैं। मूंगा रत्न शक्ति, साहस, सकारात्मकता और शारीरिक कल्याण का प्रतीक है। अपनी जन्म कुंडली में बताई गई व्यक्तिगत आवश्यकताओं के अनुसार रेड कोरल के लाभ जानने के लिए Astrovastubazar जैसे प्रतिष्ठित ज्योतिष संस्थान से सलाह लें। अधिक सटीक ज्योतिषीय भविष्यवाणियों और उपायों के लिए हमसे संपर्क करें।`,
     benefitsTitleHindi: 'Benefits of Moonga (Red Coral)',
     benefitsTitleEnglish: 'Benefits of Wearing Red Coral',
     wearingMethodTitleHindi: 'रत्न पहनने की विधि',
@@ -92,6 +212,24 @@ const gemstoneDetails = {
   'moti-pearl': {
     nameHindi: 'मोती',
     nameEnglish: 'Pearl',
+    descriptionEnglish: `Wearing Astrovastubazar Premium South Sea Pearls offers powerful benefits—they promote courage, sharpen the mind, and help calm emotions, making them especially effective in reducing anger. These high-quality gems are particularly beneficial for individuals born under Pisces, Leo, and Sagittarius. By wearing premium pearls, you can experience a greater sense of inner peace and mental clarity. While pearls have no known adverse effects, it's still wise to consult an astrologer to ensure the gem aligns with your personal chart and maximizes its positive impact.
+
+Best Features:
+1. Bright Shine, Mirror-like Glow ("Chandrakant" effect)
+2. Perfectly Round; Rare and Most Valuable
+3. Pure white, like moonlight
+4. Flawless Surface with Luxurious Feel
+
+Order now to attract the powerful benefits of Pearl. Attain mental stability in this chaotic and messy world. Enhance career as well as personal growth with increased confidence, concentration, a sense of security, and a happy, healthy mind. Consult a prominent Astrology Sansthan like Astrovastubazar for more benefits of Pearl according to your individual needs stated in your birth chart. Contact us for more accurate astrology advice and personalized remedies.`,
+    descriptionHindi: `Astrovastubazar के प्रीमियम साउथ सी पर्ल्स धारण करने से कई शक्तिशाली लाभ मिलने की मान्यता है—ये साहस बढ़ाते हैं, बुद्धि को तेज करते हैं और भावनाओं को शांत करने में मदद करते हैं, जिससे क्रोध कम करने में विशेष रूप से सहायक माने जाते हैं। ये उच्च गुणवत्ता वाले मोती मीन, सिंह और धनु राशि में जन्मे लोगों के लिए खास तौर पर लाभकारी माने जाते हैं। प्रीमियम मोती पहनने से अधिक आंतरिक शांति और मानसिक स्पष्टता का अनुभव हो सकता है। मोतियों के कोई ज्ञात प्रतिकूल प्रभाव नहीं हैं, फिर भी यह सुनिश्चित करने के लिए ज्योतिषी से सलाह लेना समझदारी है कि रत्न आपकी व्यक्तिगत कुंडली के अनुकूल हो और उसके सकारात्मक प्रभाव अधिकतम हों।
+
+मुख्य विशेषताएँ:
+1. चमकदार आभा और आईने जैसी चमक ("चंद्रकांत" प्रभाव)
+2. पूरी तरह गोल; दुर्लभ और सबसे मूल्यवान
+3. चाँदनी जैसी शुद्ध सफेदी
+4. दोषरहित सतह और शानदार एहसास
+
+मोती के शक्तिशाली लाभ पाने के लिए अभी ऑर्डर करें। इस अराजक और तनावपूर्ण दुनिया में मानसिक स्थिरता पाएँ। आत्मविश्वास, एकाग्रता और सुरक्षा की भावना बढ़ाकर तथा मन को प्रसन्न और स्वस्थ रखकर करियर और व्यक्तिगत विकास को बेहतर बनाएँ। अपनी जन्म कुंडली में बताई गई व्यक्तिगत आवश्यकताओं के अनुसार मोती के लाभ जानने के लिए Astrovastubazar जैसे प्रतिष्ठित ज्योतिष संस्थान से सलाह लें। अधिक सटीक ज्योतिषीय सलाह और व्यक्तिगत उपायों के लिए हमसे संपर्क करें।`,
     benefitsTitleHindi: 'Benefits of wearing Moti',
     benefitsTitleEnglish: 'Benefits of wearing Pearl Pendant',
     wearingMethodTitleHindi: 'मोती पहनने की विधि',
@@ -106,6 +244,26 @@ const gemstoneDetails = {
   'manikya-ruby': {
     nameHindi: 'माणिक्य',
     nameEnglish: 'Ruby',
+    descriptionEnglish: `Ruby, also called Manikya, is a powerful and sacred gemstone that brings many benefits to the person who wears it. It is linked with the Sun, the planet of success and power, and is believed to give its blessings to the wearer. Wearing Ruby can help you become more confident, do well in your job, and build strong leadership skills. It also looks beautiful with its bright red shine. Ruby is said to carry the Sun’s positive energy and reduce its bad effects in your life. You can wear Ruby on the ring finger of your right hand or as a pendant around your neck, starting on a Sunday.
+
+Astrovastubazar’s Premium Ruby Key Features:
+1. Exceptional Hardness
+2. Glossy Vitreous Finish
+3. Expertly Faceted for Symmetrical Proportions
+4. Rich, Vibrant "Crimson Red" with Strong Lustre
+5. Natural, High-energy Resonance for Sun (Surya) Planetary Benefits
+
+Wearing Ruby (Manikya) enhances professional excellence, boosts confidence, and cultivates leadership qualities. Astrologically linked to the Sun, it brings the planet's blessings, promoting success in career and personal growth. Hence, wait no more, order Astrovastubazar 100% Original Ruby to harness the power of the Sun, the king of planets. Consult a prominent Astrology Sansthan like Astrovastubazar for more benefits of Ruby according to your individual needs stated in your birth chart. Contact us for more accurate astrology predictions and remedies.`,
+    descriptionHindi: `रूबी, जिसे माणिक्य भी कहा जाता है, एक शक्तिशाली और पवित्र रत्न है जो इसे धारण करने वाले व्यक्ति को कई लाभ प्रदान करता है। इसका संबंध सफलता और शक्ति के ग्रह सूर्य से है और मान्यता है कि यह धारण करने वाले को सूर्य का आशीर्वाद देता है। रूबी पहनने से आत्मविश्वास बढ़ाने, नौकरी में अच्छा प्रदर्शन करने और नेतृत्व के मज़बूत गुण विकसित करने में मदद मिल सकती है। इसकी चमकीली लाल आभा इसे सुंदर भी बनाती है। माना जाता है कि रूबी सूर्य की सकारात्मक ऊर्जा लाता है और जीवन में उसके बुरे प्रभावों को कम करता है। इसे रविवार से दाहिने हाथ की अनामिका में या गले में पेंडेंट के रूप में पहन सकते हैं।
+
+Astrovastubazar के प्रीमियम रूबी की मुख्य विशेषताएँ:
+1. असाधारण कठोरता
+2. चमकदार काँच जैसी फिनिश
+3. सममित अनुपात के लिए विशेषज्ञता से तराशा गया
+4. गहरा, जीवंत "क्रिमसन रेड" रंग और तेज चमक
+5. सूर्य ग्रह के लाभों के लिए प्राकृतिक, उच्च-ऊर्जा अनुनाद
+
+रूबी (माणिक्य) धारण करने से पेशेवर उत्कृष्टता, आत्मविश्वास और नेतृत्व के गुणों को बढ़ावा मिलता है। ज्योतिष में इसका संबंध सूर्य से है; मान्यता है कि यह करियर में सफलता और व्यक्तिगत विकास को बढ़ावा देने के लिए सूर्य का आशीर्वाद लाता है। इसलिए देर न करें—ग्रहों के राजा सूर्य की शक्ति पाने के लिए Astrovastubazar का 100% असली रूबी ऑर्डर करें। अपनी जन्म कुंडली में बताई गई व्यक्तिगत आवश्यकताओं के अनुसार रूबी के लाभ जानने के लिए Astrovastubazar जैसे प्रतिष्ठित ज्योतिष संस्थान से सलाह लें। अधिक सटीक ज्योतिषीय भविष्यवाणियों और उपायों के लिए हमसे संपर्क करें।`,
     benefitsTitleHindi: 'Benefits of Manikya (Ruby)',
     benefitsTitleEnglish: 'Benefits of Manikya (Ruby)',
     wearingMethodTitleHindi: 'रत्न पहनने की विधि',
@@ -117,6 +275,17 @@ const gemstoneDetails = {
     religiousBeliefEnglish: 'According to traditional astrological belief, wearing Ruby may gradually lessen the Sun’s inauspicious effects and invite auspicious results. This is a matter of faith and does not guarantee outcomes.',
     wearingMethodEnglish: 'Traditional guidance suggests wearing it around the neck on a Sunday during an auspicious Shukla Paksha yoga or the Sun’s auspicious nakshatra. It may also be worn as a ring on the ring finger of the right hand. Consult a qualified astrologer before wearing it.',
   },
+};
+
+const gemstoneDetailSlugAliases = {
+  'blue-sapphire-neelam': 'neelam-blue-sapphire',
+  'yellow-sapphire-pukhraj': 'pukhraj-yellow-sapphire',
+  'emerald-panna': 'panna-emerald',
+  'cat-s-eye-lahsuniya': 'lahsuniya-cat-s-eye',
+  'hessonite-garnet-gomed': 'gomed-hessonite-garnet',
+  'red-coral-moonga': 'moonga-red-coral',
+  'pearl-moti': 'moti-pearl',
+  'ruby-manikya': 'manikya-ruby',
 };
 
 const rattiOptions = ['5.25', '6.25', '7.25', '8.25', '9.25'];
@@ -145,6 +314,7 @@ const GemstoneDetails = () => {
   );
   const [quantity, setQuantity] = useState(1);
   const [activeImage, setActiveImage] = useState(0);
+  const [descriptionLanguage, setDescriptionLanguage] = useState('en');
   const thumbnailRailRef = useRef(null);
   const kundliForMenuRef = useRef(null);
   const [isKundliForMenuOpen, setIsKundliForMenuOpen] = useState(false);
@@ -178,6 +348,7 @@ const GemstoneDetails = () => {
   useEffect(() => {
     setQuantity(1);
     setActiveImage(0);
+    setDescriptionLanguage('en');
     setIsKundliForMenuOpen(false);
     setKundliDetails({
       name: '',
@@ -227,7 +398,13 @@ const GemstoneDetails = () => {
   if (!product) return <Navigate to="/gemstone" replace />;
 
   const quality = product.category.replace('Gemstone - ', '');
-  const details = gemstoneDetails[slug];
+  const details = gemstoneDetails[gemstoneDetailSlugAliases[slug] || slug];
+  const descriptionText = (descriptionLanguage === 'hi'
+    ? details?.descriptionHindi
+    : details?.descriptionEnglish
+  ) || (descriptionLanguage === 'hi'
+    ? 'उत्पाद का विवरण जल्द जोड़ा जाएगा।'
+    : 'Product description will be added soon.');
   const relatedProducts = gemstoneProducts
     .filter((item) => item.name !== product.name && item.category === product.category)
     .slice(0, 4);
@@ -336,7 +513,7 @@ const GemstoneDetails = () => {
                     {details.benefitsTitleHindi}
                   </h2>
                   <p className="mt-1">{details.benefitsHindi}</p>
-                  <p className="mt-2">Brand: Astroscience</p>
+                  <p className="mt-2">Brand: Astrovastubazar</p>
                   <p>रत्न: {details.nameHindi}</p>
                   <p className="mt-2">धार्मिक मान्यता: {details.religiousBeliefHindi}</p>
                   <p className="mt-2">{details.wearingMethodTitleHindi}: {details.wearingMethodHindi}</p>
@@ -347,7 +524,7 @@ const GemstoneDetails = () => {
                     {details.benefitsTitleEnglish}
                   </h2>
                   <p className="mt-1">{details.benefitsEnglish}</p>
-                  <p className="mt-2">Brand: Astroscience</p>
+                  <p className="mt-2">Brand: Astrovastubazar</p>
                   <p>Gem: {details.nameEnglish}</p>
                   <p className="mt-2">Religious Belief: {details.religiousBeliefEnglish}</p>
                   <p className="mt-2">{details.wearingMethodTitleEnglish}: {details.wearingMethodEnglish}</p>
@@ -619,6 +796,47 @@ const GemstoneDetails = () => {
           </div>
         </section>
       </div>
+
+      <section aria-label="Product description" className="mx-auto max-w-[1440px] px-4 sm:px-6 xl:px-10">
+        <div className="pt-2 pb-8 sm:pt-3 sm:pb-10 lg:pt-4">
+          <div role="tablist" aria-label="Description language" className="flex gap-6 border-b border-[#231416]/10">
+            {[
+              { id: 'en', label: 'English Description' },
+              { id: 'hi', label: 'हिंदी विवरण' },
+            ].map((tab) => (
+              <button
+                key={tab.id}
+                type="button"
+                role="tab"
+                id={`gemstone-description-tab-${tab.id}`}
+                aria-selected={descriptionLanguage === tab.id}
+                aria-controls="gemstone-description-panel"
+                onClick={() => setDescriptionLanguage(tab.id)}
+                className={`border-b-2 px-1 pb-2 text-sm font-medium transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#7A1519] ${
+                  descriptionLanguage === tab.id
+                    ? 'border-[#7A1519] text-[#7A1519]'
+                    : 'border-transparent text-[#6F6063] hover:text-[#231416]'
+                }`}
+              >
+                {tab.label}
+              </button>
+            ))}
+          </div>
+
+          <div
+            id="gemstone-description-panel"
+            role="tabpanel"
+            aria-labelledby={`gemstone-description-tab-${descriptionLanguage}`}
+            lang={descriptionLanguage === 'hi' ? 'hi' : 'en'}
+            className="pt-5 text-base leading-7 text-[#3a2c2e]"
+            style={descriptionLanguage === 'hi' ? { fontFamily: "'Nirmala UI', 'Mangal', sans-serif" } : undefined}
+          >
+            {descriptionText.split(/\n+/).map((paragraph, index) => (
+              paragraph.trim() && <p key={index}>{paragraph.trim()}</p>
+            ))}
+          </div>
+        </div>
+      </section>
 
       {relatedProducts.length > 0 && (
         <section aria-labelledby="related-gemstones-heading" className="border-t border-[#231416]/10 bg-[#f8f6f1]">

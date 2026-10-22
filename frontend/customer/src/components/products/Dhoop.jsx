@@ -1,18 +1,8 @@
 import { ShoppingCart } from 'lucide-react';
 import { motion, useReducedMotion } from 'framer-motion';
+import { Link } from 'react-router-dom';
 import { useCustomerStore } from '../../store/useCustomerStore';
-
-const dhoopProducts = [
-  { name: 'Budh Amrit Dhoop', image: '/Dhoop/budh1.1.jpg', hoverImage: '/Dhoop/budh1.jpg', price: 'Rs. 409.00' },
-  { name: 'Chandra Amrit Dhoop', image: '/Dhoop/chandra1.jpg', hoverImage: '/Dhoop/chandra1.1.jpg', price: 'Rs. 409.00' },
-  { name: 'Ketu Amrit Dhoop', image: '/Dhoop/ketu1.jpg', hoverImage: '/Dhoop/ketu1.1.jpg', price: 'Rs. 409.00' },
-  { name: 'Mangal Amrit Dhoop', image: '/Dhoop/Mangal1.jpg', hoverImage: '/Dhoop/Mangal1.1.jpg', price: 'Rs. 409.00' },
-  { name: 'Rahu Amrit Dhoop', image: '/Dhoop/rahu1.jpg', hoverImage: '/Dhoop/rahu1.1.jpg', price: 'Rs. 409.00' },
-  { name: 'Shani Amrit Dhoop', image: '/Dhoop/shani1.1.jpg', hoverImage: '/Dhoop/shani1.jpg', price: 'Rs. 409.00' },
-  { name: 'Shukra Amrit Dhoop', image: '/Dhoop/sukra1.jpg', hoverImage: '/Dhoop/sukra1.1.jpg', price: 'Rs. 409.00' },
-  { name: 'Surya Amrit Dhoop', image: '/Dhoop/surya1.jpg', hoverImage: '/Dhoop/surya1.1.jpg', price: 'Rs. 409.00' },
-  { name: 'Brihaspati Amrit Dhoop', image: '/Dhoop/brahspati1.jpg', hoverImage: '/Dhoop/brahspati2.jpg', price: 'Rs. 409.00' },
-];
+import dhoopProducts, { getDhoopProductSlug } from '../../data/dhoopProducts';
 
 const DhoopPage = () => {
   const reduceMotion = useReducedMotion();
@@ -87,22 +77,35 @@ const DhoopPage = () => {
                 className="group flex h-full flex-col overflow-hidden rounded-2xl border border-[#201b3a]/10 bg-white transition duration-300 hover:-translate-y-1 hover:border-[#4d001e]/30 hover:shadow-[0_18px_40px_rgba(32,27,58,0.12)]"
               >
                 <div className="relative aspect-square overflow-hidden bg-[#f7f2ea]">
-                  <img
-                    src={product.image}
-                    alt={product.name}
-                    loading="lazy"
-                    className="h-full w-full object-contain object-center transition-opacity duration-1000 ease-in-out group-hover:opacity-0"
-                  />
-                  <img
-                    src={product.hoverImage}
-                    alt=""
-                    aria-hidden="true"
-                    loading="lazy"
-                    className="absolute inset-0 h-full w-full object-contain object-center opacity-0 transition-opacity duration-1000 ease-in-out group-hover:opacity-100"
-                  />
+                  <Link
+                    to={`/dhoop/${getDhoopProductSlug(product.name)}`}
+                    aria-label={`View ${product.name}`}
+                    className="absolute inset-0"
+                  >
+                    <img
+                      src={product.image}
+                      alt={product.name}
+                      loading="lazy"
+                      className="h-full w-full object-contain object-center transition-opacity duration-1000 ease-in-out group-hover:opacity-0"
+                    />
+                    <img
+                      src={product.hoverImage}
+                      alt=""
+                      aria-hidden="true"
+                      loading="lazy"
+                      className="absolute inset-0 h-full w-full object-contain object-center opacity-0 transition-opacity duration-1000 ease-in-out group-hover:opacity-100"
+                    />
+                  </Link>
                 </div>
                 <div className="flex flex-1 flex-col p-2 sm:p-4">
-                  <h2 className="line-clamp-2 min-h-8 text-xs font-semibold leading-snug text-[#201b3a] sm:min-h-10 sm:text-sm">{product.name}</h2>
+                  <h2 className="line-clamp-2 min-h-8 text-xs font-semibold leading-snug text-[#201b3a] sm:min-h-10 sm:text-sm">
+                    <Link
+                      to={`/dhoop/${getDhoopProductSlug(product.name)}`}
+                      className="hover:text-[#4d001e] focus-visible:outline-none focus-visible:underline"
+                    >
+                      {product.name}
+                    </Link>
+                  </h2>
                   <div className="mt-1.5 flex items-center gap-1.5 sm:gap-2" aria-label="Rated 5 out of 5, 11 reviews">
                     <span className="text-xs leading-none tracking-tight text-[#c9962b] sm:text-sm" aria-hidden="true">★★★★★</span>
                     <span className="hidden text-xs text-[#201b3a]/75 sm:inline">(11 reviews)</span>

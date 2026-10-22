@@ -22,7 +22,9 @@ import ProblemWiseLalKitabRemediesPage from './pages/ProblemWiseLalKitabRemedies
 import GemstonePage from './components/products/Gemstone';
 import GemstoneDetailsPage from './components/products/GemstoneDetails';
 import SoapPage from './components/products/Soap';
+import SoapDetailsPage from './components/products/SoapDetails';
 import DhoopPage from './components/products/Dhoop';
+import DhoopDetailsPage from './components/products/DhoopDetails';
 import PyritePage from './components/products/Pyrite';
 import PyriteDetails from './components/products/PyriteDetails';
 import CitrinePage from './components/products/Citrine';
@@ -90,7 +92,9 @@ function App() {
           <Route path="/lal-kitab-details" element={<LalKitabDetailsPage />} />
           <Route path="/gemstone/:slug" element={<GemstoneDetailsPage />} />
           <Route path="/gemstone" element={<GemstonePage />} />
+          <Route path="/soap/:slug" element={<SoapDetailsPage />} />
           <Route path="/soap" element={<SoapPage />} />
+          <Route path="/dhoop/:slug" element={<DhoopDetailsPage />} />
           <Route path="/dhoop" element={<DhoopPage />} />
           <Route path="/pyrite/:slug" element={<PyriteDetails />} />
           <Route path="/pyrite" element={<PyritePage />} />

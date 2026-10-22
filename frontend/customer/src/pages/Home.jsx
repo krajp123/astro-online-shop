@@ -111,7 +111,7 @@ const topProducts = [
   { name: 'Shakti Peeth Yantra', price: 'Rs. 2,550.00', image: '/top%20products/1.png', href: '/products/shakti-peeth-yantra' },
   { name: 'Ashtasiddhi Yantra ', price: 'Rs. 41,000.00', image: '/top%20products/4.jpg', href: '/featured-products/ashtasiddhi-yantra' },
   { name: 'Lal Kitab Amrit ', price: 'Rs. 2,550.00', image: '/top%20products/3.jpg', href: '/lal-kitab-details' },
-  { name: 'Shukra Amrit Soap', price: 'Rs. 479.00', image: '/top%20products/2.jpg', href: '/featured-products/shukra-amrit-soap' },
+  { name: 'Shukra Amrit Soap', price: 'Rs. 479.00', image: '/top%20products/2.jpg', href: '/soap/shukra-amrit-soap' },
   { name: 'Rahu Mantra Upchar Potli', price: 'Rs. 3,100.00', image: '/top%20products/6.png', href: '/mantra-upchar/rahu-mantra-upchar' },
   { name: 'Shani Amrit Dhoop', price: 'Rs. 409.00', image: '/top%20products/5.jpg', href: '/featured-products/shani-amrit-dhoop' },
   
