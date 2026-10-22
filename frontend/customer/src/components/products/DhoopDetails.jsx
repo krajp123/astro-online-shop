@@ -10,6 +10,7 @@ const DhoopDetails = () => {
   const product = useMemo(() => getDhoopProductBySlug(slug), [slug]);
   const [quantity, setQuantity] = useState(1);
   const [activeImage, setActiveImage] = useState(0);
+  const [descriptionLanguage, setDescriptionLanguage] = useState('en');
   const cart = useCustomerStore((state) => state.cart);
   const setCart = useCustomerStore((state) => state.setCart);
   const gallery = useMemo(
@@ -24,6 +25,7 @@ const DhoopDetails = () => {
   useEffect(() => {
     setQuantity(1);
     setActiveImage(0);
+    setDescriptionLanguage('en');
   }, [product]);
 
   if (!product) return <Navigate to="/dhoop" replace />;
@@ -185,6 +187,46 @@ const DhoopDetails = () => {
           </div>
         </section>
       </div>
+
+      <section aria-label="Product description" className="mx-auto max-w-[1440px] px-4 sm:px-6 xl:px-10">
+        <div className="pt-2 pb-8 sm:pt-3 sm:pb-10 lg:pt-4">
+          <div role="tablist" aria-label="Description language" className="flex gap-6 border-b border-[#231416]/10">
+            {[
+              { id: 'en', label: 'English Description' },
+              { id: 'hi', label: 'हिंदी विवरण' },
+            ].map((tab) => (
+              <button
+                key={tab.id}
+                type="button"
+                role="tab"
+                id={`dhoop-description-tab-${tab.id}`}
+                aria-selected={descriptionLanguage === tab.id}
+                aria-controls="dhoop-description-panel"
+                onClick={() => setDescriptionLanguage(tab.id)}
+                className={`border-b-2 px-1 pb-2 text-sm font-medium transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#7A1519] ${
+                  descriptionLanguage === tab.id
+                    ? 'border-[#7A1519] text-[#7A1519]'
+                    : 'border-transparent text-[#6F6063] hover:text-[#231416]'
+                }`}
+              >
+                {tab.label}
+              </button>
+            ))}
+          </div>
+          <div
+            id="dhoop-description-panel"
+            role="tabpanel"
+            aria-labelledby={`dhoop-description-tab-${descriptionLanguage}`}
+            lang={descriptionLanguage === 'hi' ? 'hi' : 'en'}
+            className="pt-5 text-base leading-7 text-[#3a2c2e]"
+            style={descriptionLanguage === 'hi' ? { fontFamily: "'Nirmala UI', 'Mangal', sans-serif" } : undefined}
+          >
+            {descriptionLanguage === 'hi'
+              ? product.descriptionHindi || product.description || 'उत्पाद का विवरण जल्द जोड़ा जाएगा।'
+              : product.descriptionEnglish || 'Product description will be added soon.'}
+          </div>
+        </div>
+      </section>
 
       <section aria-labelledby="dhoop-related-heading">
         <div className="mx-auto max-w-[1440px] px-4 py-10 sm:px-6 sm:py-12 xl:px-10">
